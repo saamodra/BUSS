@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'SF Pro Display Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SF Pro Display'), url('../fonts/sf_pro/SF\ Pro\ Display.ttf') format('woff');
+}
+@font-face {
+    font-family: 'Apercu Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('SF Pro Display Bold'), url('../fonts/sf_pro/SF\ Pro\ Display-Bold.ttf') format('woff');
+}

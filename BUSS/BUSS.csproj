@@ -157,6 +157,41 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\css\apercu.css" />
+    <Content Include="Content\assets1\css\bootstrap.min.css" />
+    <Content Include="Content\assets\css\atlantis-pro.css" />
+    <Content Include="Content\assets\css\sf_pro.css" />
+    <Content Include="Content\assets\css\star-rating-svg.css" />
+    <Content Include="Content\assets\css\homestyle.css" />
+    <Content Include="Content\assets\flickity-docs\flickity.css" />
+    <Content Include="Content\assets\flickity-docs\flickity.min.css" />
+    <Content Include="Content\assets\flickity-docs\flickity.pkgd.js" />
+    <Content Include="Content\assets\flickity-docs\flickity.pkgd.min.js" />
+    <Content Include="Content\assets\img\home\bg-1.png" />
+    <Content Include="Content\assets\img\home\bg-2.png" />
+    <Content Include="Content\assets\img\home\bg-3.png" />
+    <Content Include="Content\assets\img\home\blog-car1.jpg" />
+    <Content Include="Content\assets\img\home\blog-car2.jpg" />
+    <Content Include="Content\assets\img\home\blog-car3.jpg" />
+    <Content Include="Content\assets\img\home\bus-2.png" />
+    <Content Include="Content\assets\img\home\bus-3.png" />
+    <Content Include="Content\assets\img\home\car1.jpg" />
+    <Content Include="Content\assets\img\home\car2.jpg" />
+    <Content Include="Content\assets\img\home\car3.jpg" />
+    <Content Include="Content\assets\img\home\des1.jpg" />
+    <Content Include="Content\assets\img\home\des2.jpg" />
+    <Content Include="Content\assets\img\home\des3.jpg" />
+    <Content Include="Content\assets\img\home\des4.jpg" />
+    <Content Include="Content\assets\img\home\des5.jpg" />
+    <Content Include="Content\assets\img\home\des6.jpg" />
+    <Content Include="Content\assets\img\home\des7.jpg" />
+    <Content Include="Content\assets\img\home\des8.jpg" />
+    <Content Include="Content\assets\img\home\Ok-icon.png" />
+    <Content Include="Content\assets\img\home\parallax.png" />
+    <Content Include="Content\assets1\js\bootstrap.min.js" />
+    <Content Include="Content\assets1\js\jquery-3.5.1.min.js" />
+    <Content Include="Content\assets\js\jquery.star-rating-svg.min.js" />
+    <Content Include="Content\assets\js\script.js" />
     <Content Include="Content\assets\css\atlantis.css" />
     <Content Include="Content\assets\css\atlantis.min.css" />
     <Content Include="Content\assets\css\bootstrap.min.css" />
@@ -538,10 +573,7 @@
     <Content Include="Content\assets\js\plugin\webfont\webfont.min.js" />
     <Content Include="Content\assets\js\setting-demo.js" />
     <Content Include="Content\assets\js\setting-demo2.js" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\blog.html" />
     <Content Include="Content\demo1\charts\charts.html" />
     <Content Include="Content\demo1\charts\sparkline.html" />
     <Content Include="Content\demo1\compact-sidebar.html" />
@@ -566,10 +598,12 @@
     <Content Include="Content\demo1\tables\datatables.html" />
     <Content Include="Content\demo1\tables\tables.html" />
     <Content Include="Content\demo1\widgets.html" />
+    <Content Include="Content\destinasi.html" />
+    <Content Include="Content\index.html" />
+    <Content Include="Content\paket-wisata.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Models\DBBuss.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DBBuss.Context.cs</LastGenOutput>
@@ -661,6 +695,25 @@
     <Content Include="Models\DBBuss.edmx.diagram">
       <DependentUpon>DBBuss.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\assets\css\homestyle.css.map" />
+    <Content Include="Content\assets\css\homestyle.scss" />
+    <Content Include="Content\assets\flickity-docs\fonts\2D333F_0_0.woff" />
+    <Content Include="Content\assets\flickity-docs\fonts\2D333F_0_0.woff2" />
+    <Content Include="Content\assets\flickity-docs\fonts\2D333F_1_0.woff" />
+    <Content Include="Content\assets\flickity-docs\fonts\2D333F_1_0.woff2" />
+    <Content Include="Content\assets\flickity-docs\fonts\2D333F_2_0.woff" />
+    <Content Include="Content\assets\flickity-docs\fonts\2D333F_2_0.woff2" />
+    <Content Include="Content\assets\fonts\apercu-cufonfonts\Apercu Bold Italic.otf" />
+    <Content Include="Content\assets\fonts\apercu-cufonfonts\Apercu Bold.otf" />
+    <Content Include="Content\assets\fonts\apercu-cufonfonts\Apercu Italic.otf" />
+    <Content Include="Content\assets\fonts\apercu-cufonfonts\Apercu Light Italic.otf" />
+    <Content Include="Content\assets\fonts\apercu-cufonfonts\Apercu Light.otf" />
+    <Content Include="Content\assets\fonts\apercu-cufonfonts\Apercu Medium Italic.otf" />
+    <Content Include="Content\assets\fonts\apercu-cufonfonts\Apercu Medium.otf" />
+    <Content Include="Content\assets\fonts\apercu-cufonfonts\Apercu Mono.otf" />
+    <Content Include="Content\assets\fonts\apercu-cufonfonts\Apercu_Regular.otf" />
+    <Content Include="Content\assets\fonts\sf_pro\SF Pro Display-Bold.ttf" />
+    <Content Include="Content\assets\fonts\sf_pro\SF Pro Display.ttf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -687,23 +740,21 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Pegawai\Create.cshtml" />
-    <Content Include="Views\Pegawai\Delete.cshtml" />
     <Content Include="Views\Pegawai\Details.cshtml" />
     <Content Include="Views\Pegawai\Edit.cshtml" />
     <Content Include="Views\Pegawai\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\assets1\images\" />
+    <Folder Include="Content\assets\js\fonts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />

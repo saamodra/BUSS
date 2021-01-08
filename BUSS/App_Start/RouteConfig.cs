@@ -25,11 +25,6 @@ namespace BUSS
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
-                name: "Root",
-                url: "{action}/{id}",
-                defaults: new { controller = "Home", id = UrlParameter.Optional }
-            );
         }
     }
 }

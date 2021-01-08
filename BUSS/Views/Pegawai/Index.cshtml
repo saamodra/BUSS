@@ -81,6 +81,11 @@
                                             <a href="@Url.Action("Details", "Pegawai", new { id = item.ID_Pegawai })" class="btn btn-info btn-sm mr-1">
                                                 <i class="fa fa-eye"></i> Detil
                                             </a>
+                                            <form action="@Url.Action("Delete", "Pegawai")" method="post" class="d-inline deleteForm">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="id" value="@item.ID_Pegawai" />
+                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 }
@@ -105,6 +110,46 @@
                     "nextPage": "Selanjutnya"
                 },
             });
+
+            $(".deleteForm").one('submit', function (e) {
+                e.preventDefault();
+                var form = $(this);
+                swal({
+                    title: 'Yakin ingin menghapus data ini?',
+                    text: "Anda tidak akan bisa mengembalikan data ini",
+                    icon: 'warning',
+                    buttons: {
+                        confirm: {
+                            text: 'Hapus!',
+                            className: 'btn btn-success'
+                        },
+                        cancel: {
+                            visible: true,
+                            className: 'btn btn-danger'
+                        }
+                    }
+                }).then((isConfirm) => {
+                    if (isConfirm) {
+                        form.submit();
+                    } else {
+                        swal.close();
+                    }
+                });
+            })
         });
+
+        if ("@TempData["SuccessMessage"]" != "") {
+            swal("Berhasil", "@TempData["SuccessMessage"]", {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                },
+            });
+        }
+
+        
+
     </script>
 }

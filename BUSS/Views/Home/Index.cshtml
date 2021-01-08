@@ -1,246 +1,541 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
     ViewBag.Title = "Home Page";
     ViewBag.SidebarMenu = "Pegawai";
 }
-<div class="panel-header bg-primary-gradient">
-    <div class="page-inner py-5">
-        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Travel</title>
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/assets/flickity-docs/flickity.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/sf_pro.css">
+    <link rel="stylesheet" href="~/Content/assets/css/star-rating-svg.css">
+    <link rel="stylesheet" href="~/Content/assets/css/fonts.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/homestyle.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top py-0 navbar-dark">
+            <a class="navbar-brand" href="/">
+                <h2 class="font-weight-bold">NamaAplikasi</h2>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                <div class="navbar-nav align-items-center">
+                    <a class="nav-item-2" href="#home">Home</a>
+                    <a class="nav-item-2" href="destinasi.html">Destinasi</a>
+                    <a class="nav-item-2" href="#tentang">Blog</a>
+                    <a class="btn btn-rounded btn-transparent ml-3 h-50" href="/Home/Login">
+                        <i class="fa fa-user mr-2"></i> Login
+                        / Daftar
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="carousel-wrapper">
+        <div class="social-media">
+            <div class="vertical-line"></div>
+            <div class="icon">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div class="vertical-line"></div>
+        </div>
+        <div class="carousel-content">
+            <h2 class="carousel-title">NamaAplikasi</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eleifend orci id feugiat finibus. Integer
+                ullamcorper et diam nec ornare. Phasellus tempus nisl vitae ipsum molestie, ac feugiat nibh condimentum.
+                Quisque quis rhoncus ante.
+            </p>
+            <a href="#" class="btn btn-explore btn-warning font-weight-bold">
+                EXPLORE <i class="ml-2 fas fa-long-arrow-alt-right"></i>
+            </a>
+        </div>
+        <div class="carousel" data-flickity='{ "wrapAround": true }'>
+            <div class="carousel-cell">
+                <h4>Green Lake City</h4>
+                <div class="my-rating mb-2" data-rating="3"></div>
+                <div class="image-container">
+                    <div class="overlay"></div>
+                    <img src="~/Content/assets/img/home/car1.jpg" />
+                </div>
+            </div>
+            <div class="carousel-cell">
+                <h4>Candi Borobudur</h4>
+                <div class="my-rating mb-2" data-rating="4.2"></div>
+                <div class="image-container">
+                    <div class="overlay"></div>
+                    <img src="~/Content/assets/img/home/car2.jpg" />
+                </div>
+            </div>
+            <div class="carousel-cell">
+                <h4>Pantai Pasir Putih</h4>
+                <div class="my-rating mb-2" data-rating="4.7"></div>
+                <div class="image-container">
+                    <div class="overlay"></div>
+                    <img src="~/Content/assets/img/home/car3.jpg" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Form -->
+    <section>
+        <div class="section-form shadow">
+            <h3 class="form-title text-left">Hey kamu, Mau ke mana?</h3>
+            <form action="" class="mt-5">
+                <div class="form-group">
+                    <label for="cari" class="font-weight-bold cari-label">Cari Tempat Tujuan Wisatamu</label>
+                    <div class="d-flex">
+                        <input type="text" name="cari" class="form-control" placeholder="Cari ...">
+                        <button class="btn btn-warning ml-3 font-weight-bold">
+                            <i class="fa fa-search mr-2"></i>
+                            Cari
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- End Section Form -->
+    <!-- Section Destination -->
+    <section class="destination bg-white">
+        <div class="section-title">
             <div>
-                <h2 class="text-white pb-2 fw-bold">Dashboard</h2>
-                <h5 class="text-white op-7 mb-2">Free Bootstrap 4 Admin Dashboard</h5>
+                <h3 class="">Paket Wisata</h3>
+                <p>Ini lho, paket wisata favorit customer.</p>
             </div>
-            <div class="ml-md-auto py-2 py-md-0">
-                <a href="#" class="btn btn-white btn-border btn-round mr-2">Manage</a>
-                <a href="#" class="btn btn-secondary btn-round">Add Customer</a>
-            </div>
+            <a href="#">Lihat Semua <i class="fas fa-long-arrow-alt-right"></i></a>
         </div>
-    </div>
-</div>
-<div class="page-inner mt--5">
-    <div class="row mt--2">
-        <div class="col-md-6">
-            <div class="card full-height">
-                <div class="card-body">
-                    <div class="card-title">Overall statistics</div>
-                    <div class="card-category">Daily information about statistics in system</div>
-                    <div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
-                        <div class="px-2 pb-2 pb-md-0 text-center">
-                            <div id="circles-1"></div>
-                            <h6 class="fw-bold mt-3 mb-0">New Users</h6>
-                        </div>
-                        <div class="px-2 pb-2 pb-md-0 text-center">
-                            <div id="circles-2"></div>
-                            <h6 class="fw-bold mt-3 mb-0">Sales</h6>
-                        </div>
-                        <div class="px-2 pb-2 pb-md-0 text-center">
-                            <div id="circles-3"></div>
-                            <h6 class="fw-bold mt-3 mb-0">Subscribers</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card full-height">
-                <div class="card-body">
-                    <div class="card-title">Total income & spend statistics</div>
-                    <div class="row py-3">
-                        <div class="col-md-4 d-flex flex-column justify-content-around">
-                            <div>
-                                <h6 class="fw-bold text-uppercase text-success op-8">Total Income</h6>
-                                <h3 class="fw-bold">$9.782</h3>
-                            </div>
-                            <div>
-                                <h6 class="fw-bold text-uppercase text-danger op-8">Total Spend</h6>
-                                <h3 class="fw-bold">$1,248</h3>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div id="chart-container">
-                                <canvas id="totalIncomeChart"></canvas>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <a href="#">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="~/Content/assets/img/home/des1.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <div class="card-title font-weight-bold h5">2H2M di Nusa Kambangan</div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="dest-star mb-1" data-rating="2.3"></div>
+                                    81 rated
+                                </div>
+                                <div class="paket-wisata-price">
+                                    <div class="strikethrough mb-1"><s>IDR 1.930.000</s></div>
+                                    <div class="real">IDR 1.930.000</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-head-row">
-                        <div class="card-title">User Statistics</div>
-                        <div class="card-tools">
-                            <a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
-                                <span class="btn-label">
-                                    <i class="fa fa-pencil"></i>
-                                </span>
-                                Export
-                            </a>
-                            <a href="#" class="btn btn-info btn-border btn-round btn-sm">
-                                <span class="btn-label">
-                                    <i class="fa fa-print"></i>
-                                </span>
-                                Print
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart-container" style="min-height: 375px">
-                        <canvas id="statisticsChart"></canvas>
-                    </div>
-                    <div id="myChartLegend"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card card-primary">
-                <div class="card-header">
-                    <div class="card-title">Daily Sales</div>
-                    <div class="card-category">March 25 - April 02</div>
-                </div>
-                <div class="card-body pb-0">
-                    <div class="mb-4 mt-2">
-                        <h1>$4,578.58</h1>
-                    </div>
-                    <div class="pull-in">
-                        <canvas id="dailySalesChart"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body pb-0">
-                    <div class="h1 fw-bold float-right text-warning">+7%</div>
-                    <h2 class="mb-2">213</h2>
-                    <p class="text-muted">Transactions</p>
-                    <div class="pull-in sparkline-fix">
-                        <div id="lineChart"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row row-card-no-pd">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-head-row card-tools-still-right">
-                        <h4 class="card-title">Users Geolocation</h4>
-                        <div class="card-tools">
-                            <button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-angle-down"></span></button>
-                            <button class="btn btn-icon btn-link btn-primary btn-xs btn-refresh-card"><span class="fa fa-sync-alt"></span></button>
-                            <button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-times"></span></button>
-                        </div>
-                    </div>
-                    <p class="card-category">
-                        Map of the distribution of users around the world
-                    </p>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="table-responsive table-hover table-sales">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/id.png" alt="indonesia">
-                                                </div>
-                                            </td>
-                                            <td>Indonesia</td>
-                                            <td class="text-right">
-                                                2.320
-                                            </td>
-                                            <td class="text-right">
-                                                42.18%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/us.png" alt="united states">
-                                                </div>
-                                            </td>
-                                            <td>USA</td>
-                                            <td class="text-right">
-                                                240
-                                            </td>
-                                            <td class="text-right">
-                                                4.36%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/au.png" alt="australia">
-                                                </div>
-                                            </td>
-                                            <td>Australia</td>
-                                            <td class="text-right">
-                                                119
-                                            </td>
-                                            <td class="text-right">
-                                                2.16%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/ru.png" alt="russia">
-                                                </div>
-                                            </td>
-                                            <td>Russia</td>
-                                            <td class="text-right">
-                                                1.081
-                                            </td>
-                                            <td class="text-right">
-                                                19.65%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/cn.png" alt="china">
-                                                </div>
-                                            </td>
-                                            <td>China</td>
-                                            <td class="text-right">
-                                                1.100
-                                            </td>
-                                            <td class="text-right">
-                                                20%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/br.png" alt="brazil">
-                                                </div>
-                                            </td>
-                                            <td>Brasil</td>
-                                            <td class="text-right">
-                                                640
-                                            </td>
-                                            <td class="text-right">
-                                                11.63%
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mapcontainer">
-                                <div id="map-example" class="vmap"></div>
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <a href="#">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="~/Content/assets/img/home/des2.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <div class="card-title font-weight-bold h5">2H2M di Nusa Kambangan</div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="dest-star mb-1" data-rating="2.3"></div>
+                                    81 rated
+                                </div>
+                                <div class="paket-wisata-price">
+                                    <div class="strikethrough mb-1"><s>IDR 1.930.000</s></div>
+                                    <div class="real">IDR 1.930.000</div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <a href="#">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="~/Content/assets/img/home/des3.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <div class="card-title font-weight-bold h5">2H2M di Nusa Kambangan</div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="dest-star mb-1" data-rating="2.3"></div>
+                                    81 rated
+                                </div>
+                                <div class="paket-wisata-price">
+                                    <div class="strikethrough mb-1"><s>IDR 1.930.000</s></div>
+                                    <div class="real">IDR 1.930.000</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <a href="#">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="~/Content/assets/img/home/des4.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <div class="card-title font-weight-bold h5">2H2M di Nusa Kambangan</div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="dest-star mb-1" data-rating="2.3"></div>
+                                    81 rated
+                                </div>
+                                <div class="paket-wisata-price">
+                                    <div class="strikethrough mb-1"><s>IDR 1.930.000</s></div>
+                                    <div class="real">IDR 1.930.000</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <a href="#">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="~/Content/assets/img/home/des5.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <div class="card-title font-weight-bold h5">2H2M di Nusa Kambangan</div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="dest-star mb-1" data-rating="2.3"></div>
+                                    81 rated
+                                </div>
+                                <div class="paket-wisata-price">
+                                    <div class="strikethrough mb-1"><s>IDR 1.930.000</s></div>
+                                    <div class="real">IDR 1.930.000</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <a href="#">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="~/Content/assets/img/home/des6.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <div class="card-title font-weight-bold h5">2H2M di Nusa Kambangan</div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="dest-star mb-1" data-rating="2.3"></div>
+                                    81 rated
+                                </div>
+                                <div class="paket-wisata-price">
+                                    <div class="strikethrough mb-1"><s>IDR 1.930.000</s></div>
+                                    <div class="real">IDR 1.930.000</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <a href="#">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="~/Content/assets/img/home/des7.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <div class="card-title font-weight-bold h5">2H2M di Nusa Kambangan</div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="dest-star mb-1" data-rating="2.3"></div>
+                                    81 rated
+                                </div>
+                                <div class="paket-wisata-price">
+                                    <div class="strikethrough mb-1"><s>IDR 1.930.000</s></div>
+                                    <div class="real">IDR 1.930.000</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <a href="#">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="~/Content/assets/img/home/des8.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <div class="card-title font-weight-bold h5">2H2M di Nusa Kambangan Nusa dua village</div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="dest-star mb-1" data-rating="2.3"></div>
+                                    81 rated
+                                </div>
+                                <div class="paket-wisata-price">
+                                    <div class="strikethrough mb-1"><s>IDR 1.930.000</s></div>
+                                    <div class="real">IDR 1.930.000</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- End Section Destination -->
+    <!-- Section Inspirasi Liburan -->
+    <section class="bg-white">
+        <div class="section-title">
+            <div>
+                <h3 class="">Inspirasi Liburan</h3>
+                <p>Sebelum berwisata, ada baiknya baca artikel-artikel berikut</p>
+            </div>
+            <a href="#">Lihat Semua <i class="fas fa-long-arrow-alt-right"></i></a>
+        </div>
+        <div class="row inspirasi-liburan">
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <a href="#">
+                    <div class="card bg-dark border-0 text-white h-100">
+                        <img class="card-img" src="~/Content/assets/img/home/des1.jpg" alt="Card image">
+                        <div class="card-img-overlay">
+                            <div class="card-overlay-content">
+                                <p class="card-text mb-1">Pengalaman tak terlupakan di</p>
+                                <h5 class="card-title text-white">Curug</h5>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <a href="#">
+                    <div class="card bg-dark border-0 text-white h-100">
+                        <img class="card-img" src="~/Content/assets/img/home/des7.jpg" alt="Card image">
+                        <div class="card-img-overlay">
+                            <div class="card-overlay-content">
+                                <p class="card-text mb-1">Rehat Sejenak di</p>
+                                <h5 class="card-title text-white">Candi Borobudur</h5>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <a href="#">
+                    <div class="card bg-dark border-0 text-white h-100">
+                        <img class="card-img" src="~/Content/assets/img/home/des6.jpg" alt="Card image">
+                        <div class="card-img-overlay">
+                            <div class="card-overlay-content">
+                                <p class="card-text mb-1">7 Tips sebelum pergi</p>
+                                <h5 class="card-title text-white">Muncak</h5>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <a href="#">
+                    <div class="card bg-dark border-0 text-white h-100">
+                        <img class="card-img" src="~/Content/assets/img/home/des4.jpg" alt="Card image">
+                        <div class="card-img-overlay">
+                            <div class="card-overlay-content">
+                                <p class="card-text mb-1">Isi weekendmu ke</p>
+                                <h5 class="card-title text-white">Pantai Pasir Putih</h5>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- End Section Inspirasi Liburan -->
+    <!-- Section Why -->
+    <section class="bg-white mt-5">
+        <div class="section-title">
+            <div>
+                <h3 class="">Kenapa pilih kami ?</h3>
+                <p>Kenapa ya? Berikut alasannya</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <div class="card border-0">
+                    <img class="card-img-top" src="..." alt="Garansi harga termurah">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">Garansi harga termurah</h5>
+                        <p class="card-text">
+                            Some quick example text to build on the card title and make up the bulk of
+                            the card's content.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <div class="card border-0">
+                    <img class="card-img-top" src="..." alt="Banyak promo menarik">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">Banyak promo menarik</h5>
+                        <p class="card-text">
+                            Some quick example text to build on the card title and make up the bulk of
+                            the card's content.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <div class="card border-0">
+                    <img class="card-img-top" src="..." alt="Pembatalan pesanan mudah">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">Pembatalan pesanan mudah</h5>
+                        <p class="card-text">
+                            Some quick example text to build on the card title and make up the bulk of
+                            the card's content.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                <div class="card border-0">
+                    <img class="card-img-top" src="..." alt="Customer service 24 jam">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">Customer service 24 jam</h5>
+                        <p class="card-text">
+                            Some quick example text to build on the card title and make up the bulk of
+                            the card's content.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+    <!-- End Section Why -->
+    <!-- Section Why -->
+    <section class="subscription bg-white mt-5 d-flex justify-content-center align-items-center">
+        <div class="">
+            <h3 class="text-center">Kalau bukan sekarang, kapan lagi?</h3>
+            <p class="text-center">Yuk pesan sekarang, dan rasakan liburan menyenangkan bareng orang tersayang!</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-5 about">
+                <div class="footer-logo">
+                    BusTravel
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque consectetur at sapien eu porta. Vivamus nec commodo justo. Donec quis neque ullamcorper, interdum ex ac, euismod justo.</p>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2 list">
+                <h5 class="list-title">Menu</h5>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Destinasi</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 list">
+                <h5 class="list-title">Kontak Kami</h5>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <div class="contact-list">
+                                <div class="icon"><i class="fa fa-phone mr-2 mt-1"></i></div>
+                                <div class="text">+0352-8362233</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="contact-list">
+                                <div class="icon"><i class="fab fa-whatsapp mr-2 mt-1"></i></div>
+                                <div class="text">0812 3433 1541</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="contact-list">
+                                <div class="icon"><i class="fa fa-envelope mr-2 mt-1"></i></div>
+                                <div class="text">cs@bustravel.com</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="contact-list">
+                                <div class="icon"><i class="fa fa-map-marker-alt mr-2 mt-1"></i></div>
+                                <div class="text">Jl. Jati V D No. 8, Sungai Bambu, Tanjung Priok, Jakarta Utara</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2 list">
+                <h5 class="list-title">Ikuti Kami</h5>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <div class="contact-list">
+                                <div class="icon"><i class="fab fa-instagram mr-2 mt-1"></i></div>
+                                <div class="text">Instagram</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="contact-list">
+                                <div class="icon"><i class="fab fa-facebook mr-2 mt-1"></i></div>
+                                <div class="text">Facebook</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="contact-list">
+                                <div class="icon"><i class="fab fa-twitter mr-2 mt-1"></i></div>
+                                <div class="text">Twitter</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-down">
+            <p class="text-center mb-0">&copy; 2020 BusTravel</p>
+        </div>
+    </footer>
+
+    <script src="~/Content/assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/flickity-docs/flickity.pkgd.min.js"></script>
+    <script src="~/Content/assets/js/jquery.star-rating-svg.min.js"></script>
+    <script src="~/Content/assets/js/script.js"></script>
+    <script type="text/javascript">
+        $(".my-rating").starRating({
+            starSize: 15,
+            totalStars: 5,
+            emptyColor: 'rgba(0,0,0,0)',
+            activeColor: '#fff',
+            ratedColor: '#fff',
+            useGradient: false,
+            useFullStars: false,
+            callback: function (currentRating, $el) {
+            }
+        });
+        $(".dest-star").starRating({
+            starSize: 15,
+            totalStars: 5,
+            emptyColor: 'rgba(0,0,0,0)',
+            activeColor: '#ffc105',
+            ratedColor: '#fff',
+            useGradient: false,
+            readOnly: true,
+            callback: function (currentRating, $el) {
+            }
+        });
+    </script>
+</body>
+
+</html>

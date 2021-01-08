@@ -20,11 +20,6 @@ namespace BUSS.Controllers
             return View(db.Pegawais.ToList());
         }
 
-        public JsonResult getData()
-        {
-            return Json(db.Pegawais.ToList(), JsonRequestBehavior.AllowGet);
-        }
-
         // GET: Pegawai/Details/5
         public ActionResult Details(int? id)
         {
@@ -57,6 +52,7 @@ namespace BUSS.Controllers
             {
                 db.Pegawais.Add(pegawai);
                 db.SaveChanges();
+                TempData["SuccessMessage"] = "Data berhasil ditambah!";
                 return RedirectToAction("Index");
             }
 
@@ -89,22 +85,8 @@ namespace BUSS.Controllers
             {
                 db.Entry(pegawai).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["SuccessMessage"] = "Data berhasil diubah!";
                 return RedirectToAction("Index");
-            }
-            return View(pegawai);
-        }
-
-        // GET: Pegawai/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Pegawai pegawai = db.Pegawais.Find(id);
-            if (pegawai == null)
-            {
-                return HttpNotFound();
             }
             return View(pegawai);
         }

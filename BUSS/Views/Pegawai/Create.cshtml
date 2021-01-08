@@ -1,7 +1,7 @@
 ﻿@model BUSS.Models.Pegawai
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Pegawai";
     ViewBag.SidebarMenu = "Pegawai";
 }
 
@@ -20,6 +20,12 @@
             <li class="nav-item">
                 <a href="/Admin/Pegawai">Pegawai</a>
             </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/Pegawai/Create">Tambah</a>
+            </li>
         </ul>
     </div>
     <div class="row">
@@ -27,7 +33,6 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title">Data Pegawai</h3>
-                    <a href="/Admin/Pegawai" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah Data</a>
                 </div>
                 <div class="card-body">
                     @using (Html.BeginForm())
@@ -55,6 +60,7 @@
 
                                 <div class="form-group">
                                     <input type="submit" value="Simpan" class="btn btn-default" />
+                                    <a href="@Url.Action("Index", "Pegawai")" class="btn btn-warning">Batal</a>
                                 </div>
 
                             </div>
@@ -74,12 +80,16 @@
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Role)
-                                    @Html.EditorFor(model => model.Role, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.DropDownListFor(model => model.Role, new List<SelectListItem>
+                                    {
+                                        new SelectListItem() {Text = "Admin", Value="1"},
+                                        new SelectListItem() {Text = "Tour Leader", Value="2"}
+                                    }, "Pilih Role", new { @class = "form-control" })
+
                                     @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
                                 </div>
-                            </div>
 
-                            
+                            </div>
                         </div>
                     }
 

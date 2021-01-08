@@ -1,74 +1,71 @@
 ﻿@model BUSS.Models.Pegawai
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Pegawai";
+    ViewBag.SidebarMenu = "Pegawai";
 }
 
-<h2>Details</h2>
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">@ViewBag.Title</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="/Admin">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/Pegawai">Pegawai</a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/Pegawai/Create">Detail</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Data Pegawai @Html.DisplayFor(model => model.ID_Pegawai)</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <h5 class="col-sm-1 font-weight-bold">@Html.DisplayNameFor(model => model.Nama)</h5>
+                        <h5 class="col-sm-11">@Html.DisplayFor(model => model.Nama)</h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col-sm-1 font-weight-bold">@Html.DisplayNameFor(model => model.Alamat)</h5>
+                        <h5 class="col-sm-11">@Html.DisplayFor(model => model.Alamat)</h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col-sm-1 font-weight-bold">@Html.DisplayNameFor(model => model.No_HP)</h5>
+                        <h5 class="col-sm-11">@Html.DisplayFor(model => model.No_HP)</h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col-sm-1 font-weight-bold">@Html.DisplayNameFor(model => model.Username)</h5>
+                        <h5 class="col-sm-11">@Html.DisplayFor(model => model.Username)</h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col-sm-1 font-weight-bold">@Html.DisplayNameFor(model => model.Role)</h5>
+                        <h5 class="col-sm-11">@(Html.DisplayFor(model => model.Role).ToString() == "1" ? "Admin" : "Tour Leader")</h5>
+                    </div>
 
-<div>
-    <h4>Pegawai</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nama)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nama)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Alamat)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Alamat)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.No_HP)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.No_HP)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Username)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Role)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Role)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-    </dl>
+                    <div class="form-group row mt-sm-3">
+                        <a href="@Url.Action("Index", "Pegawai")" class="btn btn-secondary mr-1">
+                            <i class="fa fa-arrow-alt-circle-left"></i> Kembali
+                        </a>
+                        <a href="@Url.Action("Edit", "Pegawai", new { id = Model.ID_Pegawai })" class="btn btn-warning mr-1">
+                            <i class="fa fa-edit"></i> Ubah
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Pegawai }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
