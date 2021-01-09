@@ -10,96 +10,82 @@ using BUSS.Models;
 
 namespace BUSS.Controllers
 {
-    public class PegawaiController : Controller
+    public class KotaController : Controller
     {
         private BUSSEntities db = new BUSSEntities();
 
-        // GET: Pegawai
+        // GET: Kota
         public ActionResult Index()
         {
-            return View(db.Pegawais.Where(s => s.Status == 1).ToList());
+            return View(db.Kotas.Where(k => k.Status == 1).ToList());
         }
 
-        // GET: Pegawai/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Pegawai pegawai = db.Pegawais.Find(id);
-            if (pegawai == null)
-            {
-                return HttpNotFound();
-            }
-            return View(pegawai);
-        }
 
-        // GET: Pegawai/Create
+        // GET: Kota/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Pegawai/Create
+        // POST: Kota/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Pegawai,Nama,Alamat,No_HP,Username,Password,Role,Status")] Pegawai pegawai)
+        public ActionResult Create([Bind(Include = "ID_Kota,Nama_Kota,Status")] Kota kota)
         {
             if (ModelState.IsValid)
             {
-                pegawai.Status = 1;
-                db.Pegawais.Add(pegawai);
+                kota.Status = 1;
+                db.Kotas.Add(kota);
                 db.SaveChanges();
                 TempData["SuccessMessage"] = "Data berhasil ditambah!";
                 return RedirectToAction("Index");
             }
 
-            return View(pegawai);
+            return View(kota);
         }
 
-        // GET: Pegawai/Edit/5
+        // GET: Kota/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pegawai pegawai = db.Pegawais.Find(id);
-            if (pegawai == null)
+            Kota kota = db.Kotas.Find(id);
+            if (kota == null)
             {
                 return HttpNotFound();
             }
-            return View(pegawai);
+            return View(kota);
         }
 
-        // POST: Pegawai/Edit/5
+        // POST: Kota/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Pegawai,Nama,Alamat,No_HP,Username,Password,Role,Status")] Pegawai pegawai)
+        public ActionResult Edit([Bind(Include = "ID_Kota,Nama_Kota")] Kota kota)
         {
             if (ModelState.IsValid)
             {
-                pegawai.Status = 1;
-                db.Entry(pegawai).State = EntityState.Modified;
+                kota.Status = 1;
+                db.Entry(kota).State = EntityState.Modified;
                 db.SaveChanges();
                 TempData["SuccessMessage"] = "Data berhasil diubah!";
                 return RedirectToAction("Index");
             }
-            return View(pegawai);
+            return View(kota);
         }
 
-        // POST: Pegawai/Delete/5
+        // POST: Kota/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Pegawai pegawai = db.Pegawais.Find(id);
-            pegawai.Status = 0;
+            Kota kota = db.Kotas.Find(id);
+            kota.Status = 0;
             db.SaveChanges();
             TempData["SuccessMessage"] = "Data berhasil dihapus!";
             return RedirectToAction("Index");

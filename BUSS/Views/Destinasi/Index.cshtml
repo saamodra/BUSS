@@ -1,8 +1,8 @@
-﻿@model IEnumerable<BUSS.Models.Pegawai>
+﻿@model IEnumerable<BUSS.Models.Destinasi>
 
 @{
-    ViewBag.Title = "Pegawai";
-    ViewBag.SidebarMenu = "Pegawai";
+    ViewBag.Title = "Destinasi";
+    ViewBag.SidebarMenu = "Destinasi";
 }
 
 <div class="page-inner">
@@ -18,7 +18,7 @@
                 <i class="flaticon-right-arrow"></i>
             </li>
             <li class="nav-item">
-                <a href="/Admin/Pegawai">Pegawai</a>
+                <a href="/Admin/@ViewBag.Title">@ViewBag.Title</a>
             </li>
         </ul>
     </div>
@@ -26,8 +26,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3 class="card-title">Data Pegawai</h3>
-                    <a href="/Admin/Pegawai/Create" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah Data</a>
+                    <h3 class="card-title">Data @ViewBag.Title</h3>
+                    <a href="/Admin/@ViewBag.Title/Create" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah Data</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -36,19 +36,22 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Nama)
+                                        @Html.DisplayNameFor(model => model.Nama_Destinasi)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Alamat)
+                                        @Html.DisplayNameFor(model => model.Kota.Nama_Kota)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.No_HP)
+                                        @Html.DisplayNameFor(model => model.Harga_Tiket)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Username)
+                                        @Html.DisplayNameFor(model => model.Rating)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Role)
+                                        @Html.DisplayNameFor(model => model.Jam_buka)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Jam_tutup)
                                     </th>
                                     <th>Aksi</th>
                                 </tr>
@@ -60,30 +63,33 @@
                                     <tr>
                                         <td>@(rowCount++).</td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Nama)
+                                            @Html.DisplayFor(modelItem => item.Nama_Destinasi)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Alamat)
+                                            @Html.DisplayFor(modelItem => item.Kota.Nama_Kota)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.No_HP)
+                                            @Html.DisplayFor(modelItem => item.Harga_Tiket)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Username)
+                                            @Html.DisplayFor(modelItem => item.Rating)
                                         </td>
                                         <td>
-                                            @(item.Role == 1 ? "Admin" : "Tour Leader")
+                                            @Html.DisplayFor(modelItem => item.Jam_buka)
                                         </td>
                                         <td>
-                                            <a href="@Url.Action("Edit", "Pegawai", new { id = item.ID_Pegawai })" class="btn btn-warning btn-sm mr-1">
+                                            @Html.DisplayFor(modelItem => item.Jam_tutup)
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Edit", "Destinasi", new { id = item.ID_Destinasi })" class="btn btn-warning btn-sm mr-1">
                                                 <i class="fa fa-edit"></i> Ubah
                                             </a>
-                                            <a href="@Url.Action("Details", "Pegawai", new { id = item.ID_Pegawai })" class="btn btn-info btn-sm mr-1">
+                                            <a href="@Url.Action("Details", "Destinasi", new { id = item.ID_Destinasi })" class="btn btn-info btn-sm mr-1">
                                                 <i class="fa fa-eye"></i> Detil
                                             </a>
-                                            <form action="@Url.Action("Delete", "Pegawai")" method="post" class="d-inline deleteForm">
+                                            <form action="@Url.Action("Delete", "Destinasi")" method="post" class="d-inline deleteForm">
                                                 @Html.AntiForgeryToken()
-                                                <input type="hidden" name="id" value="@item.ID_Pegawai" />
+                                                <input type="hidden" name="id" value="@item.ID_Destinasi" />
                                                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button>
                                             </form>
                                         </td>

@@ -25,6 +25,19 @@ namespace BUSS.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Destinasi> Destinasis { get; set; }
+        public virtual DbSet<Detail_Foto> Detail_Foto { get; set; }
+        public virtual DbSet<Detail_Kategori> Detail_Kategori { get; set; }
+        public virtual DbSet<Detail_Paket> Detail_Paket { get; set; }
+        public virtual DbSet<Detail_Rating_Destinasi> Detail_Rating_Destinasi { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
+        public virtual DbSet<Jenis_Kendaraan> Jenis_Kendaraan { get; set; }
+        public virtual DbSet<Kategori_Wilayah> Kategori_Wilayah { get; set; }
+        public virtual DbSet<Kendaraan> Kendaraans { get; set; }
+        public virtual DbSet<Kota> Kotas { get; set; }
+        public virtual DbSet<Paket> Pakets { get; set; }
         public virtual DbSet<Pegawai> Pegawais { get; set; }
+        public virtual DbSet<Transaksi> Transaksis { get; set; }
     }
 }

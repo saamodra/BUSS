@@ -10,7 +10,7 @@
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/assets/css/atlantis.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/atlantis-pro.css">
 
     <link rel="stylesheet" href="~/Content/assets/css/style.css">
 </head>
@@ -18,7 +18,7 @@
     <div class="wrapper">
         <div class="main-header">
             <!-- Logo Header -->
-            <div class="logo-header" data-background-color="dark2">
+            <div class="logo-header" data-background-color="blue">
 
                 <a href="/" class="logo">
                     <img src="~/Content/assets/img/buss-logo.svg" alt="navbar brand" class="navbar-brand">
@@ -37,7 +37,7 @@
             </div>
             <!-- End Logo Header -->
             <!-- Navbar Header -->
-            <nav class="navbar navbar-header navbar-expand-lg" data-background-color="dark2">
+            <nav class="navbar navbar-header navbar-expand-lg" data-background-color="blue2">
 
                 <div class="container-fluid">
                     <div class="collapse" id="search-nav">
@@ -264,7 +264,7 @@
         <!-- End Sidebar -->
 
         <div class="main-panel">
-            <div class="content">
+            <div class="container">
                 @RenderBody()
             </div>
             <footer class="footer">
@@ -345,9 +345,51 @@
 
     <!-- Atlantis JS -->
     <script src="~/Content/assets/js/atlantis.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/jquery.priceformat.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
 
     <!-- Atlantis DEMO methods, don't include it in your project! -->
     <script src="~/Content/assets/js/setting-demo.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example2').DataTable({
+                "language": {
+                    "lengthMenu": "_MENU_ Data per halaman",
+                    "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entries",
+                    "zeroRecords": "Tidak ada data yang cocok",
+                    "search": "Pencarian :",
+                    "nextPage": "Selanjutnya"
+                },
+            });
+
+            $(".deleteForm").one('submit', function (e) {
+                e.preventDefault();
+                var form = $(this);
+                swal({
+                    title: 'Yakin ingin menghapus data ini?',
+                    text: "Anda tidak akan bisa mengembalikan data ini",
+                    icon: 'warning',
+                    buttons: {
+                        confirm: {
+                            text: 'Hapus!',
+                            className: 'btn btn-success'
+                        },
+                        cancel: {
+                            visible: true,
+                            className: 'btn btn-danger'
+                        }
+                    }
+                }).then((isConfirm) => {
+                    if (isConfirm) {
+                        form.submit();
+                    } else {
+                        swal.close();
+                    }
+                });
+            })
+        });
+    </script>
     @RenderSection("scripts", required: false)
 
 </body>

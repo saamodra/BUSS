@@ -1,0 +1,65 @@
+﻿@model BUSS.Models.Kota
+
+@{
+    ViewBag.Title = "Edit";
+    ViewBag.SidebarMenu = "Kota";
+}
+
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">@ViewBag.Title</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="/Admin">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/@ViewBag.SidebarMenu">@ViewBag.SidebarMenu</a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="#">Edit</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Data @ViewBag.SidebarMenu</h3>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.ID_Kota)
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Nama_Kota)
+                                    @Html.EditorFor(model => model.Nama_Kota, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Nama_Kota, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="Simpan" class="btn btn-primary" />
+                                    <a href="@Url.Action("Index", "Pegawai")" class="btn btn-warning">Batal</a>
+                                </div>
+
+                            </div>
+
+                            
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

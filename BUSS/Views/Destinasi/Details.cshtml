@@ -1,0 +1,141 @@
+﻿@model BUSS.Models.Destinasi
+
+@{
+    ViewBag.Title = "Detail Destinasi";
+    ViewBag.SidebarMenu = "Destinasi";
+}
+
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">@ViewBag.SidebarMenu</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="/Admin">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/@ViewBag.SidebarMenu">@ViewBag.SidebarMenu</a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="#">Detail</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card full-height">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Tambahkan Foto</h3>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Details", "Destinasi", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.ID_Destinasi)
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Foto</label>
+                            <input class="form-control-file" id="files" multiple="multiple" name="files" type="file" />
+                            <span class="field-validation-valid text-success">@ViewBag.UploadStatus</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Upload" class="btn btn-primary" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card full-height">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">@ViewBag.Title</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <h5 class="col-sm-2 font-weight-bold">@Html.DisplayNameFor(model => model.Nama_Destinasi)</h5>
+                        <h5 class="col-sm-10">@Html.DisplayFor(model => model.Nama_Destinasi)</h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col-sm-2 font-weight-bold">@Html.DisplayNameFor(model => model.Harga_Tiket)</h5>
+                        <h5 class="col-sm-10">@Html.DisplayFor(model => model.Harga_Tiket)</h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col-sm-2 font-weight-bold">@Html.DisplayNameFor(model => model.Kota.Nama_Kota)</h5>
+                        <h5 class="col-sm-10">@Html.DisplayFor(model => model.Kota.Nama_Kota)</h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col-sm-2 font-weight-bold">@Html.DisplayNameFor(model => model.Rating)</h5>
+                        <h5 class="col-sm-10">@Html.DisplayFor(model => model.Rating)</h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col-sm-2 font-weight-bold">Jam Operasional</h5>
+                        <h5 class="col-sm-10">@Html.DisplayFor(model => model.Jam_buka) - @Html.DisplayFor(model => model.Jam_tutup) WIB</h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col-sm-2 font-weight-bold">@Html.DisplayNameFor(model => model.Deskripsi)</h5>
+                        <h5 class="col-sm-10">@Html.DisplayFor(model => model.Deskripsi)</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card full-height">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Gallery</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @if (Model.Detail_Foto.Count == 0)
+                        {
+                            <div class="col-md-12">
+                                <h5 class="font-weight-bold">Belum ada foto.</h5>
+                            </div>
+                        }
+                        @foreach (var item in Model.Detail_Foto)
+                        {
+                            <div class="col-md-3 mt-3">
+                                <div class="position-relative gallery-container">
+                                    <div class="overlay">
+                                        <form action="@Url.Action("HapusFoto", "Destinasi")" method="post">
+                                            @Html.AntiForgeryToken()
+                                            @Html.HiddenFor(model => model.ID_Destinasi)
+                                            <input type="hidden" value="@item.ID_Detail" name="detailId" />
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-trash"></i> Hapus
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <img src="~/Content/upload/@item.Foto" alt="@item.Foto" class="height-300px w-100" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        if ("@TempData["SuccessMessage"]" != "") {
+            swal("Berhasil", "@TempData["SuccessMessage"]", {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                },
+            });
+        }
+    </script>
+}

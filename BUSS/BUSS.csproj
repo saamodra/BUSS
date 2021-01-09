@@ -129,31 +129,78 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DestinasiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KotaController.cs" />
     <Compile Include="Controllers\PegawaiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DBBuss.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBBuss.Context.tt</DependentUpon>
+    <Compile Include="Models\BussModule.cs" />
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DBBuss.cs">
+    <Compile Include="Models\DbBuss.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBBuss.tt</DependentUpon>
+      <DependentUpon>DbBuss.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DBBuss.Designer.cs">
+    <Compile Include="Models\DbBuss.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBBuss.edmx</DependentUpon>
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbBuss.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbBuss.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Destinasi.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DestinasiMetadata.cs" />
+    <Compile Include="Models\Detail_Foto.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Detail_FotoMetadata.cs" />
+    <Compile Include="Models\Detail_Kategori.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Detail_KategoriMetadata.cs" />
+    <Compile Include="Models\Detail_Paket.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Detail_Rating_Destinasi.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Feedback.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Jenis_Kendaraan.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KategoriWilayahMetadata.cs" />
+    <Compile Include="Models\Kategori_Wilayah.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Kendaraan.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\KeyValue.cs" />
+    <Compile Include="Models\Kota.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KotaMetadata.cs" />
+    <Compile Include="Models\Paket.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Pegawai.cs">
-      <DependentUpon>DBBuss.tt</DependentUpon>
+      <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PegawaiMetadata.cs" />
+    <Compile Include="Models\Transaksi.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -604,16 +651,17 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\DBBuss.Context.tt">
+    <Content Include="Models\DbBuss.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DBBuss.Context.cs</LastGenOutput>
-      <DependentUpon>DBBuss.edmx</DependentUpon>
+      <DependentUpon>DbBuss.edmx</DependentUpon>
+      <LastGenOutput>DbBuss.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DBBuss.tt">
+    <Content Include="Models\DbBuss.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBBuss.edmx</DependentUpon>
-      <LastGenOutput>DBBuss.cs</LastGenOutput>
+      <DependentUpon>DbBuss.edmx</DependentUpon>
+      <LastGenOutput>DbBuss.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\assets\css\atlantis.css.map" />
@@ -688,13 +736,6 @@
     <Content Include="Content\assets\sass\atlantis\_responsive.scss" />
     <Content Include="Content\assets\sass\atlantis\_typography.scss" />
     <Content Include="Content\assets\sass\atlantis\_variables.scss" />
-    <EntityDeploy Include="Models\DBBuss.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBBuss.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DBBuss.edmx.diagram">
-      <DependentUpon>DBBuss.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\assets\css\homestyle.css.map" />
     <Content Include="Content\assets\css\homestyle.scss" />
     <Content Include="Content\assets\flickity-docs\fonts\2D333F_0_0.woff" />
@@ -714,17 +755,26 @@
     <Content Include="Content\assets\fonts\apercu-cufonfonts\Apercu_Regular.otf" />
     <Content Include="Content\assets\fonts\sf_pro\SF Pro Display-Bold.ttf" />
     <Content Include="Content\assets\fonts\sf_pro\SF Pro Display.ttf" />
+    <EntityDeploy Include="Models\DbBuss.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DbBuss.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DbBuss.edmx.diagram">
+      <DependentUpon>DbBuss.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.priceformat.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -744,11 +794,20 @@
     <Content Include="Views\Pegawai\Edit.cshtml" />
     <Content Include="Views\Pegawai\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Destinasi\Create.cshtml" />
+    <Content Include="Views\Destinasi\Delete.cshtml" />
+    <Content Include="Views\Destinasi\Details.cshtml" />
+    <Content Include="Views\Destinasi\Edit.cshtml" />
+    <Content Include="Views\Destinasi\Index.cshtml" />
+    <Content Include="Views\Kota\Create.cshtml" />
+    <Content Include="Views\Kota\Edit.cshtml" />
+    <Content Include="Views\Kota\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\assets1\images\" />
     <Folder Include="Content\assets\js\fonts\" />
+    <Folder Include="Content\upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

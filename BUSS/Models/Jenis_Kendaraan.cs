@@ -12,24 +12,20 @@ namespace BUSS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Pegawai
+    public partial class Jenis_Kendaraan
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Pegawai()
+        public Jenis_Kendaraan()
         {
-            this.Transaksis = new HashSet<Transaksi>();
+            this.Kendaraans = new HashSet<Kendaraan>();
         }
     
-        public int ID_Pegawai { get; set; }
-        public string Nama { get; set; }
-        public string Alamat { get; set; }
-        public string No_HP { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public int Role { get; set; }
+        public int ID_Jenis { get; set; }
+        public string Nama_Jenis { get; set; }
+        public int Jumlah_Kursi { get; set; }
         public int Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transaksi> Transaksis { get; set; }
+        public virtual ICollection<Kendaraan> Kendaraans { get; set; }
     }
 }

@@ -31,7 +31,6 @@ namespace BUSS.Models
         [Required(ErrorMessage = "Role wajib diisi!")]
         public int Role { get; set; }
 
-        [DefaultValue(1)]
         public int Status { get; set; }
     }
 }
