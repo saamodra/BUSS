@@ -17,7 +17,7 @@ namespace BUSS.Controllers
         // GET: Pegawai
         public ActionResult Index()
         {
-            return View(db.Pegawais.ToList());
+            return View(db.Pegawais.Where(s => s.Status == 1).ToList());
         }
 
         // GET: Pegawai/Details/5
@@ -97,8 +97,9 @@ namespace BUSS.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Pegawai pegawai = db.Pegawais.Find(id);
-            db.Pegawais.Remove(pegawai);
+            pegawai.Status = 0;
             db.SaveChanges();
+            TempData["SuccessMessage"] = "Data berhasil dihapus!";
             return RedirectToAction("Index");
         }
 
