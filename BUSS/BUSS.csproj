@@ -207,7 +207,6 @@
   <ItemGroup>
     <Content Include="Content\assets\css\apercu.css" />
     <Content Include="Content\assets\css\atlantis-pro.css" />
-    <Content Include="Content\assets\css\dropzone.min.css" />
     <Content Include="Content\assets\css\sf_pro.css" />
     <Content Include="Content\assets\css\star-rating-svg.css" />
     <Content Include="Content\assets\css\homestyle.css" />
