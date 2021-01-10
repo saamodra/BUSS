@@ -10,6 +10,7 @@
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/dropzone.min.css">
     <link rel="stylesheet" href="~/Content/assets/css/atlantis-pro.css">
 
     <link rel="stylesheet" href="~/Content/assets/css/style.css">
@@ -348,16 +349,15 @@
     <script src="~/Scripts/moment.min.js"></script>
     <script src="~/Scripts/jquery.priceformat.min.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/dropzone.min.js"></script>
 
-    <!-- Atlantis DEMO methods, don't include it in your project! -->
-    <script src="~/Content/assets/js/setting-demo.js"></script>
     <script>
         $(document).ready(function () {
             $('#example2').DataTable({
                 "language": {
                     "lengthMenu": "_MENU_ Data per halaman",
                     "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entries",
-                    "zeroRecords": "Tidak ada data yang cocok",
+                    "zeroRecords": "Tidak ada data.",
                     "search": "Pencarian :",
                     "nextPage": "Selanjutnya"
                 },

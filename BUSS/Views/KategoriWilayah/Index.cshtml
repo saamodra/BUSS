@@ -1,8 +1,8 @@
-﻿@model IEnumerable<BUSS.Models.Pegawai>
+﻿@model IEnumerable<BUSS.Models.Kategori_Wilayah>
 
 @{
-    ViewBag.Title = "Pegawai";
-    ViewBag.SidebarMenu = "Pegawai";
+    ViewBag.Title = "Kategori Wilayah";
+    ViewBag.SidebarMenu = "Kategori Wilayah";
 }
 
 <div class="page-inner">
@@ -18,7 +18,7 @@
                 <i class="flaticon-right-arrow"></i>
             </li>
             <li class="nav-item">
-                <a href="/Admin/@ViewBag.SidebarMenu">@ViewBag.SidebarMenu</a>
+                <a href="/Admin/KategoriWilayah">@ViewBag.SidebarMenu</a>
             </li>
         </ul>
     </div>
@@ -26,8 +26,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3 class="card-title">Data @ViewBag.SidebarMenu</h3>
-                    <a href="/Admin/@ViewBag.SidebarMenu/Create" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah Data</a>
+                    <h3 class="card-title">Data @ViewBag.Title</h3>
+                    <a href="/Admin/KategoriWilayah/Create" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah Data</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -36,19 +36,7 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Nama)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Alamat)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.No_HP)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Username)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Role)
+                                        @Html.DisplayNameFor(model => model.Nama_Wilayah)
                                     </th>
                                     <th>Aksi</th>
                                 </tr>
@@ -60,30 +48,18 @@
                                     <tr>
                                         <td>@(rowCount++).</td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Nama)
+                                            @Html.DisplayFor(modelItem => item.Nama_Wilayah)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Alamat)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.No_HP)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Username)
-                                        </td>
-                                        <td>
-                                            @(item.Role == 1 ? "Admin" : "Tour Leader")
-                                        </td>
-                                        <td>
-                                            <a href="@Url.Action("Edit", @ViewBag.SidebarMenu, new { id = item.ID_Pegawai })" class="btn btn-warning btn-sm mr-1">
+                                            <a href="@Url.Action("Edit", "KategoriWilayah", new { id = item.ID_KategoriWilayah })" class="btn btn-warning btn-sm mr-1">
                                                 <i class="fa fa-edit"></i> Ubah
                                             </a>
-                                            <a href="@Url.Action("Details", @ViewBag.SidebarMenu, new { id = item.ID_Pegawai })" class="btn btn-info btn-sm mr-1">
+                                            <a href="@Url.Action("Details", "KategoriWilayah", new { id = item.ID_KategoriWilayah })" class="btn btn-info btn-sm mr-1">
                                                 <i class="fa fa-eye"></i> Detil
                                             </a>
-                                            <form action="@Url.Action("Delete", @ViewBag.SidebarMenu)" method="post" class="d-inline deleteForm">
+                                            <form action="@Url.Action("Delete", "KategoriWilayah")" method="post" class="d-inline deleteForm">
                                                 @Html.AntiForgeryToken()
-                                                <input type="hidden" name="id" value="@item.ID_Pegawai" />
+                                                <input type="hidden" name="id" value="@item.ID_KategoriWilayah" />
                                                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button>
                                             </form>
                                         </td>

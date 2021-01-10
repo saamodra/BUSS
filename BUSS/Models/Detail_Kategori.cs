@@ -11,7 +11,9 @@ namespace BUSS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(Detail_KategoriMetadata))]
     public partial class Detail_Kategori
     {
         public int ID_KategoriWilayah { get; set; }

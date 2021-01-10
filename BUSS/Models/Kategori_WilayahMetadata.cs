@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace BUSS.Models
 {
-    public class KategoriWilayahMetadata
+    public class Kategori_WilayahMetadata
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public KategoriWilayahMetadata()
+        public Kategori_WilayahMetadata()
         {
             this.Detail_Kategori = new HashSet<Detail_Kategori>();
         }
 
         public int ID_KategoriWilayah { get; set; }
+
+        [DisplayName("Kategori Wilayah")]
+        [Required(ErrorMessage = "Nama wilayah wajib diisi!")]
         public string Nama_Wilayah { get; set; }
         public int Status { get; set; }
 

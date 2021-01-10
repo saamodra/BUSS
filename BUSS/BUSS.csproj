@@ -131,6 +131,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DestinasiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KategoriWilayahController.cs" />
     <Compile Include="Controllers\KotaController.cs" />
     <Compile Include="Controllers\PegawaiController.cs" />
     <Compile Include="Global.asax.cs">
@@ -179,7 +180,7 @@
     <Compile Include="Models\Jenis_Kendaraan.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\KategoriWilayahMetadata.cs" />
+    <Compile Include="Models\Kategori_WilayahMetadata.cs" />
     <Compile Include="Models\Kategori_Wilayah.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
@@ -205,8 +206,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\apercu.css" />
-    <Content Include="Content\assets1\css\bootstrap.min.css" />
     <Content Include="Content\assets\css\atlantis-pro.css" />
+    <Content Include="Content\assets\css\dropzone.min.css" />
     <Content Include="Content\assets\css\sf_pro.css" />
     <Content Include="Content\assets\css\star-rating-svg.css" />
     <Content Include="Content\assets\css\homestyle.css" />
@@ -235,8 +236,6 @@
     <Content Include="Content\assets\img\home\des8.jpg" />
     <Content Include="Content\assets\img\home\Ok-icon.png" />
     <Content Include="Content\assets\img\home\parallax.png" />
-    <Content Include="Content\assets1\js\bootstrap.min.js" />
-    <Content Include="Content\assets1\js\jquery-3.5.1.min.js" />
     <Content Include="Content\assets\js\jquery.star-rating-svg.min.js" />
     <Content Include="Content\assets\js\script.js" />
     <Content Include="Content\assets\css\atlantis.css" />
@@ -621,30 +620,6 @@
     <Content Include="Content\assets\js\setting-demo.js" />
     <Content Include="Content\assets\js\setting-demo2.js" />
     <Content Include="Content\blog.html" />
-    <Content Include="Content\demo1\charts\charts.html" />
-    <Content Include="Content\demo1\charts\sparkline.html" />
-    <Content Include="Content\demo1\compact-sidebar.html" />
-    <Content Include="Content\demo1\components\avatars.html" />
-    <Content Include="Content\demo1\components\buttons.html" />
-    <Content Include="Content\demo1\components\flaticons.html" />
-    <Content Include="Content\demo1\components\font-awesome-icons.html" />
-    <Content Include="Content\demo1\components\gridsystem.html" />
-    <Content Include="Content\demo1\components\notifications.html" />
-    <Content Include="Content\demo1\components\panels.html" />
-    <Content Include="Content\demo1\components\simple-line-icons.html" />
-    <Content Include="Content\demo1\components\sweetalert.html" />
-    <Content Include="Content\demo1\components\typography.html" />
-    <Content Include="Content\demo1\forms\forms.html" />
-    <Content Include="Content\demo1\icon-menu.html" />
-    <Content Include="Content\demo1\index.html" />
-    <Content Include="Content\demo1\maps\jqvmap.html" />
-    <Content Include="Content\demo1\overlay-sidebar.html" />
-    <Content Include="Content\demo1\sidebar-style-1.html" />
-    <Content Include="Content\demo1\starter-template.html" />
-    <Content Include="Content\demo1\static-sidebar.html" />
-    <Content Include="Content\demo1\tables\datatables.html" />
-    <Content Include="Content\demo1\tables\tables.html" />
-    <Content Include="Content\demo1\widgets.html" />
     <Content Include="Content\destinasi.html" />
     <Content Include="Content\index.html" />
     <Content Include="Content\paket-wisata.html" />
@@ -763,6 +738,7 @@
       <DependentUpon>DbBuss.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\dropzone.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -802,10 +778,13 @@
     <Content Include="Views\Kota\Create.cshtml" />
     <Content Include="Views\Kota\Edit.cshtml" />
     <Content Include="Views\Kota\Index.cshtml" />
+    <Content Include="Views\KategoriWilayah\Create.cshtml" />
+    <Content Include="Views\KategoriWilayah\Details.cshtml" />
+    <Content Include="Views\KategoriWilayah\Edit.cshtml" />
+    <Content Include="Views\KategoriWilayah\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\assets1\images\" />
     <Folder Include="Content\assets\js\fonts\" />
     <Folder Include="Content\upload\" />
   </ItemGroup>

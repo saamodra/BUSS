@@ -118,9 +118,8 @@ namespace BUSS.Controllers
         }
 
         [HttpPost]
-        public ActionResult Details(HttpPostedFileBase[] files, int id)
+        public ActionResult Details(IEnumerable<HttpPostedFileBase> files, int id)
         {
-            
             //Ensure model state is valid  
             if (ModelState.IsValid)
             {   //iterating through multiple file collection
@@ -149,7 +148,7 @@ namespace BUSS.Controllers
             Destinasi destinasi = db.Destinasis.Find(id);
 
             //assigning file uploaded status to ViewBag for showing message to user.  
-            ViewBag.UploadStatus = files.Count().ToString() + " berhasil diunggah.";
+            TempData["SuccessMessage"] = files.Count().ToString() + " berhasil diunggah.";
 
             return View(destinasi);
         }

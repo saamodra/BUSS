@@ -41,7 +41,7 @@
                         @Html.HiddenFor(model => model.ID_Destinasi)
                         <div class="form-group">
                             <label for="exampleFormControlFile1">Foto</label>
-                            <input class="form-control-file" id="files" multiple="multiple" name="files" type="file" />
+                            <input class="form-control-file" id="files" multiple="multiple" name="files" type="file" accept=".jpg,.jpeg,.png" required />
                             <span class="field-validation-valid text-success">@ViewBag.UploadStatus</span>
                         </div>
                         <div class="form-group">
