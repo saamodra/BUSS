@@ -42,6 +42,19 @@
     opacity: 0;
 }
 
+.link {
+    background: none;
+    border: none;
+    outline: none;
+    color: blue;
+    cursor: pointer;
+}
+
+.login-aside-bg {
+    background-image: url(../img/home/bus-3.png);
+    background-size: cover;
+}
+
 /* Responsive layout - makes a two column-layout instead of four columns */
 @media screen and (max-width: 800px) {
     .column {

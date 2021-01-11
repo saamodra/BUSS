@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -18,7 +19,6 @@ namespace BUSS.Models
         [Required(ErrorMessage = "NIK wajib diisi!")]
         [MinLength(16, ErrorMessage = "NIK wajib diisi 16 angka!")]
         [MaxLength(16, ErrorMessage = "NIK wajib diisi 16 angka!")]
-        [DataType(DataType.PhoneNumber)]
         public string NIK { get; set; }
 
         [Required(ErrorMessage = "Nama wajib diisi!")]
@@ -30,11 +30,12 @@ namespace BUSS.Models
         public string Alamat { get; set; }
 
         [Required(ErrorMessage = "No. HP wajib diisi!")]
+        [DisplayName("No. HP")]
         [DataType(DataType.PhoneNumber)]
         public string No_HP { get; set; }
 
         [Required(ErrorMessage = "Email wajib diisi!")]
-        [DataType(DataType.EmailAddress)]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Format email salah!")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Password wajib diisi!")]

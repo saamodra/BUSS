@@ -630,6 +630,9 @@
     <Content Include="Content\blog.html" />
     <Content Include="Content\destinasi.html" />
     <Content Include="Content\index.html" />
+    <Content Include="Content\loginpage\animation.css" />
+    <Content Include="Content\loginpage\script.js" />
+    <Content Include="Content\loginpage\style.css" />
     <Content Include="Content\paket-wisata.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -807,6 +810,8 @@
     <Content Include="Views\Paket\Details.cshtml" />
     <Content Include="Views\Paket\Edit.cshtml" />
     <Content Include="Views\Paket\Index.cshtml" />
+    <Content Include="Views\Customer\Register.cshtml" />
+    <Content Include="Views\Pegawai\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

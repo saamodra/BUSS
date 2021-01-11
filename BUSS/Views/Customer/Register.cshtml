@@ -9,7 +9,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Login - Customer</title>
+    <title>Daftar</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <link rel="icon" href="~/Content/assets/img/icon.ico" type="image/x-icon" />
 
@@ -41,47 +41,63 @@
             <p class="subtitle text-white op-7">Ayo bergabung dengan komunitas kami untuk masa depan yang lebih baik</p>
         </div>
         <div class="login-aside w-50 d-flex align-items-center justify-content-center bg-white">
+
             <div class="container container-login container-transparent animated fadeIn">
-                <h3 class="text-center">Login Customer</h3>
+                <h3 class="text-center">Daftar Akun BUSS</h3>
                 <div class="login-form">
-                    @using (Html.BeginForm())
+                    @using (Html.BeginForm("Register", "Customer", FormMethod.Post))
                     {
                         @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NIK)
+                            @Html.EditorFor(model => model.NIK, new { htmlAttributes = new { @class = "form-control", @maxlength = "16", @type = "number" } })
+                            @Html.ValidationMessageFor(model => model.NIK, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Nama)
+                            @Html.EditorFor(model => model.Nama, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nama, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Alamat)
+                            @Html.EditorFor(model => model.Alamat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Alamat, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.No_HP)
+                            @Html.EditorFor(model => model.No_HP, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                            @Html.ValidationMessageFor(model => model.No_HP, "", new { @class = "text-danger" })
+                        </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.Email)
                             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.Password)
                             @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         </div>
-
                         <div class="row form-action">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-secondary w-100 fw-bold">Masuk</button>
+                                <button type="submit" class="btn btn-secondary w-100 fw-bold">Daftar</button>
                             </div>
                         </div>
                     }
-                    <div class="login-account mt-4">
-                        <span class="msg">Belum mempunyai akun ?</span>
-                        <a href="@Url.Action("Register", "Customer")" class="link">Daftar disini</a>
-                    </div>
                     <div class="login-account">
-                        <span class="msg">Pegawai BUSS ?</span>
-                        <a href="@Url.Action("Login", "Pegawai")" class="link">Login disini</a>
+                        <span class="msg">Sudah mempunyai akun ?</span>
+                        <a href="@Url.Action("Login", "Customer")" class="link">Login disini</a>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <script src="~/Content/assets/js/core/jquery.3.2.1.min.js"></script>
     <script src="~/Content/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
     <script src="~/Content/assets/js/core/popper.min.js"></script>
     <script src="~/Content/assets/js/core/bootstrap.min.js"></script>
+    <!-- Sweet Alert -->
+    <script src="~/Content/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
     <script src="~/Content/assets/js/atlantis.min.js"></script>
     <script>
         if ("@TempData["SuccessMessage"]" != "") {

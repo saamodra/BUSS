@@ -41,6 +41,11 @@ namespace BUSS.Controllers
             return View();
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         // POST: Customer/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -115,6 +120,11 @@ namespace BUSS.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Register()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Register([Bind(Include = "NIK,Nama,Alamat,No_HP,Email,Password")] Customer customer)
@@ -123,11 +133,14 @@ namespace BUSS.Controllers
             {
                 db.Customers.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                TempData["SuccessMessage"] = "Register berhasil";
+
+                return RedirectToAction("Register");
             }
 
             return View(customer);
         }
+        
 
         protected override void Dispose(bool disposing)
         {
