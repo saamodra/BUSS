@@ -11,7 +11,9 @@ namespace BUSS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(Detail_PaketMetadata))]
     public partial class Detail_Paket
     {
         public int ID_Paket { get; set; }

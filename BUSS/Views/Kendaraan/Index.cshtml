@@ -1,8 +1,7 @@
-﻿@model IEnumerable<BUSS.Models.Kota>
-
+﻿@model IEnumerable<BUSS.Models.Kendaraan>
 @{
-    ViewBag.Title = "Kota";
-    ViewBag.SidebarMenu = "Kota";
+    ViewBag.Title = "Kendaraan";
+    ViewBag.SidebarMenu = "Kendaraan";
 }
 
 <div class="page-inner">
@@ -36,7 +35,16 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Nama_Kota)
+                                        @Html.DisplayNameFor(model => model.Nama_Kendaraan)
+                                    </th>
+                                    <th>
+                                        Jenis Kendaraan
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.No_Kendaraan)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Harga_kendaraan)
                                     </th>
                                     <th>Aksi</th>
                                 </tr>
@@ -48,15 +56,24 @@
                                     <tr>
                                         <td>@(rowCount++).</td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Nama_Kota)
+                                            @Html.DisplayFor(modelItem => item.Nama_Kendaraan)
                                         </td>
                                         <td>
-                                            <a href="@Url.Action("Edit", "Kota", new { id = item.ID_Kota })" class="btn btn-warning btn-sm mr-1">
+                                            @Html.DisplayFor(modelItem => item.Jenis_Kendaraan.Nama_Jenis)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.No_Kendaraan)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Harga_kendaraan)
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Edit", @ViewBag.SidebarMenu, new { id = item.ID_Kendaraan })" class="btn btn-warning btn-sm mr-1">
                                                 <i class="fa fa-edit"></i> Ubah
                                             </a>
-                                            <form action="@Url.Action("Delete", "Kota")" method="post" class="d-inline deleteForm">
+                                            <form action="@Url.Action("Delete", @ViewBag.SidebarMenu)" method="post" class="d-inline deleteForm">
                                                 @Html.AntiForgeryToken()
-                                                <input type="hidden" name="id" value="@item.ID_Kota" />
+                                                <input type="hidden" name="id" value="@item.ID_Kendaraan" />
                                                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button>
                                             </form>
                                         </td>

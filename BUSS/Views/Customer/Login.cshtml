@@ -1,0 +1,121 @@
+﻿@model BUSS.Models.Customer
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Login</title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <link rel="icon" href="~/Content/assets/img/icon.ico" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="~/Content/assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+		WebFont.load({
+			google: {"families":["Lato:300,400,700,900"]},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['@Url.Content("~/Content/assets/css/fonts.min.css")']},
+			active: function() {
+				sessionStorage.fonts = true;
+			}
+		});
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/atlantis-pro.css">
+</head>
+<body class="login">
+    <div class="wrapper wrapper-login">
+        <div class="container container-login animated fadeIn">
+            <h3 class="text-center">Login Customer</h3>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="login-form">
+                    <div class="form-group">
+                        <label for="username" class="placeholder"><b>Username</b></label>
+                        <input id="username" name="username" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="placeholder"><b>Password</b></label>
+                        <a href="#" class="link float-right">Forget Password ?</a>
+                        <div class="position-relative">
+                            <input id="password" name="password" type="password" class="form-control" required>
+                            <div class="show-password">
+                                <i class="icon-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-action-d-flex mb-3">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="rememberme">
+                            <label class="custom-control-label m-0" for="rememberme">Remember Me</label>
+                        </div>
+                        <a href="/Dashboard" class="btn btn-primary col-md-5 float-right mt-3 mt-sm-0 fw-bold">Sign In</a>
+                    </div>
+                    <div class="login-account">
+                        <span class="msg">Don't have an account yet ?</span>
+                        <a href="#" id="show-signup" class="link">Sign Up</a>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="container container-signup animated fadeIn">
+            <h3 class="text-center">Daftar Akun</h3>
+            @using (Html.BeginForm("Register", "Customer", FormMethod.Post))
+            {
+                <div class="login-form">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NIK)
+                        @Html.EditorFor(model => model.NIK, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NIK, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nama)
+                        @Html.EditorFor(model => model.Nama, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nama, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Alamat)
+                        @Html.EditorFor(model => model.Alamat, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Alamat, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.No_HP)
+                        @Html.EditorFor(model => model.No_HP, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.No_HP, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email)
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password)
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="row form-action">
+                        <div class="col-md-6">
+                            <a href="#" id="show-signin" class="btn btn-danger btn-link w-100 fw-bold">Batal</a>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary w-100 fw-bold">Daftar</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <script src="~/Content/assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="~/Content/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="~/Content/assets/js/core/popper.min.js"></script>
+    <script src="~/Content/assets/js/core/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/atlantis.min.js"></script>
+</body>
+</html>

@@ -128,10 +128,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DestinasiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Jenis_KendaraanController.cs" />
     <Compile Include="Controllers\KategoriWilayahController.cs" />
+    <Compile Include="Controllers\KendaraanController.cs" />
     <Compile Include="Controllers\KotaController.cs" />
     <Compile Include="Controllers\PegawaiController.cs" />
     <Compile Include="Global.asax.cs">
@@ -141,6 +144,7 @@
     <Compile Include="Models\Customer.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerMetadata.cs" />
     <Compile Include="Models\DbBuss.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -171,6 +175,7 @@
     <Compile Include="Models\Detail_Paket.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Detail_PaketMetadata.cs" />
     <Compile Include="Models\Detail_Rating_Destinasi.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
@@ -180,6 +185,7 @@
     <Compile Include="Models\Jenis_Kendaraan.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Jenis_KendaraanMetadata.cs" />
     <Compile Include="Models\Kategori_WilayahMetadata.cs" />
     <Compile Include="Models\Kategori_Wilayah.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
@@ -187,6 +193,7 @@
     <Compile Include="Models\Kendaraan.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\KendaraanMetadata.cs" />
     <Compile Include="Models\KeyValue.cs" />
     <Compile Include="Models\Kota.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
@@ -195,6 +202,7 @@
     <Compile Include="Models\Paket.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PaketMetadata.cs" />
     <Compile Include="Models\Pegawai.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
@@ -781,6 +789,18 @@
     <Content Include="Views\KategoriWilayah\Details.cshtml" />
     <Content Include="Views\KategoriWilayah\Edit.cshtml" />
     <Content Include="Views\KategoriWilayah\Index.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\Delete.cshtml" />
+    <Content Include="Views\Customer\Details.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Login.cshtml" />
+    <Content Include="Views\Jenis_Kendaraan\Create.cshtml" />
+    <Content Include="Views\Jenis_Kendaraan\Index.cshtml" />
+    <Content Include="Views\Jenis_Kendaraan\Edit.cshtml" />
+    <Content Include="Views\Kendaraan\Index.cshtml" />
+    <Content Include="Views\Kendaraan\Create.cshtml" />
+    <Content Include="Views\Kendaraan\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
