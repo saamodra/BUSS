@@ -25,7 +25,7 @@ namespace BUSS.Controllers
         // GET: Kendaraan/Create
         public ActionResult Create()
         {
-            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan, "ID_Jenis", "Nama_Jenis");
+            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan.Where(k => k.Status == 1), "ID_Jenis", "Nama_Jenis");
             return View();
         }
 
@@ -45,7 +45,7 @@ namespace BUSS.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan, "ID_Jenis", "Nama_Jenis", kendaraan.ID_Jenis);
+            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan.Where(k => k.Status == 1), "ID_Jenis", "Nama_Jenis", kendaraan.ID_Jenis);
             return View(kendaraan);
         }
 
@@ -61,7 +61,7 @@ namespace BUSS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan, "ID_Jenis", "Nama_Jenis", kendaraan.ID_Jenis);
+            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan.Where(k => k.Status == 1), "ID_Jenis", "Nama_Jenis", kendaraan.ID_Jenis);
             return View(kendaraan);
         }
 
@@ -80,7 +80,7 @@ namespace BUSS.Controllers
                 TempData["SuccessMessage"] = "Data berhasil diubah!";
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan, "ID_Jenis", "Nama_Jenis", kendaraan.ID_Jenis);
+            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan.Where(k => k.Status == 1), "ID_Jenis", "Nama_Jenis", kendaraan.ID_Jenis);
             return View(kendaraan);
         }
 

@@ -41,7 +41,7 @@ namespace BUSS.Controllers
         // GET: Destinasi/Create
         public ActionResult Create()
         {
-            ViewBag.ID_Kota = new SelectList(db.Kotas, "ID_Kota", "Nama_Kota");
+            ViewBag.ID_Kota = new SelectList(db.Kotas.Where(k => k.Status == 1), "ID_Kota", "Nama_Kota");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace BUSS.Controllers
                 return RedirectToAction("Details", "Destinasi", new { @id = destinasi.ID_Destinasi });
             }
 
-            ViewBag.ID_Kota = new SelectList(db.Kotas, "ID_Kota", "Nama_Kota", destinasi.ID_Kota);
+            ViewBag.ID_Kota = new SelectList(db.Kotas.Where(k => k.Status == 1), "ID_Kota", "Nama_Kota", destinasi.ID_Kota);
             return View(destinasi);
         }
 
@@ -82,7 +82,7 @@ namespace BUSS.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.ID_Kota = new SelectList(db.Kotas, "ID_Kota", "Nama_Kota", destinasi.ID_Kota);
+            ViewBag.ID_Kota = new SelectList(db.Kotas.Where(k => k.Status == 1), "ID_Kota", "Nama_Kota", destinasi.ID_Kota);
             return View(destinasi);
         }
 

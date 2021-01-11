@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BUSSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BUSSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="NIK" />
@@ -27,7 +27,7 @@
           <Property Name="Rating" Type="float" Nullable="false" />
           <Property Name="Jam_buka" Type="time" Precision="7" Nullable="false" />
           <Property Name="Jam_tutup" Type="time" Precision="7" Nullable="false" />
-          <Property Name="Deskripsi" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Deskripsi" Type="varchar" MaxLength="255" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Detail_Foto">
@@ -116,7 +116,7 @@
           </Key>
           <Property Name="ID_Paket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nama_Paket" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Harga" Type="money" Nullable="false" />
+          <Property Name="Harga" Type="money" />
           <Property Name="Konsumsi" Type="int" Nullable="false" />
           <Property Name="Lama_Perjalanan" Type="int" />
           <Property Name="Jenis_Paket" Type="int" Nullable="false" />
@@ -419,7 +419,8 @@
             <End Role="Transaksi" EntitySet="Transaksi" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BUSSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -447,7 +448,7 @@
           <Property Name="Rating" Type="Double" Nullable="false" />
           <Property Name="Jam_buka" Type="Time" Nullable="false" Precision="7" />
           <Property Name="Jam_tutup" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="Deskripsi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Deskripsi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Kota" Relationship="Self.FK_Destinasi_Kota" FromRole="Destinasi" ToRole="Kota" />
           <NavigationProperty Name="Detail_Foto" Relationship="Self.FK_Detail_Foto_Destinasi" FromRole="Destinasi" ToRole="Detail_Foto" />
@@ -554,7 +555,7 @@
           </Key>
           <Property Name="ID_Paket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nama_Paket" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Harga" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Harga" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Konsumsi" Type="Int32" Nullable="false" />
           <Property Name="Lama_Perjalanan" Type="Int32" />
           <Property Name="Jenis_Paket" Type="Int32" Nullable="false" />

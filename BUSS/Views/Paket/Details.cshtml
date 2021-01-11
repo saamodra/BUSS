@@ -1,0 +1,175 @@
+﻿@model BUSS.Models.Paket
+
+@{
+    ViewBag.Title = "Detail Paket";
+    ViewBag.SidebarMenu = "Paket";
+}
+
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">@ViewBag.SidebarMenu</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="/Admin">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/@ViewBag.SidebarMenu">@ViewBag.SidebarMenu</a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="#">Detail</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card full-height">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Tambahkan Destinasi</h3>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("AddDetails", "Paket", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.ID_Paket)
+                        <div class="form-group">
+                            <label for="Destinasi">Destinasi</label>
+                            @Html.DropDownList("ID_Destinasi", null, "Pilih Destinasi", htmlAttributes: new { @class = "form-control", @required = "true" })
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Simpan" class="btn btn-primary" />
+                            <a href="@Url.Action("Index", "Paket")" class="btn btn-warning">Batal</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card full-height">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">@ViewBag.Title</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <h5 class="col-sm-2 font-weight-bold">@Html.DisplayNameFor(model => model.Nama_Paket)</h5>
+                        <h5 class="col-sm-10">@Html.DisplayFor(model => model.Nama_Paket)</h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col-sm-2 font-weight-bold">@Html.DisplayNameFor(model => model.Harga)</h5>
+                        <h5 class="col-sm-10">
+                            @if (Model.Harga == null)
+                            {
+                                <text>-</text> 
+                            } else { 
+                                @Html.DisplayFor(model => model.Harga)
+                            }
+                        </h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col-sm-2 font-weight-bold">@Html.DisplayNameFor(model => model.Konsumsi)</h5>
+                        <h5 class="col-sm-10">@Html.DisplayFor(model => model.Konsumsi)x</h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col-sm-2 font-weight-bold">@Html.DisplayNameFor(model => model.Lama_Perjalanan)</h5>
+                        <h5 class="col-sm-10">@Html.DisplayFor(model => model.Lama_Perjalanan) Hari</h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col-sm-2 font-weight-bold">@Html.DisplayNameFor(model => model.Jenis_Paket)</h5>
+                        <h5 class="col-sm-10">@(Model.Jenis_Paket == 0 ? "Paket" : "Custom")
+                        </h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col-sm-2 font-weight-bold">@Html.DisplayNameFor(model => model.Jadwal)</h5>
+                        <h5 class="col-sm-10">@Html.DisplayFor(model => model.Jadwal) Hari</h5>
+                    </div>
+                    <div class="row">
+                        <h5 class="col-sm-2 font-weight-bold">@Html.DisplayNameFor(model => model.Keterangan)</h5>
+                        <h5 class="col-sm-10">@Html.DisplayFor(model => model.Keterangan)</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card full-height">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Daftar Destinasi</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table" id="example2">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Nama Destinasi</th>
+                                    <th>Kota</th>
+                                    <th>Harga Tiket</th>
+                                    <th>Rating</th>
+                                    <th>Jam Operasional</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int rowCount = 1; }
+                                @foreach (var item in Model.Detail_Paket)
+                                {
+                                <tr>
+                                    <td>@(rowCount++).</td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Destinasi.Nama_Destinasi)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Destinasi.Kota.Nama_Kota)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Destinasi.Harga_Tiket)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Destinasi.Rating)
+                                    </td>
+                                    <td>
+                                        @item.Destinasi.Jam_buka - @item.Destinasi.Jam_tutup
+                                    </td>
+                                    <td>
+                                        <form action="@Url.Action("DeleteDetails", "Paket")" method="post" class="d-inline deleteForm">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="ID_Paket" value="@item.ID_Paket" />
+                                            <input type="hidden" name="ID_Destinasi" value="@item.ID_Destinasi" />
+                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        if ("@TempData["SuccessMessage"]" != "") {
+            swal("Berhasil", "@TempData["SuccessMessage"]", {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                },
+            });
+        }
+    </script>
+}

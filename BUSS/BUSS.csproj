@@ -136,6 +136,7 @@
     <Compile Include="Controllers\KategoriWilayahController.cs" />
     <Compile Include="Controllers\KendaraanController.cs" />
     <Compile Include="Controllers\KotaController.cs" />
+    <Compile Include="Controllers\PaketController.cs" />
     <Compile Include="Controllers\PegawaiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -186,10 +187,10 @@
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Jenis_KendaraanMetadata.cs" />
-    <Compile Include="Models\Kategori_WilayahMetadata.cs" />
     <Compile Include="Models\Kategori_Wilayah.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Kategori_WilayahMetadata.cs" />
     <Compile Include="Models\Kendaraan.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
@@ -801,6 +802,11 @@
     <Content Include="Views\Kendaraan\Index.cshtml" />
     <Content Include="Views\Kendaraan\Create.cshtml" />
     <Content Include="Views\Kendaraan\Edit.cshtml" />
+    <Content Include="Views\Paket\Create.cshtml" />
+    <Content Include="Views\Paket\Delete.cshtml" />
+    <Content Include="Views\Paket\Details.cshtml" />
+    <Content Include="Views\Paket\Edit.cshtml" />
+    <Content Include="Views\Paket\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

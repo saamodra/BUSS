@@ -32,7 +32,7 @@ namespace BUSS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_Kota = new SelectList(db.Kotas, "ID_Kota", "Nama_Kota");
+            ViewBag.ID_Kota = new SelectList(db.Kotas.Where(k => k.Status == 1), "ID_Kota", "Nama_Kota");
 
             return View(kategori_Wilayah);
         }
@@ -59,7 +59,7 @@ namespace BUSS.Controllers
                     TempData["ErrorMessage"] = "Data kota gagal ditambahkan!";
                 } else
                 {
-                    TempData["SuccessMessage"] = "Data kota ditambah!";
+                    TempData["SuccessMessage"] = "Data kota berhasil ditambah!";
                     db.SaveChanges();
                 }
             }
@@ -76,7 +76,7 @@ namespace BUSS.Controllers
 
                 db.Detail_Kategori.Remove(detail);
                 db.SaveChanges();
-                TempData["SuccessMessage"] = "Data kota dihapus!";
+                TempData["SuccessMessage"] = "Data kota berhasil dihapus!";
 
                 return RedirectToAction("Details", "KategoriWilayah", new { @id = ID_KategoriWilayah });
             }

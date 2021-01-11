@@ -25,7 +25,7 @@ namespace BUSS.Models
     
         public int ID_Paket { get; set; }
         public string Nama_Paket { get; set; }
-        public decimal Harga { get; set; }
+        public Nullable<decimal> Harga { get; set; }
         public int Konsumsi { get; set; }
         public Nullable<int> Lama_Perjalanan { get; set; }
         public int Jenis_Paket { get; set; }
