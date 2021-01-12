@@ -24,12 +24,10 @@ namespace BUSS.Models
         public string Nama_Paket { get; set; }
 
         [DisplayName("Harga Paket")]
-        [Required(ErrorMessage = "Harga paket wajib diisi!")]
         [DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode = true)]
-        public decimal Harga { get; set; }
+        public Nullable<decimal> Harga { get; set; }
 
         [DisplayName("Konsumsi")]
-        [Required(ErrorMessage = "Konsumsi wajib diisi!")]
         public int Konsumsi { get; set; }
 
         [DisplayName("Lama Perjalanan")]
@@ -37,7 +35,6 @@ namespace BUSS.Models
         public Nullable<int> Lama_Perjalanan { get; set; }
 
         [DisplayName("Jenis Paket")]
-        [Required(ErrorMessage = "Jenis paket wajib diisi!")]
         public int Jenis_Paket { get; set; }
         public string Jadwal { get; set; }
 

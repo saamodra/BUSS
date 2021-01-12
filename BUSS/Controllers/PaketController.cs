@@ -92,7 +92,7 @@ namespace BUSS.Controllers
         // POST: Paket/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Paket,Nama_Paket,Harga,Lama_Perjalanan,Jenis_Paket,Jadwal,Keterangan,Status")] Paket paket)
+        public ActionResult Create([Bind(Include = "ID_Paket,Nama_Paket,Lama_Perjalanan,Keterangan")] Paket paket)
         {
             if (ModelState.IsValid)
             {
@@ -128,10 +128,12 @@ namespace BUSS.Controllers
         // POST: Paket/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Paket,Nama_Paket,Harga,Konsumsi,Lama_Perjalanan,Jenis_Paket,Jadwal,Keterangan,Status")] Paket paket)
+        public ActionResult Edit([Bind(Include = "ID_Paket,Nama_Paket,Lama_Perjalanan,Keterangan,Status")] Paket paket)
         {
             if (ModelState.IsValid)
             {
+                paket.Konsumsi = (paket.Lama_Perjalanan == null ? 0 : paket.Lama_Perjalanan.Value) * 2;
+                paket.Status = 1;
                 db.Entry(paket).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
