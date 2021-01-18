@@ -19,7 +19,7 @@ namespace BUSS.Controllers
         // GET: Jenis_Kendaraan
         public ActionResult Index()
         {
-            return View(db.Jenis_Kendaraan.Where(jk => jk.Status == 1).ToList());
+            return View(db.Jenis_Kendaraan.Where(jk => jk.Status == 1).OrderBy(k => k.Nama_Jenis).ToList());
         }
 
 
@@ -80,7 +80,7 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_Jenis,Nama_Jenis,Jumlah_Kursi,CreatedBy,CreatedDate")] Jenis_Kendaraan jenis_Kendaraan)
         {
-            if (db.Jenis_Kendaraan.Any(k => k.Nama_Jenis == jenis_Kendaraan.Nama_Jenis))
+            if (db.Jenis_Kendaraan.Where(k => k.ID_Jenis != jenis_Kendaraan.ID_Jenis).Any(k => k.Nama_Jenis == jenis_Kendaraan.Nama_Jenis))
             {
                 ModelState.AddModelError("Nama_Jenis", "Nama jenis kendaraan sudah ada.");
             }

@@ -817,6 +817,7 @@
     <Content Include="Views\Dashboard\Pegawai.cshtml" />
     <Content Include="Views\Dashboard\Tourleader.cshtml" />
     <Content Include="Views\Dashboard\Manager.cshtml" />
+    <Content Include="Views\Home\Paket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

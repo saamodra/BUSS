@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bus Travel</title>
+    <title>Travel BUSS</title>
     <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/assets/flickity-docs/flickity.min.css">
     <link rel="stylesheet" href="~/Content/assets/css/sf_pro.css">
@@ -25,7 +25,7 @@
     <header>
         <nav class="navbar navbar-expand-lg fixed-top py-0 navbar-dark">
             <a class="navbar-brand" href="/">
-                <h2 class="font-weight-bold">NamaAplikasi</h2>
+                <h2 class="font-weight-bold">BUSS</h2>
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -58,7 +58,7 @@
             <div class="vertical-line"></div>
         </div>
         <div class="carousel-content">
-            <h2 class="carousel-title">NamaAplikasi</h2>
+            <h2 class="carousel-title">BUSS</h2>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eleifend orci id feugiat finibus. Integer
                 ullamcorper et diam nec ornare. Phasellus tempus nisl vitae ipsum molestie, ac feugiat nibh condimentum.
@@ -128,10 +128,11 @@
         <div class="row">
             @foreach (var item in Model)
             {
+             
                 <div class="col-xs-12 col-sm-6 col-md-3 my-2">
-                    <a href="#">
+                    <a href="@Url.Action("Paket", "Home")">
                         <div class="card h-100">
-                            <img class="card-img-top" src="~/Content/upload/" alt="Card image cap">
+                            <img class="card-img-top" src="~/Content/upload/@item.Detail_Paket.FirstOrDefault().Destinasi.Detail_Foto.FirstOrDefault().Foto" alt="Card image cap">
                             <div class="card-body">
                                 <div class="card-title font-weight-bold h5">@item.Nama_Paket</div>
                                 <div class="d-flex justify-content-between">
@@ -149,146 +150,6 @@
                     </a>
                 </div>
             }
-            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
-                <a href="#">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="~/Content/assets/img/home/des2.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="card-title font-weight-bold h5">2H2M di Nusa Kambangan</div>
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <div class="dest-star mb-1" data-rating="2.3"></div>
-                                    81 rated
-                                </div>
-                                <div class="paket-wisata-price">
-                                    <div class="strikethrough mb-1"><s>IDR 1.930.000</s></div>
-                                    <div class="real">IDR 1.930.000</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
-                <a href="#">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="~/Content/assets/img/home/des3.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="card-title font-weight-bold h5">2H2M di Nusa Kambangan</div>
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <div class="dest-star mb-1" data-rating="2.3"></div>
-                                    81 rated
-                                </div>
-                                <div class="paket-wisata-price">
-                                    <div class="strikethrough mb-1"><s>IDR 1.930.000</s></div>
-                                    <div class="real">IDR 1.930.000</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
-                <a href="#">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="~/Content/assets/img/home/des4.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="card-title font-weight-bold h5">2H2M di Nusa Kambangan</div>
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <div class="dest-star mb-1" data-rating="2.3"></div>
-                                    81 rated
-                                </div>
-                                <div class="paket-wisata-price">
-                                    <div class="strikethrough mb-1"><s>IDR 1.930.000</s></div>
-                                    <div class="real">IDR 1.930.000</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
-                <a href="#">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="~/Content/assets/img/home/des5.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="card-title font-weight-bold h5">2H2M di Nusa Kambangan</div>
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <div class="dest-star mb-1" data-rating="2.3"></div>
-                                    81 rated
-                                </div>
-                                <div class="paket-wisata-price">
-                                    <div class="strikethrough mb-1"><s>IDR 1.930.000</s></div>
-                                    <div class="real">IDR 1.930.000</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
-                <a href="#">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="~/Content/assets/img/home/des6.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="card-title font-weight-bold h5">2H2M di Nusa Kambangan</div>
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <div class="dest-star mb-1" data-rating="2.3"></div>
-                                    81 rated
-                                </div>
-                                <div class="paket-wisata-price">
-                                    <div class="strikethrough mb-1"><s>IDR 1.930.000</s></div>
-                                    <div class="real">IDR 1.930.000</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
-                <a href="#">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="~/Content/assets/img/home/des7.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="card-title font-weight-bold h5">2H2M di Nusa Kambangan</div>
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <div class="dest-star mb-1" data-rating="2.3"></div>
-                                    81 rated
-                                </div>
-                                <div class="paket-wisata-price">
-                                    <div class="strikethrough mb-1"><s>IDR 1.930.000</s></div>
-                                    <div class="real">IDR 1.930.000</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
-                <a href="#">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="~/Content/assets/img/home/des8.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="card-title font-weight-bold h5">2H2M di Nusa Kambangan Nusa dua village</div>
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <div class="dest-star mb-1" data-rating="2.3"></div>
-                                    81 rated
-                                </div>
-                                <div class="paket-wisata-price">
-                                    <div class="strikethrough mb-1"><s>IDR 1.930.000</s></div>
-                                    <div class="real">IDR 1.930.000</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
         </div>
     </section>
     <!-- End Section Destination -->

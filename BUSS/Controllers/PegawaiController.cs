@@ -19,7 +19,7 @@ namespace BUSS.Controllers
         // GET: Pegawai
         public ActionResult Index()
         {
-            return View(db.Pegawais.Where(s => s.Status == 1).ToList());
+            return View(db.Pegawais.Where(s => s.Status == 1).OrderBy(k => k.Nama).ToList());
         }
 
         // GET: Pegawai/Details/5
@@ -175,6 +175,7 @@ namespace BUSS.Controllers
                         Session["Name"] = obj.Nama.ToString();
                         Session["Email"] = obj.Email.ToString();
                         Session["Role"] = obj.Role.ToString();
+
                         return RedirectToAction("UserLogin");
                     }
                     else

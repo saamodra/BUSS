@@ -19,7 +19,7 @@ namespace BUSS.Controllers
         public ActionResult Index()
         {
             var destinasis = db.Destinasis.Include(d => d.Kota)
-                .Where(d => d.Status == 1);
+                .Where(d => d.Status == 1).OrderBy(k => k.Nama_Destinasi);
             return View(destinasis.ToList());
         }
 
@@ -41,7 +41,7 @@ namespace BUSS.Controllers
         // GET: Destinasi/Create
         public ActionResult Create()
         {
-            ViewBag.ID_Kota = new SelectList(db.Kotas.Where(k => k.Status == 1), "ID_Kota", "Nama_Kota");
+            ViewBag.ID_Kota = new SelectList(db.Kotas.Where(k => k.Status == 1).OrderBy(k => k.Nama_Kota), "ID_Kota", "Nama_Kota");
             return View();
         }
 
@@ -76,7 +76,7 @@ namespace BUSS.Controllers
                 
             }
 
-            ViewBag.ID_Kota = new SelectList(db.Kotas.Where(k => k.Status == 1), "ID_Kota", "Nama_Kota", destinasi.ID_Kota);
+            ViewBag.ID_Kota = new SelectList(db.Kotas.Where(k => k.Status == 1).OrderBy(k => k.Nama_Kota), "ID_Kota", "Nama_Kota", destinasi.ID_Kota);
             return View(destinasi);
         }
 
@@ -93,7 +93,7 @@ namespace BUSS.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.ID_Kota = new SelectList(db.Kotas.Where(k => k.Status == 1), "ID_Kota", "Nama_Kota", destinasi.ID_Kota);
+            ViewBag.ID_Kota = new SelectList(db.Kotas.Where(k => k.Status == 1).OrderBy(k => k.Nama_Kota), "ID_Kota", "Nama_Kota", destinasi.ID_Kota);
             return View(destinasi);
         }
 
@@ -104,7 +104,7 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_Destinasi,Nama_Destinasi,Harga_Tiket,ID_Kota,Rating,Jam_Buka,Jam_Tutup,Deskripsi,CreatedBy,CreatedDate")] Destinasi destinasi)
         {
-            if (db.Destinasis.Any(k => k.Nama_Destinasi == destinasi.Nama_Destinasi))
+            if (db.Destinasis.Where(k => k.ID_Destinasi != destinasi.ID_Destinasi).Any(k => k.Nama_Destinasi == destinasi.Nama_Destinasi))
             {
                 ModelState.AddModelError("Nama_Destinasi", "Nama destinasi sudah ada.");
             }
@@ -120,7 +120,7 @@ namespace BUSS.Controllers
                 TempData["SuccessMessage"] = "Data berhasil diubah!";
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_Kota = new SelectList(db.Kotas, "ID_Kota", "Nama_Kota", destinasi.ID_Kota);
+            ViewBag.ID_Kota = new SelectList(db.Kotas.Where(k => k.Status == 1).OrderBy(k => k.Nama_Kota), "ID_Kota", "Nama_Kota", destinasi.ID_Kota);
             return View(destinasi);
         }
 

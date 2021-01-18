@@ -18,14 +18,14 @@ namespace BUSS.Controllers
         public ActionResult Index()
         {
             var kendaraans = db.Kendaraans.Include(k => k.Jenis_Kendaraan)
-                .Where(k => k.Status == 1);
+                .Where(k => k.Status == 1).OrderBy(k => k.Nama_Kendaraan);
             return View(kendaraans.ToList());
         }
 
         // GET: Kendaraan/Create
         public ActionResult Create()
         {
-            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan.Where(k => k.Status == 1), "ID_Jenis", "Nama_Jenis");
+            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan.Where(k => k.Status == 1).OrderBy(k => k.Nama_Jenis), "ID_Jenis", "Nama_Jenis");
             return View();
         }
 
@@ -54,7 +54,7 @@ namespace BUSS.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan.Where(k => k.Status == 1), "ID_Jenis", "Nama_Jenis", kendaraan.ID_Jenis);
+            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan.Where(k => k.Status == 1).OrderBy(k => k.Nama_Jenis), "ID_Jenis", "Nama_Jenis", kendaraan.ID_Jenis);
             return View(kendaraan);
         }
 
@@ -70,7 +70,7 @@ namespace BUSS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan.Where(k => k.Status == 1), "ID_Jenis", "Nama_Jenis", kendaraan.ID_Jenis);
+            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan.Where(k => k.Status == 1).OrderBy(k => k.Nama_Jenis), "ID_Jenis", "Nama_Jenis", kendaraan.ID_Jenis);
             return View(kendaraan);
         }
 
@@ -81,7 +81,7 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_Kendaraan,Nama_Kendaraan,ID_Jenis,No_Kendaraan,Harga_kendaraan,CreatedBy,CreatedDate")] Kendaraan kendaraan)
         {
-            if (db.Kendaraans.Any(k => k.Nama_Kendaraan == kendaraan.Nama_Kendaraan))
+            if (db.Kendaraans.Where(k => k.ID_Kendaraan != kendaraan.ID_Kendaraan).Any(k => k.Nama_Kendaraan == kendaraan.Nama_Kendaraan))
             {
                 ModelState.AddModelError("Nama_Kendaraan", "Nama kendaraan sudah ada.");
             }
@@ -96,7 +96,7 @@ namespace BUSS.Controllers
                 TempData["SuccessMessage"] = "Data berhasil diubah!";
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan.Where(k => k.Status == 1), "ID_Jenis", "Nama_Jenis", kendaraan.ID_Jenis);
+            ViewBag.ID_Jenis = new SelectList(db.Jenis_Kendaraan.Where(k => k.Status == 1).OrderBy(k => k.Nama_Jenis), "ID_Jenis", "Nama_Jenis", kendaraan.ID_Jenis);
             return View(kendaraan);
         }
 

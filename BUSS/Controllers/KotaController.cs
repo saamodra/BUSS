@@ -17,7 +17,7 @@ namespace BUSS.Controllers
         // GET: Kota
         public ActionResult Index()
         {
-            return View(db.Kotas.Where(k => k.Status == 1).ToList());
+            return View(db.Kotas.Where(k => k.Status == 1).OrderBy(k => k.Nama_Kota).ToList());
         }
 
 
@@ -77,7 +77,7 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_Kota,Nama_Kota,CreatedBy,CreatedDate")] Kota kota)
         {
-            if (db.Kotas.Any(k => k.Nama_Kota == kota.Nama_Kota))
+            if (db.Kotas.Where(k => k.ID_Kota != kota.ID_Kota).Any(k => k.Nama_Kota == kota.Nama_Kota))
             {
                 ModelState.AddModelError("Nama_Kota", "Nama kota sudah ada.");
             }

@@ -17,7 +17,7 @@ namespace BUSS.Controllers
         // GET: Paket
         public ActionResult Index()
         {
-            return View(db.Pakets.Where(p => p.Status == 1).ToList());
+            return View(db.Pakets.Where(p => p.Status == 1).OrderBy(k => k.Nama_Paket).ToList());
         }
 
         // GET: Paket/Details/5
@@ -33,7 +33,7 @@ namespace BUSS.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.ID_Destinasi = new SelectList(db.Destinasis.Where(k => k.Status == 1), "ID_Destinasi", "Nama_Destinasi");
+            ViewBag.ID_Destinasi = new SelectList(db.Destinasis.Where(k => k.Status == 1).OrderBy(k => k.Nama_Destinasi), "ID_Destinasi", "Nama_Destinasi");
             return View(paket);
         }
 
@@ -139,7 +139,7 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_Paket,Nama_Paket,Lama_Perjalanan,Keterangan,Status,CreatedBy,CreatedDate")] Paket paket)
         {
-            if (db.Pakets.Any(k => k.Nama_Paket == paket.Nama_Paket))
+            if (db.Pakets.Where(k => k.ID_Paket != paket.ID_Paket).Any(k => k.Nama_Paket == paket.Nama_Paket))
             {
                 ModelState.AddModelError("Nama_Paket", "Nama paket sudah ada.");
             }

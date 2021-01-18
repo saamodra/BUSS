@@ -17,7 +17,7 @@ namespace BUSS.Controllers
         // GET: KategoriWilayah
         public ActionResult Index()
         {
-            return View(db.Kategori_Wilayah.Where(k => k.Status == 1).ToList());
+            return View(db.Kategori_Wilayah.Where(k => k.Status == 1).OrderBy(k => k.Nama_Wilayah).ToList());
         }
 
         // GET: KategoriWilayah/Details/5
@@ -32,7 +32,7 @@ namespace BUSS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_Kota = new SelectList(db.Kotas.Where(k => k.Status == 1), "ID_Kota", "Nama_Kota");
+            ViewBag.ID_Kota = new SelectList(db.Kotas.Where(d => d.Status == 1).OrderBy(k => k.Nama_Kota), "ID_Kota", "Nama_Kota");
 
             return View(kategori_Wilayah);
         }
@@ -145,7 +145,7 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_KategoriWilayah,Nama_Wilayah,Status,CreatedBy,CreatedDate")] Kategori_Wilayah kategori_Wilayah)
         {
-            if (db.Kategori_Wilayah.Any(k => k.Nama_Wilayah == kategori_Wilayah.Nama_Wilayah))
+            if (db.Kategori_Wilayah.Where(k => k.ID_KategoriWilayah != kategori_Wilayah.ID_KategoriWilayah).Any(k => k.Nama_Wilayah == kategori_Wilayah.Nama_Wilayah))
             {
                 ModelState.AddModelError("Nama_Wilayah", "Nama kategori wilayah sudah ada.");
             }
