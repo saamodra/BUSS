@@ -18,6 +18,7 @@ namespace BUSS.Models
         public int ID_Transaksi { get; set; }
         public int Rating { get; set; }
         public string Isi_Feedback { get; set; }
+        public System.DateTime CreatedDate { get; set; }
     
         public virtual Transaksi Transaksi { get; set; }
     }

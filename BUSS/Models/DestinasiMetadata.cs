@@ -45,9 +45,19 @@ namespace BUSS.Models
         [DataType(DataType.MultilineText)]
         public string Deskripsi { get; set; }
         public int Status { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int ModifiedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
 
         public virtual Kota Kota { get; set; }
+        public virtual Pegawai Pegawai { get; set; }
+        public virtual Pegawai Pegawai1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detail_Foto> Detail_Foto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Detail_Paket> Detail_Paket { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Detail_Rating_Destinasi> Detail_Rating_Destinasi { get; set; }
     }
 }

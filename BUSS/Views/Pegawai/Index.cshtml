@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title">Data @ViewBag.SidebarMenu</h3>
-                    <a href="/Admin/@ViewBag.SidebarMenu/Create" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah Data</a>
+                    <a href="@Url.Action("Create", ViewBag.SidebarMenu)" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah Data</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -45,7 +45,7 @@
                                         @Html.DisplayNameFor(model => model.No_HP)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Username)
+                                        @Html.DisplayNameFor(model => model.Email)
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.Role)
@@ -69,7 +69,7 @@
                                             @Html.DisplayFor(modelItem => item.No_HP)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Username)
+                                            @Html.DisplayFor(modelItem => item.Email)
                                         </td>
                                         <td>
                                             @(item.Role == 1 ? "Admin" : "Tour Leader")

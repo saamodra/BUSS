@@ -28,8 +28,14 @@ namespace BUSS.Models
         public string No_Kendaraan { get; set; }
         public decimal Harga_kendaraan { get; set; }
         public int Status { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int ModifiedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
     
         public virtual Jenis_Kendaraan Jenis_Kendaraan { get; set; }
+        public virtual Pegawai Pegawai { get; set; }
+        public virtual Pegawai Pegawai1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaksi> Transaksis { get; set; }
     }

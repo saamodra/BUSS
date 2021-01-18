@@ -56,6 +56,10 @@ namespace BUSS.Controllers
             {
                 destinasi.Rating = 0;
                 destinasi.Status = 1;
+                destinasi.CreatedBy = (int)Session["ID_Pegawai"];
+                destinasi.CreatedDate = DateTime.Now;
+                destinasi.ModifiedBy = (int)Session["ID_Pegawai"];
+                destinasi.ModifiedDate = DateTime.Now;
 
                 db.Destinasis.Add(destinasi);
                 db.SaveChanges();
@@ -91,11 +95,14 @@ namespace BUSS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Destinasi,Nama_Destinasi,Harga_Tiket,ID_Kota,Rating,Jam_Buka,Jam_Tutup,Deskripsi")] Destinasi destinasi)
+        public ActionResult Edit([Bind(Include = "ID_Destinasi,Nama_Destinasi,Harga_Tiket,ID_Kota,Rating,Jam_Buka,Jam_Tutup,Deskripsi,CreatedBy,CreatedDate")] Destinasi destinasi)
         {
             if (ModelState.IsValid)
             {
                 destinasi.Status = 1;
+                destinasi.ModifiedBy = (int)Session["ID_Pegawai"];
+                destinasi.ModifiedDate = DateTime.Now;
+
                 db.Entry(destinasi).State = EntityState.Modified;
                 db.SaveChanges();
                 TempData["SuccessMessage"] = "Data berhasil diubah!";

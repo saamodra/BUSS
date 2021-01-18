@@ -101,9 +101,17 @@ namespace BUSS.Controllers
         {
             if (ModelState.IsValid)
             {
+                kategori_Wilayah.Status = 1;
+                kategori_Wilayah.CreatedBy = (int)Session["ID_Pegawai"];
+                kategori_Wilayah.CreatedDate = DateTime.Now;
+                kategori_Wilayah.ModifiedBy = (int)Session["ID_Pegawai"];
+                kategori_Wilayah.ModifiedDate = DateTime.Now;
                 db.Kategori_Wilayah.Add(kategori_Wilayah);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                TempData["SuccessMessage"] = "Data berhasil ditambah!";
+
+                return RedirectToAction("Details", "Destinasi", new { @id = kategori_Wilayah.ID_KategoriWilayah });
             }
 
             return View(kategori_Wilayah);
@@ -129,12 +137,16 @@ namespace BUSS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_KategoriWilayah,Nama_Wilayah,Status")] Kategori_Wilayah kategori_Wilayah)
+        public ActionResult Edit([Bind(Include = "ID_KategoriWilayah,Nama_Wilayah,Status,CreatedBy,CreatedDate")] Kategori_Wilayah kategori_Wilayah)
         {
             if (ModelState.IsValid)
             {
+                kategori_Wilayah.Status = 1;
+                kategori_Wilayah.ModifiedBy = (int)Session["ID_Pegawai"];
+                kategori_Wilayah.ModifiedDate = DateTime.Now;
                 db.Entry(kategori_Wilayah).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["SuccessMessage"] = "Data berhasil diubah!";
                 return RedirectToAction("Index");
             }
             return View(kategori_Wilayah);

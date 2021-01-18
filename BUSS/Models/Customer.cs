@@ -29,6 +29,7 @@ namespace BUSS.Models
         public string No_HP { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public System.DateTime CreatedDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detail_Rating_Destinasi> Detail_Rating_Destinasi { get; set; }

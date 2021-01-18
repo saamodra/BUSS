@@ -25,7 +25,13 @@ namespace BUSS.Models
         [Required(ErrorMessage = "Jumlah kursi wajib diisi!")]
         public int Jumlah_Kursi { get; set; }
         public int Status { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public int ModifiedBy { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
 
+        public virtual Pegawai Pegawai { get; set; }
+        public virtual Pegawai Pegawai1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Kendaraan> Kendaraans { get; set; }
     }

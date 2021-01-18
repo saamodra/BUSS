@@ -14,5 +14,20 @@ namespace BUSS.Controllers.Admin
         {
             return View();
         }
+
+        public ActionResult Pegawai()
+        {
+            return View();
+        }
+
+        public ActionResult Tourleader()
+        {
+            return View();
+        }
+
+        public ActionResult Manager()
+        {
+            return View();
+        }
     }
 }

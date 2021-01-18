@@ -40,9 +40,10 @@
                     {
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(model => model.ID_Kendaraan)
+                        @Html.HiddenFor(model => model.CreatedBy)
+                        @Html.HiddenFor(model => model.CreatedDate)
                         <div class="row">
                             <div class="col-md-4">
-
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Nama_Kendaraan)
                                     @Html.EditorFor(model => model.Nama_Kendaraan, new { htmlAttributes = new { @class = "form-control" } })
@@ -84,11 +85,11 @@
 @section scripts {
     <script>
         $("#formSubmit").submit(function (e) {
-            var hargaTiket = $('#Harga_Tiket').val().replace(/[^0-9]/g, '');
-            $('#Harga_Tiket').val(hargaTiket);
+            var hargaKendaraan = $('#Harga_kendaraan').val().replace(/[^0-9]/g, '');
+            $('#Harga_kendaraan').val(hargaKendaraan);
         });
 
-        $('#Harga_Tiket').priceFormat({
+        $('#Harga_kendaraan').priceFormat({
             prefix: 'Rp',
             centsLimit: 0,
             thousandsSeparator: '.'

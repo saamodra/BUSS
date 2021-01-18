@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BUSS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,12 @@ namespace BUSS.Controllers
 {
     public class HomeController : Controller
     {
+        BUSSEntities db = new BUSSEntities();
+
         public ActionResult Index()
         {
-            return View();
+            var paket = db.Pakets.Where(d => d.Status == 1 && d.Harga != null).ToList();
+            return View(paket);
         }
 
         public ActionResult About()

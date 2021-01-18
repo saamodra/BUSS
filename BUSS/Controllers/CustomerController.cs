@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using BUSS.Models;
 
 namespace BUSS.Controllers
@@ -131,6 +132,7 @@ namespace BUSS.Controllers
         {
             if (ModelState.IsValid)
             {
+                customer.CreatedDate = DateTime.Now;
                 db.Customers.Add(customer);
                 db.SaveChanges();
                 TempData["SuccessMessage"] = "Register berhasil";
@@ -140,7 +142,54 @@ namespace BUSS.Controllers
 
             return View(customer);
         }
-        
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string email, string password)
+        {
+            if (ModelState.IsValid)
+            {
+                using (BUSSEntities db = new BUSSEntities())
+                {
+                    var obj = db.Customers.Where(a => a.Email.Equals(email) && a.Password.Equals(password)).FirstOrDefault();
+                    if (obj != null)
+                    {
+                        TempData["SuccessMessage"] = "Login berhasil!";
+                        Session["NIK"] = obj.NIK.ToString();
+                        Session["Name"] = obj.Nama.ToString();
+                        Session["UserName"] = obj.Email.ToString();
+                        Session["Role"] = "3";
+                        return RedirectToAction("UserLogin");
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Email dan Password tidak cocok!";
+                    }
+                }
+            }
+
+            return RedirectToAction("Login");
+        }
+
+        public ActionResult UserLogin()
+        {
+            if (Session["Role"].ToString() == "3")
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon(); // it will clear the session at the end of request
+            return RedirectToAction("Index", "Home");
+        }
+
 
         protected override void Dispose(bool disposing)
         {

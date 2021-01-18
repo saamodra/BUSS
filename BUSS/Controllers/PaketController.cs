@@ -99,6 +99,10 @@ namespace BUSS.Controllers
                 paket.Konsumsi = (paket.Lama_Perjalanan == null ? 0 : paket.Lama_Perjalanan.Value) * 2;
                 paket.Jenis_Paket = 0;
                 paket.Status = 1;
+                paket.CreatedBy = (int)Session["ID_Pegawai"];
+                paket.CreatedDate = DateTime.Now;
+                paket.ModifiedBy = (int)Session["ID_Pegawai"];
+                paket.ModifiedDate = DateTime.Now;
                 db.Pakets.Add(paket);
                 db.SaveChanges();
 
@@ -128,14 +132,17 @@ namespace BUSS.Controllers
         // POST: Paket/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Paket,Nama_Paket,Lama_Perjalanan,Keterangan,Status")] Paket paket)
+        public ActionResult Edit([Bind(Include = "ID_Paket,Nama_Paket,Lama_Perjalanan,Keterangan,Status,CreatedBy,CreatedDate")] Paket paket)
         {
             if (ModelState.IsValid)
             {
                 paket.Konsumsi = (paket.Lama_Perjalanan == null ? 0 : paket.Lama_Perjalanan.Value) * 2;
                 paket.Status = 1;
+                paket.ModifiedBy = (int)Session["ID_Pegawai"];
+                paket.ModifiedDate = DateTime.Now;
                 db.Entry(paket).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["SuccessMessage"] = "Data berhasil diubah!";
                 return RedirectToAction("Index");
             }
             return View(paket);

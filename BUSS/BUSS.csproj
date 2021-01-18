@@ -811,6 +811,12 @@
     <Content Include="Views\Paket\Index.cshtml" />
     <Content Include="Views\Customer\Register.cshtml" />
     <Content Include="Views\Pegawai\Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutTourLeader.cshtml" />
+    <Content Include="Views\Shared\_LayoutManager.cshtml" />
+    <Content Include="Views\Shared\_LayoutCustomer.cshtml" />
+    <Content Include="Views\Dashboard\Pegawai.cshtml" />
+    <Content Include="Views\Dashboard\Tourleader.cshtml" />
+    <Content Include="Views\Dashboard\Manager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

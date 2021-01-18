@@ -19,6 +19,18 @@ namespace BUSS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Pegawai()
         {
+            this.Destinasis = new HashSet<Destinasi>();
+            this.Destinasis1 = new HashSet<Destinasi>();
+            this.Jenis_Kendaraan = new HashSet<Jenis_Kendaraan>();
+            this.Jenis_Kendaraan1 = new HashSet<Jenis_Kendaraan>();
+            this.Kategori_Wilayah = new HashSet<Kategori_Wilayah>();
+            this.Kategori_Wilayah1 = new HashSet<Kategori_Wilayah>();
+            this.Kendaraans = new HashSet<Kendaraan>();
+            this.Kendaraans1 = new HashSet<Kendaraan>();
+            this.Kotas = new HashSet<Kota>();
+            this.Kotas1 = new HashSet<Kota>();
+            this.Pakets = new HashSet<Paket>();
+            this.Pakets1 = new HashSet<Paket>();
             this.Transaksis = new HashSet<Transaksi>();
         }
     
@@ -26,11 +38,37 @@ namespace BUSS.Models
         public string Nama { get; set; }
         public string Alamat { get; set; }
         public string No_HP { get; set; }
-        public string Username { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
         public int Role { get; set; }
         public int Status { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Destinasi> Destinasis { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Destinasi> Destinasis1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Jenis_Kendaraan> Jenis_Kendaraan { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Jenis_Kendaraan> Jenis_Kendaraan1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kategori_Wilayah> Kategori_Wilayah { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kategori_Wilayah> Kategori_Wilayah1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kendaraan> Kendaraans { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kendaraan> Kendaraans1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kota> Kotas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kota> Kotas1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Paket> Pakets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Paket> Pakets1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaksi> Transaksis { get; set; }
     }

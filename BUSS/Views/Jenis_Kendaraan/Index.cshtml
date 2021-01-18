@@ -18,7 +18,7 @@
                 <i class="flaticon-right-arrow"></i>
             </li>
             <li class="nav-item">
-                <a href="/Admin/Jenis_Kendaraan">@ViewBag.SidebarMenu</a>
+                <a href="@Url.Action("Index", "Jenis_Kendaraan")">@ViewBag.SidebarMenu</a>
             </li>
         </ul>
     </div>
@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title">Data @ViewBag.SidebarMenu</h3>
-                    <a href="/Admin/Jenis_Kendaraan/Create" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah Data</a>
+                    <a href="@Url.Action("Create", "Jenis_Kendaraan")" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah Data</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

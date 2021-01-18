@@ -1,8 +1,10 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Home Page";
+﻿
+@{
     ViewBag.Dashboard = "active";
+    ViewBag.Title = "Pegawai";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div class="panel-header bg-primary-gradient">
     <div class="page-inner py-5">
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
@@ -190,4 +192,16 @@
 </div>
 
 @section scripts {
+    <script>
+        if ("@TempData["SuccessMessage"]" != "") {
+            swal("Berhasil", "@TempData["SuccessMessage"]", {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                },
+            });
+        }
+    </script>
 }

@@ -18,7 +18,7 @@
                 <i class="flaticon-right-arrow"></i>
             </li>
             <li class="nav-item">
-                <a href="/Admin/@ViewBag.SidebarMenu">@ViewBag.SidebarMenu</a>
+                <a href="@Url.Action("Index", ViewBag.SidebarMenu)">@ViewBag.SidebarMenu</a>
             </li>
             <li class="separator">
                 <i class="flaticon-right-arrow"></i>
@@ -39,6 +39,8 @@
                     {
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(model => model.ID_Destinasi)
+                        @Html.HiddenFor(model => model.CreatedBy)
+                        @Html.HiddenFor(model => model.CreatedDate)
                         <div class="row">
                             <div class="col-md-4">
 

@@ -42,6 +42,8 @@ namespace BUSS.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        public System.DateTime CreatedDate { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detail_Rating_Destinasi> Detail_Rating_Destinasi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

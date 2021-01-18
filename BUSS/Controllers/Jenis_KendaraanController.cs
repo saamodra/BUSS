@@ -39,6 +39,11 @@ namespace BUSS.Controllers
             if (ModelState.IsValid)
             {
                 jenis_Kendaraan.Status = 1;
+                jenis_Kendaraan.CreatedBy = (int)Session["ID_Pegawai"];
+                jenis_Kendaraan.CreatedDate = DateTime.Now;
+                jenis_Kendaraan.ModifiedBy = (int)Session["ID_Pegawai"];
+                jenis_Kendaraan.ModifiedDate = DateTime.Now;
+
                 db.Jenis_Kendaraan.Add(jenis_Kendaraan);
                 db.SaveChanges();
                 TempData["SuccessMessage"] = "Data berhasil ditambah!";
@@ -68,11 +73,13 @@ namespace BUSS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Jenis,Nama_Jenis,Jumlah_Kursi")] Jenis_Kendaraan jenis_Kendaraan)
+        public ActionResult Edit([Bind(Include = "ID_Jenis,Nama_Jenis,Jumlah_Kursi,CreatedBy,CreatedDate")] Jenis_Kendaraan jenis_Kendaraan)
         {
             if (ModelState.IsValid)
             {
                 jenis_Kendaraan.Status = 1;
+                jenis_Kendaraan.ModifiedBy = (int)Session["ID_Pegawai"];
+                jenis_Kendaraan.ModifiedDate = DateTime.Now;
                 db.Entry(jenis_Kendaraan).State = EntityState.Modified;
                 db.SaveChanges();
                 TempData["SuccessMessage"] = "Data berhasil diubah!";

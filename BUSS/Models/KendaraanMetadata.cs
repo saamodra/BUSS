@@ -36,6 +36,8 @@ namespace BUSS.Models
         public int Status { get; set; }
 
         public virtual Jenis_Kendaraan Jenis_Kendaraan { get; set; }
+        public virtual Pegawai Pegawai { get; set; }
+        public virtual Pegawai Pegawai1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaksi> Transaksis { get; set; }
     }
