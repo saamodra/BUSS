@@ -37,8 +37,14 @@ namespace BUSS.Controllers
             return View();
         }
 
+        public ActionResult Paket()
+        {
+            var paket = db.Pakets.Where(k => k.Status == 1).ToList();
+            return View(paket);
+        }
+
         //Get one paket 
-        public ActionResult Paket(int? id)
+        public ActionResult LihatPaket(int? id)
         {
             if (id == null)
             {
@@ -51,6 +57,12 @@ namespace BUSS.Controllers
             }
             
             return View(paket);
+        }
+
+        public ActionResult Destinasi()
+        {
+            var destinasi = db.Destinasis.Where(k => k.Status == 1).ToList();
+            return View(destinasi);
         }
     }
 }

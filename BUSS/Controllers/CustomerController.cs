@@ -164,6 +164,7 @@ namespace BUSS.Controllers
                         Session["Name"] = obj.Nama.ToString();
                         Session["UserName"] = obj.Email.ToString();
                         Session["Role"] = "3";
+                        Session["IsCustomer"] = true;
                         return RedirectToAction("UserLogin");
                     }
                     else
@@ -180,11 +181,11 @@ namespace BUSS.Controllers
         {
             if (Session["Role"].ToString() == "3")
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Index", "Home");
             }
         }
 

@@ -35,13 +35,23 @@
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav align-items-center">
-                    <a class="nav-item-2" href="#home">Home</a>
-                    <a class="nav-item-2" href="destinasi.html">Destinasi</a>
-                    <a class="nav-item-2" href="#tentang">Blog</a>
-                    <a class="btn btn-rounded btn-transparent ml-3 h-50" href="@Url.Action("Login", "Customer")">
-                        <i class="fa fa-user mr-2"></i> Login
-                        / Daftar
-                    </a>
+                    <a class="nav-item-2" href="@Url.Action("Index", "Home")">Home</a>
+                    <a class="nav-item-2" href="@Url.Action("Destinasi", "Home")">Destinasi</a>
+                    <a class="nav-item-2" href="@Url.Action("Paket", "Home")">Paket</a>
+
+                    @if (Session["IsCustomer"] != null && (bool)Session["IsCustomer"] == true)
+                    {
+                        <a class="btn btn-rounded btn-transparent ml-3 h-50" href="@Url.Action("Profile", "Customer")">
+                            <i class="fa fa-user mr-2"></i> @Session["Name"].ToString()
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-rounded btn-transparent ml-3 h-50" href="@Url.Action("Login", "Customer")">
+                            <i class="fa fa-user mr-2"></i> Login
+                            / Daftar
+                        </a>
+                    }
                 </div>
             </div>
         </nav>
@@ -130,7 +140,7 @@
             {
              
                 <div class="col-xs-12 col-sm-6 col-md-3 my-2">
-                    <a href="@Url.Action("Paket", "Home")">
+                    <a href="@Url.Action("Paket", "Home", new { id = item.ID_Paket })">
                         <div class="card h-100">
                             <img class="card-img-top" src="~/Content/upload/@item.Detail_Paket.FirstOrDefault().Destinasi.Detail_Foto.FirstOrDefault().Foto" alt="Card image cap">
                             <div class="card-body">

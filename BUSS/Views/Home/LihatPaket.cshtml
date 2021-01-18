@@ -1,0 +1,83 @@
+﻿@model BUSS.Models.Paket
+
+@{
+    ViewBag.Title = "Detail Paket";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+<section class="bg-white section-page">
+    <div class="row">
+        <div class="col-md-8">
+            <div id="carouselExampleIndicators" class="carousel slide carousel-paket" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    @{
+                        int countSlide = 0;
+                    }
+                    @foreach (var detailpaket in Model.Detail_Paket)
+                    {
+                        foreach (var foto in detailpaket.Destinasi.Detail_Foto)
+                        {
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="@(countSlide == 0 ? "active" : "")"></li>
+                            countSlide++;
+                        }
+                    }
+                </ol>
+                <div class="carousel-inner">
+                    @{
+                        countSlide = 0;
+                    }
+                    @foreach (var detailpaket in Model.Detail_Paket)
+                    {
+                        foreach (var foto in detailpaket.Destinasi.Detail_Foto)
+                        {
+                            <div class="carousel-item @(countSlide == 0 ? "active" : "")">
+                                <img class="d-block w-100" src="~/Content/upload/@foto.Foto" alt="@detailpaket.Destinasi.Nama_Destinasi">
+                            </div>
+                            countSlide++;
+                        }
+                    }
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+            <h3 class="mt-5 font-weight-bold">@Model.Nama_Paket</h3>
+            <p class="mt-5 font-weight-bold">Daftar Tujuan</p>
+            <table class="table table-hover">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th>No.</th>
+                        <th>Nama</th>
+                        <th>Kota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int number = 1;
+                    }
+                    @foreach (var destinasi in Model.Detail_Paket)
+                    {
+                        <tr>
+                            <td>@number.</td>
+                            <td>@destinasi.Destinasi.Nama_Destinasi</td>
+                            <td>@destinasi.Destinasi.Kota.Nama_Kota</td>
+                        </tr>
+                        number++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</section>
+
+<hr />

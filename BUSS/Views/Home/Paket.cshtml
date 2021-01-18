@@ -1,5 +1,64 @@
-﻿
+﻿@model IEnumerable<BUSS.Models.Paket>
+
 @{
-    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    ViewBag.Title = "Destinasi";
+    Layout = "~/Views/Shared/_LayoutCustomer2.cshtml";
 }
 
+<!-- Section Form -->
+<section class="search-form-destinasi">
+    <div class="shadow">
+        <h3 class="form-title text-left">Cari Paket</h3>
+        <form action="" class="mt-5">
+            <div class="form-group">
+                <div class="d-flex">
+                    <input type="text" name="cari" class="form-control" placeholder="Cari ...">
+                    <button class="btn btn-warning ml-3 font-weight-bold"><i class="fa fa-search mr-2"></i> Cari</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- End Section Form -->
+<!-- Section Destination -->
+<section class="bg-white">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-12">
+            <div class="section-title">
+                <div>
+                    <h3 class="">Daftar Paket</h3>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-xs-12 col-sm-6 col-md-3 my-2">
+                        <a href="@Url.Action("LihatPaket", "Home", new { id = item.ID_Paket })">
+                            <div class="card h-100">
+                                <img class="card-img-top" src="~/Content/upload/@item.Detail_Paket.FirstOrDefault().Destinasi.Detail_Foto.FirstOrDefault().Foto" alt="Card image cap">
+                                <div class="card-body">
+                                    <div class="card-title font-weight-bold h5">@item.Nama_Paket</div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <div class="dest-star mb-1" data-rating="0"></div>
+                                            81 rated
+                                        </div>
+                                        <div class="paket-wisata-price">
+                                            <div class="strikethrough mb-1"><s>Rp192.000</s></div>
+                                            <div class="real">@Html.DisplayFor(modelItem => item.Harga)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+
+            <button type="button" class="btn btn-black mx-auto my-5"><i class="fa fa-arrow-circle-down mr-2"></i> Muat lebih banyak</button>
+        </div>
+    </div>
+
+</section>
+<!-- End Section Destination -->

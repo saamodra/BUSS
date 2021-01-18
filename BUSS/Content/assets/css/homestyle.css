@@ -305,8 +305,12 @@ nav {
 }
 
 .nav-item-2:hover:after {
-  width: 100%;
+    width: 100%;
 }
+
+/*.navbar-dark .nav-item-2:hover {
+    color: #09083a;
+}*/
 
 .nav-sticky {
   background-color: #fff;
@@ -417,7 +421,7 @@ section, footer > div:first-child {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   width: 80%;
-  background-image: url(../img/home/bg-3.png);
+  background-color: white;
   background-size: cover;
   border-radius: 10px;
   padding: 20px 50px;
@@ -877,6 +881,20 @@ footer .list ul li a:hover {
     width: 35px !important;
     height: 35px !important;
   }
+}
+
+.carousel-paket {
+    height: 500px;
+    width: 100%;
+}
+
+.carousel-paket img{
+    height: 500px;
+    object-fit: cover;
+}
+
+.section-page {
+    margin-top: 100px;
 }
 
 @media only screen and (max-width: 768px) {
