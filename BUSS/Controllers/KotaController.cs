@@ -34,6 +34,11 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_Kota,Nama_Kota,Status")] Kota kota)
         {
+            if (db.Kotas.Any(k => k.Nama_Kota == kota.Nama_Kota))
+            {
+                ModelState.AddModelError("Nama_Kota", "Nama kota sudah ada.");
+            }
+
             if (ModelState.IsValid)
             {
                 kota.Status = 1;
@@ -72,6 +77,11 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_Kota,Nama_Kota,CreatedBy,CreatedDate")] Kota kota)
         {
+            if (db.Kotas.Any(k => k.Nama_Kota == kota.Nama_Kota))
+            {
+                ModelState.AddModelError("Nama_Kota", "Nama kota sudah ada.");
+            }
+
             if (ModelState.IsValid)
             {
                 kota.Status = 1;

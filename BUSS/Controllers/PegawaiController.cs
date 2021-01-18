@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -49,18 +50,57 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_Pegawai,Nama,Alamat,No_HP,Email,Password,Role,Status")] Pegawai pegawai)
         {
+            if (db.Pegawais.Any(k => k.Email == pegawai.Email))
+            {
+                ModelState.AddModelError("Email", "Email sudah terdaftar.");
+            }
+
             if (ModelState.IsValid)
             {
+                pegawai.Password = BussModule.RandomString(8);
                 pegawai.CreatedDate = DateTime.Now;
                 pegawai.ModifiedDate = DateTime.Now;
                 pegawai.Status = 1;
                 db.Pegawais.Add(pegawai);
                 db.SaveChanges();
+
+                sendEmail(pegawai);
+
                 TempData["SuccessMessage"] = "Data berhasil ditambah!";
+
                 return RedirectToAction("Index");
             }
 
             return View(pegawai);
+        }
+
+        public void sendEmail(Pegawai pegawai)
+        {
+            var message = "<h2>Selamat datang, {0}</h2><p>Terima kasih telah bergabung dengan BUSS. Berikut data awal anda : </p><br><table> <tr> <td>Email</td> <td>:</td> <td><b>{1}</b></td> </tr> <tr> <td>Password</td> <td>:</td> <td><b>{2}</b></td> </tr></table><br><h4><i>Segera ganti password anda demi keamanan!</i></h4>";
+
+            var senderEmail = new MailAddress("travelbussofficial@gmail.com", "Travel BUSS Official");
+            var receiverEmail = new MailAddress(pegawai.Email, pegawai.Nama);
+            var password = "projectprg4";
+            var sub = "Registrasi Pegawai BUSS Berhasil";
+            var body = string.Format(message, pegawai.Nama, pegawai.Email, pegawai.Password);
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(senderEmail.Address, password)
+            };
+            using (var mess = new MailMessage(senderEmail, receiverEmail)
+            {
+                Subject = sub,
+                IsBodyHtml = true,
+                Body = body
+            })
+            {
+                smtp.Send(mess);
+            }
         }
 
         // GET: Pegawai/Edit/5
@@ -85,6 +125,11 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_Pegawai,Nama,Alamat,No_HP,Email,Password,Role,Status")] Pegawai pegawai)
         {
+            if (db.Pegawais.Any(k => k.Email == pegawai.Email))
+            {
+                ModelState.AddModelError("Email", "Email sudah terdaftar.");
+            }
+
             if (ModelState.IsValid)
             {
                 pegawai.Status = 1;

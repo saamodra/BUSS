@@ -94,6 +94,11 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_Paket,Nama_Paket,Lama_Perjalanan,Keterangan")] Paket paket)
         {
+            if (db.Pakets.Any(k => k.Nama_Paket == paket.Nama_Paket))
+            {
+                ModelState.AddModelError("Nama_Paket", "Nama paket sudah ada.");
+            }
+
             if (ModelState.IsValid)
             {
                 paket.Konsumsi = (paket.Lama_Perjalanan == null ? 0 : paket.Lama_Perjalanan.Value) * 2;
@@ -134,6 +139,11 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_Paket,Nama_Paket,Lama_Perjalanan,Keterangan,Status,CreatedBy,CreatedDate")] Paket paket)
         {
+            if (db.Pakets.Any(k => k.Nama_Paket == paket.Nama_Paket))
+            {
+                ModelState.AddModelError("Nama_Paket", "Nama paket sudah ada.");
+            }
+
             if (ModelState.IsValid)
             {
                 paket.Konsumsi = (paket.Lama_Perjalanan == null ? 0 : paket.Lama_Perjalanan.Value) * 2;

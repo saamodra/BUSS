@@ -52,8 +52,14 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_Destinasi,Nama_Destinasi,Harga_Tiket,ID_Kota,Jam_Buka,Jam_Tutup,Deskripsi")] Destinasi destinasi)
         {
+            if (db.Destinasis.Any(k => k.Nama_Destinasi == destinasi.Nama_Destinasi))
+            {
+                ModelState.AddModelError("Nama_Destinasi", "Nama destinasi sudah ada");
+            }
+           
             if (ModelState.IsValid)
             {
+                
                 destinasi.Rating = 0;
                 destinasi.Status = 1;
                 destinasi.CreatedBy = (int)Session["ID_Pegawai"];
@@ -67,6 +73,7 @@ namespace BUSS.Controllers
                 TempData["SuccessMessage"] = "Data berhasil ditambah!";
 
                 return RedirectToAction("Details", "Destinasi", new { @id = destinasi.ID_Destinasi });
+                
             }
 
             ViewBag.ID_Kota = new SelectList(db.Kotas.Where(k => k.Status == 1), "ID_Kota", "Nama_Kota", destinasi.ID_Kota);
@@ -97,6 +104,11 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_Destinasi,Nama_Destinasi,Harga_Tiket,ID_Kota,Rating,Jam_Buka,Jam_Tutup,Deskripsi,CreatedBy,CreatedDate")] Destinasi destinasi)
         {
+            if (db.Destinasis.Any(k => k.Nama_Destinasi == destinasi.Nama_Destinasi))
+            {
+                ModelState.AddModelError("Nama_Destinasi", "Nama destinasi sudah ada.");
+            }
+
             if (ModelState.IsValid)
             {
                 destinasi.Status = 1;

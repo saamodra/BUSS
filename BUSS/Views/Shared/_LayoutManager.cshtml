@@ -129,8 +129,8 @@
                                         <div class="user-box">
                                             <div class="avatar-lg"><img src="~/Content/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
                                             <div class="u-text">
-                                                <h4>Hizrian</h4>
-                                                <p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                                @Session["Name"]
+                                                <p class="text-muted">@Session["Email"]</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                                             </div>
                                         </div>
                                     </li>
@@ -140,7 +140,7 @@
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="#">Account Setting</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Logout</a>
+                                        <a class="dropdown-item" href="/Pegawai/Logout">Logout</a>
                                     </li>
                                 </div>
                             </ul>
@@ -167,8 +167,21 @@
                         <div class="info">
                             <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                                 <span>
-                                    Hizrian
-                                    <span class="user-level">Administrator</span>
+                                    @Session["Name"]
+                                    <span class="user-level">
+                                        @if (Session["Role"].ToString() == "1")
+                                        {
+                                            <text>Admin</text>
+                                        }
+                                        else if (Session["Role"].ToString() == "2")
+                                        {
+                                            <text>Tourleader</text>
+                                        }
+                                        else
+                                        {
+                                            <text>Manager</text>
+                                        }
+                                    </span>
                                     <span class="caret"></span>
                                 </span>
                             </a>
@@ -210,8 +223,8 @@
                         </li>
                         @{
                             List<KeyValue> sidebarMenu = new List<KeyValue> {
-                                new KeyValue("Transaksi", "/Manager/Pegawai"),
-                                new KeyValue("Destinasi", "/Manager/Destinasi"),
+                                new KeyValue("Pesanan", "/Manager/Pesanan"),
+                                new KeyValue("Pegawai", "/Manager/Pegawai"),
                                 new KeyValue("Feedback", "/Manager/Feedback"),
                             };
 

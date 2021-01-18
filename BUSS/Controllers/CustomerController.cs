@@ -130,6 +130,11 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register([Bind(Include = "NIK,Nama,Alamat,No_HP,Email,Password")] Customer customer)
         {
+            if (db.Customers.Any(k => k.Email == customer.Email))
+            {
+                ModelState.AddModelError("Email", "Email sudah terdaftar.");
+            }
+
             if (ModelState.IsValid)
             {
                 customer.CreatedDate = DateTime.Now;

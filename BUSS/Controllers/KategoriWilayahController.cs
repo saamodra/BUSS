@@ -99,8 +99,14 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_KategoriWilayah,Nama_Wilayah,Status")] Kategori_Wilayah kategori_Wilayah)
         {
+            if (db.Kategori_Wilayah.Any(k => k.Nama_Wilayah == kategori_Wilayah.Nama_Wilayah))
+            {
+                ModelState.AddModelError("Nama_Wilayah", "Nama kategori wilayah sudah ada sudah ada.");
+            }
+
             if (ModelState.IsValid)
             {
+
                 kategori_Wilayah.Status = 1;
                 kategori_Wilayah.CreatedBy = (int)Session["ID_Pegawai"];
                 kategori_Wilayah.CreatedDate = DateTime.Now;
@@ -139,6 +145,11 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_KategoriWilayah,Nama_Wilayah,Status,CreatedBy,CreatedDate")] Kategori_Wilayah kategori_Wilayah)
         {
+            if (db.Kategori_Wilayah.Any(k => k.Nama_Wilayah == kategori_Wilayah.Nama_Wilayah))
+            {
+                ModelState.AddModelError("Nama_Wilayah", "Nama kategori wilayah sudah ada.");
+            }
+
             if (ModelState.IsValid)
             {
                 kategori_Wilayah.Status = 1;

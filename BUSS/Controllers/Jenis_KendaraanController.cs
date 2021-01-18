@@ -36,6 +36,11 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_Jenis,Nama_Jenis,Jumlah_Kursi,Status")] Jenis_Kendaraan jenis_Kendaraan)
         {
+            if (db.Jenis_Kendaraan.Any(k => k.Nama_Jenis == jenis_Kendaraan.Nama_Jenis))
+            {
+                ModelState.AddModelError("Nama_Jenis", "Nama jenis kendaraan sudah ada.");
+            }
+
             if (ModelState.IsValid)
             {
                 jenis_Kendaraan.Status = 1;
@@ -75,6 +80,11 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_Jenis,Nama_Jenis,Jumlah_Kursi,CreatedBy,CreatedDate")] Jenis_Kendaraan jenis_Kendaraan)
         {
+            if (db.Jenis_Kendaraan.Any(k => k.Nama_Jenis == jenis_Kendaraan.Nama_Jenis))
+            {
+                ModelState.AddModelError("Nama_Jenis", "Nama jenis kendaraan sudah ada.");
+            }
+
             if (ModelState.IsValid)
             {
                 jenis_Kendaraan.Status = 1;
