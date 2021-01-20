@@ -19,6 +19,8 @@ namespace BUSS.Models
         public int ID_Paket { get; set; }
         public string ID_Customer { get; set; }
         public Nullable<int> ID_Pegawai { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public decimal Harga_total { get; set; }
         public int Jumlah_Penumpang { get; set; }
 
@@ -29,6 +31,9 @@ namespace BUSS.Models
         public string Bukti_Pelunasan { get; set; }
         public int Status_Transaksi { get; set; }
         public Nullable<double> PaketLama_Perjalanan { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
         public System.DateTime CreatedDate { get; set; }
 
         public virtual Customer Customer { get; set; }

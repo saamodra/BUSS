@@ -1,0 +1,214 @@
+﻿@model BUSS.Models.Paket
+
+@{
+    ViewBag.Title = "Custom Paket";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<section class="bg-gray section-page">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <h5 class="card-header">Kategori Wilayah</h5>
+                <div class="card-body">
+
+                    @using (Html.BeginForm())
+                    {
+                        <div class="form-group">
+                            <label for="Kategori Wilayah">Kategori Wilayah</label>
+                            <div class="d-flex">
+                                <select class="form-control" name="id">
+                                    @foreach (var ka in ViewBag.Kategori_Wilayah)
+                                    {
+                                        <option value="@ka.ID_KategoriWilayah" @(ViewBag.SelectedKategori == ka.ID_KategoriWilayah ? "selected" : "")>@ka.Nama_Wilayah</option>
+                                    }
+                                </select>
+                                <button type="submit" class="btn btn-primary ml-3"><i class="fa fa-eyes"></i> Lihat Destinasi</button>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card">
+                <h5 class="card-header">Daftar Destinasi</h5>
+                <div class="card-body">
+                    <table class="table" id="table-destinasi">
+                        <thead>
+                            <tr>
+                                <th>Nama Destinasi</th>
+                                <th>Kota</th>
+                                <th>Harga Tiket</th>
+                                <th>Jam Operasional</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (ViewBag.Destinasi != null)
+                            {
+                                foreach (var dest in ViewBag.Destinasi)
+                                {
+                                    <tr>
+                                        <td data-id="@dest.ID_Destinasi">@dest.Nama_Destinasi</td>
+                                        <td>@dest.Kota.Nama_Kota</td>
+                                        <td>@string.Format("Rp{0:0,0}", dest.Harga_Tiket)</td>
+                                        <td>@dest.Jam_buka.ToString("hh\\:mm") - @dest.Jam_tutup.ToString("hh\\:mm")</td>
+                                        <td>
+                                            <button type="button" class="btn btn-warning btn-sm btnTambah">Tambah</button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card">
+                <h5 class="card-header">Daftar Destinasi</h5>
+                <div class="card-body">
+
+                    @using (Html.BeginForm("CheckoutCustom", "Transaksi", FormMethod.Post))
+                    {
+                        <div class="d-flex">
+                            <div class="form-group">
+                                <label>Nama Paket</label>
+                                <input type="text" value="" name="Nama_Paket" class="form-control" />
+                            </div>
+                            <div class="form-group ml-3">
+                                <label>Tgl. Sewa</label>
+                                <input type="date" value="" name="tgl_sewa" class="form-control" />
+                            </div>
+                            <div class="form-group ml-3">
+                                <label>Lama Perjalanan</label>
+                                <input type="number" value="" name="Lama_Perjalanan" class="form-control" />
+                            </div>
+                        </div>
+
+                        <table class="table" id="table-destinasi-terpilih">
+                            <thead>
+                                <tr>
+                                    <th>Nama Destinasi</th>
+                                    <th>Kota</th>
+                                    <th>Harga Tiket</th>
+                                    <th>Jam Operasional</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+
+                        <div class="form-group">
+                            <h3 class="font-weight-bold text-danger" id="totalHargaTiket">Total Harga Tiket : Rp0</h3>
+                            <input type="hidden" id="Harga" name="Harga" value="" />
+                        </div>
+
+                        <div id="inputdata">
+                        </div>
+
+                        <div id="hiddenForDestinasi"></div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"> Checkout</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script>
+        const formatter = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        })
+
+        $(document).ready(function () {
+
+            $("#table-destinasi").on('click', '.btnTambah', function () {
+                let row = $(this).closest('tr');
+
+                $("#table-destinasi-terpilih tbody").append(`<tr>
+                            <td data-id="${row.find('td:eq(0)').data('id')}">${row.find('td:eq(0)').html()}</td>
+                            <td>${row.find('td:eq(1)').html()}</td>
+                            <td>${row.find('td:eq(2)').html()}</td>
+                            <td>${row.find('td:eq(3)').html()}</td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm btnDelete">Hapus</button>
+                            </td>
+                        </tr>`);
+
+                $(this).closest('tr').remove();
+
+                $("#hiddenForDestinasi").append(`<input type="hidden" value="${row.find('td:eq(0)').data('id')}" name="ID_Destinasi">`);
+
+                $("#totalHargaTiket").text("Total Harga Tiket : " + formatter.format(SumRow(2)));
+
+                $("#Harga").val(SumRow(2));
+            });
+
+
+            $("#table-destinasi-terpilih").on('click', '.btnDelete', function () {
+                let row = $(this).closest('tr');
+                $('#table-destinasi').append(`<tr>
+                            <td data-id="${row.find('td:eq(0)').data('id')}">${row.find('td:eq(0)').html()}</td>
+                            <td>${row.find('td:eq(1)').html()}</td>
+                            <td>${row.find('td:eq(2)').html()}</td>
+                            <td>${row.find('td:eq(3)').html()}</td>
+                            <td>
+                                <button type="button" class="btn btn-warning btn-sm btnTambah">Tambah</button>
+                            </td>
+                        </tr>`);
+
+                $("input[name=ID_Destinasi]").each(function (i) {
+                    if ($(this).val() == row.find('td:eq(0)').data('id')) {
+                        $(this).remove();
+                    }
+                });
+
+                $(this).closest('tr').remove();
+
+                $("#totalHargaTiket").text("Total Harga Tiket : " + formatter.format(SumRow(2)));
+
+                $("#Harga").val(SumRow(2));
+            });
+        });
+
+
+        function SumRow(column) {
+            var returnsum = 0;
+            $('#table-destinasi-terpilih tbody tr').each(function () {
+
+                var sum = 0
+
+                $(this).find('td').eq(column).each(function () {
+                    var combat = numberOnly($(this).text());
+                    if (!isNaN(combat) && combat.length !== 0) {
+                        sum += parseFloat(combat);
+                    }
+                });
+
+                returnsum += sum;
+            });
+            return returnsum;
+        }
+
+
+        function numberOnly(str) {
+            var numb = str.match(/\d/g);
+            numb = numb.join("");
+
+            return parseInt(numb);
+        }
+    </script>
+}

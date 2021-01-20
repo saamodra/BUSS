@@ -196,6 +196,10 @@ namespace BUSS.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
 
         protected override void Dispose(bool disposing)
         {

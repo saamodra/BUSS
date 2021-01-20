@@ -7,7 +7,7 @@
 
 
 <section class="bg-gray section-page">
-    @using (Html.BeginForm("CheckoutConfirmed", "Transaksi", FormMethod.Post, new { id = "formSubmit" })) { 
+    @using (Html.BeginForm((ViewBag.ID_Destinasi == null ? "CheckoutConfirmed" : "CustomConfirmed"), "Transaksi", FormMethod.Post, new { id = "formSubmit" })) {
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
@@ -24,7 +24,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <p class="m-0 font-weight-bold">Harga</p>
-                            <p class="m-0 text-danger font-weight-bold" id="Harga_paket">@Html.DisplayFor(model => model.Paket.Harga)</p>
+                            <p class="m-0 text-danger font-weight-bold" id="Harga_paket">@string.Format("Rp{0:0,0}", Model.Paket.Harga + (@Model.Paket.Konsumsi * 30000) )</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <p class="m-0 font-weight-bold">Tanggal Sewa</p>
@@ -81,6 +81,19 @@
                             </table>
                         </div>
 
+                        @if (ViewBag.ID_Destinasi != null)
+                        {
+                            foreach (var dest in ViewBag.ID_Destinasi)
+                            {
+                                <input type="hidden" name="ID_Destinasi" value="@dest" />
+                            }
+                            @Html.HiddenFor(model => model.Paket.Nama_Paket);
+                            @Html.HiddenFor(model => model.Paket.Lama_Perjalanan);
+                            @Html.HiddenFor(model => model.Paket.Konsumsi);
+
+                        }
+
+
                         <input type="hidden" name="ID_Paket" value="@Model.Paket.ID_Paket" />
                         <input type="hidden" name="PaketLama_Perjalanan" value="@Model.Paket.Lama_Perjalanan" />
                         <input type="hidden" name="Tanggal_Pesanan" value="@Model.Tanggal_Pesanan" />
@@ -92,7 +105,14 @@
                         </div>
                         <div class="form-group d-flex">
                             <button type="submit" class="btn btn-warning text-center font-weight-bold mr-2">Pesan</button>
-                            <a href="@Url.Action("LihatPaket", "Home", new { id = Model.Paket.ID_Paket })" class="btn btn-danger text-center font-weight-bold">Batal</a>
+                            @if (ViewBag.ID_Destinasi == null)
+                            {
+                                <a href="@Url.Action("LihatPaket", "Home", new { id = Model.Paket.ID_Paket })" class="btn btn-danger text-center font-weight-bold">Batal</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("CustomPaket", "Home")" class="btn btn-danger text-center font-weight-bold">Batal</a>
+                            }
                         </div>
                     </div>
                 </div>

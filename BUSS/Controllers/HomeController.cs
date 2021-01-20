@@ -59,6 +59,32 @@ namespace BUSS.Controllers
             return View(paket);
         }
 
+
+        public ActionResult CustomPaket()
+        {
+            ViewBag.Kategori_Wilayah = db.Kategori_Wilayah.Where(k => k.Status == 1).ToList();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CustomPaket(int id)
+        {
+            Kategori_Wilayah kategori_Wilayah = db.Kategori_Wilayah.Find(id);
+
+            List<int> id_kota = new List<int>();
+
+            foreach (var kota in kategori_Wilayah.Detail_Kategori)
+            {
+                id_kota.Add(kota.ID_Kota);
+            }
+
+            ViewBag.Destinasi = db.Destinasis.Where(k => k.Status == 1 && (id_kota.Contains(k.ID_Kota)))
+                .ToList();
+            ViewBag.Kategori_Wilayah = db.Kategori_Wilayah.Where(k => k.Status == 1).ToList();
+            ViewBag.SelectedKategori = id;
+            return View();
+        }
+
         public ActionResult Destinasi()
         {
             var destinasi = db.Destinasis.Where(k => k.Status == 1).ToList();

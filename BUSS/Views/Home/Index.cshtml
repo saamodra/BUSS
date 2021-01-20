@@ -41,7 +41,7 @@
 
                     @if (Session["IsCustomer"] != null && (bool)Session["IsCustomer"] == true)
                     {
-                        <a class="btn btn-rounded btn-transparent ml-3 h-50" href="@Url.Action("Profile", "Customer")">
+                        <a class="btn btn-rounded btn-transparent ml-3 h-50" href="@Url.Action("Dashboard", "Customer")">
                             <i class="fa fa-user mr-2"></i> @Session["Name"].ToString()
                         </a>
                     }
@@ -385,7 +385,7 @@
     </footer>
 
     <script src="~/Content/assets/js/core/jquery.3.2.1.min.js"></script>
-    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/core/bootstrap.min.js"></script>
     <script src="~/Content/assets/flickity-docs/flickity.pkgd.min.js"></script>
     <script src="~/Content/assets/js/jquery.star-rating-svg.min.js"></script>
     <script src="~/Content/assets/js/script.js"></script>
