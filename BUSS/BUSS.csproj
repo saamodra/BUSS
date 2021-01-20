@@ -138,6 +138,7 @@
     <Compile Include="Controllers\KotaController.cs" />
     <Compile Include="Controllers\PaketController.cs" />
     <Compile Include="Controllers\PegawaiController.cs" />
+    <Compile Include="Controllers\TransaksiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -209,6 +210,10 @@
     </Compile>
     <Compile Include="Models\PegawaiMetadata.cs" />
     <Compile Include="Models\Transaksi.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransaksiMetadata.cs" />
+    <Compile Include="Models\Transaksi_Kendaraan.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -813,14 +818,17 @@
     <Content Include="Views\Pegawai\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutTourLeader.cshtml" />
     <Content Include="Views\Shared\_LayoutManager.cshtml" />
-    <Content Include="Views\Shared\_LayoutCustomer.cshtml" />
+    <Content Include="Views\Shared\_LayoutHome.cshtml" />
     <Content Include="Views\Dashboard\Pegawai.cshtml" />
     <Content Include="Views\Dashboard\Tourleader.cshtml" />
     <Content Include="Views\Dashboard\Manager.cshtml" />
     <Content Include="Views\Home\Paket.cshtml" />
-    <Content Include="Views\Shared\_LayoutCustomer2.cshtml" />
+    <Content Include="Views\Shared\_LayoutHome2.cshtml" />
     <Content Include="Views\Home\Destinasi.cshtml" />
     <Content Include="Views\Home\LihatPaket.cshtml" />
+    <Content Include="Views\Paket\Custom.cshtml" />
+    <Content Include="Views\Shared\_LayoutCustomer.cshtml" />
+    <Content Include="Views\Transaksi\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

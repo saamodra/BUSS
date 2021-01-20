@@ -39,5 +39,6 @@ namespace BUSS.Models
         public virtual DbSet<Paket> Pakets { get; set; }
         public virtual DbSet<Pegawai> Pegawais { get; set; }
         public virtual DbSet<Transaksi> Transaksis { get; set; }
+        public virtual DbSet<Transaksi_Kendaraan> Transaksi_Kendaraan { get; set; }
     }
 }

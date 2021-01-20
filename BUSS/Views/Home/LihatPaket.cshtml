@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Detail Paket";
-    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 
 
@@ -75,8 +75,47 @@
                 </tbody>
             </table>
         </div>
-    </div>
 
+        <div class="col-md-4">
+            <div class="card">
+                <h5 class="card-header">Detail Paket</h5>
+                <div class="card-body">
+                    <h5 class="card-title mb-4">@Model.Nama_Paket</h5>
+                    <div class="d-flex justify-content-between">
+                        <p class="m-0 font-weight-bold">Konsumsi</p>
+                        <p class="m-0">@Model.Konsumsi x</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="m-0 font-weight-bold">Lama Perjalanan</p>
+                        <p class="m-0">@Model.Lama_Perjalanan Hari</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="m-0 font-weight-bold">Harga</p>
+                        <p class="m-0 text-danger font-weight-bold">@Html.DisplayFor(model => model.Harga)</p>
+                    </div>
+                    <div class="d-flex flex-column justify-content-between">
+                        <p class="m-0 font-weight-bold">Keterangan</p>
+                        <p>@(Model.Keterangan == null ? "Tidak ada keterangan." : Model.Keterangan)</p>
+                    </div>
+
+                    <form action="@Url.Action("Checkout", "Transaksi")" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" value="@Model.ID_Paket" name="id" />
+                        <div class="d-flex flex-column justify-content-between">
+                            <label>Tanggal Sewa</label>
+                            <input type="date" class="form-control" name="tgl_sewa" />
+                        </div>
+
+                        <button type="submit" class="btn btn-warning font-weight-bold">Pesan</button>
+                        @*<a href="@Url.Action("Checkout", "Transaksi", new { id = Model.ID_Paket, tgl_pesanan =  })" class="btn btn-warning text-center font-weight-bold">Pesan</a>*@
+                        <p class="font-italic detail-paket-text">Harga hanya untuk harga paket per orang, belum termasuk harga sewa bus</p>
+                        <p class="m-0 mt-4">Ingin kustom paket? <a href="@Url.Action("Custom","Paket")" class="text-primary">Klik Disini</a></p>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 </section>
 

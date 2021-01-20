@@ -189,6 +189,7 @@
           </Key>
           <Property Name="ID_Transaksi" Type="int" Nullable="false" />
           <Property Name="ID_Kendaraan" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Destinasi_Kota">
           <End Role="Kota" Type="Self.Kota" Multiplicity="1" />
@@ -783,7 +784,7 @@
           <NavigationProperty Name="Jenis_Kendaraan" Relationship="Self.FK_Kendaraan_Jenis_Kendaraan" FromRole="Kendaraan" ToRole="Jenis_Kendaraan" />
           <NavigationProperty Name="Pegawai" Relationship="Self.FK_Kendaraan_Pegawai" FromRole="Kendaraan" ToRole="Pegawai" />
           <NavigationProperty Name="Pegawai1" Relationship="Self.FK_Kendaraan_Pegawai1" FromRole="Kendaraan" ToRole="Pegawai" />
-          <NavigationProperty Name="Transaksis" Relationship="Self.Transaksi_Kendaraan" FromRole="Kendaraan" ToRole="Transaksi" />
+          <NavigationProperty Name="Transaksi_Kendaraan" Relationship="Self.FK_Transaksi_Kendaraan_Kendaraan" FromRole="Kendaraan" ToRole="Transaksi_Kendaraan" />
         </EntityType>
         <EntityType Name="Kota">
           <Key>
@@ -871,7 +872,18 @@
           <NavigationProperty Name="Feedbacks" Relationship="Self.FK_Feedback_Transaksi" FromRole="Transaksi" ToRole="Feedback" />
           <NavigationProperty Name="Paket" Relationship="Self.FK_Transaksi_Paket" FromRole="Transaksi" ToRole="Paket" />
           <NavigationProperty Name="Pegawai" Relationship="Self.FK_Transaksi_Pegawai" FromRole="Transaksi" ToRole="Pegawai" />
-          <NavigationProperty Name="Kendaraans" Relationship="Self.Transaksi_Kendaraan" FromRole="Transaksi" ToRole="Kendaraan" />
+          <NavigationProperty Name="Transaksi_Kendaraan" Relationship="Self.FK_Transaksi_Kendaraan_Transaksi" FromRole="Transaksi" ToRole="Transaksi_Kendaraan" />
+        </EntityType>
+        <EntityType Name="Transaksi_Kendaraan">
+          <Key>
+            <PropertyRef Name="ID_Transaksi" />
+            <PropertyRef Name="ID_Kendaraan" />
+          </Key>
+          <Property Name="ID_Transaksi" Type="Int32" Nullable="false" />
+          <Property Name="ID_Kendaraan" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kendaraan" Relationship="Self.FK_Transaksi_Kendaraan_Kendaraan" FromRole="Transaksi_Kendaraan" ToRole="Kendaraan" />
+          <NavigationProperty Name="Transaksi" Relationship="Self.FK_Transaksi_Kendaraan_Transaksi" FromRole="Transaksi_Kendaraan" ToRole="Transaksi" />
         </EntityType>
         <Association Name="FK_Detail_Rating_Destinasi_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
@@ -1101,6 +1113,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Transaksi_Kendaraan_Kendaraan">
+          <End Role="Kendaraan" Type="Self.Kendaraan" Multiplicity="1" />
+          <End Role="Transaksi_Kendaraan" Type="Self.Transaksi_Kendaraan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kendaraan">
+              <PropertyRef Name="ID_Kendaraan" />
+            </Principal>
+            <Dependent Role="Transaksi_Kendaraan">
+              <PropertyRef Name="ID_Kendaraan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Kota_Pegawai">
           <End Role="Pegawai" Type="Self.Pegawai" Multiplicity="1" />
           <End Role="Kota" Type="Self.Kota" Multiplicity="*" />
@@ -1173,9 +1197,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Transaksi_Kendaraan">
-          <End Role="Kendaraan" Type="Self.Kendaraan" Multiplicity="*" />
-          <End Role="Transaksi" Type="Self.Transaksi" Multiplicity="*" />
+        <Association Name="FK_Transaksi_Kendaraan_Transaksi">
+          <End Role="Transaksi" Type="Self.Transaksi" Multiplicity="1" />
+          <End Role="Transaksi_Kendaraan" Type="Self.Transaksi_Kendaraan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaksi">
+              <PropertyRef Name="ID_Transaksi" />
+            </Principal>
+            <Dependent Role="Transaksi_Kendaraan">
+              <PropertyRef Name="ID_Transaksi" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityContainer Name="BUSSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="Self.Customer" />
@@ -1192,6 +1224,7 @@
           <EntitySet Name="Pakets" EntityType="Self.Paket" />
           <EntitySet Name="Pegawais" EntityType="Self.Pegawai" />
           <EntitySet Name="Transaksis" EntityType="Self.Transaksi" />
+          <EntitySet Name="Transaksi_Kendaraan" EntityType="Self.Transaksi_Kendaraan" />
           <AssociationSet Name="FK_Detail_Rating_Destinasi_Customer" Association="Self.FK_Detail_Rating_Destinasi_Customer">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Detail_Rating_Destinasi" EntitySet="Detail_Rating_Destinasi" />
@@ -1268,6 +1301,10 @@
             <End Role="Pegawai" EntitySet="Pegawais" />
             <End Role="Kendaraan" EntitySet="Kendaraans" />
           </AssociationSet>
+          <AssociationSet Name="FK_Transaksi_Kendaraan_Kendaraan" Association="Self.FK_Transaksi_Kendaraan_Kendaraan">
+            <End Role="Kendaraan" EntitySet="Kendaraans" />
+            <End Role="Transaksi_Kendaraan" EntitySet="Transaksi_Kendaraan" />
+          </AssociationSet>
           <AssociationSet Name="FK_Kota_Pegawai" Association="Self.FK_Kota_Pegawai">
             <End Role="Pegawai" EntitySet="Pegawais" />
             <End Role="Kota" EntitySet="Kotas" />
@@ -1292,9 +1329,9 @@
             <End Role="Pegawai" EntitySet="Pegawais" />
             <End Role="Transaksi" EntitySet="Transaksis" />
           </AssociationSet>
-          <AssociationSet Name="Transaksi_Kendaraan" Association="Self.Transaksi_Kendaraan">
-            <End Role="Kendaraan" EntitySet="Kendaraans" />
+          <AssociationSet Name="FK_Transaksi_Kendaraan_Transaksi" Association="Self.FK_Transaksi_Kendaraan_Transaksi">
             <End Role="Transaksi" EntitySet="Transaksis" />
+            <End Role="Transaksi_Kendaraan" EntitySet="Transaksi_Kendaraan" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -1491,14 +1528,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="Transaksi_Kendaraan" TypeName="BUSSModel.Transaksi_Kendaraan" StoreEntitySet="Transaksi_Kendaraan">
-            <EndProperty Name="Kendaraan">
-              <ScalarProperty Name="ID_Kendaraan" ColumnName="ID_Kendaraan" />
-            </EndProperty>
-            <EndProperty Name="Transaksi">
-              <ScalarProperty Name="ID_Transaksi" ColumnName="ID_Transaksi" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="Transaksi_Kendaraan">
+            <EntityTypeMapping TypeName="BUSSModel.Transaksi_Kendaraan">
+              <MappingFragment StoreEntitySet="Transaksi_Kendaraan">
+                <ScalarProperty Name="ID_Transaksi" ColumnName="ID_Transaksi" />
+                <ScalarProperty Name="ID_Kendaraan" ColumnName="ID_Kendaraan" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

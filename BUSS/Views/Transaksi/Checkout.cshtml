@@ -1,0 +1,198 @@
+﻿@model BUSS.Models.Transaksi
+
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+
+<section class="bg-gray section-page">
+    @using (Html.BeginForm("CheckoutConfirmed", "Transaksi", FormMethod.Post, new { id = "formSubmit" })) { 
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <h5 class="card-header">Detail Paket</h5>
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">@Model.Paket.Nama_Paket</h5>
+                        <div class="d-flex justify-content-between">
+                            <p class="m-0 font-weight-bold">Konsumsi</p>
+                            <p class="m-0">@Model.Paket.Konsumsi x</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="m-0 font-weight-bold">Lama Perjalanan</p>
+                            <p class="m-0">@Model.Paket.Lama_Perjalanan Hari</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="m-0 font-weight-bold">Harga</p>
+                            <p class="m-0 text-danger font-weight-bold" id="Harga_paket">@Html.DisplayFor(model => model.Paket.Harga)</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="m-0 font-weight-bold">Tanggal Sewa</p>
+                            <p>@Html.DisplayFor(model => model.Tanggal_Pesanan)</p>
+                        </div>
+                        <div class="d-flex flex-column justify-content-between">
+                            <p class="m-0 font-weight-bold">Keterangan</p>
+                            <p>@(Model.Paket.Keterangan == null ? "Tidak ada keterangan." : Model.Paket.Keterangan)</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Pilih Bus</label>
+                            <div class="d-flex">
+                                <select name="kendaraan" id="kendaraan" class="form-control">
+                                    @foreach (var kend in ViewBag.Kendaraan)
+                                    {
+                                        <option value="@kend.ID_Kendaraan - @kend.Nama_Kendaraan - @kend.Jenis_Kendaraan.Jumlah_Kursi - @kend.Harga_kendaraan">
+                                            @kend.Nama_Kendaraan - @kend.Jenis_Kendaraan.Jumlah_Kursi
+                                        </option>
+                                    }
+                                </select>
+                                <button type="button" id="tambahBus" class="btn btn-primary ml-3">Tambah Bus</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table class="table" id="table-bus">
+                                <thead>
+                                    <tr>
+                                        <th>No. </th>
+                                        <th>Nama Bus</th>
+                                        <th>Kapasitas Penumpang</th>
+                                        <th>Harga Sewa</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>-</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <input type="hidden" name="ID_Paket" value="@Model.Paket.ID_Paket" />
+                        <input type="hidden" name="PaketLama_Perjalanan" value="@Model.Paket.Lama_Perjalanan" />
+                        <input type="hidden" name="Tanggal_Pesanan" value="@Model.Tanggal_Pesanan" />
+                        @Html.HiddenFor(model => model.Harga_total)
+                        @Html.HiddenFor(model => model.Jumlah_Penumpang)
+
+                        <div id="hiddenForBus">
+
+                        </div>
+                        <div class="form-group d-flex">
+                            <button type="submit" class="btn btn-warning text-center font-weight-bold mr-2">Pesan</button>
+                            <a href="@Url.Action("LihatPaket", "Home", new { id = Model.Paket.ID_Paket })" class="btn btn-danger text-center font-weight-bold">Batal</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</section>
+
+<hr />
+
+@section scripts {
+    <script>
+        function SumRow(column) {
+            var returnsum = 0;
+            $('#table-bus tbody tr').each(function () {
+
+                var sum = 0
+
+                $(this).find('td').eq(column).each(function () {
+                    var combat = $(this).text();
+                    if (!isNaN(combat) && combat.length !== 0) {
+                        sum += parseFloat(combat);
+                    }
+                });
+
+                returnsum += sum;
+            });
+            return returnsum;
+        }
+
+        function UpdateTfoot() {
+            var countBus = $('#table-bus tbody tr').length;
+
+            $("#table-bus tfoot").html(`<tr>
+                <td>Total</td>
+                <td>${countBus}</td>
+                <td>${SumRow(2)}</td>
+                <td>${SumRow(3)}</td>
+                <td>-</td>
+            </tr>`);
+
+            var totalHarga = numberOnly($("#Harga_paket").html()) + getFootCellValue(3);
+            $("#Harga_total").val(totalHarga);
+            $("#Jumlah_Penumpang").val(getFootCellValue(2));
+
+        }
+
+        function getFootCellValue(column) {
+            var MyRows = $('#table-bus tfoot').find('tr');
+            return parseInt($(MyRows[0]).find('td:eq(' + column + ')').html());
+        }
+
+        function numberOnly(str) {
+            var numb = str.match(/\d/g);
+            numb = numb.join("");
+
+            return parseInt(numb);
+        }
+
+        $(document).ready(function () {
+            $("#tambahBus").click(function () {
+                let kendaraan = $("#kendaraan").val();
+                if (kendaraan != null) {
+                    var array = kendaraan.split(" - ");
+                    $("#table-bus tbody").append(`<tr>
+                        <td>${array[0]}</td>
+                        <td>${array[1]}</td>
+                        <td>${array[2]}</td>
+                        <td>${parseInt(array[3])}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm btnDelete">Hapus</button>
+                        </td>
+                    </tr>`);
+
+                    UpdateTfoot();
+
+                    $('#kendaraan option:selected').remove();
+
+                    $("#hiddenForBus").append(`<input type="hidden" value="${array[0]}" name="ID_Kendaraan">`);
+
+                } else {
+                    alert("Kendaraan sudah tidak tersedia");
+                }
+
+            });
+
+            //*
+            $("#table-bus").on('click', '.btnDelete', function () {
+                let row = $(this).closest('tr').find('td');
+                $('#kendaraan').append($('<option>', {
+                    value: `${row.eq(0).text()} - ${row.eq(1).text()} - ${row.eq(2).text()} - ${row.eq(3).text()}`,
+                    text: `${row.eq(1).text()} - ${row.eq(2).text()}`
+                }));
+
+                $(this).closest('tr').remove();
+
+                UpdateTfoot();
+            });
+        });
+    </script>    
+    
+}
