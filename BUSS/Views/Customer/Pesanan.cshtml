@@ -104,6 +104,13 @@
                                                 </a>
                                             }
 
+                                            @if (item.Status_Transaksi == 3)
+                                            {
+                                                <a href="@Url.Action("KirimFeedback", "Transaksi", new { id = item.ID_Transaksi })" class="btn btn-success btn-sm mr-1">
+                                                    <i class="fa fa-comment-dots"></i> Isi Ulasan
+                                                </a>
+                                            }
+
                                             @if (item.Status_Transaksi != 4 && item.Status_Transaksi != 3)
                                             {
                                                 <form action="@Url.Action("Pembatalan", "Transaksi")" method="post" class="d-inline deleteForm">
