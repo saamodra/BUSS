@@ -412,6 +412,17 @@
             callback: function (currentRating, $el) {
             }
         });
+
+        if ("@TempData["SuccessMessage"]" != "") {
+            swal("Berhasil", "@TempData["SuccessMessage"]", {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                },
+            });
+        }
     </script>
 </body>
 

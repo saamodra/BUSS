@@ -54,10 +54,10 @@
                                             <a href="@Url.Action("Edit", "Kota", new { id = item.ID_Kota })" class="btn btn-warning btn-sm mr-1">
                                                 <i class="fa fa-edit"></i> Ubah
                                             </a>
-                                            <form action="@Url.Action("Delete", "Kota")" method="post" class="d-inline deleteForm">
+                                            <form action="@Url.Action("Delete", "Kota")" method="post" class="d-inline">
                                                 @Html.AntiForgeryToken()
                                                 <input type="hidden" name="id" value="@item.ID_Kota" />
-                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button>
+                                                <button type="submit" class="btn btn-danger btn-sm deleteBtn"><i class="fa fa-trash"></i> Hapus</button>
                                             </form>
                                         </td>
                                     </tr>

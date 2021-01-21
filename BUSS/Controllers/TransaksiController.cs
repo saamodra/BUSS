@@ -32,7 +32,7 @@ namespace BUSS.Controllers
             {
                 List<int> id_kendaraan = new List<int>();
 
-                foreach(var tr in db.Transaksis.Where(k => k.Tanggal_Pesanan == tgl_sewa).ToList())
+                foreach (var tr in db.Transaksis.Where(k => k.Tanggal_Pesanan == tgl_sewa).ToList())
                 {
                     foreach(var kend in tr.Transaksi_Kendaraan)
                     {
@@ -165,6 +165,18 @@ namespace BUSS.Controllers
             Transaksi transaksi = db.Transaksis.Find(id);
 
             return View(transaksi);
+        }
+
+
+        [HttpPost]
+        public ActionResult Pembatalan(int id)
+        {
+            Transaksi transaksi = db.Transaksis.Find(id);
+            transaksi.Status_Transaksi = 4;
+            db.SaveChanges();
+            TempData["SuccessMessage"] = "Pesanan berhasil dibatalkan!";
+
+            return RedirectToAction("Pesanan", "Customer");
         }
     }
 }

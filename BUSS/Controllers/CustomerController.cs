@@ -201,6 +201,19 @@ namespace BUSS.Controllers
             return View();
         }
 
+        public ActionResult Pesanan()
+        {
+            if(Session["NIK"] != null)
+            {
+                string nik = Session["NIK"].ToString();
+                var pesanan = db.Transaksis.Where(k => k.ID_Customer == nik).ToList();
+                return View(pesanan);
+            } else
+            {
+                return RedirectToAction("Login", "Customer");
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

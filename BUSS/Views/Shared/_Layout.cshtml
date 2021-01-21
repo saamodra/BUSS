@@ -386,11 +386,11 @@
                 },
             });
 
-            $(".deleteForm").one('submit', function (e) {
-                e.preventDefault();
-                var form = $(this);
+            $(".deleteBtn").on("click", function (e) {
+                e.preventDefault(); // prevent form submit
+                var form = event.target.form; // storing the form
                 swal({
-                    title: 'Yakin ingin menghapus data ini?',
+                    title: "Yakin ingin menghapus data ini?",
                     text: "Anda tidak akan bisa mengembalikan data ini",
                     icon: 'warning',
                     buttons: {
@@ -405,12 +405,14 @@
                     }
                 }).then((isConfirm) => {
                     if (isConfirm) {
-                        form.submit();
+                        form.submit();          // submitting the form when user press yes
                     } else {
-                        swal.close();
+                        swal("Dibatalkan", "", "error");
                     }
                 });
-            })
+            });
+
+            
         });
     </script>
     @RenderSection("scripts", required: false)

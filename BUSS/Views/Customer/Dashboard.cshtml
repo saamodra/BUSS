@@ -1,5 +1,22 @@
 ﻿
 @{
     ViewBag.Title = "Dashboard";
+    ViewBag.Dashboard = "active";
     Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+@section scripts {
+    <script>
+        if ("@TempData["SuccessMessage"]" != "") {
+            swal("Berhasil", "@TempData["SuccessMessage"]", {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                },
+            });
+        }
+    </script>
 }

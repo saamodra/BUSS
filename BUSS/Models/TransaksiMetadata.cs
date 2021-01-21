@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -21,6 +22,7 @@ namespace BUSS.Models
         public Nullable<int> ID_Pegawai { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:C0}")]
+        [DisplayName("Harga Total")]
         public decimal Harga_total { get; set; }
         public int Jumlah_Penumpang { get; set; }
 

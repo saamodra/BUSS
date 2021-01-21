@@ -1,0 +1,166 @@
+﻿@model IEnumerable<BUSS.Models.Transaksi>
+@{
+    ViewBag.Title = "Pesanan";
+    ViewBag.Pesanan = "active";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+
+}
+
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">@ViewBag.Title</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="/Admin">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Pesanan", "Customer")">@ViewBag.Title</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Data @ViewBag.Title</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table" id="example2">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Paket.Nama_Paket)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Harga_total)
+                                    </th>
+                                    <th>
+                                        DP
+                                    </th>
+                                    <th>
+                                        Tanggal Sewa
+                                    </th>
+                                    <th>
+                                        Jadwal
+                                    </th>
+                                    <th>Status Transaksi</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int rowCount = 1; }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@(rowCount++).</td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Paket.Nama_Paket)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Harga_total)
+                                        </td>
+                                        <td>
+                                            @string.Format("Rp{0:0,0}", item.Harga_total / 2)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tanggal_Pesanan)
+                                        </td>
+                                        <td>
+                                            @(item.Paket.Jadwal == null ? "-" : item.Paket.Jadwal)
+                                        </td>
+                                        <td>
+                                            @{
+                                                switch (item.Status_Transaksi)
+                                                {
+                                                    case 0: <text>Menunggu Pembayaran DP</text> break;
+                                                    case 1: <text>Menunggu Pelunasan</text> break;
+                                                    case 2: <text>Lunas</text> break;
+                                                    case 3: <text>Selesai</text> break;
+                                                    default: <text>Dibatalkan</text> break;
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Details", "Transaksi", new { id = item.ID_Paket })" class="btn btn-info btn-sm mr-1">
+                                                <i class="fa fa-eye"></i> Detil
+                                            </a>
+                                            @if (item.Status_Transaksi == 0)
+                                            {
+                                                <a href="@Url.Action("UploadDP", "Transaksi", new { id = item.ID_Transaksi })" class="btn btn-warning btn-sm mr-1">
+                                                    <i class="fa fa-money-bill-wave-alt"></i> Bayar DP
+                                                </a>
+                                            }
+                                            else if (item.Status_Transaksi == 1)
+                                            {
+                                                <a href="@Url.Action("UploadPelunasan", "Transaksi", new { id = item.ID_Transaksi })" class="btn btn-warning btn-sm mr-1">
+                                                    <i class="fa fa-money-bill-wave-alt"></i> Pelunasan
+                                                </a>
+                                            }
+
+                                            @if (item.Status_Transaksi != 4 && item.Status_Transaksi != 3)
+                                            {
+                                                <form action="@Url.Action("Pembatalan", "Transaksi")" method="post" class="d-inline deleteForm">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="id" value="@item.ID_Transaksi" />
+                                                    <button type="submit" class="btn btn-danger btn-sm btnBatal"><i class="fa fa-times-circle"></i> Batalkan</button>
+                                                </form>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        if ("@TempData["SuccessMessage"]" != "") {
+            swal("Berhasil", "@TempData["SuccessMessage"]", {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                },
+            });
+        }
+
+        $(".btnBatal").on("click", function (e) {
+            e.preventDefault(); // prevent form submit
+            var form = event.target.form; // storing the form
+            swal({
+                title: "Yakin ingin membatalkan pesanan ini?",
+                text: "Anda tidak akan bisa mengembalikan data ini",
+                icon: 'warning',
+                buttons: {
+                    confirm: {
+                        text: 'Batalkan',
+                        className: 'btn btn-success'
+                    },
+                    cancel: {
+                        visible: true,
+                        className: 'btn btn-danger'
+                    }
+                }
+            }).then((isConfirm) => {
+                if (isConfirm) {
+                    form.submit();          // submitting the form when user press yes
+                } else {
+                    swal("Dibatalkan", "", "error");
+                }
+            });
+        });
+    </script>
+}

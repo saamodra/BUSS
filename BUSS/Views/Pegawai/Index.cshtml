@@ -84,7 +84,7 @@
                                             <form action="@Url.Action("Delete", @ViewBag.SidebarMenu)" method="post" class="d-inline deleteForm">
                                                 @Html.AntiForgeryToken()
                                                 <input type="hidden" name="id" value="@item.ID_Pegawai" />
-                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button>
+                                                <button type="submit" class="btn btn-danger deleteBtn btn-sm"><i class="fa fa-trash"></i> Hapus</button>
                                             </form>
                                         </td>
                                     </tr>

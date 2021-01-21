@@ -214,7 +214,7 @@
                     </div>
                     <ul class="nav nav-primary">
                         <li class="nav-item @ViewBag.Dashboard">
-                            <a href="/Dashboard" aria-expanded="false">
+                            <a href="@Url.Action("Dashboard", "Customer")" aria-expanded="false">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
                             </a>
@@ -225,14 +225,8 @@
                             </span>
                             <h4 class="text-section">Pesanan</h4>
                         </li>
-                        <li class="nav-item @ViewBag.Custom">
-                            <a href="@Url.Action("Custom", "Paket")" aria-expanded="false">
-                                <i class="fas fa-sliders-h"></i>
-                                <p>Custom Paket</p>
-                            </a>
-                        </li>
                         <li class="nav-item @ViewBag.Pesanan">
-                            <a href="@Url.Action("Index", "Pesanan")" aria-expanded="false">
+                            <a href="@Url.Action("Pesanan", "Customer")" aria-expanded="false">
                                 <i class="fas fa-shopping-bag"></i>
                                 <p>Pesanan</p>
                             </a>
@@ -354,11 +348,11 @@
                 },
             });
 
-            $(".deleteForm").one('submit', function (e) {
-                e.preventDefault();
-                var form = $(this);
+            $(".deleteBtn").on("click", function (e) {
+                e.preventDefault(); // prevent form submit
+                var form = event.target.form; // storing the form
                 swal({
-                    title: 'Yakin ingin menghapus data ini?',
+                    title: "Yakin ingin menghapus data ini?",
                     text: "Anda tidak akan bisa mengembalikan data ini",
                     icon: 'warning',
                     buttons: {
@@ -373,12 +367,12 @@
                     }
                 }).then((isConfirm) => {
                     if (isConfirm) {
-                        form.submit();
+                        form.submit();          // submitting the form when user press yes
                     } else {
-                        swal.close();
+                        swal("Dibatalkan", "", "error");
                     }
                 });
-            })
+            });
         });
     </script>
     @RenderSection("scripts", required: false)

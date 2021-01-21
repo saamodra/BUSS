@@ -833,6 +833,7 @@
     <Content Include="Views\Shared\Currency.cshtml" />
     <Content Include="Views\Home\CustomPaket.cshtml" />
     <Content Include="Views\Customer\Dashboard.cshtml" />
+    <Content Include="Views\Customer\Pesanan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
