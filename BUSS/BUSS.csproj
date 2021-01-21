@@ -131,6 +131,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DestinasiController.cs" />
+    <Compile Include="Controllers\FeedbacksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Jenis_KendaraanController.cs" />
     <Compile Include="Controllers\KategoriWilayahController.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Models\Feedback.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FeedbackMetadata.cs" />
     <Compile Include="Models\Jenis_Kendaraan.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
@@ -834,6 +836,13 @@
     <Content Include="Views\Home\CustomPaket.cshtml" />
     <Content Include="Views\Customer\Dashboard.cshtml" />
     <Content Include="Views\Customer\Pesanan.cshtml" />
+    <Content Include="Views\Transaksi\Details.cshtml" />
+    <Content Include="Views\Feedbacks\Create.cshtml" />
+    <Content Include="Views\Feedbacks\Delete.cshtml" />
+    <Content Include="Views\Feedbacks\Details.cshtml" />
+    <Content Include="Views\Feedbacks\Edit.cshtml" />
+    <Content Include="Views\Feedbacks\Index.cshtml" />
+    <Content Include="Views\Home\LihatDestinasi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

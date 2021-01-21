@@ -178,5 +178,13 @@ namespace BUSS.Controllers
 
             return RedirectToAction("Pesanan", "Customer");
         }
+
+        public ActionResult Details(int id)
+        {
+            Transaksi transaksi = db.Transaksis.Find(id);
+            ViewBag.Feedback = db.Feedbacks.FirstOrDefault(k => k.ID_Transaksi == id);
+
+            return View(transaksi);
+        }
     }
 }

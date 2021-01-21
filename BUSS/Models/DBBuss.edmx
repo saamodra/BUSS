@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BUSSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BUSSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="NIK" />
@@ -68,6 +68,7 @@
           </Key>
           <Property Name="NIK" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="ID_Destinasi" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="float" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Feedback">
@@ -640,8 +641,7 @@
             <End Role="Transaksi" EntitySet="Transaksi" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BUSSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -721,6 +721,7 @@
           </Key>
           <Property Name="NIK" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ID_Destinasi" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Double" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_Detail_Rating_Destinasi_Customer" FromRole="Detail_Rating_Destinasi" ToRole="Customer" />
           <NavigationProperty Name="Destinasi" Relationship="Self.FK_Detail_Rating_Destinasi_Destinasi" FromRole="Detail_Rating_Destinasi" ToRole="Destinasi" />
@@ -1404,6 +1405,7 @@
               <MappingFragment StoreEntitySet="Detail_Rating_Destinasi">
                 <ScalarProperty Name="NIK" ColumnName="NIK" />
                 <ScalarProperty Name="ID_Destinasi" ColumnName="ID_Destinasi" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -90,5 +90,62 @@ namespace BUSS.Controllers
             var destinasi = db.Destinasis.Where(k => k.Status == 1).ToList();
             return View(destinasi);
         }
+
+        public ActionResult LihatDestinasi(int id)
+        {
+            var destinasi = db.Destinasis.Find(id);
+            var sess_nik = Session["NIK"];
+            if(sess_nik == null)
+            {
+                ViewBag.RatingUser = null;
+            } else 
+            {
+                ViewBag.RatingUser = db.Detail_Rating_Destinasi.First(k => k.ID_Destinasi == id && k.NIK == sess_nik.ToString()).Rating;
+            }
+
+            if (destinasi == null)
+            {
+                return HttpNotFound();
+            }
+            return View(destinasi);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateStar(int ID_Destinasi, double star)
+        {
+            if (Session["NIK"] == null)
+            {
+                TempData["ErrorMessage"] = "Silahkan login terlebih dahulu untuk memberikan rating.";
+
+                return RedirectToAction("LihatDestinasi", "Home", new { id = ID_Destinasi });
+            } else
+            {
+                var sess_nik = Session["NIK"];
+
+                var rating = db.Detail_Rating_Destinasi.First(k => k.ID_Destinasi == ID_Destinasi && k.NIK == sess_nik.ToString());
+
+                if (rating == null)
+                {
+                    Detail_Rating_Destinasi drd = new Detail_Rating_Destinasi();
+                    drd.ID_Destinasi = ID_Destinasi;
+                    drd.NIK = "1234567890123456";
+                    drd.Rating = star;
+                    db.Detail_Rating_Destinasi.Add(drd);
+                    
+                } else
+                {
+                    Detail_Rating_Destinasi drd = rating;
+                    drd.Rating = star;
+                }
+
+                db.SaveChanges();
+
+                TempData["SuccessMessage"] = "Berhasil memberikan rating.";
+
+                return RedirectToAction("LihatDestinasi", "Home", new { id = ID_Destinasi });
+                //return Json(new { result = true, data = drd }, JsonRequestBehavior.AllowGet);
+            }
+            
+        }
     }
 }

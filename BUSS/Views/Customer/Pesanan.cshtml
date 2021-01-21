@@ -79,16 +79,41 @@
                                             @{
                                                 switch (item.Status_Transaksi)
                                                 {
-                                                    case 0: <text>Menunggu Pembayaran DP</text> break;
-                                                    case 1: <text>Menunggu Pelunasan</text> break;
-                                                    case 2: <text>Lunas</text> break;
-                                                    case 3: <text>Selesai</text> break;
-                                                    default: <text>Dibatalkan</text> break;
+                                                    case 0:
+                                                        {
+                                                            <text>Menunggu Pembayaran DP</text>
+                                                            break;
+                                                        }
+                                                    case 1:
+                                                        {
+                                                            <text>Menunggu Pelunasan</text>
+                                                            break;
+                                                        }
+                                                    case 2:
+                                                        {
+                                                            <text>Lunas</text>
+                                                            break;
+                                                        }
+                                                    case 3:
+                                                        {
+                                                            <text>Selesai</text>
+                                                            break;
+                                                        }
+                                                    case 4:
+                                                        {
+                                                            <text>Dibatalkan</text>
+                                                            break;
+                                                        }
+                                                    default:
+                                                        {
+                                                            <text>Selesai</text>
+                                                            break;
+                                                        }
                                                 }
                                             }
                                         </td>
                                         <td>
-                                            <a href="@Url.Action("Details", "Transaksi", new { id = item.ID_Paket })" class="btn btn-info btn-sm mr-1">
+                                            <a href="@Url.Action("Details", "Transaksi", new { id = item.ID_Transaksi })" class="btn btn-info btn-sm mr-1">
                                                 <i class="fa fa-eye"></i> Detil
                                             </a>
                                             @if (item.Status_Transaksi == 0)
@@ -106,12 +131,12 @@
 
                                             @if (item.Status_Transaksi == 3)
                                             {
-                                                <a href="@Url.Action("KirimFeedback", "Transaksi", new { id = item.ID_Transaksi })" class="btn btn-success btn-sm mr-1">
+                                                <a href="@Url.Action("Create", "Feedbacks", new { id = item.ID_Transaksi })" class="btn btn-success btn-sm mr-1">
                                                     <i class="fa fa-comment-dots"></i> Isi Ulasan
                                                 </a>
                                             }
 
-                                            @if (item.Status_Transaksi != 4 && item.Status_Transaksi != 3)
+                                            @if (item.Status_Transaksi != 4 && item.Status_Transaksi != 3 && item.Status_Transaksi != 5)
                                             {
                                                 <form action="@Url.Action("Pembatalan", "Transaksi")" method="post" class="d-inline deleteForm">
                                                     @Html.AntiForgeryToken()

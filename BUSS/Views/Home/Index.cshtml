@@ -38,9 +38,11 @@
                     <a class="nav-item-2" href="@Url.Action("Index", "Home")">Home</a>
                     <a class="nav-item-2" href="@Url.Action("Destinasi", "Home")">Destinasi</a>
                     <a class="nav-item-2" href="@Url.Action("Paket", "Home")">Paket</a>
+                    <a class="nav-item-2" href="@Url.Action("CustomPaket", "Home")">Custom Paket</a>
 
                     @if (Session["IsCustomer"] != null && (bool)Session["IsCustomer"] == true)
                     {
+                        <a class="nav-item-2" href="@Url.Action("Logout", "Customer")"> Logout</a>
                         <a class="btn btn-rounded btn-transparent ml-3 h-50" href="@Url.Action("Dashboard", "Customer")">
                             <i class="fa fa-user mr-2"></i> @Session["Name"].ToString()
                         </a>
@@ -125,7 +127,6 @@
         </div>
     </section>
     <!-- End Section Form -->
-
     <!-- Section Destination -->
     <section class="destination bg-white">
         <div class="section-title">
@@ -138,7 +139,7 @@
         <div class="row">
             @foreach (var item in Model)
             {
-             
+
                 <div class="col-xs-12 col-sm-6 col-md-3 my-2">
                     <a href="@Url.Action("LihatPaket", "Home", new { id = item.ID_Paket })">
                         <div class="card h-100">
@@ -387,6 +388,8 @@
     <script src="~/Content/assets/js/core/jquery.3.2.1.min.js"></script>
     <script src="~/Content/assets/js/core/bootstrap.min.js"></script>
     <script src="~/Content/assets/flickity-docs/flickity.pkgd.min.js"></script>
+    <!-- Sweet Alert -->
+    <script src="~/Content/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
     <script src="~/Content/assets/js/jquery.star-rating-svg.min.js"></script>
     <script src="~/Content/assets/js/script.js"></script>
     <script type="text/javascript">

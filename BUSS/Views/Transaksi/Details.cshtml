@@ -1,0 +1,194 @@
+﻿@model BUSS.Models.Transaksi
+
+@{
+    ViewBag.Title = "Detail Pesanan";
+    ViewBag.Pesanan = "active";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">@ViewBag.Title</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="/Admin">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Pesanan", "Customer")">Pesanan</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <h5 class="card-header">Detail Transaksi</h5>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <p class="m-0 font-weight-bold">Harga Total</p>
+                        <p class="m-0 text-danger font-weight-bold">@Html.DisplayFor(model => model.Harga_total)</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="m-0 font-weight-bold">DP</p>
+                        <p class="m-0 text-danger font-weight-bold">@string.Format("Rp{0:0,0}", Model.Harga_total / 2)</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="m-0 font-weight-bold">Status Transaksi</p>
+                        <p class="m-0">
+                            @{
+                                switch (Model.Status_Transaksi)
+                                {
+                                    case 0: <text>Menunggu Pembayaran DP</text> break;
+                                case 1: <text>Menunggu Pelunasan</text> break;
+                            case 2: <text>Lunas</text> break;
+                        case 3: <text>Selesai</text> break;
+                    default: <text>Dibatalkan</text> break;
+            }
+                            }
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="m-0 font-weight-bold">Tanggal Pemesanan</p>
+                        <p class="m-0">@Html.DisplayFor(model => model.CreatedDate)</p>
+                    </div>
+                    <div class="d-flex flex-column justify-content-between">
+                        <p class="m-0 font-weight-bold">Ulasan</p>
+                        @if (ViewBag.Feedback == null)
+                        {
+                            <p>Belum ada ulasan</p>
+                        }
+                        else
+                        {
+                            <p class="m-0">Rating : @ViewBag.Feedback.Rating <i class="fa fa-star text-warning"></i></p>
+                            if (ViewBag.Feedback.Isi_Feedback == null)
+                            {
+                                <text>-</text>
+                            }
+                            else
+                            {
+                                <text>@ViewBag.Feedback.Isi_Feedback</text>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <h5 class="card-header">Detail Paket</h5>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <p class="m-0 font-weight-bold">Nama Paket</p>
+                        <p class="m-0">@Model.Paket.Nama_Paket</p>
+                    </div>
+                    @*<h5 class="card-title mb-4"></h5>*@
+                    <div class="d-flex justify-content-between">
+                        <p class="m-0 font-weight-bold">Konsumsi</p>
+                        <p class="m-0">@Model.Paket.Konsumsi x</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="m-0 font-weight-bold">Lama Perjalanan</p>
+                        <p class="m-0">@Model.Paket.Lama_Perjalanan Hari</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="m-0 font-weight-bold">Harga</p>
+                        <p class="m-0 text-danger font-weight-bold" id="Harga_paket">@Html.DisplayFor(model => model.Paket.Harga)</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="m-0 font-weight-bold">Tanggal Sewa</p>
+                        <p>@Html.DisplayFor(model => model.Tanggal_Pesanan)</p>
+                    </div>
+                    <div class="d-flex flex-column justify-content-between">
+                        <p class="m-0 font-weight-bold">Keterangan</p>
+                        <p>@(Model.Paket.Keterangan == null ? "Tidak ada keterangan." : Model.Paket.Keterangan)</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <h5 class="card-header">Detail Kendaraan</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <table class="table" id="table-bus">
+                            <thead>
+                                <tr>
+                                    <th>No. </th>
+                                    <th>Nama Bus</th>
+                                    <th>Kapasitas Penumpang</th>
+                                    <th>Harga Sewa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int countKendaraan = 1;
+                                }
+                                @foreach (var kend in Model.Transaksi_Kendaraan)
+                                {
+                                    <tr>
+                                        <td>@countKendaraan</td>
+                                        <td>@kend.Kendaraan.Nama_Kendaraan</td>
+                                        <td>@kend.Kendaraan.Jenis_Kendaraan.Jumlah_Kursi</td>
+                                        <td>@string.Format("Rp{0:0,0}", kend.Kendaraan.Harga_kendaraan)</td>
+                                    </tr>
+                                    countKendaraan++;
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="font-weight-bold">Total</td>
+                                    <td>@Model.Transaksi_Kendaraan.Count</td>
+                                    <td>@Model.Transaksi_Kendaraan.Sum(x => x.Kendaraan.Jenis_Kendaraan.Jumlah_Kursi)</td>
+                                    <td>@string.Format("Rp{0:0,0}", Model.Transaksi_Kendaraan.Sum(x => x.Kendaraan.Harga_kendaraan))</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <h5 class="card-header">Detail Destinasi</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <table class="table" id="table-bus">
+                            <thead>
+                                <tr>
+                                    <th>No. </th>
+                                    <th>Nama Destinasi</th>
+                                    <th>Kota</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int countDestinasi = 1;
+                                }
+                                @foreach (var dest in Model.Paket.Detail_Paket)
+                                {
+                                    <tr>
+                                        <td>@countDestinasi</td>
+                                        <td>@dest.Destinasi.Nama_Destinasi</td>
+                                        <td>@dest.Destinasi.Kota.Nama_Kota</td>
+                                    </tr>
+                                    countDestinasi++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -32,9 +32,11 @@
                     <a class="nav-item-2" href="@Url.Action("Index", "Home")">Home</a>
                     <a class="nav-item-2" href="@Url.Action("Destinasi", "Home")">Destinasi</a>
                     <a class="nav-item-2" href="@Url.Action("Paket", "Home")">Paket</a>
+                    <a class="nav-item-2" href="@Url.Action("CustomPaket", "Home")">Custom Paket</a>
 
                     @if (Session["IsCustomer"] != null && (bool)Session["IsCustomer"] == true)
                     {
+                        <a class="nav-item-2" href="@Url.Action("Logout", "Customer")"> Logout</a>
                         <a class="btn btn-rounded btn-transparent ml-3 h-50" href="@Url.Action("Dashboard", "Customer")">
                             <i class="fa fa-user mr-2"></i> @Session["Name"].ToString()
                         </a>
@@ -146,6 +148,11 @@
     <script src="~/Content/assets/js/core/bootstrap.min.js"></script>
     <script src="~/Content/assets/flickity-docs/flickity.pkgd.min.js"></script>
     <script src="~/Content/assets/js/jquery.star-rating-svg.min.js"></script>
+    <!-- Datatables -->
+    <script src="~/Content/assets/js/plugin/datatables/datatables.min.js"></script>
+    <!-- Sweet Alert -->
+    <script src="~/Content/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
     <script src="~/Content/assets/js/script.js"></script>
     <script type="text/javascript">

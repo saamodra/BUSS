@@ -193,6 +193,7 @@ namespace BUSS.Controllers
         {
             FormsAuthentication.SignOut();
             Session.Abandon(); // it will clear the session at the end of request
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -213,6 +214,8 @@ namespace BUSS.Controllers
                 return RedirectToAction("Login", "Customer");
             }
         }
+
+       
 
         protected override void Dispose(bool disposing)
         {

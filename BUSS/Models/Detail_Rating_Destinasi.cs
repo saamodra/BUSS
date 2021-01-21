@@ -16,6 +16,7 @@ namespace BUSS.Models
     {
         public string NIK { get; set; }
         public int ID_Destinasi { get; set; }
+        public double Rating { get; set; }
         public int Status { get; set; }
     
         public virtual Customer Customer { get; set; }

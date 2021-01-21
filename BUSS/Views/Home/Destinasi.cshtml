@@ -91,7 +91,7 @@
                 @foreach (var data in Model)
                 {
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2">
-                        <a href="@Url.Action("Destinasi", "Home", new { id = data.ID_Destinasi })">
+                        <a href="@Url.Action("LihatDestinasi", "Home", new { id = data.ID_Destinasi })">
                             <div class="card h-100">
                                 <img class="card-img-top" src="~/Content/upload/@data.Detail_Foto.FirstOrDefault().Foto" alt="@data.Nama_Destinasi">
                                 <div class="card-body">
