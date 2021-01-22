@@ -15,6 +15,7 @@ namespace BUSS.Models
         public string Nama { get; set; }
 
         [Required(ErrorMessage = "Alamat wajib diisi!")]
+        [DataType(DataType.MultilineText)]
         public string Alamat { get; set; }
 
         [DisplayName("No. HP")]
@@ -25,8 +26,6 @@ namespace BUSS.Models
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Format email salah!")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password wajib diisi!")]
-        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Role wajib diisi!")]

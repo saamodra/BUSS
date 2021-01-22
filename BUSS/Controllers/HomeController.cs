@@ -100,7 +100,7 @@ namespace BUSS.Controllers
                 ViewBag.RatingUser = null;
             } else 
             {
-                ViewBag.RatingUser = db.Detail_Rating_Destinasi.First(k => k.ID_Destinasi == id && k.NIK == sess_nik.ToString()).Rating;
+                //ViewBag.RatingUser = db.Detail_Rating_Destinasi.First(k => k.ID_Destinasi == id && k.NIK == sess_nik.ToString());
             }
 
             if (destinasi == null)

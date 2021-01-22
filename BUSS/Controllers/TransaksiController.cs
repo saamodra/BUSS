@@ -1,6 +1,7 @@
 ﻿using BUSS.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -179,12 +180,153 @@ namespace BUSS.Controllers
             return RedirectToAction("Pesanan", "Customer");
         }
 
+        public ActionResult UploadDP(int id)
+        {
+            var transaksi = db.Transaksis.Find(id);
+
+            return View(transaksi);
+        }
+
+        [HttpPost]
+        public ActionResult UploadDP(int ID_Transaksi, HttpPostedFileBase BuktiDP)
+        {
+            var transaksi = db.Transaksis.Find(ID_Transaksi);
+            if(transaksi == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (BuktiDP != null)
+            {
+                var ext = Path.GetExtension(BuktiDP.FileName);
+                var InputFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ext;
+                var ServerSavePath = Path.Combine(Server.MapPath("~/Content/upload/") + InputFileName);
+                //Save BuktiDP to server folder  
+                BuktiDP.SaveAs(ServerSavePath);
+
+                transaksi.Bukti_DP = InputFileName;
+                transaksi.Status_Transaksi = 1;
+                db.SaveChanges();
+            }
+
+            TempData["SuccessMessage"] = "Pembayaran DP diproses.";
+
+            return RedirectToAction("Pesanan", "Customer");
+
+        }
+
+        public ActionResult UploadPelunasan(int id)
+        {
+            var transaksi = db.Transaksis.Find(id);
+
+            return View(transaksi);
+        }
+
+        [HttpPost]
+        public ActionResult UploadPelunasan(int ID_Transaksi, HttpPostedFileBase BuktiDP)
+        {
+            var transaksi = db.Transaksis.Find(ID_Transaksi);
+            if (transaksi == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (BuktiDP != null)
+            {
+                var ext = Path.GetExtension(BuktiDP.FileName);
+                var InputFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ext;
+                var ServerSavePath = Path.Combine(Server.MapPath("~/Content/upload/") + InputFileName);
+                //Save BuktiDP to server folder  
+                BuktiDP.SaveAs(ServerSavePath);
+
+                transaksi.Bukti_Pelunasan = InputFileName;
+                transaksi.Status_Transaksi = 3;
+                db.SaveChanges();
+            }
+
+            TempData["SuccessMessage"] = "Pelunasan diproses.";
+
+            return RedirectToAction("Pesanan", "Customer");
+
+        }
+
+
+        [HttpPost]
+        public ActionResult KonfirmasiDP(int ID_Transaksi, string submit)
+        {
+            var transaksi = db.Transaksis.Find(ID_Transaksi);
+
+            if (submit == "Valid")
+            {
+                transaksi.Status_Transaksi = 2;
+                TempData["SuccessMessage"] = "Pembayaran DP Valid";
+            } else
+            {
+                string fullPath = Request.MapPath("~/Content/upload/" + transaksi.Bukti_DP);
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+
+                transaksi.Status_Transaksi = 0;
+                transaksi.Bukti_DP = null;
+                TempData["ErrorMessage"] = "Pembayaran DP Tidak Valid";
+            }
+
+            db.SaveChanges();
+
+            return RedirectToAction("Pesanan", "Pegawai");
+        }
+
+        [HttpPost]
+        public ActionResult KonfirmasiPelunasan(int ID_Transaksi, string submit)
+        {
+            var transaksi = db.Transaksis.Find(ID_Transaksi);
+
+            if (submit == "Valid")
+            {
+                transaksi.Status_Transaksi = 4;
+                TempData["SuccessMessage"] = "Pembayaran Pelunasan Valid";
+            }
+            else
+            {
+                string fullPath = Request.MapPath("~/Content/upload/" + transaksi.Bukti_Pelunasan);
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+
+                transaksi.Status_Transaksi = 2;
+                transaksi.Bukti_Pelunasan = null;
+                TempData["ErrorMessage"] = "Pembayaran Pelunasan Tidak Valid";
+            }
+
+            db.SaveChanges();
+
+            return RedirectToAction("Pesanan", "Pegawai");
+        }
+
         public ActionResult Details(int id)
         {
             Transaksi transaksi = db.Transaksis.Find(id);
             ViewBag.Feedback = db.Feedbacks.FirstOrDefault(k => k.ID_Transaksi == id);
 
             return View(transaksi);
+        }
+
+        public ActionResult DetailTransaksi(int id)
+        {
+            Transaksi transaksi = db.Transaksis.Find(id);
+            ViewBag.Feedback = db.Feedbacks.FirstOrDefault(k => k.ID_Transaksi == id);
+
+            return View(transaksi);
+        }
+
+        public ActionResult Penyelesaian(int id)
+        {
+            Transaksi transaksi = db.Transaksis.Find(id);
+
+            return View();
         }
     }
 }

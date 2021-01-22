@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<BUSS.Models.Transaksi>
-@{
-    ViewBag.Title = "Pesanan";
-    ViewBag.Pesanan = "active";
-    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
 
+@{
+    ViewBag.Title = "Pemesanan";
+    ViewBag.SidebarMenu = "Pemesanan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <div class="page-inner">
     <div class="page-header">
@@ -19,7 +20,7 @@
                 <i class="flaticon-right-arrow"></i>
             </li>
             <li class="nav-item">
-                <a href="@Url.Action("Pesanan", "Customer")">@ViewBag.Title</a>
+                <a href="@Url.Action("Pesanan", "Pegawai")">@ViewBag.Title</a>
             </li>
         </ul>
     </div>
@@ -123,37 +124,9 @@
                                             }
                                         </td>
                                         <td>
-                                            <a href="@Url.Action("Details", "Transaksi", new { id = item.ID_Transaksi })" class="btn btn-info btn-sm mr-1">
+                                            <a href="@Url.Action("DetailTransaksi", "Transaksi", new { id = item.ID_Transaksi })" class="btn btn-info btn-sm mr-1">
                                                 <i class="fa fa-eye"></i> Detil
                                             </a>
-                                            @if (item.Status_Transaksi == 0)
-                                            {
-                                                <a href="@Url.Action("UploadDP", "Transaksi", new { id = item.ID_Transaksi })" class="btn btn-warning btn-sm mr-1">
-                                                    <i class="fa fa-money-bill-wave-alt"></i> Bayar DP
-                                                </a>
-                                            }
-                                            else if (item.Status_Transaksi == 2)
-                                            {
-                                                <a href="@Url.Action("UploadPelunasan", "Transaksi", new { id = item.ID_Transaksi })" class="btn btn-warning btn-sm mr-1">
-                                                    <i class="fa fa-money-bill-wave-alt"></i> Pelunasan
-                                                </a>
-                                            }
-
-                                            @if (item.Status_Transaksi == 5)
-                                            {
-                                                <a href="@Url.Action("Create", "Feedbacks", new { id = item.ID_Transaksi })" class="btn btn-success btn-sm mr-1">
-                                                    <i class="fa fa-comment-dots"></i> Isi Ulasan
-                                                </a>
-                                            }
-
-                                            @if (item.Status_Transaksi == 0 && item.Status_Transaksi == 2 && item.Status_Transaksi == 4)
-                                            {
-                                                <form action="@Url.Action("Pembatalan", "Transaksi")" method="post" class="d-inline deleteForm">
-                                                    @Html.AntiForgeryToken()
-                                                    <input type="hidden" name="id" value="@item.ID_Transaksi" />
-                                                    <button type="submit" class="btn btn-danger btn-sm btnBatal"><i class="fa fa-times-circle"></i> Batalkan</button>
-                                                </form>
-                                            }
                                         </td>
                                     </tr>
                                 }
@@ -174,6 +147,17 @@
                 buttons: {
                     confirm: {
                         className: 'btn btn-success'
+                    }
+                },
+            });
+        }
+
+        if ("@TempData["ErrorMessage"]" != "") {
+            swal("Gagal", "@TempData["ErrorMessage"]", {
+                icon: "error",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-danger'
                     }
                 },
             });

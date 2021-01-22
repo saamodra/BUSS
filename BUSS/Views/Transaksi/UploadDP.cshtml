@@ -1,21 +1,46 @@
 ﻿@model BUSS.Models.Transaksi
 
 @{
-    ViewBag.Title = "Pembayaran";
-    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    ViewBag.Title = "Unggah Bukti Pembayaran DP";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
 }
 
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">@ViewBag.Title</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="/Admin">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Pesanan", "Customer")">@ViewBag.Title</a>
+            </li>
+        </ul>
+    </div>
 
-<section class="bg-gray section-page">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <h5 class="card-header">Detail Pembayaran</h5>
                 <div class="card-body">
-                    <h3>Silahkan melakukan pembayaran DP sejumlah <text class="text-danger font-weight-bold">@string.Format("Rp{0:0,0}", Model.Harga_total/2)</text> ke</h3>
+                    <h3 class="text-center">Silahkan melakukan pembayaran DP sejumlah <text class="text-danger font-weight-bold">@string.Format("Rp{0:0,0}", Model.Harga_total / 2)</text> ke</h3>
                     <h5 class="text-center mt-2 mb-4">Rekening BRI <text class="text-danger font-weight-bold">6355612388123</text> A.N PT. Travel BUSS</h5>
                     <div class="d-flex justify-content-center">
-                        <a href="@Url.Action("UploadDP", "Transaksi", new { id = Model.ID_Transaksi })" class="btn btn-primary d-inline-block">Unggah Bukti Transfer</a>
+                        @using(Html.BeginForm("UploadDP", "Transaksi", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.ID_Transaksi)
+
+                            <div class="mb-3">
+                                <input type="file" name="BuktiDP" accept=".jpg,.png,jpeg" />
+                            </div>
+                            <button class="btn btn-primary d-inline-block">Unggah Bukti Transfer</button>
+                        }
                     </div>
                 </div>
             </div>
@@ -32,7 +57,7 @@
                     </div>
                     <div class="d-flex justify-content-between">
                         <p class="m-0 font-weight-bold">DP</p>
-                        <p class="m-0 text-danger font-weight-bold">@string.Format("Rp{0:0,0}", Model.Harga_total/2)</p>
+                        <p class="m-0 text-danger font-weight-bold">@string.Format("Rp{0:0,0}", Model.Harga_total / 2)</p>
                     </div>
                     <div class="d-flex justify-content-between">
                         <p class="m-0 font-weight-bold">Status Transaksi</p>
@@ -40,11 +65,46 @@
                             @{
                                 switch (Model.Status_Transaksi)
                                 {
-                                    case 0: <text>Menunggu Pembayaran DP</text> break;
-                                    case 1: <text>Menunggu Pelunasan</text> break;
-                                    case 2: <text>Lunas</text> break;
-                                    case 3: <text>Selesai</text> break;
-                                    default: <text>Dibatalkan</text> break;
+                                    case 0:
+                                        {
+                                            <text>Menunggu Pembayaran DP</text>
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            <text>Pembayaran DP diproses</text>
+                                            break;
+                                        }
+                                    case 2:
+                                        {
+                                            <text>Menunggu Pelunasan</text>
+                                            break;
+                                        }
+                                    case 3:
+                                        {
+                                            <text>Pelunasan diproses</text>
+                                            break;
+                                        }
+                                    case 4:
+                                        {
+                                            <text>Lunas</text>
+                                            break;
+                                        }
+                                    case 5:
+                                        {
+                                            <text>Selesai</text>
+                                            break;
+                                        }
+                                    case 6:
+                                        {
+                                            <text>Isi Feedback</text>
+                                            break;
+                                        }
+                                    default:
+                                        {
+                                            <text>Dibatalkan</text>
+                                            break;
+                                        }
                                 }
                             }
                         </p>
@@ -169,6 +229,4 @@
         </div>
     </div>
 
-</section>
-
-<hr />
+</div>

@@ -76,7 +76,7 @@
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="ID_Destinasi" value="@Model.ID_Destinasi" />
                             <div class="d-flex">
-                                <input type="number" max="5" min="1" class="form-control" name="star" value="@(ViewBag.RatingUser == null ? "" : ViewBag.RatingUser)" />
+                                <input type="number" max="5" min="1" class="form-control" name="star" value="" />
                                 <button type="submit" class="btn btn-sm btn-primary ml-2"><i class="fa fa-star"></i></button>
                             </div>
                         </form>

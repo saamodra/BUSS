@@ -3,7 +3,13 @@
 @{
     ViewBag.Title = "Detail Pesanan";
     ViewBag.Pesanan = "active";
-    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    if (Session["Role"].ToString() == "1")
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    } else
+    {
+        Layout = "~/Views/Shared/_LayoutTourLeader.cshtml";
+    }
 }
 
 <div class="page-inner">
@@ -134,32 +140,51 @@
                     </div>
                     @if (Session["ID_Pegawai"] != null)
                     {
-                        if (Model.Status_Transaksi == 1)
+                        if (Session["Role"].ToString() == "1")
                         {
-                            <form action="@Url.Action("KonfirmasiDP", "Transaksi")" method="post">
-                                <div class="d-flex flex-column justify-content-between">
-                                    <p class="m-0 font-weight-bold">Konfirmasi Pembayaran DP</p>
-                                    <div class="d-flex">
-                                        <input type="hidden" name="ID_Transaksi" value="@Model.ID_Transaksi" />
-                                        <input type="submit" name="submit" value="Valid" class="btn btn-success btn-sm mr-3" />
-                                        <input type="submit" name="submit" value="Tidak Valid" class="btn btn-danger btn-sm mr-3" />
+                            if (Model.Status_Transaksi == 1)
+                            {
+                                <form action="@Url.Action("KonfirmasiDP", "Transaksi")" method="post">
+                                    <div class="d-flex flex-column justify-content-between">
+                                        <p class="m-0 font-weight-bold">Konfirmasi Pembayaran DP</p>
+                                        <div class="d-flex">
+                                            <input type="hidden" name="ID_Transaksi" value="@Model.ID_Transaksi" />
+                                            <input type="submit" name="submit" value="Valid" class="btn btn-success btn-sm mr-2" />
+                                            <input type="submit" name="submit" value="Tidak Valid" class="btn btn-danger btn-sm mr-2" />
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                        }
+                                </form>
+                            }
 
-                        if (Model.Status_Transaksi == 3)
+                            if (Model.Status_Transaksi == 3)
+                            {
+                                <form action="@Url.Action("KonfirmasiPelunasan", "Transaksi")" method="post">
+                                    <div class="d-flex flex-column justify-content-between">
+                                        <p class="m-0 font-weight-bold">Konfirmasi Pelunasan</p>
+                                        <div class="d-flex">
+                                            <input type="hidden" name="ID_Transaksi" value="@Model.ID_Transaksi" />
+                                            <input type="submit" name="submit" value="Valid" class="btn btn-success btn-sm mr-2" />
+                                            <input type="submit" name="submit" value="Tidak Valid" class="btn btn-danger btn-sm mr-2" />
+                                        </div>
+                                    </div>
+                                </form>
+                            }
+
+                        }
+                        else if (Session["Role"].ToString() == "2")
                         {
-                            <form action="@Url.Action("KonfirmasiPelunasan", "Transaksi")" method="post">
+
+                            <form action="@Url.Action("KirimJadwal", "Tourleader")" method="post" enctype="multipart/form-data">
                                 <div class="d-flex flex-column justify-content-between">
-                                    <p class="m-0 font-weight-bold">Konfirmasi Pembayaran DP</p>
+                                    <p class="m-0 font-weight-bold">Kirim Jadwal</p>
                                     <div class="d-flex">
-                                        <input type="hidden" value="@Model.ID_Transaksi" />
-                                        <input type="submit" name="submit" value="Valid" class="btn btn-success btn-sm mr-3" />
-                                        <input type="submit" name="submit" value="Tidak Valid" class="btn btn-danger btn-sm mr-3" />
+                                        <input type="hidden" name="id_paket" value="@Model.ID_Paket" />
+                                        <input type="file" name="jadwal" required />
+                                        <input type="submit" name="submit" value="Kirim" class="btn btn-primary btn-sm mr-2" />
                                     </div>
                                 </div>
                             </form>
+
                         }
                     }
                 </div>

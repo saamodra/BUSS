@@ -215,6 +215,13 @@ namespace BUSS.Controllers
             }
         }
 
+        public ActionResult Pesanan()
+        {
+            var transaksi = db.Transaksis.ToList();
+
+            return View(transaksi);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

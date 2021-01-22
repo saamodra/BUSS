@@ -139,6 +139,7 @@
     <Compile Include="Controllers\KotaController.cs" />
     <Compile Include="Controllers\PaketController.cs" />
     <Compile Include="Controllers\PegawaiController.cs" />
+    <Compile Include="Controllers\TourleaderController.cs" />
     <Compile Include="Controllers\TransaksiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -843,10 +844,17 @@
     <Content Include="Views\Feedbacks\Edit.cshtml" />
     <Content Include="Views\Feedbacks\Index.cshtml" />
     <Content Include="Views\Home\LihatDestinasi.cshtml" />
+    <Content Include="Views\Transaksi\UploadDP.cshtml" />
+    <Content Include="Views\Pegawai\Pesanan.cshtml" />
+    <Content Include="Views\Transaksi\DetailTransaksi.cshtml" />
+    <Content Include="Views\Tourleader\Pesanan.cshtml" />
+    <Content Include="Views\Transaksi\UploadPelunasan.cshtml" />
+    <Content Include="Views\Transaksi\Penyelesaian.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\assets\js\fonts\" />
+    <Folder Include="Content\jadwal\" />
     <Folder Include="Content\upload\" />
   </ItemGroup>
   <ItemGroup>

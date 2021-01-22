@@ -154,6 +154,13 @@
         @if (Session["ID_Pegawai"] == null)
         {
             Response.Redirect("~/Pegawai/Login");
+        } else
+        {
+            if(Session["Role"].ToString() != "2")
+            {
+                <script>alert("Anda tidak diperbolehkan mengakses halaman ini.")</script>
+                Response.Redirect("~/Dashboard/Pegawai");
+            }
         }
 
         <!-- Sidebar -->
@@ -220,13 +227,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/TourLeader/Pesanan" aria-expanded="false">
+                            <a href="/Tourleader/Pesanan" aria-expanded="false">
                                 <i class="fas fa-ticket-alt"></i>
                                 <p>Pesanan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/TourLeader/Paket" aria-expanded="false">
+                            <a href="/Tourleader/Paket" aria-expanded="false">
                                 <i class="fas fa-ticket-alt"></i>
                                 <p>Paket</p>
                             </a>
