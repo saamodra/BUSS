@@ -1,9 +1,7 @@
 ﻿@model BUSS.Models.Destinasi
 
-@{
-    ViewBag.Title = "Tambah Destinasi";
-    ViewBag.SidebarMenu = "Destinasi";
-}
+@{ ViewBag.Title = "Tambah Destinasi";
+                ViewBag.SidebarMenu = "Destinasi"; }
 
 <div class="page-inner">
     <div class="page-header">
@@ -37,24 +35,27 @@
                 <div class="card-body">
                     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formSubmit" }))
                     {
-                        @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
                         <div class="row">
                             <div class="col-md-4">
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Nama_Destinasi)
+                                    <label class="text-danger">*</label>
                                     @Html.EditorFor(model => model.Nama_Destinasi, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.Nama_Destinasi, "", new { @class = "text-danger" })
                                 </div>
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Harga_Tiket)
+                                    <label class="text-danger">*</label>
                                     @Html.EditorFor(model => model.Harga_Tiket, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.Harga_Tiket, "", new { @class = "text-danger" })
                                 </div>
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.ID_Kota)
+                                    <label class="text-danger">*</label>
                                     @Html.DropDownList("ID_Kota", null, "Pilih Kota", htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.ID_Kota, "", new { @class = "text-danger" })
                                 </div>
@@ -70,12 +71,14 @@
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Jam_buka)
+                                    <label class="text-danger">*</label>
                                     @Html.EditorFor(model => model.Jam_buka, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.Jam_buka, "", new { @class = "text-danger" })
                                 </div>
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Jam_tutup)
+                                    <label class="text-danger">*</label>
                                     @Html.EditorFor(model => model.Jam_tutup, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.Jam_tutup, "", new { @class = "text-danger" })
                                 </div>
@@ -87,8 +90,7 @@
                                 </div>
 
                             </div>
-                        </div>
-                    }
+                        </div>}
 
                 </div>
             </div>
@@ -104,9 +106,9 @@
         });
 
         $('#Harga_Tiket').priceFormat({
-          prefix: 'Rp',
-          centsLimit: 0,
-          thousandsSeparator: '.'
+            prefix: 'Rp',
+            centsLimit: 0,
+            thousandsSeparator: '.'
         });
 
         $('#Jam_buka').datetimepicker({
@@ -116,5 +118,5 @@
         $('#Jam_tutup').datetimepicker({
             format: 'HH:mm'
         });
-    </script>    
+    </script>
 }

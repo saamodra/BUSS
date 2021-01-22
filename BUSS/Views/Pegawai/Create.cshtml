@@ -1,9 +1,7 @@
 ﻿@model BUSS.Models.Pegawai
 
-@{
-    ViewBag.Title = "Pegawai";
-    ViewBag.SidebarMenu = "Pegawai";
-}
+@{ ViewBag.Title = "Pegawai";
+    ViewBag.SidebarMenu = "Pegawai"; }
 
 <div class="page-inner">
     <div class="page-header">
@@ -37,23 +35,26 @@
                 <div class="card-body">
                     @using (Html.BeginForm())
                     {
-                        @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Nama)
+                                    <label class="text-danger">*</label>
                                     @Html.EditorFor(model => model.Nama, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.Nama, "", new { @class = "text-danger" })
                                 </div>
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Alamat)
+                                    <label class="text-danger">*</label>
                                     @Html.EditorFor(model => model.Alamat, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.Alamat, "", new { @class = "text-danger" })
                                 </div>
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.No_HP)
+                                    <label class="text-danger">*</label>
                                     @Html.EditorFor(model => model.No_HP, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.No_HP, "", new { @class = "text-danger" })
                                 </div>
@@ -68,15 +69,16 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Email)
+                                    <label class="text-danger">*</label>
                                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                 </div>
 
-
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Role)
+                                    <label class="text-danger">*</label>
                                     @Html.DropDownListFor(model => model.Role, new List<SelectListItem>
-                                    {
+                                                                                                {
                                         new SelectListItem() {Text = "Admin", Value="1"},
                                         new SelectListItem() {Text = "Tour Leader", Value="2"}
                                     }, "Pilih Role", new { @class = "form-control" })
@@ -85,8 +87,7 @@
                                 </div>
 
                             </div>
-                        </div>
-                    }
+                        </div>}
 
                 </div>
             </div>

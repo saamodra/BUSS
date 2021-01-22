@@ -21,7 +21,7 @@ namespace BUSS.Models
         [Required(ErrorMessage = "Nama destinasi wajib diisi!")]
         public string Nama_Destinasi { get; set; }
 
-        [DisplayName("Harga Tiket")]
+        [DisplayName("Harga Tiket (Perorang)")]
         [Required(ErrorMessage = "Harga tiket wajib diisi!")]
         [DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode = true)]
         public decimal Harga_Tiket { get; set; }

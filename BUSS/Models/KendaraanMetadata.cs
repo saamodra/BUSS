@@ -29,7 +29,7 @@ namespace BUSS.Models
         [Required(ErrorMessage = "No.Kendaraan wajib diisi!")]
         public string No_Kendaraan { get; set; }
 
-        [DisplayName("Harga Sewa")]
+        [DisplayName("Harga Sewa (Perhari)")]
         [Required(ErrorMessage = "Harga sewa wajib diisi!")]
         [DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode = true)]
         public decimal Harga_kendaraan { get; set; }
