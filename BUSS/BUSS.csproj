@@ -839,8 +839,6 @@
     <Content Include="Views\Customer\Pesanan.cshtml" />
     <Content Include="Views\Transaksi\Details.cshtml" />
     <Content Include="Views\Feedbacks\Create.cshtml" />
-    <Content Include="Views\Feedbacks\Delete.cshtml" />
-    <Content Include="Views\Feedbacks\Details.cshtml" />
     <Content Include="Views\Feedbacks\Edit.cshtml" />
     <Content Include="Views\Feedbacks\Index.cshtml" />
     <Content Include="Views\Home\LihatDestinasi.cshtml" />
@@ -850,6 +848,8 @@
     <Content Include="Views\Tourleader\Pesanan.cshtml" />
     <Content Include="Views\Transaksi\UploadPelunasan.cshtml" />
     <Content Include="Views\Transaksi\Penyelesaian.cshtml" />
+    <Content Include="Views\Tourleader\UbahJadwal.cshtml" />
+    <Content Include="Views\Tourleader\Paket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

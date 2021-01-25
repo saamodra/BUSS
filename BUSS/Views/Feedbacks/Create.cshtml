@@ -17,7 +17,7 @@
                 <i class="flaticon-right-arrow"></i>
             </li>
             <li class="nav-item">
-                <a href="@Url.Action("Pesanan", "Transaksi")">Pesanan</a>
+                <a href="@Url.Action("Pesanan", "Customer")">Pesanan</a>
             </li>
             <li class="separator">
                 <i class="flaticon-right-arrow"></i>
@@ -45,6 +45,7 @@
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <label class="text-danger font-weight-bold">*</label>
                                     <div class="col-md-10">
                                         <input type="number" name="Rating" id="Rating" min="1" max="5" class="form-control">
                                         @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })

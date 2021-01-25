@@ -14,7 +14,7 @@ namespace BUSS.Models
         [Required]
         public int ID_Transaksi { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Rating wajib diisi.")]
         public int Rating { get; set; }
 
         [DisplayName("Isi Feedback")]

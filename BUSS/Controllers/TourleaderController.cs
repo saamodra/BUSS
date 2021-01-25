@@ -19,8 +19,27 @@ namespace BUSS.Controllers
             return View(transaksi);
         }
 
+        public ActionResult Paket()
+        {
+            var paket = db.Pakets.Where(k => k.Status == 1).ToList(); 
+
+            return View(paket);
+        }
+
+        public ActionResult UbahJadwal(int id)
+        {
+            var paket = db.Pakets.Find(id);
+
+            if (paket == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(paket);
+        }
+
         [HttpPost]
-        public ActionResult KirimJadwal(int id_paket, HttpPostedFileBase jadwal)
+        public ActionResult KirimJadwal(int id_paket, HttpPostedFileBase jadwal, int type)
         {
             var paket = db.Pakets.Find(id_paket);
 
@@ -47,7 +66,13 @@ namespace BUSS.Controllers
 
             TempData["SuccessMessage"] = "Jadwal berhasil diunggah";
 
-            return RedirectToAction("Pesanan", "Tourleader");
+            if (type == 1)
+            {
+                return RedirectToAction("Pesanan", "Tourleader");
+            } else
+            {
+                return RedirectToAction("Paket", "Tourleader");
+            }
         }
 
 

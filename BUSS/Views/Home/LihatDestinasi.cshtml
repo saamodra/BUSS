@@ -59,7 +59,7 @@
                     </div>
                     <div class="d-flex justify-content-between my-1">
                         <p class="m-0 font-weight-bold">Rating</p>
-                        <p class="m-0">@Model.Rating <i class="fa fa-star"></i></p>
+                        <p class="m-0">@String.Format("{0:0.0}", Model.Rating)  <i class="fa fa-star"></i></p>
                     </div>
                     <div class="d-flex justify-content-between my-1">
                         <p class="m-0 font-weight-bold">Harga Tiket</p>
@@ -76,13 +76,15 @@
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="ID_Destinasi" value="@Model.ID_Destinasi" />
                             <div class="d-flex">
-                                <input type="number" max="5" min="1" class="form-control" name="star" value="" />
+                                <input type="number" max="5" min="1" class="form-control" name="star" value="@(ViewBag.RatingUser == null ? "" : ViewBag.RatingUser.Rating)" required />
+                                <label class="text-danger ml-2">*</label>
                                 <button type="submit" class="btn btn-sm btn-primary ml-2"><i class="fa fa-star"></i></button>
                             </div>
                         </form>
                     </div>
 
-                    <a href="@Url.Action("Destinasi", "Home")" class="btn btn-warning font-weight-bold">Lihat Paket lainnya</a>
+
+                    <a href="@Url.Action("Destinasi", "Home")" class="btn btn-warning font-weight-bold text-center d-inline-block w-100">Lihat Destinasi lainnya <i class="fa fa-chevron-right"></i></a>
 
                 </div>
             </div>

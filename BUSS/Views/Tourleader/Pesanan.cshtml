@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Pesanan";
-    ViewBag.SidebarMenu = "Pesanan";
+    ViewBag.Pesanan = "active";
     Layout = "~/Views/Shared/_LayoutTourLeader.cshtml";
 }
 
@@ -32,7 +32,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table" id="example2">
+                        <table class="table" id="multi_filter">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -77,7 +77,8 @@
                                             @if (item.Paket.Jadwal == null)
                                             {
                                                 <text>-</text>
-                                            } else
+                                            }
+                                            else
                                             {
                                                 <a href="~/Content/jadwal/@item.Paket.Jadwal">@item.Paket.Jadwal</a>
                                             }
@@ -137,6 +138,18 @@
                                     </tr>
                                 }
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th>Nama Paket</th>
+                                    <th>Harga Total</th>
+                                    <th>DP</th>
+                                    <th>Tanggal Sewa</th>
+                                    <th></th>
+                                    <th>Status Transaksi</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -191,6 +204,35 @@
                     form.submit();          // submitting the form when user press yes
                 } else {
                     swal("Dibatalkan", "", "error");
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#multi_filter').DataTable({
+                initComplete: function () {
+                    var columnCount = 1;
+                    this.api().columns().every(function () {
+                        if (columnCount != 8 && columnCount != 1 && columnCount != 6) {
+                            var column = this;
+                            var select = $('<select class="form-control form-control-sm height-unset"><option value=""></option></select>')
+                                .appendTo($(column.footer()).empty())
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        }
+                        columnCount++;
+                    });
                 }
             });
         });

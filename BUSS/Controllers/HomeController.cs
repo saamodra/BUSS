@@ -100,7 +100,7 @@ namespace BUSS.Controllers
                 ViewBag.RatingUser = null;
             } else 
             {
-                //ViewBag.RatingUser = db.Detail_Rating_Destinasi.First(k => k.ID_Destinasi == id && k.NIK == sess_nik.ToString());
+                ViewBag.RatingUser = db.Detail_Rating_Destinasi.FirstOrDefault(k => k.ID_Destinasi == id && k.NIK == sess_nik.ToString());
             }
 
             if (destinasi == null)
@@ -122,13 +122,13 @@ namespace BUSS.Controllers
             {
                 var sess_nik = Session["NIK"];
 
-                var rating = db.Detail_Rating_Destinasi.First(k => k.ID_Destinasi == ID_Destinasi && k.NIK == sess_nik.ToString());
+                var rating = db.Detail_Rating_Destinasi.FirstOrDefault(k => k.ID_Destinasi == ID_Destinasi && k.NIK == sess_nik.ToString());
 
                 if (rating == null)
                 {
                     Detail_Rating_Destinasi drd = new Detail_Rating_Destinasi();
                     drd.ID_Destinasi = ID_Destinasi;
-                    drd.NIK = "1234567890123456";
+                    drd.NIK = Session["NIK"].ToString();
                     drd.Rating = star;
                     db.Detail_Rating_Destinasi.Add(drd);
                     

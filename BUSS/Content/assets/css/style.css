@@ -7,6 +7,10 @@
     object-fit: cover;
 }
 
+.height-unset {
+    height: unset !important;
+}
+
 .row-gallery {
     display: flex;
     flex-wrap: wrap;

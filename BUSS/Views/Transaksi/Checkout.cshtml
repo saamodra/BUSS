@@ -95,7 +95,7 @@
 
 
                         <input type="hidden" name="ID_Paket" value="@Model.Paket.ID_Paket" />
-                        <input type="hidden" name="PaketLama_Perjalanan" value="@Model.Paket.Lama_Perjalanan" />
+                        <input type="hidden" name="PaketLama_Perjalanan" id="LamaPerjalanan" value="@Model.Paket.Lama_Perjalanan" />
                         <input type="hidden" name="Tanggal_Pesanan" value="@Model.Tanggal_Pesanan" />
                         @Html.HiddenFor(model => model.Harga_total)
                         @Html.HiddenFor(model => model.Jumlah_Penumpang)
@@ -103,8 +103,13 @@
                         <div id="hiddenForBus">
 
                         </div>
+
+                        <div>
+                            <h2 class="d-inline text-danger">Total Harga Pesanan : </h2>
+                            <h2 class="d-inline text-danger" id="txtTotalHarga">Rp0</h2>
+                        </div>
                         <div class="form-group d-flex">
-                            <button type="submit" class="btn btn-warning text-center font-weight-bold mr-2">Pesan</button>
+                            <button type="submit" id="btnSubmit" class="btn btn-warning text-center font-weight-bold mr-2">Pesan</button>
                             @if (ViewBag.ID_Destinasi == null)
                             {
                                 <a href="@Url.Action("LihatPaket", "Home", new { id = Model.Paket.ID_Paket })" class="btn btn-danger text-center font-weight-bold">Batal</a>
@@ -133,7 +138,7 @@
                 var sum = 0
 
                 $(this).find('td').eq(column).each(function () {
-                    var combat = $(this).text();
+                    var combat = numberOnly($(this).text());
                     if (!isNaN(combat) && combat.length !== 0) {
                         sum += parseFloat(combat);
                     }
@@ -148,14 +153,17 @@
             var countBus = $('#table-bus tbody tr').length;
 
             $("#table-bus tfoot").html(`<tr>
-                <td>Total</td>
+                <td>Total Bus</td>
                 <td>${countBus}</td>
                 <td>${SumRow(2)}</td>
-                <td>${SumRow(3)}</td>
+                <td>Rp${txtMoney(SumRow(3))}</td>
                 <td>-</td>
             </tr>`);
 
-            var totalHarga = numberOnly($("#Harga_paket").html()) + getFootCellValue(3);
+            var totalHarga = (numberOnly($("#Harga_paket").html()) * getFootCellValue(2)) + (getFootCellValue(3) * $("#LamaPerjalanan").val());
+            var totalHargaFormatted = "Rp" + txtMoney(totalHarga);
+            
+            $("#txtTotalHarga").html(totalHargaFormatted);
             $("#Harga_total").val(totalHarga);
             $("#Jumlah_Penumpang").val(getFootCellValue(2));
 
@@ -163,7 +171,7 @@
 
         function getFootCellValue(column) {
             var MyRows = $('#table-bus tfoot').find('tr');
-            return parseInt($(MyRows[0]).find('td:eq(' + column + ')').html());
+            return parseInt(numberOnly($(MyRows[0]).find('td:eq(' + column + ')').html()));
         }
 
         function numberOnly(str) {
@@ -171,6 +179,10 @@
             numb = numb.join("");
 
             return parseInt(numb);
+        }
+
+        function txtMoney(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
         $(document).ready(function () {
@@ -182,7 +194,7 @@
                         <td>${array[0]}</td>
                         <td>${array[1]}</td>
                         <td>${array[2]}</td>
-                        <td>${parseInt(array[3])}</td>
+                        <td>Rp${txtMoney(parseInt(array[3]))}</td>
                         <td>
                             <button type="button" class="btn btn-danger btn-sm btnDelete">Hapus</button>
                         </td>
@@ -212,7 +224,38 @@
 
                 UpdateTfoot();
             });
+
+            $("#btnSubmit").on("click", function (e) {
+                e.preventDefault(); // prevent form submit
+                var form = event.target.form; // storing the form
+                var countBus = $('#table-bus tbody tr').length;
+                if (countBus != 0) {
+                    if ("@Session["NIK"]" == "") {
+                        swal("Gagal", "Silahkan login terlebih dahulu sebelum memesan!", {
+                            icon: "error",
+                            buttons: {
+                                confirm: {
+                                    className: 'btn btn-danger'
+                                }
+                            },
+                        });
+                    } else {
+                        form.submit();
+                    }
+                } else {
+                    swal("Gagal", "Silahkan pilih bus terlebih dahulu", {
+                        icon: "error",
+                        buttons: {
+                            confirm: {
+                                className: 'btn btn-danger'
+                            }
+                        },
+                    });
+                }
+            });
         });
+
+
     </script>    
     
 }

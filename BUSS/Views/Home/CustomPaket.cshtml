@@ -75,20 +75,23 @@
                 <h5 class="card-header">Daftar Destinasi</h5>
                 <div class="card-body">
 
-                    @using (Html.BeginForm("CheckoutCustom", "Transaksi", FormMethod.Post))
+                    @using (Html.BeginForm("CheckoutCustom", "Transaksi", FormMethod.Post, new { id = "checkoutForm" }))
                     {
                         <div class="d-flex">
                             <div class="form-group">
                                 <label>Nama Paket</label>
-                                <input type="text" value="" name="Nama_Paket" class="form-control" />
+                                <label class="text-danger">*</label>
+                                <input type="text" value="" name="Nama_Paket" class="form-control" required />
                             </div>
                             <div class="form-group ml-3">
                                 <label>Tgl. Sewa</label>
-                                <input type="date" value="" name="tgl_sewa" class="form-control" />
+                                <label class="text-danger">*</label>
+                                <input type="date" value="" name="tgl_sewa" class="form-control" required />
                             </div>
                             <div class="form-group ml-3">
                                 <label>Lama Perjalanan</label>
-                                <input type="number" value="" name="Lama_Perjalanan" class="form-control" />
+                                <label class="text-danger">*</label>
+                                <input type="number" value="" name="Lama_Perjalanan" class="form-control" required />
                             </div>
                         </div>
 
@@ -108,7 +111,7 @@
 
                         <div class="form-group">
                             <h3 class="font-weight-bold text-danger" id="totalHargaTiket">Total Harga Tiket : Rp0</h3>
-                            <input type="hidden" id="Harga" name="Harga" value="" />
+                            <input type="hidden" id="Harga" name="Harga" value="" required />
                         </div>
 
                         <div id="inputdata">
@@ -116,7 +119,7 @@
 
                         <div id="hiddenForDestinasi"></div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary"> Checkout</button>
+                            <button type="submit" class="btn btn-primary" id="btnSubmit"> Checkout</button>
                         </div>
                     }
                 </div>
@@ -132,6 +135,17 @@
             currency: 'IDR',
             minimumFractionDigits: 0
         })
+
+        if ("@TempData["ErrorMessage"]" != "") {
+            swal("Gagal", "@TempData["ErrorMessage"]", {
+                icon: "error",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-danger'
+                    }
+                },
+            });
+        }
 
         $(document).ready(function () {
 
@@ -181,6 +195,54 @@
                 $("#totalHargaTiket").text("Total Harga Tiket : " + formatter.format(SumRow(2)));
 
                 $("#Harga").val(SumRow(2));
+            });
+
+
+            $("#btnSubmit").on("click", function (e) {
+                e.preventDefault(); // prevent form submit
+                var form = event.target.form; // storing the form
+                var countBus = $('#table-destinasi-terpilih tbody tr').length;
+
+                if (countBus != 0) {
+                    if ("@Session["NIK"]" == "") {
+                        swal("Gagal", "Silahkan login terlebih dahulu sebelum memesan!", {
+                            icon: "error",
+                            buttons: {
+                                confirm: {
+                                    className: 'btn btn-danger'
+                                }
+                            },
+                        });
+                    } else {
+                        var isvalid = true;
+                        $("#checkoutForm input").each(function () {
+                            if ($(this).val() == "") {
+                                isvalid = false;
+                            }
+                        })
+
+                        if (isvalid) form.submit();
+                        else {
+                            swal("Gagal", "Lengkapi semua isian!", {
+                                icon: "error",
+                                buttons: {
+                                    confirm: {
+                                        className: 'btn btn-danger'
+                                    }
+                                },
+                            });
+                        }
+                    }
+                } else {
+                    swal("Gagal", "Silahkan pilih destinasi terlebih dahulu", {
+                        icon: "error",
+                        buttons: {
+                            confirm: {
+                                className: 'btn btn-danger'
+                            }
+                        },
+                    });
+                }
             });
         });
 

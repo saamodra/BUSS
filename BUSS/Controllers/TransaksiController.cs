@@ -21,34 +21,42 @@ namespace BUSS.Controllers
         [HttpPost]
         public ActionResult Checkout(int id, DateTime tgl_sewa)
         {
-            var paket = db.Pakets.Find(id);
-
-            Transaksi transaksi = new Transaksi
+            if(tgl_sewa < DateTime.Now.AddDays(3))
             {
-                Paket = paket,
-                Tanggal_Pesanan = tgl_sewa
-            };
+                TempData["ErrorMessage"] = "Pemesanan harus minimal 4 hari sebelum keberangkatan!";
 
-            if(db.Transaksis.Any(k => k.Tanggal_Pesanan == tgl_sewa))
-            {
-                List<int> id_kendaraan = new List<int>();
-
-                foreach (var tr in db.Transaksis.Where(k => k.Tanggal_Pesanan == tgl_sewa).ToList())
-                {
-                    foreach(var kend in tr.Transaksi_Kendaraan)
-                    {
-                        id_kendaraan.Add(kend.ID_Kendaraan);
-                    }
-                }
-
-                ViewBag.Kendaraan = db.Kendaraans.Where(k => k.Status == 1 && !(id_kendaraan.Contains(k.ID_Kendaraan))).OrderBy(k => k.Nama_Kendaraan).ToList();
-
+                return RedirectToAction("LihatPaket", "Home", new { id = id });
             } else
             {
-                ViewBag.Kendaraan = db.Kendaraans.Where(k => k.Status == 1).OrderBy(k => k.Nama_Kendaraan).ToList();
-            }
+                var paket = db.Pakets.Find(id);
+
+                Transaksi transaksi = new Transaksi
+                {
+                    Paket = paket,
+                    Tanggal_Pesanan = tgl_sewa
+                };
+
+                if(db.Transaksis.Any(k => k.Tanggal_Pesanan == tgl_sewa))
+                {
+                    List<int> id_kendaraan = new List<int>();
+
+                    foreach (var tr in db.Transaksis.Where(k => k.Tanggal_Pesanan == tgl_sewa).ToList())
+                    {
+                        foreach(var kend in tr.Transaksi_Kendaraan)
+                        {
+                            id_kendaraan.Add(kend.ID_Kendaraan);
+                        }
+                    }
+
+                    ViewBag.Kendaraan = db.Kendaraans.Where(k => k.Status == 1 && !(id_kendaraan.Contains(k.ID_Kendaraan))).OrderBy(k => k.Nama_Kendaraan).ToList();
+
+                } else
+                {
+                    ViewBag.Kendaraan = db.Kendaraans.Where(k => k.Status == 1).OrderBy(k => k.Nama_Kendaraan).ToList();
+                }
             
-            return View(transaksi);
+                return View(transaksi);
+            }
         }
 
         [HttpPost]
@@ -81,38 +89,47 @@ namespace BUSS.Controllers
         [HttpPost]
         public ActionResult CheckoutCustom(Paket paket, DateTime tgl_sewa, int[] ID_Destinasi)
         {
-            paket.Konsumsi = (paket.Lama_Perjalanan == null ? 0 : paket.Lama_Perjalanan.Value) * 2;
-            
-
-            Transaksi transaksi = new Transaksi
+            if (tgl_sewa < DateTime.Now.AddDays(3))
             {
-                Paket = paket,
-                Tanggal_Pesanan = tgl_sewa
-            };
+                TempData["ErrorMessage"] = "Pemesanan harus minimal 4 hari sebelum keberangkatan!";
 
-            if (db.Transaksis.Any(k => k.Tanggal_Pesanan == tgl_sewa))
-            {
-                List<int> id_kendaraan = new List<int>();
-
-                foreach (var tr in db.Transaksis.Where(k => k.Tanggal_Pesanan == tgl_sewa).ToList())
-                {
-                    foreach (var kend in tr.Transaksi_Kendaraan)
-                    {
-                        id_kendaraan.Add(kend.ID_Kendaraan);
-                    }
-                }
-
-                ViewBag.Kendaraan = db.Kendaraans.Where(k => k.Status == 1 && !(id_kendaraan.Contains(k.ID_Kendaraan))).OrderBy(k => k.Nama_Kendaraan).ToList();
-
+                return RedirectToAction("CustomPaket", "Home");
             }
             else
             {
-                ViewBag.Kendaraan = db.Kendaraans.Where(k => k.Status == 1).OrderBy(k => k.Nama_Kendaraan).ToList();
+                paket.Konsumsi = (paket.Lama_Perjalanan == null ? 0 : paket.Lama_Perjalanan.Value) * 2;
+
+                Transaksi transaksi = new Transaksi
+                {
+                    Paket = paket,
+                    Tanggal_Pesanan = tgl_sewa
+                };
+
+                if (db.Transaksis.Any(k => k.Tanggal_Pesanan == tgl_sewa))
+                {
+                    List<int> id_kendaraan = new List<int>();
+
+                    foreach (var tr in db.Transaksis.Where(k => k.Tanggal_Pesanan == tgl_sewa).ToList())
+                    {
+                        foreach (var kend in tr.Transaksi_Kendaraan)
+                        {
+                            id_kendaraan.Add(kend.ID_Kendaraan);
+                        }
+                    }
+
+                    ViewBag.Kendaraan = db.Kendaraans.Where(k => k.Status == 1 && !(id_kendaraan.Contains(k.ID_Kendaraan))).OrderBy(k => k.Nama_Kendaraan).ToList();
+
+                }
+                else
+                {
+                    ViewBag.Kendaraan = db.Kendaraans.Where(k => k.Status == 1).OrderBy(k => k.Nama_Kendaraan).ToList();
+                }
+
+                ViewBag.ID_Destinasi = ID_Destinasi;
+
+                return View("Checkout", transaksi);
             }
-
-            ViewBag.ID_Destinasi = ID_Destinasi;
-
-            return View("Checkout", transaksi);
+            
         }
 
         [HttpPost]

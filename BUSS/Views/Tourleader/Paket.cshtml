@@ -2,7 +2,8 @@
 
 @{
     ViewBag.Title = "Paket";
-    ViewBag.SidebarMenu = "Paket";
+    ViewBag.Paket = "active";
+    Layout = "~/Views/Shared/_LayoutTourLeader.cshtml";
 }
 
 <div class="page-inner">
@@ -18,7 +19,7 @@
                 <i class="flaticon-right-arrow"></i>
             </li>
             <li class="nav-item">
-                <a href="@Url.Action("Index", ViewBag.SidebarMenu)">@ViewBag.Title</a>
+                <a href="#">@ViewBag.Title</a>
             </li>
         </ul>
     </div>
@@ -27,11 +28,10 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title">Data @ViewBag.Title</h3>
-                    <a href="@Url.Action("Create", ViewBag.SidebarMenu)" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah Data</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table" id="example2">
+                        <table class="table" id="multi_filter">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -95,21 +95,27 @@
                                             }
                                         </td>
                                         <td>
-                                            <a href="@Url.Action("Edit", "Paket", new { id = item.ID_Paket })" class="btn btn-warning btn-sm mr-1">
-                                                <i class="fa fa-edit"></i> Ubah
+                                            <a href="@Url.Action("UbahJadwal", "Tourleader", new { id = item.ID_Paket })" class="btn btn-warning btn-sm mr-1">
+                                                <i class="fa fa-edit"></i> Ubah Jadwal
                                             </a>
-                                            <a href="@Url.Action("Details", "Paket", new { id = item.ID_Paket })" class="btn btn-info btn-sm mr-1">
-                                                <i class="fa fa-eye"></i> Detil
-                                            </a>
-                                            <form action="@Url.Action("Delete", "Paket")" method="post" class="d-inline">
-                                                @Html.AntiForgeryToken()
-                                                <input type="hidden" name="id" value="@item.ID_Paket" />
-                                                <button type="submit" class="btn btn-danger deleteBtn btn-sm"><i class="fa fa-trash"></i> Hapus</button>
-                                            </form>
+                                            
                                         </td>
                                     </tr>
                                 }
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th>Nama Paket</th>
+                                    <th>Harga</th>
+                                    <th>Konsumsi</th>
+                                    <th>Lama Perjalanan</th>
+                                    <th>Jenis Paket</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+
+                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -130,5 +136,34 @@
                 },
             });
         }
+
+        $(document).ready(function () {
+            $('#multi_filter').DataTable({
+                initComplete: function () {
+                    var columnCount = 1;
+                    this.api().columns().every(function () {
+                        if (columnCount != 8 && columnCount != 1 && columnCount != 7) {
+                            var column = this;
+                            var select = $('<select class="form-control form-control-sm height-unset"><option value=""></option></select>')
+                                .appendTo($(column.footer()).empty())
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        }
+                        columnCount++;
+                    });
+                }
+            });
+        });
     </script>
 }

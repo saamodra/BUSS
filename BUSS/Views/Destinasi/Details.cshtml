@@ -106,7 +106,7 @@
                                     <div class="overlay">
                                         <form action="@Url.Action("HapusFoto", "Destinasi")" method="post">
                                             @Html.AntiForgeryToken()
-                                            @Html.HiddenFor(model => model.ID_Destinasi)
+                                            @Html.HiddenFor(model => model.ID_Destinasi) 
                                             <input type="hidden" value="@item.ID_Detail" name="detailId" />
                                             <button type="submit" class="btn btn-danger">
                                                 <i class="fa fa-trash"></i> Hapus

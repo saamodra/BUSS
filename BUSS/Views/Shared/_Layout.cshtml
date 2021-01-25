@@ -10,7 +10,6 @@
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/assets/css/dropzone.min.css">
     <link rel="stylesheet" href="~/Content/assets/css/atlantis-pro.css">
 
     <link rel="stylesheet" href="~/Content/assets/css/style.css">
@@ -151,10 +150,10 @@
             <!-- End Navbar -->
         </div>
 
-        @if (Session["ID_Pegawai"] == null)
+        @if (Session["ID_Pegawai"] == null || Session["Role"].ToString() != "1")
         {
             Response.Redirect("~/Pegawai/Login");
-        }
+        } 
 
         <!-- Sidebar -->
         <div class="sidebar sidebar-style-2">
@@ -167,7 +166,7 @@
                         <div class="info">
                             <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                                 <span>
-                                    @Session["Name"]
+                                    @ViewBag.Title
                                     <span class="user-level">
                                         @if (Session["Role"].ToString() == "1")
                                         {
