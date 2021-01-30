@@ -87,10 +87,12 @@
             $('#Harga_kendaraan').val(hargaKendaraan);
         });
 
-        $('#Harga_kendaraan').priceFormat({
-            prefix: 'Rp',
-            centsLimit: 0,
-            thousandsSeparator: '.'
-        });
+        $(document).ready(function () {
+            $('#Harga_kendaraan').priceFormat({
+                prefix: 'Rp',
+                centsLimit: 0,
+                thousandsSeparator: '.'
+            });
+        })
     </script>
 }
