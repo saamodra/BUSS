@@ -166,7 +166,7 @@
                         <div class="info">
                             <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                                 <span>
-                                    @ViewBag.Title
+                                    @Session["Name"].ToString()
                                     <span class="user-level">
                                         @if (Session["Role"].ToString() == "1")
                                         {

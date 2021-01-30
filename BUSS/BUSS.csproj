@@ -137,6 +137,7 @@
     <Compile Include="Controllers\KategoriWilayahController.cs" />
     <Compile Include="Controllers\KendaraanController.cs" />
     <Compile Include="Controllers\KotaController.cs" />
+    <Compile Include="Controllers\LaporanController.cs" />
     <Compile Include="Controllers\PaketController.cs" />
     <Compile Include="Controllers\PegawaiController.cs" />
     <Compile Include="Controllers\TourleaderController.cs" />
@@ -224,6 +225,9 @@
   <ItemGroup>
     <Content Include="Content\assets\css\apercu.css" />
     <Content Include="Content\assets\css\atlantis-pro.css" />
+    <Content Include="Content\assets\css\buttons.bootstrap4.min.css" />
+    <Content Include="Content\assets\css\buttons.dataTables.min.css" />
+    <Content Include="Content\assets\css\dataTables.bootstrap4.min.css" />
     <Content Include="Content\assets\css\sf_pro.css" />
     <Content Include="Content\assets\css\star-rating-svg.css" />
     <Content Include="Content\assets\css\homestyle.css" />
@@ -757,6 +761,12 @@
       <DependentUpon>DbBuss.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\buttons.bootstrap4.min.js" />
+    <Content Include="Scripts\buttons.colVis.min.js" />
+    <Content Include="Scripts\buttons.html5.min.js" />
+    <Content Include="Scripts\buttons.print.min.js" />
+    <Content Include="Scripts\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\dataTables.buttons.min.js" />
     <Content Include="Scripts\dropzone.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -768,8 +778,11 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jszip.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\pdfmake.min.js" />
+    <Content Include="Scripts\vfs_fonts.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -849,6 +862,7 @@
     <Content Include="Views\Transaksi\Penyelesaian.cshtml" />
     <Content Include="Views\Tourleader\UbahJadwal.cshtml" />
     <Content Include="Views\Tourleader\Paket.cshtml" />
+    <Content Include="Views\Laporan\Pesanan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

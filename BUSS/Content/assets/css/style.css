@@ -59,9 +59,19 @@
     background-size: cover;
 }
 
+.dt-button-collection .dropdown-menu {
+    position: relative;
+    width: 100%;
+}
+
+.dt-button-collection .dropdown-menu .dt-button.active {
+    background: #6861CE !important;
+}
+
+
 /* Responsive layout - makes a two column-layout instead of four columns */
 @media screen and (max-width: 800px) {
-    .column {
+        .column {
         flex: 50%;
         max-width: 50%;
     }

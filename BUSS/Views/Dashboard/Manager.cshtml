@@ -3,3 +3,30 @@
     ViewBag.Title = "Manager";
     Layout = "~/Views/Shared/_LayoutManager.cshtml";
 }
+
+
+@section scripts {
+    <script>
+        if ("@TempData["SuccessMessage"]" != "") {
+            swal("Berhasil", "@TempData["SuccessMessage"]", {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                },
+            });
+        }
+
+        if ("@TempData["ErrorMessage"]" != "") {
+            swal("Gagal", "@TempData["ErrorMessage"]", {
+                icon: "error",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-danger'
+                    }
+                },
+            });
+        }
+    </script>
+}

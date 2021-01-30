@@ -10,8 +10,10 @@
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/assets/css/dropzone.min.css">
     <link rel="stylesheet" href="~/Content/assets/css/atlantis-pro.css">
+    <link rel="stylesheet" href="~/Content/assets/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/buttons.bootstrap4.min.css">
 
     <link rel="stylesheet" href="~/Content/assets/css/style.css">
 </head>
@@ -151,7 +153,7 @@
             <!-- End Navbar -->
         </div>
 
-        @if (Session["ID_Pegawai"] == null)
+        @if (Session["ID_Pegawai"] == null || Session["Role"].ToString() != "3")
         {
             Response.Redirect("~/Pegawai/Login");
         }
@@ -169,22 +171,7 @@
                                 <span>
                                     @Session["Name"]
                                     <span class="user-level">
-                                        @if (Session["Role"].ToString() == "1")
-                                        {
-                                            <text>Admin</text>
-                                        }
-                                        else if (Session["Role"].ToString() == "2")
-                                        {
-                                            <text>Tourleader</text>
-                                        }
-                                        else if (Session["Role"].ToString() == "3")
-                                        {
-                                            <text>Customer</text>
-                                        }
-                                        else
-                                        {
-                                            <text>Manager</text>
-                                        }
+                                        Manager
                                     </span>
                                     <span class="caret"></span>
                                 </span>
@@ -227,9 +214,9 @@
                         </li>
                         @{
                             List<KeyValue> sidebarMenu = new List<KeyValue> {
-                                new KeyValue("Pesanan", "/Manager/Pesanan"),
-                                new KeyValue("Pegawai", "/Manager/Pegawai"),
-                                new KeyValue("Feedback", "/Manager/Feedback"),
+                                new KeyValue("Pesanan", "/Laporan/Pesanan"),
+                                new KeyValue("Pegawai", "/Laporan/Pegawai"),
+                                new KeyValue("Feedback", "/Laporan/Feedback"),
                             };
 
                             List<String> navIcon = new List<String> {
@@ -324,7 +311,15 @@
 
     <!-- Datatables -->
     <script src="~/Content/assets/js/plugin/datatables/datatables.min.js"></script>
-    @*<script src="~/Content/assets/js/jquery.dataTables.min.js"></script>*@
+    <script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Scripts/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/buttons.bootstrap4.min.js"></script>
+    <script src="~/Scripts/jszip.min.js"></script>
+    <script src="~/Scripts/pdfmake.min.js"></script>
+    <script src="~/Scripts/vfs_fonts.js"></script>
+    <script src="~/Scripts/buttons.html5.min.js"></script>
+    <script src="~/Scripts/buttons.print.min.js"></script>
+    <script src="~/Scripts/buttons.colVis.min.js"></script>
 
     <!-- Bootstrap Notify -->
     <script src="~/Content/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
@@ -352,6 +347,7 @@
     <script src="~/Scripts/moment.min.js"></script>
     <script src="~/Scripts/jquery.priceformat.min.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+
 
     <script>
         $(document).ready(function () {
