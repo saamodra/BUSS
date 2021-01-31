@@ -863,6 +863,8 @@
     <Content Include="Views\Tourleader\UbahJadwal.cshtml" />
     <Content Include="Views\Tourleader\Paket.cshtml" />
     <Content Include="Views\Laporan\Pesanan.cshtml" />
+    <Content Include="Views\Laporan\Destinasi.cshtml" />
+    <Content Include="Views\Laporan\Feedback.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

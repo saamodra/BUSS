@@ -20,6 +20,9 @@ namespace BUSS.Models
         [DisplayName("Isi Feedback")]
         [DataType(DataType.MultilineText)]
         public string Isi_Feedback { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
         public System.DateTime CreatedDate { get; set; }
 
         public virtual Transaksi Transaksi { get; set; }

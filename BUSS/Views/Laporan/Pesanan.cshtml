@@ -11,7 +11,7 @@
         <h4 class="page-title">@ViewBag.Title</h4>
         <ul class="breadcrumbs">
             <li class="nav-home">
-                <a href="/Admin">
+                <a href="@Url.Action("Manager", "Dashboard")">
                     <i class="flaticon-home"></i>
                 </a>
             </li>
@@ -19,7 +19,7 @@
                 <i class="flaticon-right-arrow"></i>
             </li>
             <li class="nav-item">
-                <a href="@Url.Action("Pesanan", "Pegawai")">@ViewBag.Title</a>
+                <a href="@Url.Action("Pesanan", "Laporan")">@ViewBag.Title</a>
             </li>
         </ul>
     </div>
@@ -189,37 +189,17 @@
             });
         }
 
-        $(".btnBatal").on("click", function (e) {
-            e.preventDefault(); // prevent form submit
-            var form = event.target.form; // storing the form
-            swal({
-                title: "Yakin ingin membatalkan pesanan ini?",
-                text: "Anda tidak akan bisa mengembalikan data ini",
-                icon: 'warning',
-                buttons: {
-                    confirm: {
-                        text: 'Batalkan',
-                        className: 'btn btn-success'
-                    },
-                    cancel: {
-                        visible: true,
-                        className: 'btn btn-danger'
-                    }
-                }
-            }).then((isConfirm) => {
-                if (isConfirm) {
-                    form.submit();          // submitting the form when user press yes
-                } else {
-                    swal("Dibatalkan", "", "error");
-                }
-            });
-        });
-
         $(document).ready(function () {
             $('#multi_filter').DataTable({
                 dom: '<"row"<"col-lg-4"l><"col-lg-4"B><"col-lg-4"f>>rtip',
                 buttons: [
                     {
+                        extend: 'copy',
+                        text: '<i class="fa fa-copy"></i> Copy',
+                        exportOptions: {
+                            columns: ':visible',
+                        }
+                    }, {
                         extend: 'excel',
                         text: '<i class="fa fa-file-excel"></i> Excel',
                         title: 'Data Transaksi',
@@ -248,6 +228,17 @@
                         text: '<i class="fa fa-eye"></i>'
                     }
                 ],
+                "language": {
+                    "lengthMenu": "_MENU_ Data per halaman",
+                    "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entries",
+                    "zeroRecords": "Tidak ada data.",
+                    "search": "Pencarian :",
+                    "infoFiltered": "(tersaring dari total _MAX_ data)",
+                    "paginate": {
+                        "previous": "Sebelumnya",
+                        "next": "Selanjutnya"
+                    }
+                },
                 initComplete: function () {
                     var columnCount = 1;
                     this.api().columns().every(function () {

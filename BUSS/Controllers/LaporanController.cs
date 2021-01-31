@@ -23,5 +23,19 @@ namespace BUSS.Controllers
 
             return View(transaksi);
         }
+
+        public ActionResult Destinasi()
+        {
+            var destinasi = db.Destinasis.ToList();
+
+            return View(destinasi);
+        }
+
+        public ActionResult Feedback()
+        {
+            var feedback = db.Feedbacks.ToList();
+
+            return View(feedback);
+        }
     }
 }
