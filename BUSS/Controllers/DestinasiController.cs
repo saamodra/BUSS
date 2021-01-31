@@ -58,8 +58,7 @@ namespace BUSS.Controllers
             }
            
             if (ModelState.IsValid)
-            {
-                
+            {   
                 destinasi.Rating = 0;
                 destinasi.Status = 1;
                 destinasi.CreatedBy = (int)Session["ID_Pegawai"];

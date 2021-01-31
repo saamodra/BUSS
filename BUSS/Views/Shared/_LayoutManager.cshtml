@@ -347,6 +347,20 @@
     <script src="~/Scripts/moment.min.js"></script>
     <script src="~/Scripts/jquery.priceformat.min.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script>
+        const formatter = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        })
+
+        function numberOnly(str) {
+            var numb = str.match(/\d/g);
+            numb = numb.join("");
+
+            return parseInt(numb);
+        }
+    </script>
     @RenderSection("scripts", required: false)
 
 </body>

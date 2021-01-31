@@ -42,18 +42,14 @@
                                         @Html.DisplayNameFor(model => model.Kota.Nama_Kota)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Harga_Tiket)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Rating)
-                                    </th>
-                                    <th>
                                         @Html.DisplayNameFor(model => model.Jam_buka)
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.Jam_tutup)
                                     </th>
                                     <th>Status Data</th>
+                                    <th>Rating</th>
+                                    <th>Harga Tiket</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,12 +65,6 @@
                                         @Html.DisplayFor(modelItem => item.Kota.Nama_Kota)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Harga_Tiket)
-                                    </td>
-                                    <td>
-                                        @item.Rating.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)
-                                    </td>
-                                    <td>
                                         @Html.DisplayFor(modelItem => item.Jam_buka)
                                     </td>
                                     <td>
@@ -83,31 +73,45 @@
                                     <td>
                                         @(item.Status == 1 ? "Aktif" : "Tidak Aktif")
                                     </td>
+                                    <td>
+                                        @item.Rating.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Harga_Tiket)
+                                    </td>
                                 </tr>
                                 }
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th></th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Nama_Destinasi)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Kota.Nama_Kota)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Harga_Tiket)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Rating)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Jam_buka)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Jam_tutup)
-                                    </th>
+                                    <th>Nama Destinasi</th>
+                                    <th>Kota</th>
+                                    <th>Jam Buka</th>
+                                    <th>Jam Tutup</th>
                                     <th>Status Data</th>
+                                    <th>Rating</th>
+                                    <th>Harga Tiket</th>
+                                </tr>
+                                <tr>
+                                    <th>Total</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <th>Rata-rata</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -119,6 +123,7 @@
 </div>
 
 @section scripts {
+    <script src="//cdn.datatables.net/plug-ins/1.10.22/api/sum().js"></script>
     <script>
         if ("@TempData["SuccessMessage"]" != "") {
             swal("Berhasil", "@TempData["SuccessMessage"]", {
@@ -142,6 +147,13 @@
             });
         }
 
+        function printDestinasi(win) {
+            var table = $(win.document.body).find('table');
+            var body = table.find('tbody');
+            $(body).append($('#multi_filter tfoot').find('tr:eq(1)').clone());
+            $(body).append($('#multi_filter tfoot').find('tr:eq(2)').clone());
+        }
+
         $(document).ready(function () {
             $('#multi_filter').DataTable({
                 dom: '<"row"<"col-lg-4"l><"col-lg-4"B><"col-lg-4"f>>rtip',
@@ -151,14 +163,21 @@
                         text: '<i class="fa fa-copy"></i> Copy',
                         exportOptions: {
                             columns: ':visible',
+                        },
+                        customize: function (win) {
+                            printDestinasi(win);
                         }
                     }, {
                         extend: 'excel',
                         text: '<i class="fa fa-file-excel"></i> Excel',
                         title: 'Data Destinasi',
+                        footer: true,
                         filename: 'Data Destinasi ' + moment().format('DD-MM-YYYY'),
                         exportOptions: {
                             columns: ':visible',
+                        },
+                        customize: function (xlsx) {
+                            return xlsx + "\nAny heading for the csv file can be separated with , and for new line use";
                         }
                     }, {
                         extend: 'pdf',
@@ -167,6 +186,9 @@
                         filename: 'Data Destinasi ' + moment().format('DD-MM-YYYY'),
                         exportOptions: {
                             columns: ':visible',
+                        },
+                        customize: function (win) {
+                            printDestinasi(win);
                         }
                     }, {
                         extend: 'print',
@@ -175,11 +197,18 @@
                         filename: 'Data Destinasi ' + moment().format('DD-MM-YYYY'),
                         exportOptions: {
                             columns: ':visible',
+                        },
+                        customize: function (win) {
+                            printDestinasi(win);
                         }
                     }, {
                         extend: 'colvis',
                         text: '<i class="fa fa-eye"></i>'
                     }
+                ],
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    ['10', '25', '50', 'All']
                 ],
                 "language": {
                     "lengthMenu": "_MENU_ Data per halaman",
@@ -192,13 +221,79 @@
                         "next": "Selanjutnya"
                     }
                 },
+                drawCallback: function () {
+                    var api = this.api();
+
+                    // SUM Harga
+                    $(`tr:eq(1) th:eq(7)`, api.table().footer()).html(
+                        api.column(7, { page: 'current' }).data().reduce(function (a, b) {
+                            if (typeof a === 'string') {
+                                a = numberOnly(a) * 1;
+                            }
+                            if (typeof b === 'string') {
+                                b = numberOnly(b) * 1;
+                            }
+
+                            return formatter.format(a + b);
+                        }, 0)
+                    );
+
+                    // SUM Rating
+                    $(`tr:eq(1) th:eq(6)`, api.table().footer()).html(
+                        api.column(6, { page: 'current' }).data().reduce(function (a, b) {
+                            if (typeof a === 'string') {
+                                a = parseFloat(a) * 1;
+                            }
+                            if (typeof b === 'string') {
+                                b = parseFloat(b) * 1;
+                            }
+
+                            return a + b;
+                        }, 0)
+                    );
+
+
+                    // view page column
+                    var columnData = api.column(6, { page: 'current' }).data();
+                    var theColumnPage = columnData.reduce(function (a, b) {
+                        if (isNaN(a)) return '';
+                        else a = parseFloat(a);
+
+                        if (isNaN(b)) return '';
+                        else b = parseFloat(b);
+
+                        return a + b;
+                    }, 0);
+
+                    $(`tr:eq(2) th:eq(6)`, api.table().footer()).html(
+                        parseFloat(theColumnPage / columnData.count()).toFixed(2)
+                    );
+
+                    columnData = api.column(7, { page: 'current' }).data();
+                    theColumnPage = columnData.reduce(function (a, b) {
+                        if (typeof a === 'string') {
+                            a = numberOnly(a);
+                        }
+                        if (typeof b === 'string') {
+                            b = numberOnly(b);
+                        }
+
+                        return a + b;
+                    }, 0);
+
+
+                    $(`tr:eq(2) th:eq(7)`, api.table().footer()).html(
+                        formatter.format(theColumnPage / columnData.count())
+                    );
+                },
                 initComplete: function () {
-                    var columnCount = 1;
-                    this.api().columns().every(function () {
-                        if (columnCount != 9 && columnCount != 1) {
+                    var columnCount = 0;
+                    var api = this.api();
+                    api.columns().every(function () {
+                        if (columnCount != 9 && columnCount != 0) {
                             var column = this;
                             var select = $('<select class="form-control form-control-sm height-unset"><option value=""></option></select>')
-                                .appendTo($(column.footer()).empty())
+                                .appendTo($(`tr:eq(0) th:eq(${columnCount})`, api.table().footer()).empty())
                                 .on('change', function () {
                                     var val = $.fn.dataTable.util.escapeRegex(
                                         $(this).val()

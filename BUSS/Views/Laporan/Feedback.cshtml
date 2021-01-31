@@ -38,9 +38,9 @@
                                     <th>No.</th>
                                     <th>Nama Paket</th>
                                     <th>Customer</th>
-                                    <th>Rating</th>
-                                    <th>Isi Feedback</th>
                                     <th>Tgl. Feedback</th>
+                                    <th>Isi Feedback</th>
+                                    <th>Rating</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,25 +56,33 @@
                                             @Html.DisplayFor(modelItem => item.Transaksi.Customer.Nama)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Rating)
+                                            @Html.DisplayFor(modelItem => item.CreatedDate)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Isi_Feedback)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                                            @Html.DisplayFor(modelItem => item.Rating)
                                         </td>
                                     </tr>
                                 }
                             </tbody>
                             <tfoot>
                                 <tr>
+                                    <th>Rata-Rata</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
                                     <th></th>
                                     <th>Nama Paket</th>
                                     <th>Customer</th>
-                                    <th>Rating</th>
+                                    <th>Tgl. Feedback</th>
                                     <th>Isi Feedback</th>
-                                    <th>Tgl. Kirim</th>
+                                    <th>Rating</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -124,6 +132,7 @@
                         text: '<i class="fa fa-file-excel"></i> Excel',
                         title: 'Data Feedback',
                         filename: 'Data Feedback ' + moment().format('DD-MM-YYYY'),
+                        footer: true,
                         exportOptions: {
                             columns: ':visible',
                         }
@@ -139,6 +148,7 @@
                         extend: 'print',
                         text: '<i class="fa fa-print"></i> Print',
                         title: 'Data Feedback',
+                        footer: true,
                         filename: 'Data Feedback ' + moment().format('DD-MM-YYYY'),
                         exportOptions: {
                             columns: ':visible',
@@ -159,13 +169,64 @@
                         "next": "Selanjutnya"
                     }
                 },
+                "footerCallback": function (tfoot, data, start, end, display) {
+                    var api = this.api();
+                    var allT;
+
+                    // total column
+                    var i = 5;
+                    var columnDataTotal = api
+                        .column(i)
+                        .data();
+                    var theColumnTotal = columnDataTotal
+                        .reduce(function (a, b) {
+                            if (isNaN(a)) {
+                                return '';
+                            } else {
+                                a = parseFloat(a);
+                            }
+                            if (isNaN(b)) {
+                                return '';
+                            } else {
+                                b = parseFloat(b);
+                            }
+                            return a + b;
+                        }, 0);
+                    // view page column
+                    var columnData = api
+                        .column(i, {
+                            page: 'current'
+                        })
+                        .data();
+                    var theColumnPage = columnData
+                        .reduce(function (a, b) {
+                            if (isNaN(a)) {
+                                return '';
+                            } else {
+                                a = parseFloat(a);
+                            }
+                            if (isNaN(b)) {
+                                return '';
+                            } else {
+                                b = parseFloat(b);
+                            }
+                            return a + b;
+                        }, 0);
+
+                    // Update footer
+
+                    $('tr:eq(0) th:eq(5)', api.table().footer()).html(
+                        parseFloat(theColumnPage / columnData.count()).toFixed(2)
+                    );
+                },
                 initComplete: function () {
-                    var columnCount = 1;
-                    this.api().columns().every(function () {
-                        if (columnCount != 9 && columnCount != 1) {
+                    var columnCount = 0;
+                    var api = this.api();
+                    api.columns().every(function () {
+                        if (columnCount != 9 && columnCount != 0) {
                             var column = this;
                             var select = $('<select class="form-control form-control-sm height-unset"><option value=""></option></select>')
-                                .appendTo($(column.footer()).empty())
+                                .appendTo($(`tr:eq(1) th:eq(${columnCount})`, api.table().footer()).empty())
                                 .on('change', function () {
                                     var val = $.fn.dataTable.util.escapeRegex(
                                         $(this).val()
