@@ -341,9 +341,33 @@ namespace BUSS.Controllers
 
         public ActionResult Penyelesaian(int id)
         {
-            Transaksi transaksi = db.Transaksis.Find(id);
+            //Transaksi transaksi = db.Transaksis.Find(id);
 
             return View();
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Penyelesaian(int id, decimal Biaya_Tambahan)
+        {
+            var trans = db.Transaksis.Find(id);
+
+            if (Biaya_Tambahan != null)
+            {
+                trans.Harga_total = trans.Harga_total + Biaya_Tambahan;
+                trans.Status_Transaksi = 5;
+                db.Transaksis.Add(trans);
+            }
+            else
+            {
+                trans.Status_Transaksi = 5;
+            }
+
+            db.Entry(trans).State = EntityState.Modified;
+            db.SaveChanges();
+
+            TempData["SuccessMessage"] = "Pesanan telah selesai.";
+            return RedirectToAction("Pesanan", "Pegawai");
         }
     }
 }
