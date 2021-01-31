@@ -134,6 +134,12 @@
                                             <a href="@Url.Action("DetailTransaksi", "Transaksi", new { id = item.ID_Transaksi })" class="btn btn-info btn-sm mr-1">
                                                 <i class="fa fa-eye"></i> Detil
                                             </a>
+                                            @if (item.Status_Transaksi == 4)
+                                            {
+                                                <a href="@Url.Action("Penyelesaian", "Transaksi", new { id = item.ID_Transaksi })" class="btn btn-success btn-sm mr-1">
+                                                    <i class="fa fa-money-bill-wave-alt"></i> Selesai
+                                                </a>
+                                            }
                                         </td>
                                     </tr>
                                 }
