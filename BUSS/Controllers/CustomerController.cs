@@ -199,6 +199,12 @@ namespace BUSS.Controllers
 
         public ActionResult Dashboard()
         {
+            string nik = Session["NIK"].ToString();
+            ViewBag.dbData = db.view_DashboardCustomer.Where(x => x.ID_Customer == nik).ToList();
+            ViewBag.trCount = db.Transaksis.Where(x => x.ID_Customer == nik).Count();
+            ViewBag.trSum = db.Transaksis.Where(x => x.ID_Customer == nik).Sum(x => x.Harga_total);
+            ViewBag.Transaksi = db.Transaksis.Where(x => x.ID_Customer == nik).OrderByDescending(x => x.CreatedDate).Take(5).ToList();
+             
             return View();
         }
 

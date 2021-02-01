@@ -192,6 +192,16 @@
           <Property Name="ID_Kendaraan" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BUSS.dbo.view_DashboardCustomer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_DashboardCustomer">
+          <Key>
+            <PropertyRef Name="tgl" />
+          </Key>
+          <Property Name="tgl" Type="date" Nullable="false" />
+          <Property Name="ID_Customer" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="jumlah" Type="int" />
+        </EntityType>
         <Association Name="FK_Destinasi_Kota">
           <End Role="Kota" Type="Self.Kota" Multiplicity="1" />
           <End Role="Destinasi" Type="Self.Destinasi" Multiplicity="*" />
@@ -532,6 +542,13 @@
           <EntitySet Name="Pegawai" EntityType="Self.Pegawai" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transaksi" EntityType="Self.Transaksi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transaksi_Kendaraan" EntityType="Self.Transaksi_Kendaraan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="view_DashboardCustomer" EntityType="Self.view_DashboardCustomer" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_DashboardCustomer].[tgl] AS [tgl], 
+    [view_DashboardCustomer].[ID_Customer] AS [ID_Customer], 
+    [view_DashboardCustomer].[jumlah] AS [jumlah]
+    FROM [dbo].[view_DashboardCustomer] AS [view_DashboardCustomer]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Destinasi_Kota" Association="Self.FK_Destinasi_Kota">
             <End Role="Kota" EntitySet="Kota" />
             <End Role="Destinasi" EntitySet="Destinasi" />
@@ -1334,7 +1351,16 @@
             <End Role="Transaksi" EntitySet="Transaksis" />
             <End Role="Transaksi_Kendaraan" EntitySet="Transaksi_Kendaraan" />
           </AssociationSet>
+          <EntitySet Name="view_DashboardCustomer" EntityType="BUSSModel.view_DashboardCustomer" />
         </EntityContainer>
+        <EntityType Name="view_DashboardCustomer">
+          <Key>
+            <PropertyRef Name="tgl" />
+          </Key>
+          <Property Name="ID_Customer" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="tgl" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="jumlah" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1536,6 +1562,15 @@
                 <ScalarProperty Name="ID_Transaksi" ColumnName="ID_Transaksi" />
                 <ScalarProperty Name="ID_Kendaraan" ColumnName="ID_Kendaraan" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_DashboardCustomer">
+            <EntityTypeMapping TypeName="BUSSModel.view_DashboardCustomer">
+              <MappingFragment StoreEntitySet="view_DashboardCustomer">
+                <ScalarProperty Name="jumlah" ColumnName="jumlah" />
+                <ScalarProperty Name="tgl" ColumnName="tgl" />
+                <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

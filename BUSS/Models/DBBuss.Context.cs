@@ -40,5 +40,6 @@ namespace BUSS.Models
         public virtual DbSet<Pegawai> Pegawais { get; set; }
         public virtual DbSet<Transaksi> Transaksis { get; set; }
         public virtual DbSet<Transaksi_Kendaraan> Transaksi_Kendaraan { get; set; }
+        public virtual DbSet<view_DashboardCustomer> view_DashboardCustomer { get; set; }
     }
 }

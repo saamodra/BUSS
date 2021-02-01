@@ -84,26 +84,6 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th></th>
-                                    <th>Nama Destinasi</th>
-                                    <th>Kota</th>
-                                    <th>Jam Buka</th>
-                                    <th>Jam Tutup</th>
-                                    <th>Status Data</th>
-                                    <th>Rating</th>
-                                    <th>Harga Tiket</th>
-                                </tr>
-                                <tr>
-                                    <th>Total</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
                                     <th>Rata-rata</th>
                                     <th></th>
                                     <th></th>
@@ -112,6 +92,16 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>Nama Destinasi</th>
+                                    <th>Kota</th>
+                                    <th>Jam Buka</th>
+                                    <th>Jam Tutup</th>
+                                    <th>Status Data</th>
+                                    <th>Rating</th>
+                                    <th>Harga Tiket</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -147,13 +137,6 @@
             });
         }
 
-        function printDestinasi(win) {
-            var table = $(win.document.body).find('table');
-            var body = table.find('tbody');
-            $(body).append($('#multi_filter tfoot').find('tr:eq(1)').clone());
-            $(body).append($('#multi_filter tfoot').find('tr:eq(2)').clone());
-        }
-
         $(document).ready(function () {
             $('#multi_filter').DataTable({
                 dom: '<"row"<"col-lg-4"l><"col-lg-4"B><"col-lg-4"f>>rtip',
@@ -163,9 +146,6 @@
                         text: '<i class="fa fa-copy"></i> Copy',
                         exportOptions: {
                             columns: ':visible',
-                        },
-                        customize: function (win) {
-                            printDestinasi(win);
                         }
                     }, {
                         extend: 'excel',
@@ -175,31 +155,24 @@
                         filename: 'Data Destinasi ' + moment().format('DD-MM-YYYY'),
                         exportOptions: {
                             columns: ':visible',
-                        },
-                        customize: function (xlsx) {
-                            return xlsx + "\nAny heading for the csv file can be separated with , and for new line use";
                         }
                     }, {
                         extend: 'pdf',
                         text: '<i class="fa fa-file-pdf"></i> PDF',
                         title: 'Data Destinasi',
+                        footer: true,
                         filename: 'Data Destinasi ' + moment().format('DD-MM-YYYY'),
                         exportOptions: {
                             columns: ':visible',
-                        },
-                        customize: function (win) {
-                            printDestinasi(win);
                         }
                     }, {
                         extend: 'print',
                         text: '<i class="fa fa-print"></i> Print',
                         title: 'Data Destinasi',
+                        footer: true,
                         filename: 'Data Destinasi ' + moment().format('DD-MM-YYYY'),
                         exportOptions: {
                             columns: ':visible',
-                        },
-                        customize: function (win) {
-                            printDestinasi(win);
                         }
                     }, {
                         extend: 'colvis',
@@ -224,35 +197,6 @@
                 drawCallback: function () {
                     var api = this.api();
 
-                    // SUM Harga
-                    $(`tr:eq(1) th:eq(7)`, api.table().footer()).html(
-                        api.column(7, { page: 'current' }).data().reduce(function (a, b) {
-                            if (typeof a === 'string') {
-                                a = numberOnly(a) * 1;
-                            }
-                            if (typeof b === 'string') {
-                                b = numberOnly(b) * 1;
-                            }
-
-                            return formatter.format(a + b);
-                        }, 0)
-                    );
-
-                    // SUM Rating
-                    $(`tr:eq(1) th:eq(6)`, api.table().footer()).html(
-                        api.column(6, { page: 'current' }).data().reduce(function (a, b) {
-                            if (typeof a === 'string') {
-                                a = parseFloat(a) * 1;
-                            }
-                            if (typeof b === 'string') {
-                                b = parseFloat(b) * 1;
-                            }
-
-                            return a + b;
-                        }, 0)
-                    );
-
-
                     // view page column
                     var columnData = api.column(6, { page: 'current' }).data();
                     var theColumnPage = columnData.reduce(function (a, b) {
@@ -265,7 +209,7 @@
                         return a + b;
                     }, 0);
 
-                    $(`tr:eq(2) th:eq(6)`, api.table().footer()).html(
+                    $(`tr:eq(0) th:eq(6)`, api.table().footer()).html(
                         parseFloat(theColumnPage / columnData.count()).toFixed(2)
                     );
 
@@ -282,7 +226,7 @@
                     }, 0);
 
 
-                    $(`tr:eq(2) th:eq(7)`, api.table().footer()).html(
+                    $(`tr:eq(0) th:eq(7)`, api.table().footer()).html(
                         formatter.format(theColumnPage / columnData.count())
                     );
                 },
@@ -293,7 +237,7 @@
                         if (columnCount != 9 && columnCount != 0) {
                             var column = this;
                             var select = $('<select class="form-control form-control-sm height-unset"><option value=""></option></select>')
-                                .appendTo($(`tr:eq(0) th:eq(${columnCount})`, api.table().footer()).empty())
+                                .appendTo($(`tr:eq(1) th:eq(${columnCount})`, api.table().footer()).empty())
                                 .on('change', function () {
                                     var val = $.fn.dataTable.util.escapeRegex(
                                         $(this).val()

@@ -73,7 +73,14 @@
                                             @Html.DisplayFor(modelItem => item.Tanggal_Pesanan)
                                         </td>
                                         <td>
-                                            @(item.Paket.Jadwal == null ? "-" : item.Paket.Jadwal)
+                                            @if (item.Paket.Jadwal == null)
+                                            {
+                                                <text>-</text>
+                                            }
+                                            else
+                                            {
+                                                <a href="~/Content/jadwal/@item.Paket.Jadwal">@item.Paket.Jadwal</a>
+                                            }
                                         </td>
                                         <td>
                                             @{

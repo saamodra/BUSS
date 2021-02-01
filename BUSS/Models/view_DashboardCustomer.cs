@@ -12,14 +12,10 @@ namespace BUSS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Feedback
+    public partial class view_DashboardCustomer
     {
-        public int ID_Feedback { get; set; }
-        public int ID_Transaksi { get; set; }
-        public int Rating { get; set; }
-        public string Isi_Feedback { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-    
-        public virtual Transaksi Transaksi { get; set; }
+        public string ID_Customer { get; set; }
+        public System.DateTime tgl { get; set; }
+        public Nullable<int> jumlah { get; set; }
     }
 }

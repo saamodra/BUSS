@@ -5,6 +5,119 @@
     Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
 }
 
+<div class="panel-header bg-primary-gradient">
+    <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+            <div>
+                <h2 class="text-white pb-2 fw-bold">Dashboard</h2>
+                <h5 class="text-white op-7 mb-2">Selamat Datang, @Session["Name"]!</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-inner mt--5">
+    <div class="row mt--2">
+        <div class="col-md-6">
+            <div class="card full-height">
+                <div class="card-body">
+                    <div class="card-title">5 Transaksi Terakhir Anda</div>
+                    <table class="table" id="example2">
+                        <thead>
+                            <tr>
+                                <td>No</td>
+                                <td>Paket</td>
+                                <td>Harga Total</td>
+                                <td>Status</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ int no = 1; }
+                            @foreach(var item in ViewBag.Transaksi)
+                            {
+                                <tr>
+                                    <td>@(no++)</td>
+                                    <td>@item.Paket.Nama_Paket</td>
+                                    <td>@item.Harga_total</td>
+                                    <td>
+                                        @{
+                                            switch (item.Status_Transaksi)
+                                            {
+                                                case 0:
+                                                    {
+                                                        <text>Menunggu Pembayaran DP</text>
+                                                        break;
+                                                    }
+                                                case 1:
+                                                    {
+                                                        <text>Pembayaran DP diproses</text>
+                                                        break;
+                                                    }
+                                                case 2:
+                                                    {
+                                                        <text>Menunggu Pelunasan</text>
+                                                        break;
+                                                    }
+                                                case 3:
+                                                    {
+                                                        <text>Pelunasan diproses</text>
+                                                        break;
+                                                    }
+                                                case 4:
+                                                    {
+                                                        <text>Lunas</text>
+                                                        break;
+                                                    }
+                                                case 5:
+                                                    {
+                                                        <text>Selesai</text>
+                                                        break;
+                                                    }
+                                                case 6:
+                                                    {
+                                                        <text>Feedback Terkirim</text>
+                                                        break;
+                                                    }
+                                                default:
+                                                    {
+                                                        <text>Dibatalkan</text>
+                                                        break;
+                                                    }
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card full-height">
+                <div class="card-body">
+                    <div class="card-title">Statistik Pembelian</div>
+                    <div class="row py-3">
+                        <div class="col-md-4 d-flex flex-column justify-content-around">
+                            <div>
+                                <h6 class="fw-bold text-uppercase text-success op-8">Jumlah Pembelian</h6>
+                                <h3 class="fw-bold">@ViewBag.trCount</h3>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold text-uppercase text-danger op-8">Total Harga Pembelian</h6>
+                                <h3 class="fw-bold">@string.Format("Rp{0:0,0}", ViewBag.trSum)</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div id="chart-container" style="position: relative; height: 80vh">
+                                <canvas id="chartJumlahPesanan"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts {
     <script>
@@ -18,5 +131,59 @@
                 },
             });
         }
+
+        var jmlPesanan = document.getElementById('chartJumlahPesanan').getContext('2d');
+        var dtDate = [];
+        var dtCount = [];
+        
+        var array = @Html.Raw(Json.Encode(@ViewBag.dbData));
+        
+        for (var i = 0; i < array.length; i++) {
+            let d = new Date(numberOnly(array[i].tgl));
+            dtDate.push(moment(d.toString()).format("DD/MM/YYYY"));
+            dtCount.push(array[i].jumlah);
+        }
+        console.log(dtDate, dtCount);
+
+        debugger;
+
+
+        var mytotalIncomeChart = new Chart(jmlPesanan, {
+            type: 'bar',
+            data: {
+                labels: dtDate,
+                datasets: [{
+                    label: "Pembelian",
+                    backgroundColor: '#ff9e27',
+                    borderColor: 'rgb(23, 125, 255)',
+                    data: dtCount,
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    display: false,
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            display: false //this will remove only the label
+                        },
+                        gridLines: {
+                            drawBorder: false,
+                            display: false
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawBorder: false,
+                            display: false
+                        }
+                    }]
+                },
+            }
+        });
+
     </script>
 }
