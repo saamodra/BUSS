@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7cb862182e704752b3884323f10f87ba" Name="Diagram1" ZoomLevel="124">
+      <Diagram DiagramId="7cb862182e704752b3884323f10f87ba" Name="Diagram1" ZoomLevel="103">
         <EntityTypeShape EntityType="BUSSModel.Customer" Width="1.5" PointX="6" PointY="26.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BUSSModel.Destinasi" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BUSSModel.Detail_Foto" Width="1.5" PointX="7.5" PointY="14.125" IsExpanded="true" />
@@ -48,6 +48,9 @@
         <AssociationConnector Association="BUSSModel.FK_Transaksi_Pegawai" ManuallyRouted="false" />
         <AssociationConnector Association="BUSSModel.FK_Transaksi_Kendaraan_Transaksi" ManuallyRouted="false" />
         <EntityTypeShape EntityType="BUSSModel.view_DashboardCustomer" Width="1.5" PointX="13.125" PointY="10.25" />
+        <EntityTypeShape EntityType="BUSSModel.view_TransaksiCount" Width="1.5" PointX="11.5" PointY="8.125" />
+        <EntityTypeShape EntityType="BUSSModel.view_DestinasiTerlaris" Width="1.5" PointX="7.125" PointY="5.375" />
+        <EntityTypeShape EntityType="BUSSModel.view_JumlahDestinasiWilayah" Width="1.5" PointX="11.125" PointY="5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -223,6 +223,15 @@
     <Compile Include="Models\view_DashboardCustomer.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\view_DestinasiTerlaris.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\view_JumlahDestinasiWilayah.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\view_TransaksiCount.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -360,6 +360,18 @@
 
             return parseInt(numb);
         }
+
+        $(document).ready(function () {
+            $('.dttable').DataTable({
+                "language": {
+                    "lengthMenu": "_MENU_ Data per halaman",
+                    "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entries",
+                    "zeroRecords": "Tidak ada data.",
+                    "search": "Pencarian :",
+                    "nextPage": "Selanjutnya"
+                },
+            });
+        });
     </script>
     @RenderSection("scripts", required: false)
 

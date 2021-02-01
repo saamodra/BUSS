@@ -374,6 +374,13 @@
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
 
     <script>
+        function numberOnly(str) {
+            var numb = str.match(/\d/g);
+            numb = numb.join("");
+
+            return parseInt(numb);
+        }
+
         $(document).ready(function () {
             $('#example2').DataTable({
                 "language": {

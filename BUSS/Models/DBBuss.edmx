@@ -195,12 +195,46 @@
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BUSS.dbo.view_DashboardCustomer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="view_DashboardCustomer">
+          
           <Key>
             <PropertyRef Name="tgl" />
           </Key>
           <Property Name="tgl" Type="date" Nullable="false" />
           <Property Name="ID_Customer" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="jumlah" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BUSS.dbo.view_DestinasiTerlaris' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_DestinasiTerlaris">
+          <Key>
+            <PropertyRef Name="ID_Destinasi" />
+            <PropertyRef Name="Nama_Destinasi" />
+          </Key>
+          <Property Name="ID_Destinasi" Type="int" Nullable="false" />
+          <Property Name="Nama_Destinasi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="JumlahDipesan" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BUSS.dbo.view_JumlahDestinasiWilayah' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_JumlahDestinasiWilayah">
+          <Key>
+            <PropertyRef Name="ID_KategoriWilayah" />
+            <PropertyRef Name="Nama_Wilayah" />
+          </Key>
+          <Property Name="ID_KategoriWilayah" Type="int" Nullable="false" />
+          <Property Name="Nama_Wilayah" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="JumlahDestinasi" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_TransaksiCount">
+          <Key>
+            <PropertyRef Name="ID_Paket" />
+            <PropertyRef Name="Nama_Paket" />
+          </Key>
+          <Property Name="ID_Paket" Type="int" Nullable="false" />
+          <Property Name="Nama_Paket" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="jumlah_dipesan" Type="int" />
         </EntityType>
         <Association Name="FK_Destinasi_Kota">
           <End Role="Kota" Type="Self.Kota" Multiplicity="1" />
@@ -548,6 +582,27 @@ warning 6002: The table/view 'BUSS.dbo.view_DashboardCustomer' does not have a p
     [view_DashboardCustomer].[ID_Customer] AS [ID_Customer], 
     [view_DashboardCustomer].[jumlah] AS [jumlah]
     FROM [dbo].[view_DashboardCustomer] AS [view_DashboardCustomer]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_DestinasiTerlaris" EntityType="Self.view_DestinasiTerlaris" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_DestinasiTerlaris].[ID_Destinasi] AS [ID_Destinasi], 
+    [view_DestinasiTerlaris].[Nama_Destinasi] AS [Nama_Destinasi], 
+    [view_DestinasiTerlaris].[JumlahDipesan] AS [JumlahDipesan]
+    FROM [dbo].[view_DestinasiTerlaris] AS [view_DestinasiTerlaris]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_JumlahDestinasiWilayah" EntityType="Self.view_JumlahDestinasiWilayah" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_JumlahDestinasiWilayah].[ID_KategoriWilayah] AS [ID_KategoriWilayah], 
+    [view_JumlahDestinasiWilayah].[Nama_Wilayah] AS [Nama_Wilayah], 
+    [view_JumlahDestinasiWilayah].[JumlahDestinasi] AS [JumlahDestinasi]
+    FROM [dbo].[view_JumlahDestinasiWilayah] AS [view_JumlahDestinasiWilayah]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_TransaksiCount" EntityType="Self.view_TransaksiCount" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_TransaksiCount].[ID_Paket] AS [ID_Paket], 
+    [view_TransaksiCount].[Nama_Paket] AS [Nama_Paket], 
+    [view_TransaksiCount].[jumlah_dipesan] AS [jumlah_dipesan]
+    FROM [dbo].[view_TransaksiCount] AS [view_TransaksiCount]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Destinasi_Kota" Association="Self.FK_Destinasi_Kota">
             <End Role="Kota" EntitySet="Kota" />
@@ -1352,6 +1407,9 @@ warning 6002: The table/view 'BUSS.dbo.view_DashboardCustomer' does not have a p
             <End Role="Transaksi_Kendaraan" EntitySet="Transaksi_Kendaraan" />
           </AssociationSet>
           <EntitySet Name="view_DashboardCustomer" EntityType="BUSSModel.view_DashboardCustomer" />
+          <EntitySet Name="view_TransaksiCount" EntityType="BUSSModel.view_TransaksiCount" />
+          <EntitySet Name="view_DestinasiTerlaris" EntityType="BUSSModel.view_DestinasiTerlaris" />
+          <EntitySet Name="view_JumlahDestinasiWilayah" EntityType="BUSSModel.view_JumlahDestinasiWilayah" />
         </EntityContainer>
         <EntityType Name="view_DashboardCustomer">
           <Key>
@@ -1360,6 +1418,33 @@ warning 6002: The table/view 'BUSS.dbo.view_DashboardCustomer' does not have a p
           <Property Name="ID_Customer" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="tgl" Type="DateTime" Precision="0" Nullable="false" />
           <Property Name="jumlah" Type="Int32" />
+        </EntityType>
+        <EntityType Name="view_TransaksiCount">
+          <Key>
+            <PropertyRef Name="ID_Paket" />
+            <PropertyRef Name="Nama_Paket" />
+          </Key>
+          <Property Name="ID_Paket" Type="Int32" Nullable="false" />
+          <Property Name="Nama_Paket" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="jumlah_dipesan" Type="Int32" />
+        </EntityType>
+        <EntityType Name="view_DestinasiTerlaris">
+          <Key>
+            <PropertyRef Name="ID_Destinasi" />
+            <PropertyRef Name="Nama_Destinasi" />
+          </Key>
+          <Property Name="ID_Destinasi" Type="Int32" Nullable="false" />
+          <Property Name="Nama_Destinasi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JumlahDipesan" Type="Int32" />
+        </EntityType>
+        <EntityType Name="view_JumlahDestinasiWilayah">
+          <Key>
+            <PropertyRef Name="ID_KategoriWilayah" />
+            <PropertyRef Name="Nama_Wilayah" />
+          </Key>
+          <Property Name="ID_KategoriWilayah" Type="Int32" Nullable="false" />
+          <Property Name="Nama_Wilayah" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="JumlahDestinasi" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1571,6 +1656,33 @@ warning 6002: The table/view 'BUSS.dbo.view_DashboardCustomer' does not have a p
                 <ScalarProperty Name="jumlah" ColumnName="jumlah" />
                 <ScalarProperty Name="tgl" ColumnName="tgl" />
                 <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_TransaksiCount">
+            <EntityTypeMapping TypeName="BUSSModel.view_TransaksiCount">
+              <MappingFragment StoreEntitySet="view_TransaksiCount">
+                <ScalarProperty Name="jumlah_dipesan" ColumnName="jumlah_dipesan" />
+                <ScalarProperty Name="Nama_Paket" ColumnName="Nama_Paket" />
+                <ScalarProperty Name="ID_Paket" ColumnName="ID_Paket" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_DestinasiTerlaris">
+            <EntityTypeMapping TypeName="BUSSModel.view_DestinasiTerlaris">
+              <MappingFragment StoreEntitySet="view_DestinasiTerlaris">
+                <ScalarProperty Name="JumlahDipesan" ColumnName="JumlahDipesan" />
+                <ScalarProperty Name="Nama_Destinasi" ColumnName="Nama_Destinasi" />
+                <ScalarProperty Name="ID_Destinasi" ColumnName="ID_Destinasi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_JumlahDestinasiWilayah">
+            <EntityTypeMapping TypeName="BUSSModel.view_JumlahDestinasiWilayah">
+              <MappingFragment StoreEntitySet="view_JumlahDestinasiWilayah">
+                <ScalarProperty Name="JumlahDestinasi" ColumnName="JumlahDestinasi" />
+                <ScalarProperty Name="Nama_Wilayah" ColumnName="Nama_Wilayah" />
+                <ScalarProperty Name="ID_KategoriWilayah" ColumnName="ID_KategoriWilayah" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
