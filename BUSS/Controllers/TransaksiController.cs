@@ -353,9 +353,9 @@ namespace BUSS.Controllers
         {
             var trans = db.Transaksis.Find(id);
 
-            if (Biaya_Tambahan != null)
+           if (Biaya_Tambahan != null)
             {
-                trans.Harga_total = trans.Harga_total + Biaya_Tambahan;
+                trans.biaya_tambahan = Biaya_Tambahan;
                 trans.Status_Transaksi = 5;
                 db.Transaksis.Add(trans);
             }
