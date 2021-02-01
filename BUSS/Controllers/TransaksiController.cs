@@ -367,7 +367,7 @@ namespace BUSS.Controllers
             db.Entry(trans).State = EntityState.Modified;
             db.SaveChanges();
 
-            TempData["SuccessMessage"] = "Pesanan telah selesai.";
+            TempData["SuccessMessage"] = "Tes";
             return RedirectToAction("Pesanan", "Pegawai");
         }
     }
