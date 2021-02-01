@@ -33,6 +33,7 @@ namespace BUSS.Models
         public int Status_Transaksi { get; set; }
         public Nullable<double> PaketLama_Perjalanan { get; set; }
         public System.DateTime CreatedDate { get; set; }
+        public Nullable<decimal> biaya_tambahan { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

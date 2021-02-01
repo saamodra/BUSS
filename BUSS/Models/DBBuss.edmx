@@ -179,6 +179,7 @@
           <Property Name="Tanggal_Pesanan" Type="date" Nullable="false" />
           <Property Name="Bukti_DP" Type="varchar" MaxLength="255" />
           <Property Name="Bukti_Pelunasan" Type="varchar" MaxLength="255" />
+          <Property Name="biaya_tambahan" Type="money" />
           <Property Name="Status_Transaksi" Type="int" Nullable="false" />
           <Property Name="PaketLama_Perjalanan" Type="float" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -946,6 +947,7 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
           <NavigationProperty Name="Paket" Relationship="Self.FK_Transaksi_Paket" FromRole="Transaksi" ToRole="Paket" />
           <NavigationProperty Name="Pegawai" Relationship="Self.FK_Transaksi_Pegawai" FromRole="Transaksi" ToRole="Pegawai" />
           <NavigationProperty Name="Transaksi_Kendaraan" Relationship="Self.FK_Transaksi_Kendaraan_Transaksi" FromRole="Transaksi" ToRole="Transaksi_Kendaraan" />
+          <Property Name="biaya_tambahan" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="Transaksi_Kendaraan">
           <Key>
@@ -1626,6 +1628,7 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
           <EntitySetMapping Name="Transaksis">
             <EntityTypeMapping TypeName="BUSSModel.Transaksi">
               <MappingFragment StoreEntitySet="Transaksi">
+                <ScalarProperty Name="biaya_tambahan" ColumnName="biaya_tambahan" />
                 <ScalarProperty Name="ID_Transaksi" ColumnName="ID_Transaksi" />
                 <ScalarProperty Name="ID_Paket" ColumnName="ID_Paket" />
                 <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
