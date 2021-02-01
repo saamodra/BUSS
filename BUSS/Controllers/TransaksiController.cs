@@ -342,7 +342,7 @@ namespace BUSS.Controllers
 
         public ActionResult Penyelesaian(int id)
         {
-            //Transaksi transaksi = db.Transaksis.Find(id);
+            Transaksi transaksi = db.Transaksis.Find(id);
 
             return View();
         }
@@ -367,7 +367,7 @@ namespace BUSS.Controllers
             db.Entry(trans).State = EntityState.Modified;
             db.SaveChanges();
 
-            TempData["SuccessMessage"] = "Tes";
+            TempData["SuccessMessage"] = "Pesanan telah selesai.";
             return RedirectToAction("Pesanan", "Pegawai");
         }
     }
