@@ -24,7 +24,7 @@ namespace BUSS.Controllers.Admin
 
         public ActionResult Tourleader()
         {
-            ViewBag.Test = "";
+            ViewBag.Test = "Polman";
             return View();
         }
 
