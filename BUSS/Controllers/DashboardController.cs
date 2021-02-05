@@ -24,6 +24,9 @@ namespace BUSS.Controllers.Admin
 
         public ActionResult Tourleader()
         {
+            ViewBag.Transaksi = db.Transaksis.Where(k => k.Status_Transaksi > 1 && k.Status_Transaksi != 7 && k.Paket.Jadwal == null).Take(5).ToList();
+            ViewBag.Paket = db.Pakets.Where(k => k.Jadwal == null && k.Status == 1).Take(5).ToList();
+
             return View();
         }
 
