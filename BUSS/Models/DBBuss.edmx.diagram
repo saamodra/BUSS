@@ -51,6 +51,9 @@
         <EntityTypeShape EntityType="BUSSModel.view_TransaksiCount" Width="1.5" PointX="11.5" PointY="8.125" />
         <EntityTypeShape EntityType="BUSSModel.view_DestinasiTerlaris" Width="1.5" PointX="7.125" PointY="5.375" />
         <EntityTypeShape EntityType="BUSSModel.view_JumlahDestinasiWilayah" Width="1.5" PointX="11.125" PointY="5" />
+        <EntityTypeShape EntityType="BUSSModel.view_LaporanDestinasi" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BUSSModel.view_LaporanFeedback" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BUSSModel.view_LaporanTransaksi" Width="1.5" PointX="4.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

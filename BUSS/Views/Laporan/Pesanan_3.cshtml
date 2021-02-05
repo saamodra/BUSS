@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Pesanan_3";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">@ViewBag.Title</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="@Url.Action("Manager", "Dashboard")">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Pesanan", "Laporan")">@ViewBag.Title</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Data @ViewBag.Title</h3>
+                    <button onclick="funExportToPDF()" class="btn btn-info">Export to PDF</button>
+                </div>
+                <div class="card-body">
+
+                    <div id="divPDF">
+                        <div id="printerDiv"><iframe id="frmPDF"></iframe></div>
+                    </div>
+                    @*<div class="row">
+            <div class="col-md-4">
+                <h3>Customers Report</h3>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="searchText" placeholder="Enter Company Name">
+            </div>
+            <div class="col-md-3">
+                <button type="button" id="btnSearch" class="btn btn-raised btn-primary btn-block">Get Report</button>
+            </div>
+        </div>
+        <div class="row" id="divReport">
+        </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+
+
+    function funExportToPDF() {
+
+        $.ajax({
+            url: '@Url.Action("ExportToPDF", "Laporan")',
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            success: function (result) {
+
+                $('#frmPDF').attr('src', '@Url.Content("~/")' + result);
+
+                setTimeout(function () {
+                    frame = document.getElementById("frmPDF");
+                    frameframedoc = frame.contentWindow;
+                    framedoc.focus();
+                    framedoc.print();
+                }, 1000);
+            },
+            error: function (xhr, status, err) {
+                alert(err);
+            }
+        });
+
+        return false;
+    }
+
+    </script>
+}

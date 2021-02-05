@@ -1,0 +1,157 @@
+﻿@model IEnumerable<BUSS.Models.Transaksi>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PdfPesanan</title>
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/print.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <header>
+            <hr />
+            <div class="row">
+                <div class="col-2 text-center">
+                    <img src="~/Content/assets/img/favicon.png" alt="Logo" />
+                </div>
+                <div class="col-8 header-title">
+                    <h1>PT. BUSS Travel</h1>
+                    <p>Jl. Jati V D No. 8, Sungai Bambu, Jakarta Utara</p>
+                </div>
+                <div class="col-2 text-center">
+                    <img src="~/Content/assets/img/favicon.png" alt="Logo" />
+                </div>
+            </div>
+            <hr />
+        </header>
+
+        <div class="mt-5">
+            <div class="content-title mb-5">
+                <div class="d-flex justify-content-between">
+                    <p>Nomor Surat : 0817823/PMA/907237</p>
+                    <p>@DateTime.Now.ToString("dd-MM-yyyy")</p>
+                </div>
+
+                <h1 class="text-center">Laporan Transaksi</h1>
+
+            </div>
+
+            <table class="table" id="multi_filter">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Paket.Nama_Paket)
+                        </th>
+                        <th>Customer</th>
+                        <th>Jumlah Penumpang</th>
+                        <th>Lama Perjalanan</th>
+                        <th>Tanggal Sewa</th>
+                        <th>Jadwal</th>
+                        <th>Status Transaksi</th>
+                        <th>DP</th>
+                        <th>Harga Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int rowCount = 1; }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(rowCount++).</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Paket.Nama_Paket)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Customer.Nama)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Jumlah_Penumpang)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PaketLama_Perjalanan) Hari
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Tanggal_Pesanan)
+                            </td>
+                            <td>
+                                @if (item.Paket.Jadwal == null)
+                                {
+                                    <text>-</text>
+                                }
+                                else
+                                {
+                                    <a href="~/Content/jadwal/@item.Paket.Jadwal">@item.Paket.Jadwal</a>
+                                }
+                            </td>
+                            <td>
+                                @{
+                                    switch (item.Status_Transaksi)
+                                    {
+                                        case 0:
+                                            {
+                                                <text>Menunggu Pembayaran DP</text>
+                                                break;
+                                            }
+                                        case 1:
+                                            {
+                                                <text>Pembayaran DP diproses</text>
+                                                break;
+                                            }
+                                        case 2:
+                                            {
+                                                <text>Menunggu Pelunasan</text>
+                                                break;
+                                            }
+                                        case 3:
+                                            {
+                                                <text>Pelunasan diproses</text>
+                                                break;
+                                            }
+                                        case 4:
+                                            {
+                                                <text>Lunas</text>
+                                                break;
+                                            }
+                                        case 5:
+                                            {
+                                                <text>Selesai</text>
+                                                break;
+                                            }
+                                        case 6:
+                                            {
+                                                <text>Isi Feedback</text>
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                <text>Dibatalkan</text>
+                                                break;
+                                            }
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @string.Format("Rp{0:0,0}", item.Harga_total / 2)
+                            </td>
+                            <td>
+                                @string.Format("Rp{0:0,0}", item.Harga_total)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

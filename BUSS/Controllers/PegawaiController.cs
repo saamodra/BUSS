@@ -50,7 +50,7 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_Pegawai,Nama,Alamat,No_HP,Email,Password,Role,Status")] Pegawai pegawai)
         {
-            if (db.Pegawais.Any(k => k.Email == pegawai.Email))
+            if (db.Pegawais.Any(k => k.Email == pegawai.Email && k.Status == 1))
             {
                 ModelState.AddModelError("Email", "Email sudah terdaftar.");
             }
@@ -123,9 +123,9 @@ namespace BUSS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Pegawai,Nama,Alamat,No_HP,Email,Password,Role,Status")] Pegawai pegawai)
+        public ActionResult Edit([Bind(Include = "ID_Pegawai,Nama,Alamat,No_HP,Email,Password,Role,Status,CreatedDate")] Pegawai pegawai)
         {
-            if (db.Pegawais.Any(k => k.Email == pegawai.Email))
+            if (db.Pegawais.Where(k => k.ID_Pegawai != pegawai.ID_Pegawai && k.Status == 1).Any(k => k.Email == pegawai.Email))
             {
                 ModelState.AddModelError("Email", "Email sudah terdaftar.");
             }

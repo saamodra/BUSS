@@ -1,0 +1,328 @@
+﻿@model IEnumerable<BUSS.Models.Transaksi>
+
+@{
+    ViewBag.Title = "Pesanan";
+    ViewBag.SidebarMenu = "Pesanan";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">@ViewBag.Title</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="@Url.Action("Manager", "Dashboard")">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Pesanan", "Laporan")">@ViewBag.Title</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Data @ViewBag.Title</h3>
+                    <a href="@Url.Action("PrintPesanan", "Laporan")" class="btn btn-danger">Cetak</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table" id="multi_filter">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Paket.Nama_Paket)
+                                    </th>
+                                    <th>Customer</th>
+                                    <th>Jumlah Penumpang</th>
+                                    <th>Lama Perjalanan</th>
+                                    <th>Tanggal Sewa</th>
+                                    <th>Jadwal</th>
+                                    <th>Status Transaksi</th>
+                                    <th>DP</th>
+                                    <th>Harga Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int rowCount = 1; }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@(rowCount++).</td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Paket.Nama_Paket)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Customer.Nama)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Jumlah_Penumpang)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PaketLama_Perjalanan) Hari
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tanggal_Pesanan)
+                                        </td>
+                                        <td>
+                                            @if (item.Paket.Jadwal == null)
+                                            {
+                                                <text>-</text>
+                                            }
+                                            else
+                                            {
+                                                <a href="~/Content/jadwal/@item.Paket.Jadwal">@item.Paket.Jadwal</a>
+                                            }
+                                        </td>
+                                        <td>
+                                            @{
+                                                switch (item.Status_Transaksi)
+                                                {
+                                                    case 0:
+                                                        {
+                                                            <text>Menunggu Pembayaran DP</text>
+                                                            break;
+                                                        }
+                                                    case 1:
+                                                        {
+                                                            <text>Pembayaran DP diproses</text>
+                                                            break;
+                                                        }
+                                                    case 2:
+                                                        {
+                                                            <text>Menunggu Pelunasan</text>
+                                                            break;
+                                                        }
+                                                    case 3:
+                                                        {
+                                                            <text>Pelunasan diproses</text>
+                                                            break;
+                                                        }
+                                                    case 4:
+                                                        {
+                                                            <text>Lunas</text>
+                                                            break;
+                                                        }
+                                                    case 5:
+                                                        {
+                                                            <text>Selesai</text>
+                                                            break;
+                                                        }
+                                                    case 6:
+                                                        {
+                                                            <text>Isi Feedback</text>
+                                                            break;
+                                                        }
+                                                    default:
+                                                        {
+                                                            <text>Dibatalkan</text>
+                                                            break;
+                                                        }
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @string.Format("Rp{0:0,0}", item.Harga_total / 2)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Harga_total)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Total</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>Nama Paket</th>
+                                    <th>Customer</th>
+                                    <th>Jumlah Penumpang</th>
+                                    <th>Lama Perjalanan</th>
+                                    <th>Tanggal Sewa</th>
+                                    <th></th>
+                                    <th>Status Transaksi</th>
+                                    <th>DP</th>
+                                    <th>Harga Total</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        if ("@TempData["SuccessMessage"]" != "") {
+            swal("Berhasil", "@TempData["SuccessMessage"]", {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                },
+            });
+        }
+
+        if ("@TempData["ErrorMessage"]" != "") {
+            swal("Gagal", "@TempData["ErrorMessage"]", {
+                icon: "error",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-danger'
+                    }
+                },
+            });
+        }
+
+        function txtMoney(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        $(document).ready(function () {
+            $('#multi_filter').DataTable({
+                dom: '<"row"<"col-lg-4"l><"col-lg-4"B><"col-lg-4"f>>rtip',
+                buttons: [
+                    {
+                        extend: 'copy',
+                        text: '<i class="fa fa-copy"></i> Copy',
+                        footer: true,
+                        exportOptions: {
+                            columns: ':visible',
+                        }
+                    }, {
+                        extend: 'excel',
+                        text: '<i class="fa fa-file-excel"></i> Excel',
+                        title: 'Data Pesanan',
+                        footer: true,
+                        filename: 'Data Pesanan ' + moment().format('DD-MM-YYYY'),
+                        exportOptions: {
+                            columns: ':visible',
+                        }
+                    }, {
+                        extend: 'pdf',
+                        text: '<i class="fa fa-file-pdf"></i> PDF',
+                        title: 'Data Pesanan',
+                        footer: true,
+                        filename: 'Data Pesanan ' + moment().format('DD-MM-YYYY'),
+                        orientation: 'landscape',
+                        pageSize: 'LETTER',
+                        exportOptions: {
+                            columns: ':visible',
+                        }
+                    }, {
+                        extend: 'print',
+                        text: '<i class="fa fa-print"></i> Print',
+                        title: 'Data Pesanan',
+                        footer: true,
+                        filename: 'Data Pesanan ' + moment().format('DD-MM-YYYY'),
+                        exportOptions: {
+                            columns: ':visible',
+                        }
+                    }, {
+                        extend: 'colvis',
+                        text: '<i class="fa fa-eye"></i>'
+                    }
+                ],
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    ['10', '25', '50', 'All']
+                ],
+                "language": {
+                    "lengthMenu": "_MENU_ Data per halaman",
+                    "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entries",
+                    "zeroRecords": "Tidak ada data.",
+                    "search": "Pencarian :",
+                    "infoFiltered": "(tersaring dari total _MAX_ data)",
+                    "paginate": {
+                        "previous": "Sebelumnya",
+                        "next": "Selanjutnya"
+                    }
+                },
+                "footerCallback": function (row, data, start, end, display) {
+                    var api = this.api();
+
+                    // view page column
+                    for (let i = 8; i <= 9; i++) {
+                        var columnData = api.column(i, { page: 'current' }).data();
+                        var theColumnPage = columnData.reduce(function (a, b) {
+                            if (typeof a === 'string') {
+                                a = numberOnly(a);
+                            }
+                            if (typeof b === 'string') {
+                                b = numberOnly(b);
+                            }
+
+                            return a + b;
+                        }, 0);
+
+
+                        $(`tr:eq(0) th:eq(${i})`, api.table().footer()).html(
+                            formatter.format(theColumnPage)
+                        );
+                    }
+                    //var columnData = api.column(8, { page: 'current' }).data();
+                    //theColumnPage = columnData.reduce(function (a, b) {
+                    //    if (typeof a === 'string') {
+                    //        a = numberOnly(a);
+                    //    }
+                    //    if (typeof b === 'string') {
+                    //        b = numberOnly(b);
+                    //    }
+
+                    //    return a + b;
+                    //}, 0);
+
+                    //$(`tr:eq(0) th:eq(8)`, api.table().footer()).html(
+                    //    parseFloat(theColumnPage / columnData.count()).toFixed(2)
+                    //);
+
+                },
+                initComplete: function () {
+                    var columnCount = 0;
+                    var api = this.api();
+                    api.columns().every(function () {
+                        if (columnCount != 6 && columnCount != 0) {
+                            var column = this;
+                            var select = $('<select class="form-control form-control-sm height-unset"><option value=""></option></select>')
+                                .appendTo($(`tr:eq(1) th:eq(${columnCount})`, api.table().footer()).empty())
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        }
+                        columnCount++;
+                    });
+                }
+            });
+        });
+    </script>
+}
