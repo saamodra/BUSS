@@ -54,7 +54,7 @@
                         <div class="col-md-12 d-flex justify-content-around">
                             <div>
                                 <h6 class="fw-bold text-uppercase text-success op-8">Jumlah Transaksi</h6>
-                                <h3 class="fw-bold">@ViewBag.trCount</h3>
+                                <h3 align="center" class="fw-bold">@ViewBag.trCount</h3>
                             </div>
                         </div>
                         <div class="col-md-12 mt-5">
@@ -157,13 +157,15 @@
 
 
         var adminChart = new Chart(jmlPesanan, {
-            type: 'bar',
+            type: 'doughnut',
             data: {
                 labels: dtStatus,
                 datasets: [{
-                    label: "Transaksi",
-                    backgroundColor: '#ff9e27',
-                    borderColor: 'rgb(23, 125, 255)',
+                    label: dtStatus,
+                    backgroundColor: [
+                        '#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#ffb84d', '#99ff99', '#c68c53'
+                    ],
+                    borderColor: '#fff',
                     data: dtCount,
                 }],
             },
@@ -171,29 +173,35 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 legend: {
-                    display: false,
+                    display: true,
+                    position: 'right',
+                    align: 'center',
+                    labels: {
+                        fontColor: 'rgba(213, 143, 56, 1)'
+                    }
                 },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            display: false //this will remove only the label
-                        },
-                        gridLines: {
-                            drawBorder: false,
-                            display: false
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            drawBorder: false,
-                            display: false
-                        }
-                    }]
-                },
+                //scales: {
+                //    yAxes: [{
+                //        display: true,
+                //        ticks: {
+                //            beginAtZero: true
+                //        },
+                //        gridLines: {
+                //            drawBorder: false,
+                //            display: false
+                //        }
+                //    }],
+                //    xAxes: [{
+                //        gridLines: {
+                //            drawBorder: false,
+                //            display: false
+                //        }
+                //    }]
+                //},
             }
         });
 
-        adminChart.canvas.parentNode.style.height = '350px';
+        adminChart.canvas.parentNode.style.height = '400px';
 
     </script>
 }
