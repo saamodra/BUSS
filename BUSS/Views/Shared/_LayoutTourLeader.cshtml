@@ -135,9 +135,7 @@
                                     </li>
                                     <li>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">My Profile</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Account Setting</a>
+                                        <a class="dropdown-item" href="@Url.Action("Profil", "Pegawai")">Profil Saya</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="/Pegawai/Logout">Logout</a>
                                     </li>
@@ -153,9 +151,10 @@
         @if (Session["ID_Pegawai"] == null)
         {
             Response.Redirect("~/Pegawai/Login");
-        } else
+        }
+        else
         {
-            if(Session["Role"].ToString() != "2")
+            if (Session["Role"].ToString() != "2")
             {
                 <script>alert("Anda tidak diperbolehkan mengakses halaman ini.")</script>
                 Response.Redirect("~/Dashboard/Pegawai");
@@ -328,6 +327,7 @@
     <script src="~/Scripts/moment.min.js"></script>
     <script src="~/Scripts/jquery.priceformat.min.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
 
     <script>
         $(document).ready(function () {

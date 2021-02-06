@@ -349,7 +349,7 @@ namespace BUSS.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Penyelesaian(int id, decimal Biaya_Tambahan)
+        public ActionResult Penyelesaian(int id, decimal? Biaya_Tambahan)
         {
             var trans = db.Transaksis.Find(id);
 

@@ -42,7 +42,7 @@ namespace BUSS.Controllers
                 db.SaveChanges();
 
                 Transaksi transaksi = db.Transaksis.Find(feedback.ID_Transaksi);
-                transaksi.Status_Transaksi = 5;
+                transaksi.Status_Transaksi = 6;
                 db.SaveChanges();
 
                 TempData["SuccessMessage"] = "Ulasan berhasil dikirim.";

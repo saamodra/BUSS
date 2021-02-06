@@ -38,7 +38,7 @@
                                 <tr>
                                     <td>@(no++)</td>
                                     <td>@item.Paket.Nama_Paket</td>
-                                    <td>@item.Harga_total</td>
+                                    <td>@string.Format("Rp{0:0,0}", item.Harga_total)</td>
                                     <td>
                                         @{
                                             switch (item.Status_Transaksi)
