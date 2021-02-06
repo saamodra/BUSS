@@ -147,90 +147,93 @@
     </Compile>
     <Compile Include="Models\BussModule.cs" />
     <Compile Include="Models\Customer.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomerMetadata.cs" />
-    <Compile Include="Models\DbBuss.Context.cs">
+    <Compile Include="Models\DBBuss.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DbBuss.Context.tt</DependentUpon>
+      <DependentUpon>DBBuss.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbBuss.cs">
+    <Compile Include="Models\DBBuss.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbBuss.Designer.cs">
+    <Compile Include="Models\DBBuss.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DbBuss.edmx</DependentUpon>
+      <DependentUpon>DBBuss.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Destinasi.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DestinasiMetadata.cs" />
     <Compile Include="Models\Detail_Foto.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Detail_FotoMetadata.cs" />
     <Compile Include="Models\Detail_Kategori.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Detail_KategoriMetadata.cs" />
     <Compile Include="Models\Detail_Paket.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Detail_PaketMetadata.cs" />
     <Compile Include="Models\Detail_Rating_Destinasi.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Feedback.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FeedbackMetadata.cs" />
     <Compile Include="Models\Jenis_Kendaraan.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Jenis_KendaraanMetadata.cs" />
     <Compile Include="Models\Kategori_Wilayah.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Kategori_WilayahMetadata.cs" />
     <Compile Include="Models\Kendaraan.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\KendaraanMetadata.cs" />
     <Compile Include="Models\KeyValue.cs" />
     <Compile Include="Models\Kota.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\KotaMetadata.cs" />
     <Compile Include="Models\Paket.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PaketMetadata.cs" />
     <Compile Include="Models\Pegawai.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PegawaiMetadata.cs" />
     <Compile Include="Models\Transaksi.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TransaksiMetadata.cs" />
     <Compile Include="Models\Transaksi_Kendaraan.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_DashboardCustomer.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_DestinasiTerlaris.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_JumlahDestinasiWilayah.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\view_StatusTransCount.cs">
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\view_TransaksiCount.cs">
-      <DependentUpon>DbBuss.tt</DependentUpon>
+      <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -661,15 +664,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\DbBuss.Context.tt">
+    <Content Include="Models\DBBuss.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbBuss.edmx</DependentUpon>
-      <LastGenOutput>DbBuss.Context.cs</LastGenOutput>
+      <DependentUpon>DBBuss.edmx</DependentUpon>
+      <LastGenOutput>DBBuss.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DbBuss.tt">
+    <Content Include="Models\DBBuss.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbBuss.edmx</DependentUpon>
-      <LastGenOutput>DbBuss.cs</LastGenOutput>
+      <DependentUpon>DBBuss.edmx</DependentUpon>
+      <LastGenOutput>DBBuss.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -765,12 +768,12 @@
     <Content Include="Content\assets\fonts\apercu-cufonfonts\Apercu_Regular.otf" />
     <Content Include="Content\assets\fonts\sf_pro\SF Pro Display-Bold.ttf" />
     <Content Include="Content\assets\fonts\sf_pro\SF Pro Display.ttf" />
-    <EntityDeploy Include="Models\DbBuss.edmx">
+    <EntityDeploy Include="Models\DBBuss.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DbBuss.Designer.cs</LastGenOutput>
+      <LastGenOutput>DBBuss.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DbBuss.edmx.diagram">
-      <DependentUpon>DbBuss.edmx</DependentUpon>
+    <Content Include="Models\DBBuss.edmx.diagram">
+      <DependentUpon>DBBuss.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\buttons.bootstrap4.min.js" />

@@ -10,11 +10,7 @@
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
             <div>
                 <h2 class="text-white pb-2 fw-bold">Dashboard</h2>
-                <h5 class="text-white op-7 mb-2">Free Bootstrap 4 Admin Dashboard</h5>
-            </div>
-            <div class="ml-md-auto py-2 py-md-0">
-                <a href="#" class="btn btn-white btn-border btn-round mr-2">Manage</a>
-                <a href="#" class="btn btn-secondary btn-round">Add Customer</a>
+                <h5 class="text-white op-7 mb-2">Selamat Datang, @Session["Name"]!</h5>
             </div>
         </div>
     </div>
@@ -24,21 +20,28 @@
         <div class="col-md-6">
             <div class="card full-height">
                 <div class="card-body">
-                    <div class="card-title">Overall statistics</div>
-                    <div class="card-category">Daily information about statistics in system</div>
-                    <div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
-                        <div class="px-2 pb-2 pb-md-0 text-center">
-                            <div id="circles-1"></div>
-                            <h6 class="fw-bold mt-3 mb-0">New Users</h6>
-                        </div>
-                        <div class="px-2 pb-2 pb-md-0 text-center">
-                            <div id="circles-2"></div>
-                            <h6 class="fw-bold mt-3 mb-0">Sales</h6>
-                        </div>
-                        <div class="px-2 pb-2 pb-md-0 text-center">
-                            <div id="circles-3"></div>
-                            <h6 class="fw-bold mt-3 mb-0">Subscribers</h6>
-                        </div>
+                    <div class="card-title">Data Transaksi</div>
+                    <div class="table-responsive mt-4">
+                        <table class="table dttable">
+                            <thead>
+                                <tr>
+                                    <td>No</td>
+                                    <td>Status Transaksi</td>
+                                    <td>Jumlah</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int no = 1; }
+                                @foreach (var item in ViewBag.StatusTrans)
+                                {
+                                    <tr>
+                                        <td>@(no++)</td>
+                                        <td>@item.StatusTrans</td>
+                                        <td>@item.jumlah</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -46,148 +49,83 @@
         <div class="col-md-6">
             <div class="card full-height">
                 <div class="card-body">
-                    <div class="card-title">Total income & spend statistics</div>
+                    <div class="card-title">Statistik</div>
                     <div class="row py-3">
-                        <div class="col-md-4 d-flex flex-column justify-content-around">
+                        <div class="col-md-12 d-flex justify-content-around">
                             <div>
-                                <h6 class="fw-bold text-uppercase text-success op-8">Total Income</h6>
-                                <h3 class="fw-bold">$9.782</h3>
-                            </div>
-                            <div>
-                                <h6 class="fw-bold text-uppercase text-danger op-8">Total Spend</h6>
-                                <h3 class="fw-bold">$1,248</h3>
+                                <h6 class="fw-bold text-uppercase text-success op-8">Jumlah Transaksi</h6>
+                                <h3 class="fw-bold">@ViewBag.trCount</h3>
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <div id="chart-container">
-                                <canvas id="totalIncomeChart"></canvas>
+                        <div class="col-md-12 mt-5">
+                            <div id="chart-container" style="position: relative; height: 100%">
+                                <canvas id="chartStatusTrans"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row row-card-no-pd">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-head-row card-tools-still-right">
-                        <h4 class="card-title">Users Geolocation</h4>
-                        <div class="card-tools">
-                            <button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-angle-down"></span></button>
-                            <button class="btn btn-icon btn-link btn-primary btn-xs btn-refresh-card"><span class="fa fa-sync-alt"></span></button>
-                            <button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-times"></span></button>
-                        </div>
-                    </div>
-                    <p class="card-category">
-                        Map of the distribution of users around the world
-                    </p>
-                </div>
+        @*<div class="col-md-6">
+            <div class="card full-height">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="table-responsive table-hover table-sales">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/id.png" alt="indonesia">
-                                                </div>
-                                            </td>
-                                            <td>Indonesia</td>
-                                            <td class="text-right">
-                                                2.320
-                                            </td>
-                                            <td class="text-right">
-                                                42.18%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/us.png" alt="united states">
-                                                </div>
-                                            </td>
-                                            <td>USA</td>
-                                            <td class="text-right">
-                                                240
-                                            </td>
-                                            <td class="text-right">
-                                                4.36%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/au.png" alt="australia">
-                                                </div>
-                                            </td>
-                                            <td>Australia</td>
-                                            <td class="text-right">
-                                                119
-                                            </td>
-                                            <td class="text-right">
-                                                2.16%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/ru.png" alt="russia">
-                                                </div>
-                                            </td>
-                                            <td>Russia</td>
-                                            <td class="text-right">
-                                                1.081
-                                            </td>
-                                            <td class="text-right">
-                                                19.65%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/cn.png" alt="china">
-                                                </div>
-                                            </td>
-                                            <td>China</td>
-                                            <td class="text-right">
-                                                1.100
-                                            </td>
-                                            <td class="text-right">
-                                                20%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/br.png" alt="brazil">
-                                                </div>
-                                            </td>
-                                            <td>Brasil</td>
-                                            <td class="text-right">
-                                                640
-                                            </td>
-                                            <td class="text-right">
-                                                11.63%
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mapcontainer">
-                                <div id="map-example" class="vmap"></div>
-                            </div>
-                        </div>
+                    <div class="card-title">Kategori Wilayah Beserta Jumlah Destinasinya</div>
+                    <div class="table-responsive mt-4">
+                        <table class="table dttable">
+                            <thead>
+                                <tr>
+                                    <td>No</td>
+                                    <td>Nama Wilayah</td>
+                                    <td>Jumlah Destinasi</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ no = 1; }
+                                @foreach (var item in ViewBag.JumlahDestinasiWilayah)
+                                {
+                                    <tr>
+                                        <td>@(no++)</td>
+                                        <td>@item.Nama_Wilayah</td>
+                                        <td>@item.JumlahDestinasi</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="col-md-6">
+            <div class="card full-height">
+                <div class="card-body">
+                    <div class="card-title">Destinasi Terlaris</div>
+                    <div class="table-responsive mt-4">
+                        <table class="table dttable">
+                            <thead>
+                                <tr>
+                                    <td>No</td>
+                                    <td>Nama Destinasi</td>
+                                    <td>Jumlah Dipesan</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ no = 1; }
+                                @foreach (var item in ViewBag.DestinasiTerlaris)
+                                {
+                                    <tr>
+                                        <td>@(no++)</td>
+                                        <td>@item.Nama_Destinasi</td>
+                                        <td>@item.JumlahDipesan</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>*@
     </div>
 </div>
 
@@ -203,5 +141,59 @@
                 },
             });
         }
+
+        var jmlPesanan = document.getElementById('chartStatusTrans').getContext('3d');
+        var dtStatus = [];
+        var dtCount = [];
+
+        var array = @Html.Raw(Json.Encode(@ViewBag.StatusTrans));
+
+        for (var i = 0; i < array.length; i++) {
+
+            //push ke array date dan count
+            dtStatus.push(array[i].StatusTrans);
+            dtCount.push(array[i].jumlah);
+        }
+
+
+        var adminChart = new Chart(jmlPesanan, {
+            type: 'bar',
+            data: {
+                labels: dtStatus,
+                datasets: [{
+                    label: "Transaksi",
+                    backgroundColor: '#ff9e27',
+                    borderColor: 'rgb(23, 125, 255)',
+                    data: dtCount,
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    display: false,
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            display: false //this will remove only the label
+                        },
+                        gridLines: {
+                            drawBorder: false,
+                            display: false
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawBorder: false,
+                            display: false
+                        }
+                    }]
+                },
+            }
+        });
+
+        adminChart.canvas.parentNode.style.height = '350px';
+
     </script>
 }

@@ -30,10 +30,10 @@ namespace BUSS.Models
         public System.DateTime Tanggal_Pesanan { get; set; }
         public string Bukti_DP { get; set; }
         public string Bukti_Pelunasan { get; set; }
+        public Nullable<decimal> biaya_tambahan { get; set; }
         public int Status_Transaksi { get; set; }
         public Nullable<double> PaketLama_Perjalanan { get; set; }
         public System.DateTime CreatedDate { get; set; }
-        public Nullable<decimal> biaya_tambahan { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

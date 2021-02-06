@@ -19,6 +19,9 @@ namespace BUSS.Controllers.Admin
 
         public ActionResult Pegawai()
         {
+            ViewBag.StatusTrans = db.view_StatusTransCount.Take(7).ToList();
+            ViewBag.trCount = db.Transaksis.Count();
+
             return View();
         }
 
@@ -35,7 +38,7 @@ namespace BUSS.Controllers.Admin
             ViewBag.trSum = db.Transaksis.Sum(x => x.Harga_total);
             ViewBag.JumlahDestinasiWilayah = db.view_JumlahDestinasiWilayah.OrderByDescending(x => x.JumlahDestinasi).Take(5).ToList();
             ViewBag.DestinasiTerlaris = db.view_DestinasiTerlaris.OrderByDescending(x => x.JumlahDipesan).Take(5).ToList();
-
+            
             return View();
         }
     }
