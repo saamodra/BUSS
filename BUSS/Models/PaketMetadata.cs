@@ -30,7 +30,7 @@ namespace BUSS.Models
         [DisplayName("Konsumsi")]
         public int Konsumsi { get; set; }
 
-        [DisplayName("Lama Perjalanan")]
+        [DisplayName("Lama Perjalanan (hari)")]
         [Required(ErrorMessage = "Lama perjalanan wajib diisi!")]
         public Nullable<int> Lama_Perjalanan { get; set; }
 
