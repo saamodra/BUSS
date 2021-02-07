@@ -94,3 +94,25 @@
         </div>
     </div>
 </div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#Nama").keypress(function (e) {
+                var key = e.keyCode;
+                if (key >= 48 && key <= 57) {
+                    e.preventDefault();
+                }
+            });
+
+            $("#No_HP").keypress(function (e) {
+                var key = e.keyCode;
+                if (key > 31 && (key < 48 || key > 57)) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+    </script>
+        
+}
