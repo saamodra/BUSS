@@ -72,7 +72,26 @@
                                             @Html.DisplayFor(modelItem => item.Email)
                                         </td>
                                         <td>
-                                            @(item.Role == 1 ? "Admin" : "Tour Leader")
+                                            @{
+                                                switch (item.Role)
+                                                {
+                                                    case 1:
+                                                        {
+                                                            <text>Admin</text>
+                                                            break;
+                                                        }
+                                                    case 2:
+                                                        {
+                                                            <text>Tour Leader</text>
+                                                            break;
+                                                        }
+                                                    default:
+                                                        {
+                                                            <text>Manager</text>
+                                                            break;
+                                                        }
+                                                }
+                                            }
                                         </td>
                                         <td>
                                             <a href="@Url.Action("Edit", @ViewBag.SidebarMenu, new { id = item.ID_Pegawai })" class="btn btn-warning btn-sm mr-1">

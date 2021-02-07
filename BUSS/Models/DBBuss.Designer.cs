@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Sekolah\Kuliah\Sistem Informasi\Semester 3\Pemrograman 4\Project\BUSS\BUSS\Models\DbBuss.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\Kuliah\SEMESTER 3\Project\PRG4\Coding_Git\BUSS\Models\DbBuss.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
