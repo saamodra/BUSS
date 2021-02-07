@@ -202,7 +202,7 @@ namespace BUSS.Controllers
             string nik = Session["NIK"].ToString();
             ViewBag.dbData = db.view_DashboardCustomer.Where(x => x.ID_Customer == nik).ToList();
             ViewBag.trCount = db.Transaksis.Where(x => x.ID_Customer == nik).Count();
-            ViewBag.trSum = db.Transaksis.Where(x => x.ID_Customer == nik).Sum(x => x.Harga_total);
+            ViewBag.trSum = db.Transaksis.Where(x => x.ID_Customer == nik).Select(t => t.Harga_total).DefaultIfEmpty(0).Sum();
             ViewBag.Transaksi = db.Transaksis.Where(x => x.ID_Customer == nik).OrderByDescending(x => x.CreatedDate).Take(5).ToList();
              
             return View();
@@ -221,7 +221,74 @@ namespace BUSS.Controllers
             }
         }
 
-       
+        public ActionResult Profil()
+        {
+            if (Session["NIK"] != null)
+            {
+                string nik = Session["NIK"].ToString();
+                var customer = db.Customers.Find(nik);
+
+                return View(customer);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Pegawai");
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult Profil([Bind(Include = "NIK,Nama,Alamat,No_HP,Email,Password,CreatedDate")] Customer customer)
+        {
+            if (db.Customers.Where(k => k.NIK != customer.NIK).Any(k => k.Email == customer.Email))
+            {
+                ModelState.AddModelError("Email", "Email sudah terdaftar.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                TempData["SuccessMessage"] = "Profil berhasil diperbarui!";
+                return RedirectToAction("Profil");
+            }
+
+            if (Session["NIK"] != null)
+            {
+                return RedirectToAction("Login", "Pegawai");
+            }
+
+            return View(customer);
+
+        }
+
+        [HttpPost]
+        public ActionResult UbahPassword(string NIK, string password, string newpassword)
+        {
+            var customer = db.Customers.Find(NIK);
+
+            if (db.Customers.Any(k => k.NIK == NIK && k.Password == password))
+            {
+                customer.Password = newpassword;
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                TempData["SuccessMessage"] = "Password berhasil diperbarui!";
+                return RedirectToAction("Profil");
+
+            }
+            else
+            {
+                ModelState.AddModelError("Password", "Password sekarang tidak cocok.");
+            }
+
+            if (Session["NIK"] == null)
+            {
+                return RedirectToAction("Login", "Customer");
+            }
+
+            return View("Profil", customer);
+
+        }
 
         protected override void Dispose(bool disposing)
         {

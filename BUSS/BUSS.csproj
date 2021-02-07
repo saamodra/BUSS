@@ -910,6 +910,7 @@
     <Content Include="Views\Laporan\PdfPesanan.cshtml" />
     <Content Include="Views\Laporan\Pesanan_3.cshtml" />
     <Content Include="Views\Pegawai\Profil.cshtml" />
+    <Content Include="Views\Customer\Profil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

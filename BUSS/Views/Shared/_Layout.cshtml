@@ -129,7 +129,7 @@
                                             <div class="avatar-lg"><img src="~/Content/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
                                             <div class="u-text">
                                                 @Session["Name"]                                                
-                                                <p class="text-muted">@Session["Email"]</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                                <p class="text-muted">@Session["Email"]</p><a href="@Url.Action("Profil", "Customer")" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                                             </div>
                                         </div>
                                     </li>
