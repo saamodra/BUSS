@@ -10,185 +10,194 @@
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
             <div>
                 <h2 class="text-white pb-2 fw-bold">Dashboard</h2>
-            </div>
-            <div class="ml-md-auto py-2 py-md-0">
-                <a href="#" class="btn btn-white btn-border btn-round mr-2">Manage</a>
-                <a href="#" class="btn btn-secondary btn-round">Add Customer</a>
+                <h5 class="text-white op-7 mb-2">Selamat Datang, @Session["Name"]!</h5>
             </div>
         </div>
     </div>
 </div>
+
 <div class="page-inner mt--5">
     <div class="row mt--2">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card full-height">
                 <div class="card-body">
-                    <div class="card-title">Overall statistics</div>
-                    <div class="card-category">Daily information about statistics in system</div>
-                    <div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
-                        <div class="px-2 pb-2 pb-md-0 text-center">
-                            <div id="circles-1"></div>
-                            <h6 class="fw-bold mt-3 mb-0">New Users</h6>
-                        </div>
-                        <div class="px-2 pb-2 pb-md-0 text-center">
-                            <div id="circles-2"></div>
-                            <h6 class="fw-bold mt-3 mb-0">Sales</h6>
-                        </div>
-                        <div class="px-2 pb-2 pb-md-0 text-center">
-                            <div id="circles-3"></div>
-                            <h6 class="fw-bold mt-3 mb-0">Subscribers</h6>
-                        </div>
+                    <div class="card-title">Pesanan yang butuh jadwal</div>
+                    <div class="table-responsive mt-4">
+                        <table class="table multi_filter">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Nama Paket</th>
+                                    <th>Harga Total</th>
+                                    <th>DP</th>
+                                    <th>Tanggal Sewa</th>
+                                    <th>Jadwal</th>
+                                    <th>Status Transaksi</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int rowCount = 1; }
+                                @foreach (var item in ViewBag.Transaksi)
+                                {
+                                    <tr>
+                                        <td>@(rowCount++).</td>
+                                        <td>
+                                            @item.Paket.Nama_Paket
+                                        </td>
+                                        <td>
+                                            @item.Harga_total
+                                        </td>
+                                        <td>
+                                            @string.Format("Rp{0:0,0}", item.Harga_total / 2)
+                                        </td>
+                                        <td>
+                                            @item.Tanggal_Pesanan
+                                        </td>
+                                        <td>
+                                            @if (item.Paket.Jadwal == null)
+                                            {
+                                                <text>-</text>
+                                            }
+                                            else
+                                            {
+                                                <a href="~/Content/jadwal/@item.Paket.Jadwal">@item.Paket.Jadwal</a>
+                                            }
+                                        </td>
+                                        <td>
+                                            @{
+                                                switch (item.Status_Transaksi)
+                                                {
+                                                    case 0:
+                                                        {
+                                                            <text>Menunggu Pembayaran DP</text>
+                                                            break;
+                                                        }
+                                                    case 1:
+                                                        {
+                                                            <text>Pembayaran DP diproses</text>
+                                                            break;
+                                                        }
+                                                    case 2:
+                                                        {
+                                                            <text>Menunggu Pelunasan</text>
+                                                            break;
+                                                        }
+                                                    case 3:
+                                                        {
+                                                            <text>Pelunasan diproses</text>
+                                                            break;
+                                                        }
+                                                    case 4:
+                                                        {
+                                                            <text>Lunas</text>
+                                                            break;
+                                                        }
+                                                    case 5:
+                                                        {
+                                                            <text>Selesai</text>
+                                                            break;
+                                                        }
+                                                    case 6:
+                                                        {
+                                                            <text>Isi Feedback</text>
+                                                            break;
+                                                        }
+                                                    default:
+                                                        {
+                                                            <text>Dibatalkan</text>
+                                                            break;
+                                                        }
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("DetailTransaksi", "Transaksi", new { id = item.ID_Transaksi })" class="btn btn-info btn-sm mr-1">
+                                                <i class="fa fa-eye"></i> Detil
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+
+
+        <div class="col-md-12">
             <div class="card full-height">
                 <div class="card-body">
-                    <div class="card-title">Total income & spend statistics</div>
-                    <div class="row py-3">
-                        <div class="col-md-4 d-flex flex-column justify-content-around">
-                            <div>
-                                <h6 class="fw-bold text-uppercase text-success op-8">Total Income</h6>
-                                <h3 class="fw-bold">$9.782</h3>
-                            </div>
-                            <div>
-                                <h6 class="fw-bold text-uppercase text-danger op-8">Total Spend</h6>
-                                <h3 class="fw-bold">$1,248</h3>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div id="chart-container">
-                                <canvas id="totalIncomeChart"></canvas>
-                            </div>
-                        </div>
+                    <div class="card-title">Paket yang butuh jadwal</div>
+                    <div class="table-responsive mt-4">
+                        <table class="table multi_filter">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Nama Paket</th>
+                                    <th>Harga</th>
+                                    <th>Konsumsi</th>
+                                    <th>Lama Perjalanan</th>
+                                    <th>Jenis Paket</th>
+                                    <th>Jadwal</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ rowCount = 1; }
+                                @foreach (var item in ViewBag.Paket)
+                                {
+                                    <tr>
+                                        <td>@(rowCount++).</td>
+                                        <td>@item.Nama_Paket</td>
+                                        <td>
+                                            @if (item.Harga == null)
+                                            {
+                                                <text>-</text>
+                                            }
+                                            else
+                                            {
+                                                @item.Harga
+                                            }
+                                        </td>
+                                        <td>
+                                            @item.Konsumsi x
+                                        </td>
+                                        <td>
+                                            @item.Lama_Perjalanan Hari
+                                        </td>
+                                        <td>
+                                            @(item.Jenis_Paket == 0 ? "Paket" : "Custom")
+                                        </td>
+                                        <td>
+                                            @if (item.Jadwal == null)
+                                            {
+                                                <text>-</text>
+                                            }
+                                            else
+                                            {
+                                                <a href="~/Content/jadwal/@item.Jadwal">@item.Jadwal</a>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("UbahJadwal", "Tourleader", new { id = item.ID_Paket })" class="btn btn-warning btn-sm mr-1">
+                                                <i class="fa fa-edit"></i> Ubah Jadwal
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
-    <div class="row row-card-no-pd">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-head-row card-tools-still-right">
-                        <h4 class="card-title">Users Geolocation</h4>
-                        <div class="card-tools">
-                            <button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-angle-down"></span></button>
-                            <button class="btn btn-icon btn-link btn-primary btn-xs btn-refresh-card"><span class="fa fa-sync-alt"></span></button>
-                            <button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-times"></span></button>
-                        </div>
-                    </div>
-                    <p class="card-category">
-                        Map of the distribution of users around the world
-                    </p>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="table-responsive table-hover table-sales">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/id.png" alt="indonesia">
-                                                </div>
-                                            </td>
-                                            <td>Indonesia</td>
-                                            <td class="text-right">
-                                                2.320
-                                            </td>
-                                            <td class="text-right">
-                                                42.18%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/us.png" alt="united states">
-                                                </div>
-                                            </td>
-                                            <td>USA</td>
-                                            <td class="text-right">
-                                                240
-                                            </td>
-                                            <td class="text-right">
-                                                4.36%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/au.png" alt="australia">
-                                                </div>
-                                            </td>
-                                            <td>Australia</td>
-                                            <td class="text-right">
-                                                119
-                                            </td>
-                                            <td class="text-right">
-                                                2.16%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/ru.png" alt="russia">
-                                                </div>
-                                            </td>
-                                            <td>Russia</td>
-                                            <td class="text-right">
-                                                1.081
-                                            </td>
-                                            <td class="text-right">
-                                                19.65%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/cn.png" alt="china">
-                                                </div>
-                                            </td>
-                                            <td>China</td>
-                                            <td class="text-right">
-                                                1.100
-                                            </td>
-                                            <td class="text-right">
-                                                20%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="flag">
-                                                    <img src="~/Content/assets/img/flags/br.png" alt="brazil">
-                                                </div>
-                                            </td>
-                                            <td>Brasil</td>
-                                            <td class="text-right">
-                                                640
-                                            </td>
-                                            <td class="text-right">
-                                                11.63%
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mapcontainer">
-                                <div id="map-example" class="vmap"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
+
 
 @section scripts {
     <script>
@@ -203,43 +212,21 @@
             });
         }
 
-        var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-        var mytotalIncomeChart = new Chart(totalIncomeChart, {
-            type: 'bar',
-            data: {
-                labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-                datasets: [{
-                    label: "Total Income",
-                    backgroundColor: '#ff9e27',
-                    borderColor: 'rgb(23, 125, 255)',
-                    data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-                }],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                legend: {
-                    display: false,
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            display: false //this will remove only the label
-                        },
-                        gridLines: {
-                            drawBorder: false,
-                            display: false
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            drawBorder: false,
-                            display: false
-                        }
-                    }]
-                },
-            }
+        $(document).ready(function () {
+            $('.multi_filter').DataTable({
+                dom: '<"row"<"col-lg-4"l><"col-lg-4"B><"col-lg-4"f>>rtip',
+                "language": {
+                    "lengthMenu": "_MENU_ Data per halaman",
+                    "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entries",
+                    "zeroRecords": "Tidak ada data.",
+                    "search": "Pencarian :",
+                    "infoFiltered": "(tersaring dari total _MAX_ data)",
+                    "paginate": {
+                        "previous": "Sebelumnya",
+                        "next": "Selanjutnya"
+                    }
+                }
+            });
         });
     </script>
 }
