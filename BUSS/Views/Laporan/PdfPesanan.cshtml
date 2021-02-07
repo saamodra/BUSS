@@ -41,6 +41,10 @@
                 </div>
 
                 <h1 class="text-center font-weight-bold">Laporan Transaksi</h1>
+                <p class="text-center font-weight-bold h4">
+                    @(ViewBag.date_1 == null ? "" : ViewBag.date_1.ToString("dd/MM/yyyy")) -
+                    @(ViewBag.date_2 == null ? "" : ViewBag.date_2.ToString("dd/MM/yyyy"))
+                </p>
 
             </div>
 

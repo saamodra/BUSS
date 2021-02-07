@@ -1,0 +1,196 @@
+﻿@model IEnumerable<BUSS.Models.Feedback>
+
+@{
+    ViewBag.Title = "Destinasi";
+    ViewBag.SidebarMenu = "Destinasi";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">@ViewBag.Title</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="@Url.Action("Manager", "Dashboard")">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Destinasi", "Laporan")">@ViewBag.Title</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Data @ViewBag.Title</h3>
+                    <form action="@Url.Action("PrintFeedback", "Laporan")" method="get" class="d-inline">
+                        <input type="hidden" value="@(ViewBag.Paket_Terpilih == null ? "" : ViewBag.Paket_Terpilih)" name="Paket" />
+                        <button type="submit" class="btn btn-success"><i class="fa fa-print"></i> Cetak</button>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <form action="@Url.Action("Feedback", "Laporan")" method="get">
+                        <div class="d-flex">
+                            <div class="form-group">
+                                <label>Paket</label>
+                                @Html.DropDownList("ID_Paket", null, "Pilih Paket", htmlAttributes: new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary mt-4"><i class="fa fa-search"></i> Cari</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table" id="multi_filter">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">No.</th>
+                                    <th class="text-center">Nama Paket</th>
+                                    <th class="text-center">Customer</th>
+                                    <th class="text-center">Tgl. Feedback</th>
+                                    <th class="text-center">Isi Feedback</th>
+                                    <th class="text-center">Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int rowCount = 1; }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="text-center">@(rowCount++).</td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Transaksi.Paket.Nama_Paket)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Transaksi.Customer.Nama)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Isi_Feedback)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Rating)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Rata-Rata</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="//cdn.datatables.net/plug-ins/1.10.22/api/sum().js"></script>
+    <script>
+        if ("@TempData["SuccessMessage"]" != "") {
+            swal("Berhasil", "@TempData["SuccessMessage"]", {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                },
+            });
+        }
+
+        if ("@TempData["ErrorMessage"]" != "") {
+            swal("Gagal", "@TempData["ErrorMessage"]", {
+                icon: "error",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-danger'
+                    }
+                },
+            });
+        }
+
+        $(document).ready(function () {
+            $('#multi_filter').DataTable({
+                dom: 'rtip',
+                "language": {
+                    "lengthMenu": "_MENU_ Data per halaman",
+                    "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entries",
+                    "zeroRecords": "Tidak ada data.",
+                    "search": "Pencarian :",
+                    "infoFiltered": "(tersaring dari total _MAX_ data)",
+                    "paginate": {
+                        "previous": "Sebelumnya",
+                        "next": "Selanjutnya"
+                    }
+                },
+                "footerCallback": function (tfoot, data, start, end, display) {
+                    var api = this.api();
+                    var allT;
+
+                    // total column
+                    var i = 5;
+                    var columnDataTotal = api
+                        .column(i)
+                        .data();
+                    var theColumnTotal = columnDataTotal
+                        .reduce(function (a, b) {
+                            if (isNaN(a)) {
+                                return '';
+                            } else {
+                                a = parseFloat(a);
+                            }
+                            if (isNaN(b)) {
+                                return '';
+                            } else {
+                                b = parseFloat(b);
+                            }
+                            return a + b;
+                        }, 0);
+                    // view page column
+                    var columnData = api
+                        .column(i, {
+                            page: 'current'
+                        })
+                        .data();
+                    var theColumnPage = columnData
+                        .reduce(function (a, b) {
+                            if (isNaN(a)) {
+                                return '';
+                            } else {
+                                a = parseFloat(a);
+                            }
+                            if (isNaN(b)) {
+                                return '';
+                            } else {
+                                b = parseFloat(b);
+                            }
+                            return a + b;
+                        }, 0);
+
+                    // Update footer
+
+                    $('tr:eq(0) th:eq(5)', api.table().footer()).html(
+                        parseFloat(theColumnPage / columnData.count()).toFixed(2)
+                    );
+                }
+            });
+        });
+    </script>
+}
+
+

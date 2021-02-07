@@ -1,0 +1,200 @@
+﻿@model IEnumerable<BUSS.Models.Destinasi>
+
+@{
+    ViewBag.Title = "Destinasi";
+    ViewBag.SidebarMenu = "Destinasi";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">@ViewBag.Title</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="@Url.Action("Manager", "Dashboard")">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Destinasi", "Laporan")">@ViewBag.Title</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Data @ViewBag.Title</h3>
+                    <form action="@Url.Action("PrintDestinasi", "Laporan")" method="get" class="d-inline">
+                        <input type="hidden" value="@(ViewBag.Kota_Terpilih == null ? "" : ViewBag.Kota_Terpilih)" name="Kota" />
+                        <button type="submit" class="btn btn-success"><i class="fa fa-print"></i> Cetak</button>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <form action="@Url.Action("Destinasi", "Laporan")" method="get">
+                        <div class="d-flex">
+                            <div class="form-group">
+                                <label>Kota</label>
+                                @Html.DropDownList("ID_Kota", null, "Pilih Kota", htmlAttributes: new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary mt-4"><i class="fa fa-search"></i> Cari</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table" id="multi_filter">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Nama_Destinasi)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Kota.Nama_Kota)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Jam_buka)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Jam_tutup)
+                                    </th>
+                                    <th>Status Data</th>
+                                    <th>Rating</th>
+                                    <th>Harga Tiket</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int rowCount = 1; }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@(rowCount++).</td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nama_Destinasi)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Kota.Nama_Kota)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Jam_buka)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Jam_tutup)
+                                        </td>
+                                        <td>
+                                            @(item.Status == 1 ? "Aktif" : "Tidak Aktif")
+                                        </td>
+                                        <td>
+                                            @item.Rating.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Harga_Tiket)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Rata-rata</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="//cdn.datatables.net/plug-ins/1.10.22/api/sum().js"></script>
+    <script>
+        if ("@TempData["SuccessMessage"]" != "") {
+            swal("Berhasil", "@TempData["SuccessMessage"]", {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                },
+            });
+        }
+
+        if ("@TempData["ErrorMessage"]" != "") {
+            swal("Gagal", "@TempData["ErrorMessage"]", {
+                icon: "error",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-danger'
+                    }
+                },
+            });
+        }
+
+        $(document).ready(function () {
+            $('#multi_filter').DataTable({
+                dom: 'rtip',
+                "language": {
+                    "lengthMenu": "_MENU_ Data per halaman",
+                    "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entries",
+                    "zeroRecords": "Tidak ada data.",
+                    "search": "Pencarian :",
+                    "infoFiltered": "(tersaring dari total _MAX_ data)",
+                    "paginate": {
+                        "previous": "Sebelumnya",
+                        "next": "Selanjutnya"
+                    }
+                },
+                drawCallback: function () {
+                    var api = this.api();
+
+                    // view page column
+                    var columnData = api.column(6, { page: 'current' }).data();
+                    var theColumnPage = columnData.reduce(function (a, b) {
+                        if (isNaN(a)) return '';
+                        else a = parseFloat(a);
+
+                        if (isNaN(b)) return '';
+                        else b = parseFloat(b);
+
+                        return a + b;
+                    }, 0);
+
+                    $(`tr:eq(0) th:eq(6)`, api.table().footer()).html(
+                        parseFloat(theColumnPage / columnData.count()).toFixed(2)
+                    );
+
+                    columnData = api.column(7, { page: 'current' }).data();
+                    theColumnPage = columnData.reduce(function (a, b) {
+                        if (typeof a === 'string') {
+                            a = numberOnly(a);
+                        }
+                        if (typeof b === 'string') {
+                            b = numberOnly(b);
+                        }
+
+                        return a + b;
+                    }, 0);
+
+
+                    $(`tr:eq(0) th:eq(7)`, api.table().footer()).html(
+                        formatter.format(theColumnPage / columnData.count())
+                    );
+                }
+            });
+        });
+    </script>
+}
+
+

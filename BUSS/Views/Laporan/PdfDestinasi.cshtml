@@ -1,0 +1,111 @@
+﻿@model IEnumerable<BUSS.Models.Destinasi>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PdfPesanan</title>
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/print.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <header>
+            <hr />
+            <div class="row flexrow">
+                <div class="col-xs-2 text-center">
+                    <img src="~/Content/assets/img/favicon.png" alt="Logo" class="imgPrint" />
+                </div>
+                <div class="col-xs-8 header-title">
+                    <h2>PT. BUSS Travel</h2>
+                    <p class="mb-2">Jl. Jati V D No. 8, Sungai Bambu, Jakarta Utara, 14330</p>
+                    <p class="mb-2">Tlp. (021) 651-95647, Fax (021) 651-9821</p>
+                </div>
+                <div class="col-xs-2 text-center">
+                    <img src="~/Content/assets/img/favicon.png" alt="Logo" class="imgPrint" />
+                </div>
+            </div>
+            <hr />
+        </header>
+
+        <div class="mt-5">
+            <div class="content-title mb-5">
+                <div class="d-flex justify-content-between flexrow">
+                    <p>Nomor Surat : BSS/PN/@DateTime.Now.ToString("MM/yyyy")</p>
+                    <p class="text-right">@DateTime.Now.ToString("dd-MM-yyyy")</p>
+                </div>
+
+                <h1 class="text-center font-weight-bold">Laporan Destinasi</h1>
+                <p class="text-center font-weight-bold h4">
+                    @(ViewBag.Kota == null ? "-" : "Kota " + ViewBag.Kota)
+                </p>
+
+            </div>
+            <table class="table w-100" id="multi_filter">
+                <thead class="bg-black">
+                    <tr>
+                        <th class="text-center">No.</th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Nama_Destinasi)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Kota.Nama_Kota)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Jam_buka)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Jam_tutup)
+                        </th>
+                        <th class="text-center">Rating</th>
+                        <th class="text-center">Harga Tiket</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int rowCount = 1; }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center">@(rowCount++).</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nama_Destinasi)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Kota.Nama_Kota)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Jam_buka)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Jam_tutup)
+                            </td>
+                            <td>
+                                @item.Rating.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)
+                            </td>
+                            <td class="text-right">
+                                @Html.DisplayFor(modelItem => item.Harga_Tiket)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot class="bg-black">
+                    <tr>
+                        <th>Rata-rata</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>@string.Format("{0:0.00}", ViewBag.avgRating)</th>
+                        <th class="text-right">@string.Format("Rp{0:0,0}", ViewBag.avgHarga)</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

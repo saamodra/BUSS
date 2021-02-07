@@ -20,7 +20,7 @@
         <EntityTypeShape EntityType="BUSSModel.Pegawai" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BUSSModel.Transaksi" Width="1.5" PointX="8.25" PointY="17.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BUSSModel.Transaksi_Kendaraan" Width="1.5" PointX="10.5" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BUSSModel.view_DashboardCustomer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BUSSModel.view_DashboardCustomer" Width="1.5" PointX="9.375" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BUSSModel.view_DestinasiTerlaris" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BUSSModel.view_JumlahDestinasiWilayah" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BUSSModel.view_LaporanDestinasi" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />

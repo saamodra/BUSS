@@ -28,7 +28,13 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title">Data @ViewBag.Title</h3>
-                    <a href="@Url.Action("PrintPesanan", "Laporan")" class="btn btn-danger">Cetak</a>
+                    <form action="@Url.Action("PrintPesanan", "Laporan")" method="get" class="d-inline">
+                        <input type="hidden" value="@(ViewBag.status == null ? "" : ViewBag.status)" name="Status" />
+                        <input type="hidden" name="date_1" value="@(ViewBag.date_1 == null ? "" : ViewBag.date_1.ToString("yyyy-MM-dd"))" class="form-control" />
+                        <input type="hidden" name="date_2" value="@(ViewBag.date_2 == null ? "" : ViewBag.date_2.ToString("yyyy-MM-dd"))" class="form-control" />
+                                
+                        <button type="submit" class="btn btn-success"><i class="fa fa-print"></i> Cetak</button>
+                    </form>
                 </div>
                 <div class="card-body">
                     <form action="@Url.Action("Pesanan", "Laporan")" method="get">
@@ -36,14 +42,15 @@
                             <div class="form-group">
                                 <label>Status</label>
                                 <select name="status" class="form-control" >
-                                    <option value="0" @(ViewBag.status == 0 ? "selected" : "")>Menunggu Pembayaran DP</option>
-                                    <option value="1" @(ViewBag.status == 1 ? "selected" : "")>Pembayaran DP diproses</option>
-                                    <option value="2" @(ViewBag.status == 2 ? "selected" : "")>Menunggu Pelunasan</option>
-                                    <option value="3" @(ViewBag.status == 3 ? "selected" : "")>Pelunasan diproses</option>
-                                    <option value="4" @(ViewBag.status == 4 ? "selected" : "")>Lunas</option>
-                                    <option value="5" @(ViewBag.status == 5 ? "selected" : "")>Selesai</option>
-                                    <option value="6" @(ViewBag.status == 6 ? "selected" : "")>Isi Feedback</option>
-                                    <option value="7" @(ViewBag.status == 7 ? "selected" : "")>Dibatalkan</option>
+                                    <option value="">Pilih Status</option>
+                                    <option value="0" @(ViewBag.status == "0" ? "selected" : "")>Menunggu Pembayaran DP</option>
+                                    <option value="1" @(ViewBag.status == "1" ? "selected" : "")>Pembayaran DP diproses</option>
+                                    <option value="2" @(ViewBag.status == "2" ? "selected" : "")>Menunggu Pelunasan</option>
+                                    <option value="3" @(ViewBag.status == "3" ? "selected" : "")>Pelunasan diproses</option>
+                                    <option value="4" @(ViewBag.status == "4" ? "selected" : "")>Lunas</option>
+                                    <option value="5" @(ViewBag.status == "5" ? "selected" : "")>Selesai</option>
+                                    <option value="6" @(ViewBag.status == "6" ? "selected" : "")>Isi Feedback</option>
+                                    <option value="7" @(ViewBag.status == "7" ? "selected" : "")>Dibatalkan</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -55,7 +62,7 @@
                                 <input type="date" name="date_2" value="@(ViewBag.date_2 == null ? "" : ViewBag.date_2.ToString("yyyy-MM-dd"))" class="form-control" />
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary mt-4">Cari</button>
+                                <button type="submit" class="btn btn-primary mt-4"><i class="fa fa-search"></i> Cari</button>
                             </div>
                         </div>
                     </form>
@@ -178,18 +185,6 @@
                                     <th></th>
                                     <th></th>
                                 </tr>
-                                <tr>
-                                    <th></th>
-                                    <th>Nama Paket</th>
-                                    <th>Customer</th>
-                                    <th>Jumlah Penumpang</th>
-                                    <th>Lama Perjalanan</th>
-                                    <th>Tanggal Sewa</th>
-                                    <th></th>
-                                    <th>Status Transaksi</th>
-                                    <th>DP</th>
-                                    <th>Harga Total</th>
-                                </tr>
                             </tfoot>
                         </table>
                     </div>
@@ -230,52 +225,6 @@
         $(document).ready(function () {
             $('#multi_filter').DataTable({
                 dom: 'rtip',
-                buttons: [
-                    {
-                        extend: 'copy',
-                        text: '<i class="fa fa-copy"></i> Copy',
-                        footer: true,
-                        exportOptions: {
-                            columns: ':visible',
-                        }
-                    }, {
-                        extend: 'excel',
-                        text: '<i class="fa fa-file-excel"></i> Excel',
-                        title: 'Data Pesanan',
-                        footer: true,
-                        filename: 'Data Pesanan ' + moment().format('DD-MM-YYYY'),
-                        exportOptions: {
-                            columns: ':visible',
-                        }
-                    }, {
-                        extend: 'pdf',
-                        text: '<i class="fa fa-file-pdf"></i> PDF',
-                        title: 'Data Pesanan',
-                        footer: true,
-                        filename: 'Data Pesanan ' + moment().format('DD-MM-YYYY'),
-                        orientation: 'landscape',
-                        pageSize: 'LETTER',
-                        exportOptions: {
-                            columns: ':visible',
-                        }
-                    }, {
-                        extend: 'print',
-                        text: '<i class="fa fa-print"></i> Print',
-                        title: 'Data Pesanan',
-                        footer: true,
-                        filename: 'Data Pesanan ' + moment().format('DD-MM-YYYY'),
-                        exportOptions: {
-                            columns: ':visible',
-                        }
-                    }, {
-                        extend: 'colvis',
-                        text: '<i class="fa fa-eye"></i>'
-                    }
-                ],
-                lengthMenu: [
-                    [10, 25, 50, -1],
-                    ['10', '25', '50', 'All']
-                ],
                 "language": {
                     "lengthMenu": "_MENU_ Data per halaman",
                     "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entries",
@@ -325,31 +274,6 @@
                     //    parseFloat(theColumnPage / columnData.count()).toFixed(2)
                     //);
 
-                },
-                initComplete: function () {
-                    var columnCount = 0;
-                    var api = this.api();
-                    api.columns().every(function () {
-                        if (columnCount != 6 && columnCount != 0) {
-                            var column = this;
-                            var select = $('<select class="form-control form-control-sm height-unset"><option value=""></option></select>')
-                                .appendTo($(`tr:eq(1) th:eq(${columnCount})`, api.table().footer()).empty())
-                                .on('change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                        $(this).val()
-                                    );
-
-                                    column
-                                        .search(val ? '^' + val + '$' : '', true, false)
-                                        .draw();
-                                });
-
-                            column.data().unique().sort().each(function (d, j) {
-                                select.append('<option value="' + d + '">' + d + '</option>')
-                            });
-                        }
-                        columnCount++;
-                    });
                 }
             });
         });
