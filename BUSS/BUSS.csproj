@@ -913,6 +913,10 @@
     <Content Include="Views\Laporan\Pesanan_3.cshtml" />
     <Content Include="Views\Pegawai\Profil.cshtml" />
     <Content Include="Views\Customer\Profil.cshtml" />
+    <Content Include="Views\Laporan\Destinasi_2.cshtml" />
+    <Content Include="Views\Laporan\PdfDestinasi.cshtml" />
+    <Content Include="Views\Laporan\Feedback_2.cshtml" />
+    <Content Include="Views\Laporan\PdfFeedback.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
