@@ -17,16 +17,17 @@
     <div class="container-fluid">
         <header>
             <hr />
-            <div class="row">
-                <div class="col-2 text-center">
-                    <img src="~/Content/assets/img/favicon.png" alt="Logo" />
+            <div class="row flexrow">
+                <div class="col-xs-2 text-center">
+                    <img src="~/Content/assets/img/favicon.png" alt="Logo" class="imgPrint" />
                 </div>
-                <div class="col-8 header-title">
-                    <h1>PT. BUSS Travel</h1>
-                    <p>Jl. Jati V D No. 8, Sungai Bambu, Jakarta Utara</p>
+                <div class="col-xs-8 header-title">
+                    <h2>PT. BUSS Travel</h2>
+                    <p class="mb-2">Jl. Jati V D No. 8, Sungai Bambu, Jakarta Utara, 14330</p>
+                    <p class="mb-2">Tlp. (021) 651-95647, Fax (021) 651-9821</p>
                 </div>
-                <div class="col-2 text-center">
-                    <img src="~/Content/assets/img/favicon.png" alt="Logo" />
+                <div class="col-xs-2 text-center">
+                    <img src="~/Content/assets/img/favicon.png" alt="Logo" class="imgPrint" />
                 </div>
             </div>
             <hr />
@@ -34,30 +35,29 @@
 
         <div class="mt-5">
             <div class="content-title mb-5">
-                <div class="d-flex justify-content-between">
-                    <p>Nomor Surat : 0817823/PMA/907237</p>
-                    <p>@DateTime.Now.ToString("dd-MM-yyyy")</p>
+                <div class="d-flex justify-content-between flexrow">
+                    <p>Nomor Surat : BSS/PN/@DateTime.Now.ToString("MM/yyyy")</p>
+                    <p class="text-right">@DateTime.Now.ToString("dd-MM-yyyy")</p>
                 </div>
 
-                <h1 class="text-center">Laporan Transaksi</h1>
+                <h1 class="text-center font-weight-bold">Laporan Transaksi</h1>
 
             </div>
 
             <table class="table" id="multi_filter">
-                <thead>
+                <thead class="bg-black">
                     <tr>
-                        <th>No.</th>
-                        <th>
+                        <th class="align-middle">No.</th>
+                        <th class="align-middle">
                             @Html.DisplayNameFor(model => model.Paket.Nama_Paket)
                         </th>
-                        <th>Customer</th>
-                        <th>Jumlah Penumpang</th>
-                        <th>Lama Perjalanan</th>
-                        <th>Tanggal Sewa</th>
-                        <th>Jadwal</th>
-                        <th>Status Transaksi</th>
-                        <th>DP</th>
-                        <th>Harga Total</th>
+                        <th class="align-middle">Customer</th>
+                        <th class="align-middle">Jumlah Penumpang</th>
+                        <th class="align-middle">Lama Perjalanan</th>
+                        <th class="align-middle">Tanggal Sewa</th>
+                        <th class="align-middle">Status Transaksi</th>
+                        <th class="align-middle">DP</th>
+                        <th class="align-middle">Harga Total</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,33 +65,23 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@(rowCount++).</td>
-                            <td>
+                            <td class="align-middle text-center">@(rowCount++).</td>
+                            <td class="align-middle">
                                 @Html.DisplayFor(modelItem => item.Paket.Nama_Paket)
                             </td>
-                            <td>
+                            <td class="align-middle text-center">
                                 @Html.DisplayFor(modelItem => item.Customer.Nama)
                             </td>
-                            <td>
+                            <td class="align-middle text-center">
                                 @Html.DisplayFor(modelItem => item.Jumlah_Penumpang)
                             </td>
-                            <td>
+                            <td class="align-middle text-center">
                                 @Html.DisplayFor(modelItem => item.PaketLama_Perjalanan) Hari
                             </td>
-                            <td>
+                            <td class="align-middle text-center">
                                 @Html.DisplayFor(modelItem => item.Tanggal_Pesanan)
                             </td>
-                            <td>
-                                @if (item.Paket.Jadwal == null)
-                                {
-                                    <text>-</text>
-                                }
-                                else
-                                {
-                                    <a href="~/Content/jadwal/@item.Paket.Jadwal">@item.Paket.Jadwal</a>
-                                }
-                            </td>
-                            <td>
+                            <td class="align-middle text-center">
                                 @{
                                     switch (item.Status_Transaksi)
                                     {
@@ -138,20 +128,30 @@
                                     }
                                 }
                             </td>
-                            <td>
+                            <td class="text-right">
                                 @string.Format("Rp{0:0,0}", item.Harga_total / 2)
                             </td>
-                            <td>
+                            <td class="text-right">
                                 @string.Format("Rp{0:0,0}", item.Harga_total)
                             </td>
                         </tr>
                     }
                 </tbody>
+                <tfoot class="bg-black">
+                    <tr>
+                        <th>Total</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th class="text-right">@string.Format("Rp{0:0,0}", ViewBag.sumTransaksi)</th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
-
     </div>
-
-
 </body>
 </html>

@@ -31,6 +31,34 @@
                     <a href="@Url.Action("PrintPesanan", "Laporan")" class="btn btn-danger">Cetak</a>
                 </div>
                 <div class="card-body">
+                    <form action="@Url.Action("Pesanan", "Laporan")" method="get">
+                        <div class="d-flex">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select name="status" class="form-control" >
+                                    <option value="0" @(ViewBag.status == 0 ? "selected" : "")>Menunggu Pembayaran DP</option>
+                                    <option value="1" @(ViewBag.status == 1 ? "selected" : "")>Pembayaran DP diproses</option>
+                                    <option value="2" @(ViewBag.status == 2 ? "selected" : "")>Menunggu Pelunasan</option>
+                                    <option value="3" @(ViewBag.status == 3 ? "selected" : "")>Pelunasan diproses</option>
+                                    <option value="4" @(ViewBag.status == 4 ? "selected" : "")>Lunas</option>
+                                    <option value="5" @(ViewBag.status == 5 ? "selected" : "")>Selesai</option>
+                                    <option value="6" @(ViewBag.status == 6 ? "selected" : "")>Isi Feedback</option>
+                                    <option value="7" @(ViewBag.status == 7 ? "selected" : "")>Dibatalkan</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Mulai</label>
+                                <input type="date" name="date_1" value="@(ViewBag.date_1 == null ? "" : ViewBag.date_1.ToString("yyyy-MM-dd"))" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Akhir</label>
+                                <input type="date" name="date_2" value="@(ViewBag.date_2 == null ? "" : ViewBag.date_2.ToString("yyyy-MM-dd"))" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary mt-4">Cari</button>
+                            </div>
+                        </div>
+                    </form>
                     <div class="table-responsive">
                         <table class="table" id="multi_filter">
                             <thead>
@@ -81,6 +109,7 @@
                                             }
                                         </td>
                                         <td>
+                                            
                                             @{
                                                 switch (item.Status_Transaksi)
                                                 {
@@ -200,7 +229,7 @@
 
         $(document).ready(function () {
             $('#multi_filter').DataTable({
-                dom: '<"row"<"col-lg-4"l><"col-lg-4"B><"col-lg-4"f>>rtip',
+                dom: 'rtip',
                 buttons: [
                     {
                         extend: 'copy',

@@ -25,11 +25,21 @@ namespace BUSS.Controllers
             return View();
         }
 
-        public ActionResult Pesanan()
+        public ActionResult Pesanan(DateTime? date_1, DateTime? date_2, string Status)
         {
-            var transaksi = db.Transaksis.ToList();
+            ViewBag.date_1 = date_1;
+            ViewBag.date_2 = date_2;
 
-            return View("Pesanan_3", transaksi);
+            
+            if(date_1 == null)
+            {
+                var transaksi = db.Transaksis.ToList();
+                return View("Pesanan_2", transaksi);
+            } else
+            {
+                var transaksi = db.Transaksis.Where(x => x.Tanggal_Pesanan >= date_1 && x.Tanggal_Pesanan <= date_2).ToList();
+                return View("Pesanan_2", transaksi);
+            }
         }
 
         public ActionResult LaporanPesanan()
@@ -57,31 +67,19 @@ namespace BUSS.Controllers
         public ActionResult PdfPesanan()
         {
             var transaksi = db.Transaksis.ToList();
+            ViewBag.sumTransaksi = db.Transaksis.Select(x => x.Harga_total).DefaultIfEmpty(0).Sum();
 
             return View(transaksi);
         }
 
         public ActionResult PrintPesanan()
         {
-            var report = new ActionAsPdf("PdfPesanan");
-            return report;
-        }
-
-        //[HttpPost]
-        [ValidateInput(false)]
-        public FileResult Export()
-        {
-            using (MemoryStream stream = new MemoryStream())
+            var report = new ActionAsPdf("PdfPesanan")
             {
-                string html = System.IO.File.ReadAllText(Server.MapPath("~/Views/Laporan/PdfPesanan.cshtml"));
-                StringReader sr = new StringReader(html);
-                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
-                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-                pdfDoc.Open();
-                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-                pdfDoc.Close();
-                return File(stream.ToArray(), "application/pdf", "Grid.pdf");
-            }
+                FileName = "Laporan Pesanan " + DateTime.Now.ToString("dd-MM-yyyy") + ".pdf",
+                CustomSwitches = "--disable-smart-shrinking"
+            };
+            return report;
         }
 
 
