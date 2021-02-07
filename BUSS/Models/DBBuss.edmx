@@ -196,11 +196,10 @@
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BUSS.dbo.view_DashboardCustomer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="view_DashboardCustomer">
-          
           <Key>
-            <PropertyRef Name="tgl" />
+            <PropertyRef Name="ID_Customer" />
           </Key>
-          <Property Name="tgl" Type="date" Nullable="false" />
+          <Property Name="tgl" Type="date" />
           <Property Name="ID_Customer" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="jumlah" Type="int" />
         </EntityType>
@@ -323,6 +322,16 @@ warning 6002: The table/view 'BUSS.dbo.view_LaporanTransaksi' does not have a pr
           <Property Name="Alamat" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="No_HP" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+<!--Errors Found During Generation:
+warning 6002: The table/view 'BUSS.dbo.view_StatusTransCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_StatusTransCount">
+          <Key>
+            <PropertyRef Name="Status_Transaksi" />
+            <PropertyRef Name="StatusTrans" />
+          </Key>
+          <Property Name="Status_Transaksi" Type="int" Nullable="false" />
+          <Property Name="StatusTrans" Type="varchar" MaxLength="22" Nullable="false" />
+          <Property Name="jumlah" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -752,6 +761,12 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
     [view_LaporanTransaksi].[No_HP] AS [No_HP], 
     [view_LaporanTransaksi].[Email] AS [Email]
     FROM [dbo].[view_LaporanTransaksi] AS [view_LaporanTransaksi]</DefiningQuery>
+          <EntitySet Name="view_StatusTransCount" EntityType="Self.view_StatusTransCount" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_StatusTransCount].[Status_Transaksi] AS [Status_Transaksi], 
+    [view_StatusTransCount].[StatusTrans] AS [StatusTrans], 
+    [view_StatusTransCount].[jumlah] AS [jumlah]
+    FROM [dbo].[view_StatusTransCount] AS [view_StatusTransCount]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="view_TransaksiCount" EntityType="Self.view_TransaksiCount" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1094,6 +1109,7 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
           <Property Name="Tanggal_Pesanan" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Bukti_DP" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Bukti_Pelunasan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="biaya_tambahan" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Status_Transaksi" Type="Int32" Nullable="false" />
           <Property Name="PaketLama_Perjalanan" Type="Double" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -1102,7 +1118,6 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
           <NavigationProperty Name="Paket" Relationship="Self.FK_Transaksi_Paket" FromRole="Transaksi" ToRole="Paket" />
           <NavigationProperty Name="Pegawai" Relationship="Self.FK_Transaksi_Pegawai" FromRole="Transaksi" ToRole="Pegawai" />
           <NavigationProperty Name="Transaksi_Kendaraan" Relationship="Self.FK_Transaksi_Kendaraan_Transaksi" FromRole="Transaksi" ToRole="Transaksi_Kendaraan" />
-          <Property Name="biaya_tambahan" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="Transaksi_Kendaraan">
           <Key>
@@ -1114,6 +1129,41 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Kendaraan" Relationship="Self.FK_Transaksi_Kendaraan_Kendaraan" FromRole="Transaksi_Kendaraan" ToRole="Kendaraan" />
           <NavigationProperty Name="Transaksi" Relationship="Self.FK_Transaksi_Kendaraan_Transaksi" FromRole="Transaksi_Kendaraan" ToRole="Transaksi" />
+        </EntityType>
+        <EntityType Name="view_DashboardCustomer">
+          <Key>
+            <PropertyRef Name="ID_Customer" />
+          </Key>
+          <Property Name="tgl" Type="DateTime" Precision="0" />
+          <Property Name="ID_Customer" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jumlah" Type="Int32" />
+        </EntityType>
+        <EntityType Name="view_DestinasiTerlaris">
+          <Key>
+            <PropertyRef Name="ID_Destinasi" />
+            <PropertyRef Name="Nama_Destinasi" />
+          </Key>
+          <Property Name="ID_Destinasi" Type="Int32" Nullable="false" />
+          <Property Name="Nama_Destinasi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JumlahDipesan" Type="Int32" />
+        </EntityType>
+        <EntityType Name="view_JumlahDestinasiWilayah">
+          <Key>
+            <PropertyRef Name="ID_KategoriWilayah" />
+            <PropertyRef Name="Nama_Wilayah" />
+          </Key>
+          <Property Name="ID_KategoriWilayah" Type="Int32" Nullable="false" />
+          <Property Name="Nama_Wilayah" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JumlahDestinasi" Type="Int32" />
+        </EntityType>
+        <EntityType Name="view_TransaksiCount">
+          <Key>
+            <PropertyRef Name="ID_Paket" />
+            <PropertyRef Name="Nama_Paket" />
+          </Key>
+          <Property Name="ID_Paket" Type="Int32" Nullable="false" />
+          <Property Name="Nama_Paket" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jumlah_dipesan" Type="Int32" />
         </EntityType>
         <Association Name="FK_Detail_Rating_Destinasi_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
@@ -1455,6 +1505,10 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
           <EntitySet Name="Pegawais" EntityType="Self.Pegawai" />
           <EntitySet Name="Transaksis" EntityType="Self.Transaksi" />
           <EntitySet Name="Transaksi_Kendaraan" EntityType="Self.Transaksi_Kendaraan" />
+          <EntitySet Name="view_DashboardCustomer" EntityType="Self.view_DashboardCustomer" />
+          <EntitySet Name="view_DestinasiTerlaris" EntityType="Self.view_DestinasiTerlaris" />
+          <EntitySet Name="view_JumlahDestinasiWilayah" EntityType="Self.view_JumlahDestinasiWilayah" />
+          <EntitySet Name="view_TransaksiCount" EntityType="Self.view_TransaksiCount" />
           <AssociationSet Name="FK_Detail_Rating_Destinasi_Customer" Association="Self.FK_Detail_Rating_Destinasi_Customer">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Detail_Rating_Destinasi" EntitySet="Detail_Rating_Destinasi" />
@@ -1570,13 +1624,15 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
           <EntitySet Name="view_LaporanDestinasi" EntityType="BUSSModel.view_LaporanDestinasi" />
           <EntitySet Name="view_LaporanFeedback" EntityType="BUSSModel.view_LaporanFeedback" />
           <EntitySet Name="view_LaporanTransaksi" EntityType="BUSSModel.view_LaporanTransaksi" />
+          <EntitySet Name="view_StatusTransCount" EntityType="BUSSModel.view_StatusTransCount" />
         </EntityContainer>
-        <EntityType Name="view_DashboardCustomer">
+        <EntityType Name="view_StatusTransCount">
           <Key>
-            <PropertyRef Name="tgl" />
+            <PropertyRef Name="Status_Transaksi" />
+            <PropertyRef Name="StatusTrans" />
           </Key>
-          <Property Name="ID_Customer" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="tgl" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="Status_Transaksi" Type="Int32" Nullable="false" />
+          <Property Name="StatusTrans" Type="String" Nullable="false" MaxLength="22" FixedLength="false" Unicode="false" />
           <Property Name="jumlah" Type="Int32" />
         </EntityType>
         <EntityType Name="view_TransaksiCount">
@@ -1878,7 +1934,6 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
           <EntitySetMapping Name="Transaksis">
             <EntityTypeMapping TypeName="BUSSModel.Transaksi">
               <MappingFragment StoreEntitySet="Transaksi">
-                <ScalarProperty Name="biaya_tambahan" ColumnName="biaya_tambahan" />
                 <ScalarProperty Name="ID_Transaksi" ColumnName="ID_Transaksi" />
                 <ScalarProperty Name="ID_Paket" ColumnName="ID_Paket" />
                 <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
@@ -1888,6 +1943,7 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
                 <ScalarProperty Name="Tanggal_Pesanan" ColumnName="Tanggal_Pesanan" />
                 <ScalarProperty Name="Bukti_DP" ColumnName="Bukti_DP" />
                 <ScalarProperty Name="Bukti_Pelunasan" ColumnName="Bukti_Pelunasan" />
+                <ScalarProperty Name="biaya_tambahan" ColumnName="biaya_tambahan" />
                 <ScalarProperty Name="Status_Transaksi" ColumnName="Status_Transaksi" />
                 <ScalarProperty Name="PaketLama_Perjalanan" ColumnName="PaketLama_Perjalanan" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -1906,36 +1962,45 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
           <EntitySetMapping Name="view_DashboardCustomer">
             <EntityTypeMapping TypeName="BUSSModel.view_DashboardCustomer">
               <MappingFragment StoreEntitySet="view_DashboardCustomer">
-                <ScalarProperty Name="jumlah" ColumnName="jumlah" />
                 <ScalarProperty Name="tgl" ColumnName="tgl" />
                 <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_TransaksiCount">
-            <EntityTypeMapping TypeName="BUSSModel.view_TransaksiCount">
-              <MappingFragment StoreEntitySet="view_TransaksiCount">
-                <ScalarProperty Name="jumlah_dipesan" ColumnName="jumlah_dipesan" />
-                <ScalarProperty Name="Nama_Paket" ColumnName="Nama_Paket" />
-                <ScalarProperty Name="ID_Paket" ColumnName="ID_Paket" />
+                <ScalarProperty Name="jumlah" ColumnName="jumlah" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="view_DestinasiTerlaris">
             <EntityTypeMapping TypeName="BUSSModel.view_DestinasiTerlaris">
               <MappingFragment StoreEntitySet="view_DestinasiTerlaris">
-                <ScalarProperty Name="JumlahDipesan" ColumnName="JumlahDipesan" />
-                <ScalarProperty Name="Nama_Destinasi" ColumnName="Nama_Destinasi" />
                 <ScalarProperty Name="ID_Destinasi" ColumnName="ID_Destinasi" />
+                <ScalarProperty Name="Nama_Destinasi" ColumnName="Nama_Destinasi" />
+                <ScalarProperty Name="JumlahDipesan" ColumnName="JumlahDipesan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="view_JumlahDestinasiWilayah">
             <EntityTypeMapping TypeName="BUSSModel.view_JumlahDestinasiWilayah">
               <MappingFragment StoreEntitySet="view_JumlahDestinasiWilayah">
-                <ScalarProperty Name="JumlahDestinasi" ColumnName="JumlahDestinasi" />
-                <ScalarProperty Name="Nama_Wilayah" ColumnName="Nama_Wilayah" />
                 <ScalarProperty Name="ID_KategoriWilayah" ColumnName="ID_KategoriWilayah" />
+                <ScalarProperty Name="Nama_Wilayah" ColumnName="Nama_Wilayah" />
+                <ScalarProperty Name="JumlahDestinasi" ColumnName="JumlahDestinasi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_TransaksiCount">
+            <EntityTypeMapping TypeName="BUSSModel.view_TransaksiCount">
+              <MappingFragment StoreEntitySet="view_TransaksiCount">
+                <ScalarProperty Name="ID_Paket" ColumnName="ID_Paket" />
+                <ScalarProperty Name="Nama_Paket" ColumnName="Nama_Paket" />
+                <ScalarProperty Name="jumlah_dipesan" ColumnName="jumlah_dipesan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_StatusTransCount">
+            <EntityTypeMapping TypeName="BUSSModel.view_StatusTransCount">
+              <MappingFragment StoreEntitySet="view_StatusTransCount">
+                <ScalarProperty Name="jumlah" ColumnName="jumlah" />
+                <ScalarProperty Name="StatusTrans" ColumnName="StatusTrans" />
+                <ScalarProperty Name="Status_Transaksi" ColumnName="Status_Transaksi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
