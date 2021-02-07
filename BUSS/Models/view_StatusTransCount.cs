@@ -12,10 +12,10 @@ namespace BUSS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class view_DashboardCustomer
+    public partial class view_StatusTransCount
     {
-        public Nullable<System.DateTime> tgl { get; set; }
-        public string ID_Customer { get; set; }
+        public int Status_Transaksi { get; set; }
+        public string StatusTrans { get; set; }
         public Nullable<int> jumlah { get; set; }
     }
 }
