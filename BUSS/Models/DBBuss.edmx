@@ -200,7 +200,7 @@ warning 6002: The table/view 'BUSS.dbo.view_DashboardCustomer' does not have a p
             <PropertyRef Name="ID_Customer" />
             <PropertyRef Name="tgl" />
           </Key>
-          <Property Name="tgl" Type="date" Nullable="false" />
+          <Property Name="tgl" Type="date" />
           <Property Name="ID_Customer" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="jumlah" Type="int" />
         </EntityType>
@@ -323,6 +323,16 @@ warning 6002: The table/view 'BUSS.dbo.view_LaporanTransaksi' does not have a pr
           <Property Name="Alamat" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="No_HP" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+<!--Errors Found During Generation:
+warning 6002: The table/view 'BUSS.dbo.view_StatusTransCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_StatusTransCount">
+          <Key>
+            <PropertyRef Name="Status_Transaksi" />
+            <PropertyRef Name="StatusTrans" />
+          </Key>
+          <Property Name="Status_Transaksi" Type="int" Nullable="false" />
+          <Property Name="StatusTrans" Type="varchar" MaxLength="22" Nullable="false" />
+          <Property Name="jumlah" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BUSS.dbo.view_StatusTransCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -763,6 +773,12 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
     [view_LaporanTransaksi].[No_HP] AS [No_HP], 
     [view_LaporanTransaksi].[Email] AS [Email]
     FROM [dbo].[view_LaporanTransaksi] AS [view_LaporanTransaksi]</DefiningQuery>
+          <EntitySet Name="view_StatusTransCount" EntityType="Self.view_StatusTransCount" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_StatusTransCount].[Status_Transaksi] AS [Status_Transaksi], 
+    [view_StatusTransCount].[StatusTrans] AS [StatusTrans], 
+    [view_StatusTransCount].[jumlah] AS [jumlah]
+    FROM [dbo].[view_StatusTransCount] AS [view_StatusTransCount]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="view_StatusTransCount" EntityType="Self.view_StatusTransCount" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
