@@ -142,6 +142,7 @@
           <Property Name="Harga" Type="money" />
           <Property Name="Konsumsi" Type="int" Nullable="false" />
           <Property Name="Lama_Perjalanan" Type="int" />
+          <Property Name="Penginapan" Type="int" Nullable="false" />
           <Property Name="Jenis_Paket" Type="int" Nullable="false" />
           <Property Name="Jadwal" Type="varchar" MaxLength="255" />
           <Property Name="Keterangan" Type="varchar" MaxLength="255" />
@@ -198,9 +199,8 @@ warning 6002: The table/view 'BUSS.dbo.view_DashboardCustomer' does not have a p
         <EntityType Name="view_DashboardCustomer">
           <Key>
             <PropertyRef Name="ID_Customer" />
-            <PropertyRef Name="tgl" />
           </Key>
-          <Property Name="tgl" Type="date" Nullable="false" />
+          <Property Name="tgl" Type="date" />
           <Property Name="ID_Customer" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="jumlah" Type="int" />
         </EntityType>
@@ -1059,6 +1059,7 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
           <Property Name="Harga" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Konsumsi" Type="Int32" Nullable="false" />
           <Property Name="Lama_Perjalanan" Type="Int32" />
+          <Property Name="Penginapan" Type="Int32" Nullable="false" />
           <Property Name="Jenis_Paket" Type="Int32" Nullable="false" />
           <Property Name="Jadwal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Keterangan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -1137,9 +1138,8 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
         <EntityType Name="view_DashboardCustomer">
           <Key>
             <PropertyRef Name="ID_Customer" />
-            <PropertyRef Name="tgl" />
           </Key>
-          <Property Name="tgl" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="tgl" Type="DateTime" Precision="0" />
           <Property Name="ID_Customer" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="jumlah" Type="Int32" />
         </EntityType>
@@ -1878,6 +1878,7 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
                 <ScalarProperty Name="Harga" ColumnName="Harga" />
                 <ScalarProperty Name="Konsumsi" ColumnName="Konsumsi" />
                 <ScalarProperty Name="Lama_Perjalanan" ColumnName="Lama_Perjalanan" />
+                <ScalarProperty Name="Penginapan" ColumnName="Penginapan" />
                 <ScalarProperty Name="Jenis_Paket" ColumnName="Jenis_Paket" />
                 <ScalarProperty Name="Jadwal" ColumnName="Jadwal" />
                 <ScalarProperty Name="Keterangan" ColumnName="Keterangan" />

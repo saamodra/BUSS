@@ -1,7 +1,7 @@
 ﻿@model BUSS.Models.Jenis_Kendaraan
 
 @{ ViewBag.Title = "Tambah Jenis Kendaraan";
-                ViewBag.SidebarMenu = "Jenis Kendaraan"; }
+    ViewBag.SidebarMenu = "Jenis Kendaraan"; }
 
 <div class="page-inner">
     <div class="page-header">
@@ -35,7 +35,7 @@
                 <div class="card-body">
                     @using (Html.BeginForm())
                     {
-                        @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -63,3 +63,18 @@
         </div>
     </div>
 </div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#Nama_Jenis").keypress(function (e) {
+                var key = e.keyCode;
+                if (key >= 48 && key <= 57) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+    </script>
+
+}

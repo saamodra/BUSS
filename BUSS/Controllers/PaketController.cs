@@ -92,7 +92,7 @@ namespace BUSS.Controllers
         // POST: Paket/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Paket,Nama_Paket,Lama_Perjalanan,Keterangan")] Paket paket)
+        public ActionResult Create([Bind(Include = "ID_Paket,Nama_Paket,Penginapan,Lama_Perjalanan,Keterangan")] Paket paket)
         {
             if (db.Pakets.Any(k => k.Nama_Paket == paket.Nama_Paket))
             {
@@ -137,7 +137,7 @@ namespace BUSS.Controllers
         // POST: Paket/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Paket,Nama_Paket,Lama_Perjalanan,Keterangan,Status,CreatedBy,CreatedDate")] Paket paket)
+        public ActionResult Edit([Bind(Include = "ID_Paket,Nama_Paket,Penginapan,Lama_Perjalanan,Keterangan,Status,CreatedBy,CreatedDate")] Paket paket)
         {
             if (db.Pakets.Where(k => k.ID_Paket != paket.ID_Paket).Any(k => k.Nama_Paket == paket.Nama_Paket))
             {

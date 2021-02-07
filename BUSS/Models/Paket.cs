@@ -28,6 +28,7 @@ namespace BUSS.Models
         public Nullable<decimal> Harga { get; set; }
         public int Konsumsi { get; set; }
         public Nullable<int> Lama_Perjalanan { get; set; }
+        public int Penginapan { get; set; }
         public int Jenis_Paket { get; set; }
         public string Jadwal { get; set; }
         public string Keterangan { get; set; }

@@ -33,6 +33,7 @@ namespace BUSS.Models
         [DisplayName("Lama Perjalanan")]
         [Required(ErrorMessage = "Lama perjalanan wajib diisi!")]
         public Nullable<int> Lama_Perjalanan { get; set; }
+        public int Penginapan { get; set; }
 
         [DisplayName("Jenis Paket")]
         public int Jenis_Paket { get; set; }

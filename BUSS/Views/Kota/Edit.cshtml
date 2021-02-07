@@ -1,7 +1,7 @@
 ﻿@model BUSS.Models.Kota
 
 @{ ViewBag.Title = "Edit";
-                ViewBag.SidebarMenu = "Kota"; }
+    ViewBag.SidebarMenu = "Kota"; }
 
 <div class="page-inner">
     <div class="page-header">
@@ -63,3 +63,18 @@
         </div>
     </div>
 </div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#Nama_Kota").keypress(function (e) {
+                var key = e.keyCode;
+                if (key >= 48 && key <= 57) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+    </script>
+
+}

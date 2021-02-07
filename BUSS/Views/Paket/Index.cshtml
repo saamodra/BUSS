@@ -48,6 +48,9 @@
                                         @Html.DisplayNameFor(model => model.Lama_Perjalanan)
                                     </th>
                                     <th>
+                                        Menginap
+                                    </th>
+                                    <th>
                                         @Html.DisplayNameFor(model => model.Jenis_Paket)
                                     </th>
                                     <th>
@@ -81,6 +84,7 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Lama_Perjalanan) Hari
                                         </td>
+                                        <td>@(item.Penginapan == 0 ? "Tidak" : "Ya")</td>
                                         <td>
                                             @(item.Jenis_Paket == 0 ? "Paket" : "Custom")
                                         </td>
