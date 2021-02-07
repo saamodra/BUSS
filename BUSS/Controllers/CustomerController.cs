@@ -163,7 +163,7 @@ namespace BUSS.Controllers
                         Session["NIK"] = obj.NIK.ToString();
                         Session["Name"] = obj.Nama.ToString();
                         Session["UserName"] = obj.Email.ToString();
-                        Session["Role"] = "3";
+                        Session["Role"] = "4";
                         Session["IsCustomer"] = true;
                         return RedirectToAction("UserLogin");
                     }
@@ -179,7 +179,7 @@ namespace BUSS.Controllers
 
         public ActionResult UserLogin()
         {
-            if (Session["Role"].ToString() == "3")
+            if (Session["Role"].ToString() == "4")
             {
                 return RedirectToAction("Index", "Home");
             }

@@ -11,10 +11,31 @@ namespace BUSS.Controllers.Admin
     {
         BUSSEntities db = new BUSSEntities();
 
-        // GET: Dashboard
         public ActionResult Index()
         {
-            return View();
+            string role = Session["Role"].ToString();
+            if (Session["Name"] != null)
+            {
+                if (role == "1")
+                {
+                    return RedirectToAction("Pegawai");
+                } else if (role == "2")
+                {
+                    return RedirectToAction("Tourleader");
+                } else if (role == "3")
+                {
+                    return RedirectToAction("Manager");
+                } else if (role == "5")
+                {
+                    return RedirectToAction("Dashboard", "Customer");
+                } else
+                {
+                    return HttpNotFound();
+                }
+            } else
+            {
+                return RedirectToAction("Login", "Customer");
+            }
         }
 
         public ActionResult Pegawai()
