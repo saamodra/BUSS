@@ -46,7 +46,7 @@ namespace BUSS.Models
         public virtual DbSet<view_LaporanDestinasi> view_LaporanDestinasi { get; set; }
         public virtual DbSet<view_LaporanFeedback> view_LaporanFeedback { get; set; }
         public virtual DbSet<view_LaporanTransaksi> view_LaporanTransaksi { get; set; }
-        public virtual DbSet<view_TransaksiCount> view_TransaksiCount { get; set; }
         public virtual DbSet<view_StatusTransCount> view_StatusTransCount { get; set; }
+        public virtual DbSet<view_TransaksiCount> view_TransaksiCount { get; set; }
     }
 }

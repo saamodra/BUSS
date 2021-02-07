@@ -254,6 +254,9 @@
     <Compile Include="Models\view_LaporanTransaksi.cs">
       <DependentUpon>DbBuss.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\view_StatusTransCount.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\view_TransaksiCount.cs">
       <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
@@ -796,14 +799,14 @@
     <Content Include="Content\assets\fonts\apercu-cufonfonts\Apercu_Regular.otf" />
     <Content Include="Content\assets\fonts\sf_pro\SF Pro Display-Bold.ttf" />
     <Content Include="Content\assets\fonts\sf_pro\SF Pro Display.ttf" />
-    <EntityDeploy Include="Models\DBBuss.edmx">
+    <Content Include="App_Browsers\qt.browser" />
+    <EntityDeploy Include="Models\DbBuss.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DBBuss.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Models\DBBuss.edmx.diagram">
       <DependentUpon>DBBuss.edmx</DependentUpon>
     </Content>
-    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\buttons.bootstrap4.min.js" />
     <Content Include="Scripts\buttons.colVis.min.js" />
@@ -839,7 +842,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Pegawai\Create.cshtml" />
     <Content Include="Views\Pegawai\Details.cshtml" />
     <Content Include="Views\Pegawai\Edit.cshtml" />
