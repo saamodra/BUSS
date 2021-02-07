@@ -50,7 +50,7 @@ namespace BUSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_Pegawai,Nama,Alamat,No_HP,Email,Password,Role,Status")] Pegawai pegawai)
         {
-            if (db.Pegawais.Any(k => k.Email == pegawai.Email))
+            if (db.Pegawais.Any(k => k.Email == pegawai.Email && k.Status == 1))
             {
                 ModelState.AddModelError("Email", "Email sudah terdaftar.");
             }
@@ -123,9 +123,9 @@ namespace BUSS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Pegawai,Nama,Alamat,No_HP,Email,Password,Role,Status")] Pegawai pegawai)
+        public ActionResult Edit([Bind(Include = "ID_Pegawai,Nama,Alamat,No_HP,Email,Password,Role,Status,CreatedDate")] Pegawai pegawai)
         {
-            if (db.Pegawais.Any(k => k.Email == pegawai.Email))
+            if (db.Pegawais.Where(k => k.ID_Pegawai != pegawai.ID_Pegawai && k.Status == 1).Any(k => k.Email == pegawai.Email))
             {
                 ModelState.AddModelError("Email", "Email sudah terdaftar.");
             }
@@ -217,9 +217,128 @@ namespace BUSS.Controllers
 
         public ActionResult Pesanan()
         {
-            var transaksi = db.Transaksis.ToList();
+            var transaksi = db.Transaksis.OrderByDescending(k => k.CreatedDate).ToList();
 
             return View(transaksi);
+        }
+
+        public ActionResult Profil()
+        {
+            if(Session["ID_Pegawai"] != null)
+            {
+                string role = Session["Role"].ToString();
+                int ID_Pegawai = (int)Session["ID_Pegawai"];
+                if(role == "1")
+                {
+                    ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
+
+                } else if(role == "2") 
+                {
+                    ViewBag.Layout = "~/Views/Shared/_LayoutTourLeader.cshtml";
+                } else
+                {
+                    ViewBag.Layout = "~/Views/Shared/_LayoutManager.cshtml";
+                }
+
+                var pegawai = db.Pegawais.Find(ID_Pegawai);
+
+                return View(pegawai);
+            } else
+            {
+                return RedirectToAction("Login", "Pegawai");
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult Profil([Bind(Include = "ID_Pegawai,Nama,Alamat,No_HP,Email,Role,Password,CreatedDate")] Pegawai pegawai)
+        {
+            if (db.Pegawais.Where(k => k.ID_Pegawai != pegawai.ID_Pegawai && k.Status == 1).Any(k => k.Email == pegawai.Email))
+            {
+                ModelState.AddModelError("Email", "Email sudah terdaftar.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                pegawai.Status = 1;
+                pegawai.ModifiedDate = DateTime.Now;
+                db.Entry(pegawai).State = EntityState.Modified;
+                db.SaveChanges();
+                TempData["SuccessMessage"] = "Profil berhasil diperbarui!";
+                return RedirectToAction("Profil");
+            }
+
+            if (Session["ID_Pegawai"] != null)
+            {
+                string role = Session["Role"].ToString();
+                int ID_Pegawai = (int)Session["ID_Pegawai"];
+                if (role == "1")
+                {
+                    ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
+
+                }
+                else if (role == "2")
+                {
+                    ViewBag.Layout = "~/Views/Shared/_LayoutTourLeader.cshtml";
+                }
+                else
+                {
+                    ViewBag.Layout = "~/Views/Shared/_LayoutManager.cshtml";
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Pegawai");
+            }
+
+            return View(pegawai);
+
+        }
+
+        [HttpPost]
+        public ActionResult UbahPassword(int ID_Pegawai, string password, string newpassword)
+        {
+            var pegawai = db.Pegawais.Find(ID_Pegawai);
+
+            if (db.Pegawais.Any(k => k.ID_Pegawai == ID_Pegawai && k.Password == password))
+            {
+                pegawai.Password = newpassword;
+                pegawai.ModifiedDate = DateTime.Now;
+                db.Entry(pegawai).State = EntityState.Modified;
+                db.SaveChanges();
+                TempData["SuccessMessage"] = "Password berhasil diperbarui!";
+                return RedirectToAction("Profil");
+                
+            } else
+            {
+                ModelState.AddModelError("Password", "Password sekarang tidak cocok.");
+            }
+
+            if (Session["ID_Pegawai"] != null)
+            {
+                string role = Session["Role"].ToString();
+                if (role == "1")
+                {
+                    ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
+
+                }
+                else if (role == "2")
+                {
+                    ViewBag.Layout = "~/Views/Shared/_LayoutTourLeader.cshtml";
+                }
+                else
+                {
+                    ViewBag.Layout = "~/Views/Shared/_LayoutManager.cshtml";
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Pegawai");
+            }
+
+
+            return View("Profil", pegawai);
+
         }
 
         protected override void Dispose(bool disposing)

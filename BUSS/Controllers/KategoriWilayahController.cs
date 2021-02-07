@@ -117,7 +117,7 @@ namespace BUSS.Controllers
 
                 TempData["SuccessMessage"] = "Data berhasil ditambah!";
 
-                return RedirectToAction("Details", "Destinasi", new { @id = kategori_Wilayah.ID_KategoriWilayah });
+                return RedirectToAction("Details", "KategoriWilayah", new { @id = kategori_Wilayah.ID_KategoriWilayah });
             }
 
             return View(kategori_Wilayah);

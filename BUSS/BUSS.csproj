@@ -45,13 +45,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.13.2\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -63,6 +75,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -232,6 +245,15 @@
     <Compile Include="Models\view_StatusTransCount.cs">
       <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\view_LaporanDestinasi.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\view_LaporanFeedback.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\view_LaporanTransaksi.cs">
+      <DependentUpon>DbBuss.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\view_TransaksiCount.cs">
       <DependentUpon>DBBuss.tt</DependentUpon>
     </Compile>
@@ -243,6 +265,7 @@
     <Content Include="Content\assets\css\buttons.bootstrap4.min.css" />
     <Content Include="Content\assets\css\buttons.dataTables.min.css" />
     <Content Include="Content\assets\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\assets\css\print.css" />
     <Content Include="Content\assets\css\sf_pro.css" />
     <Content Include="Content\assets\css\star-rating-svg.css" />
     <Content Include="Content\assets\css\homestyle.css" />
@@ -250,6 +273,7 @@
     <Content Include="Content\assets\flickity-docs\flickity.min.css" />
     <Content Include="Content\assets\flickity-docs\flickity.pkgd.js" />
     <Content Include="Content\assets\flickity-docs\flickity.pkgd.min.js" />
+    <Content Include="Content\assets\img\favicon.png" />
     <Content Include="Content\assets\img\home\bg-1.png" />
     <Content Include="Content\assets\img\home\bg-2.png" />
     <Content Include="Content\assets\img\home\bg-3.png" />
@@ -674,6 +698,10 @@
       <DependentUpon>DBBuss.edmx</DependentUpon>
       <LastGenOutput>DBBuss.cs</LastGenOutput>
     </Content>
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -775,6 +803,7 @@
     <Content Include="Models\DBBuss.edmx.diagram">
       <DependentUpon>DBBuss.edmx</DependentUpon>
     </Content>
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\buttons.bootstrap4.min.js" />
     <Content Include="Scripts\buttons.colVis.min.js" />
@@ -880,6 +909,11 @@
     <Content Include="Views\Laporan\Pesanan.cshtml" />
     <Content Include="Views\Laporan\Destinasi.cshtml" />
     <Content Include="Views\Laporan\Feedback.cshtml" />
+    <Content Include="Views\Laporan\Pesanan_2.cshtml" />
+    <Content Include="Views\Laporan\PdfPesanan.cshtml" />
+    <Content Include="Views\Laporan\Pesanan_3.cshtml" />
+    <Content Include="Views\Pegawai\Profil.cshtml" />
+    <Content Include="Views\Customer\Profil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

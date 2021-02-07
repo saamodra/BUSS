@@ -1,0 +1,138 @@
+﻿@model BUSS.Models.Customer
+
+@{
+    ViewBag.Title = "Profil";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+<div class="page-inner">
+    <h4 class="page-title">User Profile</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Profil Pengguna</h4>
+                </div>
+                <div class="card-body">
+                    <form action="@Url.Action("Profil", "Customer")" method="post">
+                        @Html.HiddenFor(model => model.NIK)
+                        @Html.HiddenFor(model => model.Password)
+                        @Html.HiddenFor(model => model.CreatedDate)
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Nama)
+                                    <label class="text-danger">*</label>
+                                    @Html.EditorFor(model => model.Nama, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Nama, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.No_HP)
+                                    <label class="text-danger">*</label>
+                                    @Html.EditorFor(model => model.No_HP, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.No_HP, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Email)
+                                    <label class="text-danger">*</label>
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Alamat)
+                            <label class="text-danger">*</label>
+                            @Html.EditorFor(model => model.Alamat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Alamat, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Perbaru Profil</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Password</h4>
+                </div>
+                <div class="card-body">
+                    <form action="@Url.Action("UbahPassword", "Customer")" method="post" id="passwordForm">
+                        <input type="hidden" value="@Model.NIK" name="NIK" />
+                        <div class="form-group">
+                            <label>Password Sekarang</label>
+                            <label class="text-danger">*</label>
+                            <input type="password" value="" id="password" name="password" class="form-control" />
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Password Baru</label>
+                            <label class="text-danger">*</label>
+                            <input type="password" value="" id="newpassword" name="newpassword" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>Konfirmasi Password</label>
+                            <label class="text-danger">*</label>
+                            <input type="password" value="" id="confirmpassword" name="confirmpassword" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Ubah Password</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script>
+
+        if ("@TempData["SuccessMessage"]" != "") {
+            swal("Berhasil", "@TempData["SuccessMessage"]", {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-success'
+                    }
+                },
+            });
+        }
+
+
+        $("#passwordForm").validate({
+            rules: {
+                password: "required",
+                newpassword: "required",
+                confirmpassword: {
+                    required: true,
+                    equalTo: "#newpassword"
+                }
+            },
+            messages: {
+                password: {
+                    required: "Password sekarang wajib diisi!",
+                },
+                newpassword: {
+                    required: "Password baru diisi!",
+                },
+                confirmpassword: {
+                    equalTo: "Password harus sama dengan password baru!"
+                }
+            }
+        });
+    </script>
+
+}

@@ -78,10 +78,10 @@
                                             <a href="@Url.Action("Edit", @ViewBag.SidebarMenu, new { id = item.ID_Pegawai })" class="btn btn-warning btn-sm mr-1">
                                                 <i class="fa fa-edit"></i> Ubah
                                             </a>
-                                            <a href="@Url.Action("Details", @ViewBag.SidebarMenu, new { id = item.ID_Pegawai })" class="btn btn-info btn-sm mr-1">
+                                            @*<a href="@Url.Action("Details", @ViewBag.SidebarMenu, new { id = item.ID_Pegawai })" class="btn btn-info btn-sm mr-1">
                                                 <i class="fa fa-eye"></i> Detil
-                                            </a>
-                                            <form action="@Url.Action("Delete", @ViewBag.SidebarMenu)" method="post" class="d-inline deleteForm">
+                                            </a>*@
+                                            <form action="@Url.Action("Delete", "Pegawai")" method="post" class="d-inline">
                                                 @Html.AntiForgeryToken()
                                                 <input type="hidden" name="id" value="@item.ID_Pegawai" />
                                                 <button type="submit" class="btn btn-danger deleteBtn btn-sm"><i class="fa fa-trash"></i> Hapus</button>

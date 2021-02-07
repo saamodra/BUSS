@@ -216,11 +216,18 @@
             $("#table-bus").on('click', '.btnDelete', function () {
                 let row = $(this).closest('tr').find('td');
                 $('#kendaraan').append($('<option>', {
-                    value: `${row.eq(0).text()} - ${row.eq(1).text()} - ${row.eq(2).text()} - ${row.eq(3).text()}`,
+                    value: `${row.eq(0).text()} - ${row.eq(1).text()} - ${row.eq(2).text()} - ${numberOnly(row.eq(3).text())}`,
                     text: `${row.eq(1).text()} - ${row.eq(2).text()}`
                 }));
 
                 $(this).closest('tr').remove();
+
+                $("input[type=hidden][name=ID_Kendaraan]").each(function () {
+                    if ($(this).val() === row.eq(0).text()) {
+                        $(this).remove();
+                    }
+                });
+                
 
                 UpdateTfoot();
             });

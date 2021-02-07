@@ -20,6 +20,7 @@ namespace BUSS.Models
 
         [DisplayName("No. HP")]
         [Required(ErrorMessage = "No. HP wajib diisi!")]
+        [DataType(DataType.PhoneNumber)]
         public string No_HP { get; set; }
 
         [Required(ErrorMessage = "Email wajib diisi!")]
