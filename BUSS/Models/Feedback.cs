@@ -11,7 +11,9 @@ namespace BUSS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(FeedbackMetadata))]
     public partial class Feedback
     {
         public int ID_Feedback { get; set; }
