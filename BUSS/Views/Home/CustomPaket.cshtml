@@ -77,23 +77,37 @@
 
                     @using (Html.BeginForm("CheckoutCustom", "Transaksi", FormMethod.Post, new { id = "checkoutForm" }))
                     {
-                        <div class="d-flex">
-                            <div class="form-group">
-                                <label>Nama Paket</label>
-                                <label class="text-danger">*</label>
-                                <input type="text" value="" name="Nama_Paket" class="form-control" required />
-                            </div>
-                            <div class="form-group ml-3">
-                                <label>Tgl. Sewa</label>
-                                <label class="text-danger">*</label>
-                                <input type="date" value="" name="tgl_sewa" class="form-control" required />
-                            </div>
-                            <div class="form-group ml-3">
-                                <label>Lama Perjalanan</label>
-                                <label class="text-danger">*</label>
-                                <input type="number" value="" name="Lama_Perjalanan" class="form-control" required />
-                            </div>
+                    <div class="d-flex">
+                        <div class="form-group">
+                            <label>Nama Paket</label>
+                            <label class="text-danger">*</label>
+                            <input type="text" value="" name="Nama_Paket" class="form-control" required />
                         </div>
+                        <div class="form-group ml-3">
+                            <label>Tgl. Sewa</label>
+                            <label class="text-danger">*</label>
+                            <input type="date" value="" name="tgl_sewa" class="form-control" required />
+                        </div>
+                        <div class="form-group ml-3">
+                            <label>Lama Perjalanan</label>
+                            <label class="text-danger">*</label>
+                            <input type="number" value="" name="Lama_Perjalanan" id="Lama_Perjalanan" class="form-control" required />
+                        </div>
+                        <div class="form-group ml-3">
+                            <label>Konsumsi</label>
+                            <label class="text-danger"></label><br />
+                            <h4 id="Konsumsi">0</h4>
+                        </div>
+                        
+                        <div class="form-group ml-3 d-none" id="rdPenginapan">
+                            @Html.LabelFor(model => model.Penginapan)
+                            <label class="text-danger">*</label><br />
+                            <input type="radio" value="1" name="Penginapan" id="penginapan_ya" required />
+                            <label for="penginapan-ya">Ya</label>
+                            <input type="radio" value="0" class="ml-3" name="Penginapan" id="penginapan_tidak" required checked />
+                            <label for="penginapan-tidak">Tidak</label>
+                        </div>
+                    </div>
 
                         <table class="table" id="table-destinasi-terpilih">
                             <thead>
@@ -166,9 +180,7 @@
 
                 $("#hiddenForDestinasi").append(`<input type="hidden" value="${row.find('td:eq(0)').data('id')}" name="ID_Destinasi">`);
 
-                $("#totalHargaTiket").text("Total Harga Tiket : " + formatter.format(SumRow(2)));
-
-                $("#Harga").val(SumRow(2));
+                UpdateTotalHarga();
             });
 
 
@@ -191,10 +203,7 @@
                 });
 
                 $(this).closest('tr').remove();
-
-                $("#totalHargaTiket").text("Total Harga Tiket : " + formatter.format(SumRow(2)));
-
-                $("#Harga").val(SumRow(2));
+                UpdateTotalHarga();
             });
 
 
@@ -244,8 +253,36 @@
                     });
                 }
             });
+
+
+            $('#Lama_Perjalanan').on('input', function () {
+                let lp = parseInt($(this).val());
+                if (lp > 1) {
+                    $("#rdPenginapan").removeClass("d-none");
+                } else {
+                    $("#rdPenginapan").addClass("d-none");
+                    $("#penginapan_tidak").prop("checked", true);
+                }
+                let totalKonsumsi = parseInt($(this).val()) * 2;
+                $("#Konsumsi").html(totalKonsumsi);
+                UpdateTotalHarga();
+            });
+
+            $('input[type=radio][name=Penginapan]').change(function () {
+                UpdateTotalHarga();
+            });
         });
 
+        function UpdateTotalHarga() {
+            let lamaPerjalanan = parseInt($("#Lama_Perjalanan").val()) || 0;
+            console.log(lamaPerjalanan);
+            let konsumsi = (lamaPerjalanan * 2) * 30000;
+            let total = $("#penginapan_ya").is(':checked') ? 50000 * (lamaPerjalanan - 1) + SumRow(2) + konsumsi : SumRow(2) + konsumsi;
+
+            $("#totalHargaTiket").text("Total Harga Tiket : " + formatter.format(total));
+
+            $("#Harga").val(total);
+        }
 
         function SumRow(column) {
             var returnsum = 0;
