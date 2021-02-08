@@ -199,8 +199,9 @@ warning 6002: The table/view 'BUSS.dbo.view_DashboardCustomer' does not have a p
         <EntityType Name="view_DashboardCustomer">
           <Key>
             <PropertyRef Name="ID_Customer" />
+            <PropertyRef Name="tgl" />
           </Key>
-          <Property Name="tgl" Type="date" />
+          <Property Name="tgl" Type="date" Nullable="false" />
           <Property Name="ID_Customer" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="jumlah" Type="int" />
         </EntityType>
@@ -1138,8 +1139,9 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
         <EntityType Name="view_DashboardCustomer">
           <Key>
             <PropertyRef Name="ID_Customer" />
+            <PropertyRef Name="tgl" />
           </Key>
-          <Property Name="tgl" Type="DateTime" Precision="0" />
+          <Property Name="tgl" Type="DateTime" Precision="0" Nullable="false" />
           <Property Name="ID_Customer" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="jumlah" Type="Int32" />
         </EntityType>

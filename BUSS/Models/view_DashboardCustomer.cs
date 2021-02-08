@@ -14,7 +14,7 @@ namespace BUSS.Models
     
     public partial class view_DashboardCustomer
     {
-        public Nullable<System.DateTime> tgl { get; set; }
+        public System.DateTime tgl { get; set; }
         public string ID_Customer { get; set; }
         public Nullable<int> jumlah { get; set; }
     }
