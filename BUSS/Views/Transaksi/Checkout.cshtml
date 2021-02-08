@@ -24,7 +24,11 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <p class="m-0 font-weight-bold">Harga</p>
-                            <p class="m-0 text-danger font-weight-bold" id="Harga_paket">@string.Format("Rp{0:0,0}", Model.Paket.Harga + (@Model.Paket.Konsumsi * 30000) )</p>
+                            <p class="m-0 text-danger font-weight-bold" id="Harga_paket">@string.Format("Rp{0:0,0}", Model.Paket.Harga)</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="m-0 font-weight-bold">Menginap</p>
+                            <p class="m-0">@(Model.Paket.Penginapan == 0 ? "Tidak" : "Ya")</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <p class="m-0 font-weight-bold">Tanggal Sewa</p>
@@ -97,9 +101,10 @@
                         <input type="hidden" name="ID_Paket" value="@Model.Paket.ID_Paket" />
                         <input type="hidden" name="PaketLama_Perjalanan" id="LamaPerjalanan" value="@Model.Paket.Lama_Perjalanan" />
                         <input type="hidden" name="Tanggal_Pesanan" value="@Model.Tanggal_Pesanan" />
+
                         @Html.HiddenFor(model => model.Harga_total)
                         @Html.HiddenFor(model => model.Jumlah_Penumpang)
-
+                        @Html.HiddenFor(model => model.Paket.Penginapan)
                         <div id="hiddenForBus">
 
                         </div>
