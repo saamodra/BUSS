@@ -44,26 +44,22 @@
                                 <input type="hidden" name="ID_Transaksi" value="@ViewBag.ID_Transaksi" />
 
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <label class="text-danger font-weight-bold">*</label>
-                                    <div class="col-md-10">
-                                        <input type="number" name="Rating" id="Rating" min="1" max="5" class="form-control">
-                                        @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
-                                    </div>
+                                    @Html.LabelFor(model => model.Rating)
+                                    <label class="text-danger">*</label><br />
+                                    <div class="rate2"></div>
+                                    <input type="hidden" name="Rating" id="Rating" value="" />
+                                    @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+                                </div>
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Isi_Feedback)
+                                    @Html.EditorFor(model => model.Isi_Feedback, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Isi_Feedback, "", new { @class = "text-danger" })
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.Isi_Feedback, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.Isi_Feedback, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Isi_Feedback, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Kirim Feedback</button>
-                                    </div>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Kirim Feedback</button>    
                                 </div>
                             </div>
                         </div>
@@ -75,3 +71,14 @@
         </div>
     </div>
 </div>
+
+@section scripts {
+    <script>
+        $(".rate2").rate();
+
+        $(".rate2").on("change", function (ev, data) {
+            $("#Rating").val(data.to);
+        });
+    </script>
+        
+}

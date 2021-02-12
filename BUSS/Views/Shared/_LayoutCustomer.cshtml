@@ -165,7 +165,8 @@
                             <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                                 <span>
                                     @Session["Name"]
-                                    <span class="user-level">Customer
+                                    <span class="user-level">
+                                        Customer
                                     </span>
                                     <span class="caret"></span>
                                 </span>
@@ -304,6 +305,7 @@
     <script src="~/Scripts/jquery.priceformat.min.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/rater.min.js"></script>
 
     <script>
         function numberOnly(str) {
@@ -333,12 +335,13 @@
                     icon: 'warning',
                     buttons: {
                         confirm: {
-                            text: 'Hapus!',
-                            className: 'btn btn-success'
+                            text: 'Hapus',
+                            className: 'btn btn-danger'
                         },
                         cancel: {
+                            text: 'Batal',
                             visible: true,
-                            className: 'btn btn-danger'
+                            className: 'btn btn-success'
                         }
                     }
                 }).then((isConfirm) => {

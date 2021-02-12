@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -63,26 +64,45 @@ namespace BUSS.Controllers
         [HttpPost]
         public ActionResult CheckoutConfirmed(Transaksi transaksi, int[] ID_Kendaraan)
         {
-            if(ModelState.IsValid)
+            Paket a = db.Pakets.Find(transaksi.ID_Paket);
+            transaksi.Paket = a;
+            transaksi.ID_Customer = Session["NIK"].ToString();
+            transaksi.ID_Pegawai = null;
+            transaksi.Status_Transaksi = 0;
+            transaksi.CreatedDate = DateTime.Now;
+            
+            try
             {
-                transaksi.ID_Customer = Session["NIK"].ToString();
-                transaksi.ID_Pegawai = null;
-                transaksi.Status_Transaksi = 0;
-                transaksi.CreatedDate = DateTime.Now;
-                
+
                 db.Transaksis.Add(transaksi);
                 db.SaveChanges();
-
-                foreach(var kend in ID_Kendaraan)
-                {
-                    Transaksi_Kendaraan transaksi_Kendaraan = new Transaksi_Kendaraan();
-                    transaksi_Kendaraan.ID_Kendaraan = kend;
-                    transaksi_Kendaraan.ID_Transaksi = transaksi.ID_Transaksi;
-                    transaksi_Kendaraan.Status = 1;
-                    db.Transaksi_Kendaraan.Add(transaksi_Kendaraan);
-                    db.SaveChanges();
-                }
             }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+
+            foreach (var kend in ID_Kendaraan)
+            {
+                Transaksi_Kendaraan transaksi_Kendaraan = new Transaksi_Kendaraan();
+                transaksi_Kendaraan.ID_Kendaraan = kend;
+                transaksi_Kendaraan.ID_Transaksi = transaksi.ID_Transaksi;
+                transaksi_Kendaraan.Status = 1;
+                db.Transaksi_Kendaraan.Add(transaksi_Kendaraan);
+                db.SaveChanges();
+            }
+
+            
 
             return RedirectToAction("Pembayaran", "Transaksi", new { id = transaksi.ID_Transaksi });
         }

@@ -904,6 +904,10 @@ footer .list ul li a:hover {
     margin-top: 10px;
 }
 
+.rate2 {
+    font-size: 35px;
+}
+
 @media only screen and (max-width: 768px) {
   html {
     font-size: 12px;

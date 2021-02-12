@@ -14,7 +14,7 @@ namespace BUSS.Controllers
 
         public ActionResult Index()
         {
-            var paket = db.Pakets.Where(d => d.Status == 1).ToList();
+            var paket = db.view_PaketHome.Where(d => d.Status == 1).Take(8).OrderByDescending(k => k.Rating).ToList();
             return View(paket);
         }
 
@@ -39,7 +39,7 @@ namespace BUSS.Controllers
 
         public ActionResult Paket()
         {
-            var paket = db.Pakets.Where(k => k.Status == 1).ToList();
+            var paket = db.view_PaketHome.Where(k => k.Status == 1).ToList();
             return View(paket);
         }
 
@@ -111,38 +111,38 @@ namespace BUSS.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateStar(int ID_Destinasi, double star)
+        public ActionResult UpdateStar(Destinasi dest)
         {
             if (Session["NIK"] == null)
             {
                 TempData["ErrorMessage"] = "Silahkan login terlebih dahulu untuk memberikan rating.";
 
-                return RedirectToAction("LihatDestinasi", "Home", new { id = ID_Destinasi });
+                return RedirectToAction("LihatDestinasi", "Home", new { id = dest.ID_Destinasi });
             } else
             {
                 var sess_nik = Session["NIK"];
 
-                var rating = db.Detail_Rating_Destinasi.FirstOrDefault(k => k.ID_Destinasi == ID_Destinasi && k.NIK == sess_nik.ToString());
+                var rating = db.Detail_Rating_Destinasi.FirstOrDefault(k => k.ID_Destinasi == dest.ID_Destinasi && k.NIK == sess_nik.ToString());
 
                 if (rating == null)
                 {
                     Detail_Rating_Destinasi drd = new Detail_Rating_Destinasi();
-                    drd.ID_Destinasi = ID_Destinasi;
+                    drd.ID_Destinasi = dest.ID_Destinasi;
                     drd.NIK = Session["NIK"].ToString();
-                    drd.Rating = star;
+                    drd.Rating = dest.Rating;
                     db.Detail_Rating_Destinasi.Add(drd);
                     
                 } else
                 {
                     Detail_Rating_Destinasi drd = rating;
-                    drd.Rating = star;
+                    drd.Rating = dest.Rating;
                 }
 
                 db.SaveChanges();
 
                 TempData["SuccessMessage"] = "Berhasil memberikan rating.";
 
-                return RedirectToAction("LihatDestinasi", "Home", new { id = ID_Destinasi });
+                return RedirectToAction("LihatDestinasi", "Home", new { id = dest.ID_Destinasi });
                 //return Json(new { result = true, data = drd }, JsonRequestBehavior.AllowGet);
             }
             

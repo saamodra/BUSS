@@ -45,7 +45,7 @@
             <div class="container container-login container-transparent animated fadeIn">
                 <h3 class="text-center">Daftar Akun BUSS</h3>
                 <div class="login-form">
-                    @using (Html.BeginForm("Register", "Customer", FormMethod.Post))
+                    @using (Html.BeginForm("Register", "Customer", FormMethod.Post, new { id = "registerForm" }))
                     {
                         @Html.AntiForgeryToken()
                         <div class="form-group">
@@ -84,6 +84,10 @@
                             @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         </div>
+                        <div class="form-group">
+                            <label>Konfirmasi Password</label><label class="text-danger font-weight-bold">*</label>
+                            <input type="password" id="confirmpassword" name="confirmpassword" value="" class="form-control" />
+                        </div>
                         <div class="row form-action">
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-secondary w-100 fw-bold">Daftar</button>
@@ -106,6 +110,7 @@
     <script src="~/Content/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
     <script src="~/Content/assets/js/atlantis.min.js"></script>
     <script src="~/Content/assets/js/script.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
 
     <script>
         if ("@TempData["SuccessMessage"]" != "") {
@@ -118,6 +123,24 @@
                 },
             });
         }
+
+        $("#registerForm").validate({
+            rules: {
+                Password: "required",
+                confirmpassword: {
+                    required: true,
+                    equalTo: "#Password"
+                }
+            },
+            messages: {
+                Password: {
+                    required: "Password sekarang wajib diisi!",
+                },
+                confirmpassword: {
+                    equalTo: "Konfirmasi Password harus sesuai!"
+                }
+            }
+        });
     </script>
 </body>
 </html>

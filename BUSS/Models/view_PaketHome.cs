@@ -11,17 +11,15 @@ namespace BUSS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(FeedbackMetadata))]
-    public partial class Feedback
-    {
-        public int ID_Feedback { get; set; }
-        public int ID_Transaksi { get; set; }
-        public double Rating { get; set; }
-        public string Isi_Feedback { get; set; }
-        public System.DateTime CreatedDate { get; set; }
     
-        public virtual Transaksi Transaksi { get; set; }
+    public partial class view_PaketHome
+    {
+        public int ID_Paket { get; set; }
+        public string Nama_Paket { get; set; }
+        public Nullable<decimal> Harga { get; set; }
+        public double Rating { get; set; }
+        public Nullable<int> JumlahRate { get; set; }
+        public string Foto { get; set; }
+        public int Status { get; set; }
     }
 }

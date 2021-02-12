@@ -70,6 +70,11 @@
 div.dataTables_wrapper div.dataTables_length select {
     width: 75px !important;
 }
+
+.rate2 {
+    font-size: 35px;
+}
+
 /* Responsive layout - makes a two column-layout instead of four columns */
 @media screen and (max-width: 800px) {
     .column {

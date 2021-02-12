@@ -36,7 +36,7 @@
                     <a class="nav-item-2" href="@Url.Action("Paket", "Home")">Paket</a>
                     <a class="nav-item-2" href="@Url.Action("CustomPaket", "Home")">Custom Paket</a>
 
-                    
+
                     @if (Session["IsCustomer"] != null && (bool)Session["IsCustomer"] == true)
                     {
                         <a class="nav-item-2" href="@Url.Action("Logout", "Customer")"> Logout</a>
@@ -156,31 +156,8 @@
     <script src="~/Content/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
     <script src="~/Scripts/moment.min.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/rater.min.js"></script>
     <script src="~/Content/assets/js/script.js"></script>
-    <script type="text/javascript">
-        $(".my-rating").starRating({
-            starSize: 15,
-            totalStars: 5,
-            emptyColor: 'rgba(0,0,0,0)',
-            activeColor: '#fff',
-            ratedColor: '#fff',
-            useGradient: false,
-            useFullStars: false,
-            callback: function (currentRating, $el) {
-            }
-        });
-        $(".dest-star").starRating({
-            starSize: 15,
-            totalStars: 5,
-            emptyColor: 'rgba(0,0,0,0)',
-            activeColor: '#ffc105',
-            ratedColor: '#fff',
-            useGradient: false,
-            readOnly: true,
-            callback: function (currentRating, $el) {
-            }
-        });
-    </script>
     @RenderSection("scripts", required: false)
 </body>
 

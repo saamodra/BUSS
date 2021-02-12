@@ -213,7 +213,7 @@ namespace BUSS.Controllers
             if(Session["NIK"] != null)
             {
                 string nik = Session["NIK"].ToString();
-                var pesanan = db.Transaksis.Where(k => k.ID_Customer == nik).ToList();
+                var pesanan = db.Transaksis.Where(k => k.ID_Customer == nik).OrderBy(k => k.Status_Transaksi).ToList();
                 return View(pesanan);
             } else
             {

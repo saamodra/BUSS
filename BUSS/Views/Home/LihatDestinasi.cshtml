@@ -74,10 +74,13 @@
                         <p class="m-0 font-weight-bold">Beri Rating!</p>
                         <form action="@Url.Action("UpdateStar", "Home")" method="post">
                             @Html.AntiForgeryToken()
-                            <input type="hidden" name="ID_Destinasi" value="@Model.ID_Destinasi" />
-                            <div class="d-flex">
-                                <input type="number" max="5" min="1" class="form-control" name="star" value="@(ViewBag.RatingUser == null ? "" : ViewBag.RatingUser.Rating)" required />
-                                <label class="text-danger ml-2">*</label>
+                            @Html.HiddenFor(model => model.ID_Destinasi)
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <div id="rate1" class="rate2" data-rate-value="@(ViewBag.RatingUser == null ? "" : ViewBag.RatingUser.Rating)"></div>
+                                    <input type="hidden" class="form-control" name="Rating" id="star" value="@(ViewBag.RatingUser == null ? "" : ViewBag.RatingUser.Rating)" required />
+                                    <label class="text-danger ml-2">*</label>
+                                </div>
                                 <button type="submit" class="btn btn-sm btn-primary ml-2"><i class="fa fa-star"></i></button>
                             </div>
                         </form>
@@ -120,6 +123,14 @@
                 },
             });
         }
+
+        $("#rate1").rate({
+            step_size: 1,
+        });
+
+        $("#rate1").on("change", function (ev, data) {
+            $("#star").val(data.to);
+        });
     </script>
 
 }

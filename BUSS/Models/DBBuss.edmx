@@ -77,7 +77,7 @@
           </Key>
           <Property Name="ID_Feedback" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Transaksi" Type="int" Nullable="false" />
-          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="float" Nullable="false" />
           <Property Name="Isi_Feedback" Type="text" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
         </EntityType>
@@ -324,6 +324,24 @@ warning 6002: The table/view 'BUSS.dbo.view_LaporanTransaksi' does not have a pr
           <Property Name="Alamat" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="No_HP" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BUSS.dbo.view_PaketHome' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_PaketHome">
+          <Key>
+            <PropertyRef Name="ID_Paket" />
+            <PropertyRef Name="Nama_Paket" />
+            <PropertyRef Name="Rating" />
+            <PropertyRef Name="Foto" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="ID_Paket" Type="int" Nullable="false" />
+          <Property Name="Nama_Paket" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Harga" Type="money" />
+          <Property Name="Rating" Type="float" Nullable="false" />
+          <Property Name="JumlahRate" Type="int" />
+          <Property Name="Foto" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BUSS.dbo.view_StatusTransCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -671,6 +689,9 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fnGetFoto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="ID_Paket" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="BUSSModelStoreContainer">
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Destinasi" EntityType="Self.Destinasi" Schema="dbo" store:Type="Tables" />
@@ -764,6 +785,17 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
     [view_LaporanTransaksi].[No_HP] AS [No_HP], 
     [view_LaporanTransaksi].[Email] AS [Email]
     FROM [dbo].[view_LaporanTransaksi] AS [view_LaporanTransaksi]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_PaketHome" EntityType="Self.view_PaketHome" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_PaketHome].[ID_Paket] AS [ID_Paket], 
+    [view_PaketHome].[Nama_Paket] AS [Nama_Paket], 
+    [view_PaketHome].[Harga] AS [Harga], 
+    [view_PaketHome].[Rating] AS [Rating], 
+    [view_PaketHome].[JumlahRate] AS [JumlahRate], 
+    [view_PaketHome].[Foto] AS [Foto], 
+    [view_PaketHome].[Status] AS [Status]
+    FROM [dbo].[view_PaketHome] AS [view_PaketHome]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="view_StatusTransCount" EntityType="Self.view_StatusTransCount" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -980,7 +1012,7 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
           </Key>
           <Property Name="ID_Feedback" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_Transaksi" Type="Int32" Nullable="false" />
-          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Double" Nullable="false" />
           <Property Name="Isi_Feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Transaksi" Relationship="Self.FK_Feedback_Transaksi" FromRole="Feedback" ToRole="Transaksi" />
@@ -1254,6 +1286,22 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
           <Property Name="Alamat" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="No_HP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="view_PaketHome">
+          <Key>
+            <PropertyRef Name="ID_Paket" />
+            <PropertyRef Name="Nama_Paket" />
+            <PropertyRef Name="Rating" />
+            <PropertyRef Name="Foto" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="ID_Paket" Type="Int32" Nullable="false" />
+          <Property Name="Nama_Paket" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Harga" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Rating" Type="Double" Nullable="false" />
+          <Property Name="JumlahRate" Type="Int32" />
+          <Property Name="Foto" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="view_StatusTransCount">
           <Key>
@@ -1619,6 +1667,7 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
           <EntitySet Name="view_LaporanDestinasi" EntityType="Self.view_LaporanDestinasi" />
           <EntitySet Name="view_LaporanFeedback" EntityType="Self.view_LaporanFeedback" />
           <EntitySet Name="view_LaporanTransaksi" EntityType="Self.view_LaporanTransaksi" />
+          <EntitySet Name="view_PaketHome" EntityType="Self.view_PaketHome" />
           <EntitySet Name="view_StatusTransCount" EntityType="Self.view_StatusTransCount" />
           <EntitySet Name="view_TransaksiCount" EntityType="Self.view_TransaksiCount" />
           <AssociationSet Name="FK_Detail_Rating_Destinasi_Customer" Association="Self.FK_Detail_Rating_Destinasi_Customer">
@@ -2023,6 +2072,19 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
                 <ScalarProperty Name="Alamat" ColumnName="Alamat" />
                 <ScalarProperty Name="No_HP" ColumnName="No_HP" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_PaketHome">
+            <EntityTypeMapping TypeName="BUSSModel.view_PaketHome">
+              <MappingFragment StoreEntitySet="view_PaketHome">
+                <ScalarProperty Name="ID_Paket" ColumnName="ID_Paket" />
+                <ScalarProperty Name="Nama_Paket" ColumnName="Nama_Paket" />
+                <ScalarProperty Name="Harga" ColumnName="Harga" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="JumlahRate" ColumnName="JumlahRate" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

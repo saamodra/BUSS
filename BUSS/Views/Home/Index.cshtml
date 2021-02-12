@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BUSS.Models.Paket>
+﻿@model IEnumerable<BUSS.Models.view_PaketHome>
 
 @{
     Layout = null;
@@ -73,9 +73,7 @@
         <div class="carousel-content">
             <h2 class="carousel-title">BUSS</h2>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eleifend orci id feugiat finibus. Integer
-                ullamcorper et diam nec ornare. Phasellus tempus nisl vitae ipsum molestie, ac feugiat nibh condimentum.
-                Quisque quis rhoncus ante.
+                BUSS Travel merupakan bisnis penyewaan Bus sekaligus paket perjalanannya. Kami dapat menerima pesanan dari customer minimal 4 hari sebelum keberangkatan. Kami akan mempermudah perjalanan.
             </p>
             <a href="#" class="btn btn-explore btn-warning font-weight-bold">
                 EXPLORE <i class="ml-2 fas fa-long-arrow-alt-right"></i>
@@ -109,25 +107,6 @@
         </div>
     </div>
 
-    <!-- Section Form -->
-    <section>
-        <div class="section-form shadow">
-            <h3 class="form-title text-left">Hey kamu, Mau ke mana?</h3>
-            <form action="" class="mt-5">
-                <div class="form-group">
-                    <label for="cari" class="font-weight-bold cari-label">Cari Tempat Tujuan Wisatamu</label>
-                    <div class="d-flex">
-                        <input type="text" name="cari" class="form-control" placeholder="Cari ...">
-                        <button class="btn btn-warning ml-3 font-weight-bold">
-                            <i class="fa fa-search mr-2"></i>
-                            Cari
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </section>
-    <!-- End Section Form -->
     <!-- Section Destination -->
     <section class="destination bg-white">
         <div class="section-title">
@@ -140,20 +119,19 @@
         <div class="row">
             @foreach (var item in Model)
             {
-
                 <div class="col-xs-12 col-sm-6 col-md-3 my-2">
                     <a href="@Url.Action("LihatPaket", "Home", new { id = item.ID_Paket })">
                         <div class="card h-100">
-                            <img class="card-img-top" src="~/Content/upload/@item.Detail_Paket.FirstOrDefault().Destinasi.Detail_Foto.FirstOrDefault().Foto" alt="Card image cap">
+                            <img class="card-img-top" src="~/Content/upload/@item.Foto" alt="Card image cap">
                             <div class="card-body">
                                 <div class="card-title font-weight-bold h5">@item.Nama_Paket</div>
                                 <div class="d-flex justify-content-between">
-                                    <div>
-                                        <div class="dest-star mb-1" data-rating="0"></div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <i class="fa fa-star text-warning mr-2"></i>
+                                        <text>@Math.Round(item.Rating, 1) (@item.JumlahRate)</text>
                                     </div>
                                     <div class="paket-wisata-price">
-                                        <div class="strikethrough mb-1"><s>Rp192.000</s></div>
-                                        <div class="real">@Html.DisplayFor(modelItem => item.Harga)</div>
+                                        <div class="real">@string.Format("Rp{0:0,0}",  item.Harga)</div>
                                     </div>
                                 </div>
                             </div>
@@ -230,66 +208,6 @@
     </section>
     <!-- End Section Inspirasi Liburan -->
     <!-- Section Why -->
-    <section class="bg-white mt-5">
-        <div class="section-title">
-            <div>
-                <h3 class="">Kenapa pilih kami ?</h3>
-                <p>Kenapa ya? Berikut alasannya</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
-                <div class="card border-0">
-                    <img class="card-img-top" src="..." alt="Garansi harga termurah">
-                    <div class="card-body">
-                        <h5 class="card-title font-weight-bold">Garansi harga termurah</h5>
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of
-                            the card's content.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
-                <div class="card border-0">
-                    <img class="card-img-top" src="..." alt="Banyak promo menarik">
-                    <div class="card-body">
-                        <h5 class="card-title font-weight-bold">Banyak promo menarik</h5>
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of
-                            the card's content.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
-                <div class="card border-0">
-                    <img class="card-img-top" src="..." alt="Pembatalan pesanan mudah">
-                    <div class="card-body">
-                        <h5 class="card-title font-weight-bold">Pembatalan pesanan mudah</h5>
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of
-                            the card's content.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 my-2">
-                <div class="card border-0">
-                    <img class="card-img-top" src="..." alt="Customer service 24 jam">
-                    <div class="card-body">
-                        <h5 class="card-title font-weight-bold">Customer service 24 jam</h5>
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of
-                            the card's content.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Section Why -->
-    <!-- Section Why -->
     <section class="subscription bg-white mt-5 d-flex justify-content-center align-items-center">
         <div class="">
             <h3 class="text-center">Kalau bukan sekarang, kapan lagi?</h3>
@@ -303,7 +221,7 @@
                 <div class="footer-logo">
                     BusTravel
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque consectetur at sapien eu porta. Vivamus nec commodo justo. Donec quis neque ullamcorper, interdum ex ac, euismod justo.</p>
+                <p>BUSS Travel merupakan bisnis penyewaan Bus sekaligus paket perjalanannya. Kami dapat menerima pesanan dari customer minimal 4 hari sebelum keberangkatan. Kami akan mempermudah perjalanan.</p>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-2 list">
                 <h5 class="list-title">Menu</h5>

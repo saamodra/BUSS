@@ -31,6 +31,7 @@ namespace BUSS.Models
         public System.DateTime Tanggal_Pesanan { get; set; }
         public string Bukti_DP { get; set; }
         public string Bukti_Pelunasan { get; set; }
+        public Nullable<decimal> biaya_tambahan { get; set; }
         public int Status_Transaksi { get; set; }
         public Nullable<double> PaketLama_Perjalanan { get; set; }
 

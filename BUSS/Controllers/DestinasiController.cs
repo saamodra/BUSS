@@ -166,7 +166,7 @@ namespace BUSS.Controllers
             Destinasi destinasi = db.Destinasis.Find(id);
 
             //assigning file uploaded status to ViewBag for showing message to user.  
-            TempData["SuccessMessage"] = files.Count().ToString() + " berhasil diunggah.";
+            TempData["SuccessMessage"] = files.Count().ToString() + " foto berhasil diunggah.";
 
             return View(destinasi);
         }

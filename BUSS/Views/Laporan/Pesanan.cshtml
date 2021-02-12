@@ -171,59 +171,6 @@
 
 @section scripts {
     <script>
-        $(document).ready(function () {
-            $('#multi_filter').DataTable({
-                dom: '<"row"<"col-lg-4"l><"col-lg-4"B><"col-lg-4"f>>rtip',
-                buttons: [
-                    {
-                        extend: 'copy',
-                        text: '<i class="fa fa-copy"></i> Copy',
-                        footer: true,
-                        exportOptions: {
-                            columns: ':visible',
-                        }
-                    }, {
-                        extend: 'excel',
-                        text: '<i class="fa fa-file-excel"></i> Excel',
-                        title: 'Data Pesanan',
-                        footer: true,
-                        filename: 'Data Pesanan ' + moment().format('DD-MM-YYYY'),
-                        exportOptions: {
-                            columns: ':visible',
-                        }
-                    }, {
-                        extend: 'pdf',
-                        text: '<i class="fa fa-file-pdf"></i> PDF',
-                        title: 'Data Pesanan',
-                        footer: true,
-                        filename: 'Data Pesanan ' + moment().format('DD-MM-YYYY'),
-                        orientation: 'landscape',
-                        pageSize: 'LETTER',
-                        exportOptions: {
-                            columns: ':visible',
-                        }
-                    }, {
-                        extend: 'print',
-                        text: '<i class="fa fa-print"></i> Print',
-                        title: 'Data Pesanan',
-                        footer: true,
-                        filename: 'Data Pesanan ' + moment().format('DD-MM-YYYY'),
-                        exportOptions: {
-                            columns: ':visible',
-                        }
-                    }, {
-                        extend: 'colvis',
-                        text: '<i class="fa fa-eye"></i>'
-                    }
-                ],
-                lengthMenu: [
-                    [10, 25, 50, -1],
-                    ['10', '25', '50', 'All']
-                ],
-            });
-        });
-    </script>
-    <script>
         if ("@TempData["SuccessMessage"]" != "") {
             swal("Berhasil", "@TempData["SuccessMessage"]", {
                 icon: "success",
