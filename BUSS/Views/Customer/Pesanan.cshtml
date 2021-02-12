@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BUSS.Models.Transaksi>
+﻿@model IEnumerable<BUSS.Models.view_TransaksiCustomer>
 @{
     ViewBag.Title = "Pesanan";
     ViewBag.Pesanan = "active";
@@ -35,21 +35,11 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Paket.Nama_Paket)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Harga_total)
-                                    </th>
-                                    <th>
-                                        DP
-                                    </th>
-                                    <th>
-                                        Tanggal Sewa
-                                    </th>
-                                    <th>
-                                        Jadwal
-                                    </th>
+                                    <th>Nama Paket</th>
+                                    <th>Harga Total</th>
+                                    <th>DP</th>
+                                    <th>Tanggal Sewa</th>
+                                    <th>Jadwal</th>
                                     <th>Status Transaksi</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -61,25 +51,25 @@
                                     <tr>
                                         <td>@(rowCount++).</td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Paket.Nama_Paket)
+                                            @item.Nama_Paket
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Harga_total)
+                                            @string.Format("Rp{0:0,0}", item.Harga_total)
                                         </td>
                                         <td>
                                             @string.Format("Rp{0:0,0}", item.Harga_total / 2)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Tanggal_Pesanan)
+                                            @item.Tanggal_Pesanan.ToString("dd/MM/yyyy")
                                         </td>
                                         <td>
-                                            @if (item.Paket.Jadwal == null)
+                                            @if (item.Jadwal == null)
                                             {
                                                 <text>-</text>
                                             }
                                             else
                                             {
-                                                <a href="~/Content/jadwal/@item.Paket.Jadwal">@item.Paket.Jadwal</a>
+                                                <a href="~/Content/jadwal/@item.Jadwal">@item.Jadwal</a>
                                             }
                                         </td>
                                         <td>

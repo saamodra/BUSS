@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BUSSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BUSSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="NIK" />
@@ -355,6 +355,55 @@ warning 6002: The table/view 'BUSS.dbo.view_StatusTransCount' does not have a pr
           <Property Name="jumlah" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'BUSS.dbo.view_TransaksiAdmin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_TransaksiAdmin">
+          <Key>
+            <PropertyRef Name="ID_Transaksi" />
+            <PropertyRef Name="ID_Customer" />
+            <PropertyRef Name="Harga_total" />
+            <PropertyRef Name="Jumlah_Penumpang" />
+            <PropertyRef Name="Tanggal_Pesanan" />
+            <PropertyRef Name="Status_Transaksi" />
+            <PropertyRef Name="CreatedDateTr" />
+            <PropertyRef Name="ID_Paket" />
+            <PropertyRef Name="Nama_Paket" />
+            <PropertyRef Name="Konsumsi" />
+            <PropertyRef Name="Penginapan" />
+            <PropertyRef Name="Jenis_Paket" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="ModifiedBy" />
+            <PropertyRef Name="ModifiedDate" />
+          </Key>
+          <Property Name="ID_Transaksi" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Customer" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="ID_Pegawai" Type="int" />
+          <Property Name="Harga_total" Type="money" Nullable="false" />
+          <Property Name="Jumlah_Penumpang" Type="int" Nullable="false" />
+          <Property Name="Tanggal_Pesanan" Type="date" Nullable="false" />
+          <Property Name="Bukti_DP" Type="varchar" MaxLength="255" />
+          <Property Name="Bukti_Pelunasan" Type="varchar" MaxLength="255" />
+          <Property Name="biaya_tambahan" Type="money" />
+          <Property Name="Status_Transaksi" Type="int" Nullable="false" />
+          <Property Name="PaketLama_Perjalanan" Type="float" />
+          <Property Name="CreatedDateTr" Type="datetime" Nullable="false" />
+          <Property Name="ID_Paket" Type="int" Nullable="false" />
+          <Property Name="Nama_Paket" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Harga" Type="money" />
+          <Property Name="Konsumsi" Type="int" Nullable="false" />
+          <Property Name="Lama_Perjalanan" Type="int" />
+          <Property Name="Penginapan" Type="int" Nullable="false" />
+          <Property Name="Jenis_Paket" Type="int" Nullable="false" />
+          <Property Name="Jadwal" Type="varchar" MaxLength="255" />
+          <Property Name="Keterangan" Type="varchar" MaxLength="255" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="view_TransaksiCount">
           <Key>
@@ -364,6 +413,55 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
           <Property Name="ID_Paket" Type="int" Nullable="false" />
           <Property Name="Nama_Paket" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="jumlah_dipesan" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BUSS.dbo.view_TransaksiCustomer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_TransaksiCustomer">
+          <Key>
+            <PropertyRef Name="ID_Transaksi" />
+            <PropertyRef Name="ID_Customer" />
+            <PropertyRef Name="Harga_total" />
+            <PropertyRef Name="Jumlah_Penumpang" />
+            <PropertyRef Name="Tanggal_Pesanan" />
+            <PropertyRef Name="Status_Transaksi" />
+            <PropertyRef Name="CreatedDateTr" />
+            <PropertyRef Name="ID_Paket" />
+            <PropertyRef Name="Nama_Paket" />
+            <PropertyRef Name="Konsumsi" />
+            <PropertyRef Name="Penginapan" />
+            <PropertyRef Name="Jenis_Paket" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="ModifiedBy" />
+            <PropertyRef Name="ModifiedDate" />
+          </Key>
+          <Property Name="ID_Transaksi" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Customer" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="ID_Pegawai" Type="int" />
+          <Property Name="Harga_total" Type="money" Nullable="false" />
+          <Property Name="Jumlah_Penumpang" Type="int" Nullable="false" />
+          <Property Name="Tanggal_Pesanan" Type="date" Nullable="false" />
+          <Property Name="Bukti_DP" Type="varchar" MaxLength="255" />
+          <Property Name="Bukti_Pelunasan" Type="varchar" MaxLength="255" />
+          <Property Name="biaya_tambahan" Type="money" />
+          <Property Name="Status_Transaksi" Type="int" Nullable="false" />
+          <Property Name="PaketLama_Perjalanan" Type="float" />
+          <Property Name="CreatedDateTr" Type="datetime" Nullable="false" />
+          <Property Name="ID_Paket" Type="int" Nullable="false" />
+          <Property Name="Nama_Paket" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Harga" Type="money" />
+          <Property Name="Konsumsi" Type="int" Nullable="false" />
+          <Property Name="Lama_Perjalanan" Type="int" />
+          <Property Name="Penginapan" Type="int" Nullable="false" />
+          <Property Name="Jenis_Paket" Type="int" Nullable="false" />
+          <Property Name="Jadwal" Type="varchar" MaxLength="255" />
+          <Property Name="Keterangan" Type="varchar" MaxLength="255" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_Destinasi_Kota">
           <End Role="Kota" Type="Self.Kota" Multiplicity="1" />
@@ -804,12 +902,72 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
     [view_StatusTransCount].[jumlah] AS [jumlah]
     FROM [dbo].[view_StatusTransCount] AS [view_StatusTransCount]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="view_TransaksiAdmin" EntityType="Self.view_TransaksiAdmin" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_TransaksiAdmin].[ID_Transaksi] AS [ID_Transaksi], 
+    [view_TransaksiAdmin].[ID_Customer] AS [ID_Customer], 
+    [view_TransaksiAdmin].[ID_Pegawai] AS [ID_Pegawai], 
+    [view_TransaksiAdmin].[Harga_total] AS [Harga_total], 
+    [view_TransaksiAdmin].[Jumlah_Penumpang] AS [Jumlah_Penumpang], 
+    [view_TransaksiAdmin].[Tanggal_Pesanan] AS [Tanggal_Pesanan], 
+    [view_TransaksiAdmin].[Bukti_DP] AS [Bukti_DP], 
+    [view_TransaksiAdmin].[Bukti_Pelunasan] AS [Bukti_Pelunasan], 
+    [view_TransaksiAdmin].[biaya_tambahan] AS [biaya_tambahan], 
+    [view_TransaksiAdmin].[Status_Transaksi] AS [Status_Transaksi], 
+    [view_TransaksiAdmin].[PaketLama_Perjalanan] AS [PaketLama_Perjalanan], 
+    [view_TransaksiAdmin].[CreatedDateTr] AS [CreatedDateTr], 
+    [view_TransaksiAdmin].[ID_Paket] AS [ID_Paket], 
+    [view_TransaksiAdmin].[Nama_Paket] AS [Nama_Paket], 
+    [view_TransaksiAdmin].[Harga] AS [Harga], 
+    [view_TransaksiAdmin].[Konsumsi] AS [Konsumsi], 
+    [view_TransaksiAdmin].[Lama_Perjalanan] AS [Lama_Perjalanan], 
+    [view_TransaksiAdmin].[Penginapan] AS [Penginapan], 
+    [view_TransaksiAdmin].[Jenis_Paket] AS [Jenis_Paket], 
+    [view_TransaksiAdmin].[Jadwal] AS [Jadwal], 
+    [view_TransaksiAdmin].[Keterangan] AS [Keterangan], 
+    [view_TransaksiAdmin].[Status] AS [Status], 
+    [view_TransaksiAdmin].[CreatedBy] AS [CreatedBy], 
+    [view_TransaksiAdmin].[CreatedDate] AS [CreatedDate], 
+    [view_TransaksiAdmin].[ModifiedBy] AS [ModifiedBy], 
+    [view_TransaksiAdmin].[ModifiedDate] AS [ModifiedDate]
+    FROM [dbo].[view_TransaksiAdmin] AS [view_TransaksiAdmin]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="view_TransaksiCount" EntityType="Self.view_TransaksiCount" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [view_TransaksiCount].[ID_Paket] AS [ID_Paket], 
     [view_TransaksiCount].[Nama_Paket] AS [Nama_Paket], 
     [view_TransaksiCount].[jumlah_dipesan] AS [jumlah_dipesan]
     FROM [dbo].[view_TransaksiCount] AS [view_TransaksiCount]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_TransaksiCustomer" EntityType="Self.view_TransaksiCustomer" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_TransaksiCustomer].[ID_Transaksi] AS [ID_Transaksi], 
+    [view_TransaksiCustomer].[ID_Customer] AS [ID_Customer], 
+    [view_TransaksiCustomer].[ID_Pegawai] AS [ID_Pegawai], 
+    [view_TransaksiCustomer].[Harga_total] AS [Harga_total], 
+    [view_TransaksiCustomer].[Jumlah_Penumpang] AS [Jumlah_Penumpang], 
+    [view_TransaksiCustomer].[Tanggal_Pesanan] AS [Tanggal_Pesanan], 
+    [view_TransaksiCustomer].[Bukti_DP] AS [Bukti_DP], 
+    [view_TransaksiCustomer].[Bukti_Pelunasan] AS [Bukti_Pelunasan], 
+    [view_TransaksiCustomer].[biaya_tambahan] AS [biaya_tambahan], 
+    [view_TransaksiCustomer].[Status_Transaksi] AS [Status_Transaksi], 
+    [view_TransaksiCustomer].[PaketLama_Perjalanan] AS [PaketLama_Perjalanan], 
+    [view_TransaksiCustomer].[CreatedDateTr] AS [CreatedDateTr], 
+    [view_TransaksiCustomer].[ID_Paket] AS [ID_Paket], 
+    [view_TransaksiCustomer].[Nama_Paket] AS [Nama_Paket], 
+    [view_TransaksiCustomer].[Harga] AS [Harga], 
+    [view_TransaksiCustomer].[Konsumsi] AS [Konsumsi], 
+    [view_TransaksiCustomer].[Lama_Perjalanan] AS [Lama_Perjalanan], 
+    [view_TransaksiCustomer].[Penginapan] AS [Penginapan], 
+    [view_TransaksiCustomer].[Jenis_Paket] AS [Jenis_Paket], 
+    [view_TransaksiCustomer].[Jadwal] AS [Jadwal], 
+    [view_TransaksiCustomer].[Keterangan] AS [Keterangan], 
+    [view_TransaksiCustomer].[Status] AS [Status], 
+    [view_TransaksiCustomer].[CreatedBy] AS [CreatedBy], 
+    [view_TransaksiCustomer].[CreatedDate] AS [CreatedDate], 
+    [view_TransaksiCustomer].[ModifiedBy] AS [ModifiedBy], 
+    [view_TransaksiCustomer].[ModifiedDate] AS [ModifiedDate]
+    FROM [dbo].[view_TransaksiCustomer] AS [view_TransaksiCustomer]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Destinasi_Kota" Association="Self.FK_Destinasi_Kota">
             <End Role="Kota" EntitySet="Kota" />
@@ -920,8 +1078,7 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
             <End Role="Transaksi" EntitySet="Transaksi" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BUSSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1778,7 +1935,103 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
             <End Role="Transaksi" EntitySet="Transaksis" />
             <End Role="Transaksi_Kendaraan" EntitySet="Transaksi_Kendaraan" />
           </AssociationSet>
+          <EntitySet Name="view_TransaksiAdmin" EntityType="BUSSModel.view_TransaksiAdmin" />
+          <EntitySet Name="view_TransaksiCustomer" EntityType="BUSSModel.view_TransaksiCustomer" />
         </EntityContainer>
+        <EntityType Name="view_TransaksiAdmin">
+          <Key>
+            <PropertyRef Name="ID_Transaksi" />
+            <PropertyRef Name="ID_Paket" />
+            <PropertyRef Name="ID_Customer" />
+            <PropertyRef Name="Harga_total" />
+            <PropertyRef Name="Jumlah_Penumpang" />
+            <PropertyRef Name="Tanggal_Pesanan" />
+            <PropertyRef Name="Status_Transaksi" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="CreatedDateTr" />
+            <PropertyRef Name="Nama_Paket" />
+            <PropertyRef Name="Konsumsi" />
+            <PropertyRef Name="Penginapan" />
+            <PropertyRef Name="Jenis_Paket" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="ModifiedBy" />
+            <PropertyRef Name="ModifiedDate" />
+          </Key>
+          <Property Name="ID_Transaksi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Paket" Type="Int32" Nullable="false" />
+          <Property Name="ID_Customer" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Pegawai" Type="Int32" />
+          <Property Name="Harga_total" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Jumlah_Penumpang" Type="Int32" Nullable="false" />
+          <Property Name="Tanggal_Pesanan" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Bukti_DP" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Bukti_Pelunasan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="biaya_tambahan" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Status_Transaksi" Type="Int32" Nullable="false" />
+          <Property Name="PaketLama_Perjalanan" Type="Double" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedDateTr" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Nama_Paket" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Harga" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Konsumsi" Type="Int32" Nullable="false" />
+          <Property Name="Lama_Perjalanan" Type="Int32" />
+          <Property Name="Penginapan" Type="Int32" Nullable="false" />
+          <Property Name="Jenis_Paket" Type="Int32" Nullable="false" />
+          <Property Name="Jadwal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Keterangan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="view_TransaksiCustomer">
+          <Key>
+            <PropertyRef Name="ID_Transaksi" />
+            <PropertyRef Name="ID_Paket" />
+            <PropertyRef Name="ID_Customer" />
+            <PropertyRef Name="Harga_total" />
+            <PropertyRef Name="Jumlah_Penumpang" />
+            <PropertyRef Name="Tanggal_Pesanan" />
+            <PropertyRef Name="Status_Transaksi" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="CreatedDateTr" />
+            <PropertyRef Name="Nama_Paket" />
+            <PropertyRef Name="Konsumsi" />
+            <PropertyRef Name="Penginapan" />
+            <PropertyRef Name="Jenis_Paket" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="ModifiedBy" />
+            <PropertyRef Name="ModifiedDate" />
+          </Key>
+          <Property Name="ID_Transaksi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Paket" Type="Int32" Nullable="false" />
+          <Property Name="ID_Customer" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Pegawai" Type="Int32" />
+          <Property Name="Harga_total" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Jumlah_Penumpang" Type="Int32" Nullable="false" />
+          <Property Name="Tanggal_Pesanan" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Bukti_DP" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Bukti_Pelunasan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="biaya_tambahan" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Status_Transaksi" Type="Int32" Nullable="false" />
+          <Property Name="PaketLama_Perjalanan" Type="Double" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedDateTr" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Nama_Paket" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Harga" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Konsumsi" Type="Int32" Nullable="false" />
+          <Property Name="Lama_Perjalanan" Type="Int32" />
+          <Property Name="Penginapan" Type="Int32" Nullable="false" />
+          <Property Name="Jenis_Paket" Type="Int32" Nullable="false" />
+          <Property Name="Jadwal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Keterangan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2103,6 +2356,70 @@ warning 6002: The table/view 'BUSS.dbo.view_TransaksiCount' does not have a prim
                 <ScalarProperty Name="ID_Paket" ColumnName="ID_Paket" />
                 <ScalarProperty Name="Nama_Paket" ColumnName="Nama_Paket" />
                 <ScalarProperty Name="jumlah_dipesan" ColumnName="jumlah_dipesan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_TransaksiAdmin">
+            <EntityTypeMapping TypeName="BUSSModel.view_TransaksiAdmin">
+              <MappingFragment StoreEntitySet="view_TransaksiAdmin">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Keterangan" ColumnName="Keterangan" />
+                <ScalarProperty Name="Jadwal" ColumnName="Jadwal" />
+                <ScalarProperty Name="Jenis_Paket" ColumnName="Jenis_Paket" />
+                <ScalarProperty Name="Penginapan" ColumnName="Penginapan" />
+                <ScalarProperty Name="Lama_Perjalanan" ColumnName="Lama_Perjalanan" />
+                <ScalarProperty Name="Konsumsi" ColumnName="Konsumsi" />
+                <ScalarProperty Name="Harga" ColumnName="Harga" />
+                <ScalarProperty Name="Nama_Paket" ColumnName="Nama_Paket" />
+                <ScalarProperty Name="CreatedDateTr" ColumnName="CreatedDateTr" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PaketLama_Perjalanan" ColumnName="PaketLama_Perjalanan" />
+                <ScalarProperty Name="Status_Transaksi" ColumnName="Status_Transaksi" />
+                <ScalarProperty Name="biaya_tambahan" ColumnName="biaya_tambahan" />
+                <ScalarProperty Name="Bukti_Pelunasan" ColumnName="Bukti_Pelunasan" />
+                <ScalarProperty Name="Bukti_DP" ColumnName="Bukti_DP" />
+                <ScalarProperty Name="Tanggal_Pesanan" ColumnName="Tanggal_Pesanan" />
+                <ScalarProperty Name="Jumlah_Penumpang" ColumnName="Jumlah_Penumpang" />
+                <ScalarProperty Name="Harga_total" ColumnName="Harga_total" />
+                <ScalarProperty Name="ID_Pegawai" ColumnName="ID_Pegawai" />
+                <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
+                <ScalarProperty Name="ID_Paket" ColumnName="ID_Paket" />
+                <ScalarProperty Name="ID_Transaksi" ColumnName="ID_Transaksi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_TransaksiCustomer">
+            <EntityTypeMapping TypeName="BUSSModel.view_TransaksiCustomer">
+              <MappingFragment StoreEntitySet="view_TransaksiCustomer">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Keterangan" ColumnName="Keterangan" />
+                <ScalarProperty Name="Jadwal" ColumnName="Jadwal" />
+                <ScalarProperty Name="Jenis_Paket" ColumnName="Jenis_Paket" />
+                <ScalarProperty Name="Penginapan" ColumnName="Penginapan" />
+                <ScalarProperty Name="Lama_Perjalanan" ColumnName="Lama_Perjalanan" />
+                <ScalarProperty Name="Konsumsi" ColumnName="Konsumsi" />
+                <ScalarProperty Name="Harga" ColumnName="Harga" />
+                <ScalarProperty Name="Nama_Paket" ColumnName="Nama_Paket" />
+                <ScalarProperty Name="CreatedDateTr" ColumnName="CreatedDateTr" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PaketLama_Perjalanan" ColumnName="PaketLama_Perjalanan" />
+                <ScalarProperty Name="Status_Transaksi" ColumnName="Status_Transaksi" />
+                <ScalarProperty Name="biaya_tambahan" ColumnName="biaya_tambahan" />
+                <ScalarProperty Name="Bukti_Pelunasan" ColumnName="Bukti_Pelunasan" />
+                <ScalarProperty Name="Bukti_DP" ColumnName="Bukti_DP" />
+                <ScalarProperty Name="Tanggal_Pesanan" ColumnName="Tanggal_Pesanan" />
+                <ScalarProperty Name="Jumlah_Penumpang" ColumnName="Jumlah_Penumpang" />
+                <ScalarProperty Name="Harga_total" ColumnName="Harga_total" />
+                <ScalarProperty Name="ID_Pegawai" ColumnName="ID_Pegawai" />
+                <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
+                <ScalarProperty Name="ID_Paket" ColumnName="ID_Paket" />
+                <ScalarProperty Name="ID_Transaksi" ColumnName="ID_Transaksi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

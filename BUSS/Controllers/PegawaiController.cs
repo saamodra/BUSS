@@ -217,10 +217,7 @@ namespace BUSS.Controllers
 
         public ActionResult Pesanan()
         {
-
-            var transaksi = db.Transaksis.OrderBy(t => t.Status_Transaksi == 1 ? 0 : (t.Status_Transaksi == 3 ? 1 : (t.Status_Transaksi == 5 ? 2 : 3)))
-                .ThenBy(k => k.Status_Transaksi)
-                .ThenByDescending(k => k.CreatedDate)
+            var transaksi = db.view_TransaksiAdmin
                 .ToList();
 
             return View(transaksi);

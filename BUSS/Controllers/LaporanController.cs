@@ -35,15 +35,15 @@ namespace BUSS.Controllers
             {
                 int itStatus = Convert.ToInt32(Status);
                 var dt = db.Transaksis.Where(x => x.Tanggal_Pesanan >= date_1 && x.Tanggal_Pesanan <= date_2 && x.Status_Transaksi == itStatus).ToList();
-                return View(dt);
+                return View("Pesanan_2", dt);
             } else if (date_1 != null)
             {
                 var dt = db.Transaksis.Where(x => x.Tanggal_Pesanan >= date_1 && x.Tanggal_Pesanan <= date_2).ToList();
-                return View(dt);
+                return View("Pesanan_2", dt);
             }
 
             var transaksi = db.Transaksis.ToList();
-            return View(transaksi);
+            return View("Pesanan_2", transaksi);
         }
 
         public ActionResult LaporanPesanan()

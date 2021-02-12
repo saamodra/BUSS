@@ -56,6 +56,8 @@
         <AssociationConnector Association="BUSSModel.FK_Transaksi_Paket" ManuallyRouted="false" />
         <AssociationConnector Association="BUSSModel.FK_Transaksi_Pegawai" ManuallyRouted="false" />
         <AssociationConnector Association="BUSSModel.FK_Transaksi_Kendaraan_Transaksi" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BUSSModel.view_TransaksiAdmin" Width="1.5" PointX="12.125" PointY="3.125" />
+        <EntityTypeShape EntityType="BUSSModel.view_TransaksiCustomer" Width="1.5" PointX="10" PointY="3.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

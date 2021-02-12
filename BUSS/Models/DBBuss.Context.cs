@@ -49,5 +49,7 @@ namespace BUSS.Models
         public virtual DbSet<view_PaketHome> view_PaketHome { get; set; }
         public virtual DbSet<view_StatusTransCount> view_StatusTransCount { get; set; }
         public virtual DbSet<view_TransaksiCount> view_TransaksiCount { get; set; }
+        public virtual DbSet<view_TransaksiAdmin> view_TransaksiAdmin { get; set; }
+        public virtual DbSet<view_TransaksiCustomer> view_TransaksiCustomer { get; set; }
     }
 }
