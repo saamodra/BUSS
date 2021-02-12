@@ -226,6 +226,17 @@
 
         $(document).ready(function () {
             $('#multi_filter').DataTable({
+                "language": {
+                    "lengthMenu": "_MENU_ data per halaman",
+                    "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    "zeroRecords": "Tidak ada data.",
+                    "search": "Pencarian :",
+                    "infoFiltered": "(tersaring dari total _MAX_ data)",
+                    "paginate": {
+                        "previous": "Sebelumnya",
+                        "next": "Selanjutnya"
+                    }
+                },
                 initComplete: function () {
                     var columnCount = 1;
                     this.api().columns().every(function () {

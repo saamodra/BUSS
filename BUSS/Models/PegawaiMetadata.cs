@@ -27,6 +27,7 @@ namespace BUSS.Models
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Format email salah!")]
         public string Email { get; set; }
 
+        [DisplayName("Kata Sandi")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Role wajib diisi!")]
