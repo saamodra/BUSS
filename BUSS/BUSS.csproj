@@ -687,13 +687,9 @@
     <Content Include="Content\assets\js\plugin\webfont\webfont.min.js" />
     <Content Include="Content\assets\js\setting-demo.js" />
     <Content Include="Content\assets\js\setting-demo2.js" />
-    <Content Include="Content\blog.html" />
-    <Content Include="Content\destinasi.html" />
-    <Content Include="Content\index.html" />
     <Content Include="Content\loginpage\animation.css" />
     <Content Include="Content\loginpage\script.js" />
     <Content Include="Content\loginpage\style.css" />
-    <Content Include="Content\paket-wisata.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
