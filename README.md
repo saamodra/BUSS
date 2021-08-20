@@ -33,17 +33,17 @@ BUSS Travel is a business management application for bus transportation rental s
 ### Master ###
 ![Master](https://i.imgur.com/KLO0Fb9.png)
 
-### Tambah Destinasi ###
-![Tambah Destinasi](https://i.imgur.com/ROoAx72.png)
+### Destination Form ###
+![Destination Form](https://i.imgur.com/ROoAx72.png)
 
-### Paket ###
-![Paket](https://i.imgur.com/VNYigvn.png)
+### Package ###
+![Package](https://i.imgur.com/VNYigvn.png)
 
-### Reservasi ###
-![Reservasi](https://i.imgur.com/99p0w9c.png)
+### Reservation ###
+![Reservation](https://i.imgur.com/99p0w9c.png)
 
-### Detail Pesanan ###
-![Detail Pesanan](https://i.imgur.com/swp9vNp.png)
+### Reservation Detail ###
+![Reservation Detail](https://i.imgur.com/swp9vNp.png)
 
 
 ## Copyright ##
